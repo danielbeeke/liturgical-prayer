@@ -1,0 +1,34 @@
+$label-width: 40px;
+$label-height: 30px;
+
+prayer-schedule-widget {
+  width: 100%;
+  height: 100%;
+  display: grid;
+
+  grid-template-columns: $label-width 1fr;
+  grid-template-rows: $label-height 1fr;
+  grid-template-areas:
+  "empty header"
+  "labels content";
+
+  .header {
+    grid-area: header;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .week-day-header {
+  }
+
+  svg {
+    grid-area: content;
+    width: 100%;
+    height: 100%;
+
+    path {
+      fill: none;
+      stroke: red;
+    }
+  }
+}
