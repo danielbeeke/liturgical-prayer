@@ -4,14 +4,12 @@ import persistState from '../vendor/redux-localstorage/persistState.js';
 import {sharedCombineReducers} from '../Helpers/SharedCombineReducers.js';
 import {savableSlicer} from '../Helpers/SavableSlicer.js';
 
-import {UserReducer} from '../StoreReducers/UserReducer.js';
-import {PrayerScheduleReducer} from '../StoreReducers/PrayerScheduleReducer.js';
+import {AppReducer} from '../StoreReducers/AppReducer.js';
 
 const initialState = {};
 
 const reducers = sharedCombineReducers({
-  user: UserReducer,
-  prayerSchedule: PrayerScheduleReducer
+  app: AppReducer
 });
 
 const middleware = applyMiddleware(

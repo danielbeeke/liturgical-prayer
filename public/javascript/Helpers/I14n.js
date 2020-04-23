@@ -17,7 +17,7 @@ function mixString (a, b, asCodeString) {
     let valueString = '';
     if (typeof b[part] === 'object') {
       let keys = Object.keys(b[part]);
-      valueString = asCodeString ? '${{' + keys[0] + '}}' : b[part][keys[0]];
+      valueString = asCodeString ? '{' + keys[0] + '}' : b[part][keys[0]];
     }
     else if (typeof b[part] === 'string') {
       valueString = b[part];
@@ -31,7 +31,7 @@ function mixString (a, b, asCodeString) {
 
 export async function I14n (language) {
   let translations = {};
-  if (language !== 'English') {
+  if (['Dutch'].includes(language)) {
     translations = (await import(`../Translations/${language}.js`)).Translations;
   }
 
@@ -44,8 +44,8 @@ export async function I14n (language) {
    */
   return function Translate (context, ...values) {
     if (typeof context === 'string') {
-      return strings => {
-        let translatedText = I14n(strings);
+      return (strings, ...values) => {
+        let translatedText = Translate(strings, ...values);
         translatedText.context = context;
         return translatedText;
       }
@@ -54,20 +54,28 @@ export async function I14n (language) {
       let stringsToTranslate = context;
       let codeString = mixString(stringsToTranslate, values, true);
 
-      if (typeof translations[codeString] !== 'undefined') {
-        let translatedString = translations[codeString];
-
-        let tokens = translations[codeString].match(/\$\{\{.*}}/);
-
-        tokens.forEach(token => {
-          translatedString = translatedString.replace(token, '[SPLIT]');
-        });
-
-        stringsToTranslate = translatedString.split('[SPLIT]');
-        console.log(stringsToTranslate)
+      /**
+       * Translation is not available.
+       */
+      if (typeof translations[codeString] === 'undefined') {
+        return new TranslatedText(mixString(stringsToTranslate, values));
       }
 
-      return new TranslatedText(mixString(stringsToTranslate, values));
+      /**
+       * We have a translation. Fill in the tokens.
+       */
+      else {
+        let translatedString = translations[codeString];
+        let tokens = Object.assign({}, ...values);
+
+        let replacements = translatedString.match(/\{[a-zA-Z]*}/g);
+        replacements.forEach(replacement => {
+          let variableName = replacement.substr(1).substr(0, replacement.length - 2);
+          translatedString = translatedString.replace(replacement, tokens[variableName]);
+        });
+
+        return new TranslatedText(translatedString);
+      }
     }
   }
 }

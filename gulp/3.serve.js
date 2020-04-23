@@ -11,6 +11,7 @@ gulp.task('browsersync', () => {
 
   browserSync.init({
     port: 4443,
+    single: true,
     server: {
       baseDir: 'public',
     },

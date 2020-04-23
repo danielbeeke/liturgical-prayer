@@ -1,7 +1,6 @@
 import {render} from '../vendor/lighterhtml.js';
 import {watch} from '../vendor/ReduxWatch.js';
 import {Store} from "./Store.js";
-import {I14n} from '../Helpers/I14n.js';
 
 /**
  * Some helpers to easily create Custom Elements composed in a base class.
@@ -14,8 +13,20 @@ export class BaseElement extends HTMLElement {
 
     // Binds draw to the element.
     const elementDraw = this.draw;
+    let that = this;
+    this.root = document.querySelector('prayer-app');
     this.draw = function () {
       render(this, () => elementDraw.apply(this, arguments));
+      let links = this.querySelectorAll('a');
+      links.forEach(link => {
+        if (typeof link.hasListener === 'undefined') {
+          link.hasListener = true;
+          link.addEventListener('click', event => {
+            event.preventDefault();
+            that.root.router.navigate(link.getAttribute('href'));
+          })
+        }
+      })
     };
   }
 
