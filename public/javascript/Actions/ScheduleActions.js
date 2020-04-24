@@ -18,3 +18,23 @@ export const setMomentTime = (momentName, time) => {
     }
   })
 };
+
+export const toggleCategory = (momentName, categoryName) => {
+  Store.dispatch({
+    type: 'category-toggle',
+    payload: {
+      momentName: momentName,
+      categoryName: categoryName
+    }
+  })
+};
+
+export const setCategoriesOrder = (momentName, order) => {
+  Store.dispatch({
+    type: 'set-category-order',
+    payload: {
+      momentName: momentName,
+      order: order
+    }
+  })
+};

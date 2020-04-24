@@ -22,9 +22,3 @@ customElements.define('prayer-home', class PrayerSelect extends BaseElement {
     `;
   }
 });
-
-export const routes = {
-  'home': {
-    template: html`<prayer-home />`
-  }
-};

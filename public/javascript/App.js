@@ -7,13 +7,14 @@
 import {BaseElement} from './Core/BaseElement.js';
 import {Store} from './Core/Store.js';
 
-import {routes as prayerMomentsSelectRoutes} from './CustomElements/PrayerMomentsSelect.js';
-import {routes as prayerHomeRoutes} from './CustomElements/PrayerHome.js';
-import {routes as prayerPrayRoutes} from './CustomElements/PrayerPray.js';
-import {routes as prayerMomentConfigureRoutes} from './CustomElements/PrayerMomentConfigure.js';
+import './CustomElements/PrayerMomentsSelect.js';
+import './CustomElements/PrayerHome.js';
+import './CustomElements/PrayerPray.js';
+import './CustomElements/PrayerMomentConfigure.js';
 
 import {I14n} from './Helpers/I14n.js';
 import {Router} from './Core/Router.js';
+import {html} from './vendor/lighterhtml.js';
 
 customElements.define('prayer-app', class PrayerApp extends BaseElement {
 
@@ -24,12 +25,12 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
     let a = Store.getState().app;
     this.t = await I14n(a.language);
 
-    let routes = Object.assign({},
-      prayerMomentsSelectRoutes,
-      prayerHomeRoutes,
-      prayerPrayRoutes,
-      prayerMomentConfigureRoutes
-    );
+    let routes = {
+      'pray': { template: html`<prayer-home />` },
+      'settings': { template: html`<prayer-moments-select />` },
+      'settings\/([a-z]*)': { template: html`<prayer-moment-configure />` },
+      'pray\/([a-z]*)': { template: html`<prayer-pray />` }
+    };
 
     this.router = new Router({
       routes: routes,

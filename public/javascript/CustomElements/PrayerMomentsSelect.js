@@ -29,13 +29,7 @@ customElements.define('prayer-moments-select', class PrayerMomentsSelect extends
         </div>
       `)}
 
-      <a href="/home">home</a>
+      <a href="/pray">home</a>
     `;
   }
 });
-
-export const routes = {
-  'settings': {
-    template: html`<prayer-moments-select />`
-  }
-};

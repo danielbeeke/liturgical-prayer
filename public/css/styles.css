@@ -39,23 +39,5 @@ a:visited {
 
 prayer-app {
   display: block;
-  height: 100%; }
-
-prayer-schedule-widget {
-  width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  grid-template-rows: 30px 1fr;
-  grid-template-areas: "empty header" "labels content"; }
-  prayer-schedule-widget .header {
-    grid-area: header;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); }
-  prayer-schedule-widget svg {
-    grid-area: content;
-    width: 100%;
-    height: 100%; }
-    prayer-schedule-widget svg path {
-      fill: none;
-      stroke: red; }
+  padding: 20px; }

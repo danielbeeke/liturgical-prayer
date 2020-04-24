@@ -11,14 +11,8 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
     let t = this.root.t;
 
     return html`
-        <a href="/home">Home</a>
+        <a href="/pray">Home</a>
         <h1>${t.direct(moment.name)}</h1>
     `;
   }
 });
-
-export const routes = {
-  'pray\/([a-z]*)': {
-    template: html`<prayer-pray />`
-  }
-};
