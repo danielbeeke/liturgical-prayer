@@ -1,5 +1,5 @@
 'use strict';
-
+const historyApiFallback = require('connect-history-api-fallback');
 const gulp = require('gulp');
 const browserSync = require('browser-sync').create();
 global.reload = browserSync.reload;

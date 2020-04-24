@@ -7,8 +7,10 @@
 import {BaseElement} from './Core/BaseElement.js';
 import {Store} from './Core/Store.js';
 
-import {routes as prayerSelectRoutes} from './CustomElements/PrayerSelect.js';
+import {routes as prayerMomentsSelectRoutes} from './CustomElements/PrayerMomentsSelect.js';
 import {routes as prayerHomeRoutes} from './CustomElements/PrayerHome.js';
+import {routes as prayerPrayRoutes} from './CustomElements/PrayerPray.js';
+import {routes as prayerMomentConfigureRoutes} from './CustomElements/PrayerMomentConfigure.js';
 
 import {I14n} from './Helpers/I14n.js';
 import {Router} from './Core/Router.js';
@@ -23,8 +25,10 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
     this.t = await I14n(a.language);
 
     let routes = Object.assign({},
-      prayerSelectRoutes,
-      prayerHomeRoutes
+      prayerMomentsSelectRoutes,
+      prayerHomeRoutes,
+      prayerPrayRoutes,
+      prayerMomentConfigureRoutes
     );
 
     this.router = new Router({

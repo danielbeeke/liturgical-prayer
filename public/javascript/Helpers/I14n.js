@@ -42,7 +42,7 @@ export async function I14n (language) {
    * @returns {TranslatedText}
    * @constructor
    */
-  return function Translate (context, ...values) {
+  let translate = function Translate (context, ...values) {
     if (typeof context === 'string') {
       return (strings, ...values) => {
         let translatedText = Translate(strings, ...values);
@@ -69,14 +69,27 @@ export async function I14n (language) {
         let tokens = Object.assign({}, ...values);
 
         let replacements = translatedString.match(/\{[a-zA-Z]*}/g);
-        replacements.forEach(replacement => {
-          let variableName = replacement.substr(1).substr(0, replacement.length - 2);
-          translatedString = translatedString.replace(replacement, tokens[variableName]);
-        });
+        if (replacements) {
+          replacements.forEach(replacement => {
+            let variableName = replacement.substr(1).substr(0, replacement.length - 2);
+            translatedString = translatedString.replace(replacement, tokens[variableName]);
+          });
+        }
 
         return new TranslatedText(translatedString);
       }
     }
-  }
+  };
+
+  translate.direct = (variable) => {
+    if (typeof translations[variable] === 'undefined') {
+      return new TranslatedText(variable);
+    }
+    else {
+      return new TranslatedText(translations[variable]);
+    }
+  };
+
+  return translate;
 }
 

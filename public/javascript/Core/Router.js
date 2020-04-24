@@ -67,13 +67,13 @@ export class Router {
     return this.check();
   }
 
-  sync (routeName) {
-    let route = this.routes.find(route => route.path === routeName);
+  sync (path) {
+    if (!this.match(path)) return;
 
     this.options.context.history.pushState(
       null,
       null,
-      '/' + Router.cleanPath(route.path || '')
+      '/' + Router.cleanPath(path || '')
     );
   }
 
@@ -83,7 +83,7 @@ export class Router {
    * @returns {Router} - This router instance
    */
   check() {
-    const hash = Router.cleanPath(this.options.context.location.pathname);
+    const hash = Router.cleanPath(location.pathname);
 
     for (let route of this.routes) {
       const match = hash.match(route.route);
@@ -91,7 +91,7 @@ export class Router {
       if (match !== null) {
         match.shift();
 
-        navigate(route.path);
+        navigate(hash);
 
         if (this.options.debug) {
           console.log(`Fetching: /${hash}`);
@@ -143,13 +143,32 @@ export class Router {
     return this;
   }
 
+  match (path) {
+    path = Router.cleanPath(path);
+    let activeRoute = null;
+    for (let route of this.routes) {
+      const match = path.match(route.route);
+
+      if (match !== null) {
+        match.shift();
+
+        activeRoute = route;
+
+        if (this.options.debug) {
+          console.log(`Syncing: /${path}`);
+        }
+      }
+    }
+
+    return activeRoute;
+  }
+
   /**
    * Name of the current route
    * @returns {object} - Current route
    */
   get currentRoute() {
-    let routeName = Router.cleanPath(this.options.context.location.pathname);
-    return this.routes.find(route => route.path === routeName);
+    return this.match(location.pathname);
   }
 
   /**
@@ -172,5 +191,10 @@ export class Router {
    */
   static parseRoute(path) {
     return Router.cleanPath(path).split('/');
+  }
+  
+  part (index) {
+    let split =  location.pathname.split('/');
+    return typeof split[index] !== 'undefined' ? split[index] : false;
   }
 }

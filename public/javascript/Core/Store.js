@@ -5,11 +5,13 @@ import {sharedCombineReducers} from '../Helpers/SharedCombineReducers.js';
 import {savableSlicer} from '../Helpers/SavableSlicer.js';
 
 import {AppReducer} from '../StoreReducers/AppReducer.js';
+import {ScheduleReducer} from '../StoreReducers/ScheduleReducer.js';
 
 const initialState = {};
 
 const reducers = sharedCombineReducers({
-  app: AppReducer
+  app: AppReducer,
+  schedule: ScheduleReducer
 });
 
 const middleware = applyMiddleware(

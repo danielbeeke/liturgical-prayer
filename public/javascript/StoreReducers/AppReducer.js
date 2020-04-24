@@ -5,7 +5,7 @@ import {produce} from "../vendor/immer.js";
  */
 export function AppReducer (state = {
   path: 'home',
-  language: 'English'
+  language: 'Dutch'
 }, action) {
   return produce(state, nextState => {
     if (action.type === 'navigate') nextState.path = action.payload.path;
