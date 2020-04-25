@@ -58,3 +58,25 @@ export const deleteFreeCategory = (momentSlug, categorySlug) => {
     }
   })
 };
+
+export const addPrayerPoint = (momentSlug, categorySlug, prayerPoint) => {
+  Store.dispatch({
+    type: 'add-prayer-point',
+    payload: {
+      momentSlug: momentSlug,
+      categorySlug: categorySlug,
+      prayerPoint: prayerPoint
+    }
+  })
+};
+
+export const deletePrayerPoint = (momentSlug, categorySlug, prayerPoint) => {
+  Store.dispatch({
+    type: 'delete-prayer-point',
+    payload: {
+      momentSlug: momentSlug,
+      categorySlug: categorySlug,
+      prayerPoint: prayerPoint
+    }
+  })
+};

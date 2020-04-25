@@ -12,4 +12,5 @@ export let Translations = {
   'Save': 'Opslaan',
   '- Select -': '- Selecteer -',
   'Delete category': 'Verwijder categorie',
+  'Delete': 'Verwijder',
 };

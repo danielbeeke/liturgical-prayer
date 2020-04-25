@@ -39,12 +39,14 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
       enabled: true,
       isFreeForm: true,
       description: '',
+      items: [],
       order: moment.prayerCategories.length,
       slug: Slugify(this.otherText)
     } : {
       name: selectedSuggestion.Title,
       enabled: true,
       description: selectedSuggestion.Description,
+      items: [],
       isFreeForm: true,
       order: moment.prayerCategories.length,
       slug: Slugify(selectedSuggestion.Title)

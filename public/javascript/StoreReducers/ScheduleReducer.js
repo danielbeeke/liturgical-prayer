@@ -62,5 +62,17 @@ export function ScheduleReducer (state = initialState, action) {
       moment.prayerCategories.splice(existingCategoryIndex, 1);
     }
 
+    if (action.type === 'add-prayer-point') {
+      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
+      let category = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
+      category.items.push(action.payload.prayerPoint);
+    }
+
+    if (action.type === 'delete-prayer-point') {
+      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
+      let category = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
+      category.items = category.items.filter(item => item !== action.payload.prayerPoint);
+    }
+
   });
 }
