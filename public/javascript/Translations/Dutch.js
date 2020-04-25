@@ -11,4 +11,5 @@ export let Translations = {
   'Other...': 'Anders...',
   'Save': 'Opslaan',
   '- Select -': '- Selecteer -',
+  'Delete category': 'Verwijder categorie',
 };

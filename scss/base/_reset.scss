@@ -2,9 +2,9 @@ html {
   height: 100%;
   font-size: 16px;
   line-height: 24px;
-  background-color: $color-secondary;
-  font-family: sans-serif;
+  background-color: var(--color-secondary);
   font-weight: 700;
+  font-family: 'Inter var';
 }
 
 body {
@@ -19,9 +19,6 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Questrial', sans-serif;
-  text-transform: uppercase;
-  font-weight: 100;
   line-height: 2.1;
   letter-spacing: 2px;
 }
@@ -36,10 +33,37 @@ iframe {
 
 a:link,
 a:visited {
-  color: $color-tertiary;
+  color: var(--color-tertiary);
 }
 
 #__bs_notify__ {
   opacity: .4;
   pointer-events: none;
+}
+
+
+/* -------------------------------------------------------
+Variable font.
+Usage:
+
+  html { font-family: 'Inter', sans-serif; }
+  @supports (font-variation-settings: normal) {
+    html { font-family: 'Inter var', sans-serif; }
+  }
+*/
+@font-face {
+  font-family: 'Inter var';
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url("/fonts/Inter-roman.var.woff2?v=3.13") format("woff2");
+}
+@font-face {
+  font-family: 'Inter var';
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: italic;
+  font-named-instance: 'Italic';
+  src: url("/fonts/Inter-italic.var.woff2?v=3.13") format("woff2");
 }

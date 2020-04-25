@@ -1,6 +1,7 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {html} from '../vendor/lighterhtml.js';
 import {Store} from '../Core/Store.js';
+import {deleteFreeCategory} from '../Actions/ScheduleActions.js';
 
 customElements.define('prayer-category-details', class PrayerCategoryDetails extends BaseElement {
 
@@ -16,6 +17,7 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
       <a href="/settings/${momentSlug}">${t.direct('Back')}</a>
       <h1>${category.name}</h1>
       <p>${category.description}</p>
+      ${category.isFreeForm ? html`<button class="button" onclick="${() => {deleteFreeCategory(momentSlug, category.slug); this.root.router.navigate(`/settings/${momentSlug}`)}}">${t.direct('Delete category')}</button>` : html``}
     `;
   }
 });

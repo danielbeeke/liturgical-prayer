@@ -48,3 +48,13 @@ export const createFreeCategory = (momentSlug, category) => {
     }
   })
 };
+
+export const deleteFreeCategory = (momentSlug, categorySlug) => {
+  Store.dispatch({
+    type: 'delete-category',
+    payload: {
+      momentSlug: momentSlug,
+      categorySlug: categorySlug
+    }
+  })
+};

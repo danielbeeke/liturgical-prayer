@@ -8,7 +8,7 @@ let initialCategories = prayerData['Categories'].map((category, index) => {
     isFreeForm: false,
     name: category.Title,
     slug: Slugify(category.Title),
-    description: category.description,
+    description: category.Description,
   }
 });
 
@@ -53,6 +53,13 @@ export function ScheduleReducer (state = initialState, action) {
     if (action.type === 'create-category') {
       let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
       moment.prayerCategories.push(action.payload.category)
+    }
+
+    if (action.type === 'delete-category') {
+      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
+      let existingCategory = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
+      let existingCategoryIndex = moment.prayerCategories.indexOf(existingCategory);
+      moment.prayerCategories.splice(existingCategoryIndex, 1);
     }
 
   });
