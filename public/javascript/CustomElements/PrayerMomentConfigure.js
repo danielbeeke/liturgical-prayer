@@ -52,7 +52,7 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
     return html`
       <h1>${t.direct(moment.name)}</h1>
 
-      <a class="button" href="/settings/${slug}/create-free-category">${t.direct('Create free category')}</a>
+      <a class="button" href="/settings/${slug}/create-free-category">${t.direct('Create category')}</a>
 
       <div class="categories">
       ${categories.map(category => html`
@@ -62,7 +62,7 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
           onchange="${() => {toggleCategory(moment.slug, category.slug); this.draw()}}">
           
           <span>${t.direct(category.name)}</span>
-          <a href="/settings/${slug}/prayer-category/${category.slug}" class="tooltip">i</a>
+          <a href="/settings/${slug}/prayer-category/${category.slug}" class="tooltip">${category.isFreeForm ? t.direct('Edit') : 'i'}</a>
         </div>
       `)}
       </div>

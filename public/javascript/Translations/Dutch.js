@@ -13,4 +13,6 @@ export let Translations = {
   '- Select -': '- Selecteer -',
   'Delete category': 'Verwijder categorie',
   'Delete': 'Verwijder',
+  'Edit': 'Bewerken',
+  'Title': 'Titel',
 };

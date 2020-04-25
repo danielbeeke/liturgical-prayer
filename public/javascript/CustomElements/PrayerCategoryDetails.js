@@ -28,15 +28,24 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
       <h1>${this.category.name}</h1>
       <p>${this.category.description}</p>
 
-      ${this.category.items.map(item => html`
-        <span>${item}</span><button onclick="${() => {deletePrayerPoint(this.moment.slug, this.category.slug, item); this.draw()}}" class="button">${t.direct('Delete')}</button>
-      `)}
-      
-      <label>${this.category.items.length ? t.direct('Add another') : t.direct('Add your first prayer point')}</label>
-      <input name="add-text" value="${this.addText}" onchange="${event => this.addText = event.target.value}" type="text">
-      <button onclick="${() => {this.addPrayerPoint(); this.draw()}}">${t.direct('Add')}</button>
-      
-      ${this.category.isFreeForm ? html`<button class="button" onclick="${() => {deleteFreeCategory(this.moment.slug, this.category.slug); this.root.router.navigate(`/settings/${this.moment.slug}`)}}">${t.direct('Delete category')}</button>` : html``}
+      ${this.category.isFreeForm ? html`
+        <ul>
+        ${this.category.items.map(item => html`
+          <li>
+              <span>${item}</span>
+              <button onclick="${() => {deletePrayerPoint(this.moment.slug, this.category.slug, item); this.draw()}}" class="button">${t.direct('Delete')}</button>
+          </li>
+        `)}
+        </ul>
+        
+        <div>
+          <label>${this.category.items.length ? t.direct('Add another') : t.direct('Add your first prayer point')}</label>
+          <input name="add-text" value="${this.addText}" onchange="${event => this.addText = event.target.value}" type="text">
+          <button onclick="${() => {this.addPrayerPoint(); this.draw()}}">${t.direct('Add')}</button>
+        </div>      
+        
+        <button class="button" onclick="${() => {deleteFreeCategory(this.moment.slug, this.category.slug); this.root.router.navigate(`/settings/${this.moment.slug}`)}}">${t.direct('Delete category')}</button>
+      ` : html``}
     `;
   }
 });
