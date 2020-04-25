@@ -5,5 +5,10 @@ export let Translations = {
   'Afternoon': 'Middag',
   'Evening': 'Avond',
   'Settings': 'Instellingen',
-  'On which moments do you want to pray?': 'Op welke momenten wil je bidden?'
+  'On which moments do you want to pray?': 'Op welke momenten wil je bidden?',
+  'Create category': 'Maak categorie',
+  'Add': 'Toevoegen',
+  'Other...': 'Anders...',
+  'Save': 'Opslaan',
+  '- Select -': '- Selecteer -',
 };

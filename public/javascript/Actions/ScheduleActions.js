@@ -38,3 +38,13 @@ export const setCategoriesOrder = (momentSlug, order) => {
     }
   })
 };
+
+export const createFreeCategory = (momentSlug, category) => {
+  Store.dispatch({
+    type: 'create-category',
+    payload: {
+      momentSlug: momentSlug,
+      category: category
+    }
+  })
+};

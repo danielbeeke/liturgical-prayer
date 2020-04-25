@@ -1,19 +1,21 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {html} from '../vendor/lighterhtml.js';
-import {Slugify} from '../Helpers/Slugify.js';
+import {Store} from '../Core/Store.js';
 
 customElements.define('prayer-category-details', class PrayerCategoryDetails extends BaseElement {
 
   draw () {
-    let momentSlug = this.root.router.part(2);
-    let slug = this.root.router.part(4);
     let t = this.root.t;
-    let category = prayerData['Categories'].find(category => Slugify(category.Title) === slug);
+    let s = Store.getState().schedule;
+    let momentSlug = this.root.router.part(2);
+    let moment = s.moments.find(moment => moment.slug === momentSlug);
+    let slug = this.root.router.part(4);
+    let category = moment.prayerCategories.find(category => category.slug === slug);
 
     return html`
       <a href="/settings/${momentSlug}">${t.direct('Back')}</a>
-      <h1>${category.Title}</h1>
-      <p>${category.Description}</p>
+      <h1>${category.name}</h1>
+      <p>${category.description}</p>
     `;
   }
 });

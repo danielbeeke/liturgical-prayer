@@ -25,7 +25,6 @@ customElements.define('prayer-moments-select', class PrayerMomentsSelect extends
             html`<span>${t.direct(moment.name)}</span>
           `}
           </label>
-          <input class="time" type="time" name="time-${moment.slug}" value="${moment.time}" onchange="${event => {setMomentTime(moment.slug, event.target.value); this.draw()}}">
         </div>
       `)}
 

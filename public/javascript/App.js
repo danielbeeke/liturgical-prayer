@@ -12,6 +12,7 @@ import './CustomElements/PrayerHome.js';
 import './CustomElements/PrayerPray.js';
 import './CustomElements/PrayerMomentConfigure.js';
 import './CustomElements/PrayerCategoryDetails.js';
+import './CustomElements/PrayerCreateFreeCategory.js';
 
 import {I14n} from './Helpers/I14n.js';
 import {Router} from './Core/Router.js';
@@ -32,6 +33,7 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
       'settings\/([a-z]*)': { template: html`<prayer-moment-configure />` },
       'pray\/([a-z]*)': { template: html`<prayer-pray />` },
       'settings\/([a-z]*)\/prayer-category\/([a-z]*)': { template: html`<prayer-category-details />` },
+      'settings\/([a-z]*)\/create-free-category': { template: html`<prayer-create-free-category />` },
     };
 
     this.router = new Router({

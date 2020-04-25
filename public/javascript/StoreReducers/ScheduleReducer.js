@@ -5,6 +5,7 @@ let initialCategories = prayerData['Categories'].map((category, index) => {
   return {
     enabled: true,
     order: index,
+    isFreeForm: false,
     name: category.Title,
     slug: Slugify(category.Title),
     description: category.description,
@@ -47,6 +48,11 @@ export function ScheduleReducer (state = initialState, action) {
         let category = moment.prayerCategories.find(category => category.slug === categorySlug);
         category.order = order;
       }
+    }
+
+    if (action.type === 'create-category') {
+      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
+      moment.prayerCategories.push(action.payload.category)
     }
 
   });
