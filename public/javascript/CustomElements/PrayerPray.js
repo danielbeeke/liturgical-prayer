@@ -6,8 +6,8 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
 
   draw () {
     let s = Store.getState().schedule;
-    let momentName = this.root.router.part(2);
-    let moment = s.moments.find(moment => moment.name.toLowerCase() === momentName);
+    let slug = this.root.router.part(2);
+    let moment = s.moments.find(moment => moment.slug === slug);
     let t = this.root.t;
 
     return html`

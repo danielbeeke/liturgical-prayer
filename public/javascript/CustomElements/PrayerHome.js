@@ -13,7 +13,7 @@ customElements.define('prayer-home', class PrayerSelect extends BaseElement {
     
     ${s.moments.map(moment => moment.enabled ? html`
       <div>
-        <a href="${'/pray/' + moment.name.toLowerCase()}">${t.direct(moment.name)}</a>
+        <a href="${'/pray/' + moment.slug}">${t.direct(moment.name)}</a>
       </div>
     ` : html``)}
 

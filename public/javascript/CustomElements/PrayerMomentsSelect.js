@@ -18,14 +18,14 @@ customElements.define('prayer-moments-select', class PrayerMomentsSelect extends
 
       ${s.moments.map(moment => html`
         <div>
-          <input type="checkbox" id="toggle-${moment.name}" checked="${moment.enabled}" onchange="${() => {toggleMoment(moment.name); this.draw()}}">
-          <label for="toggle-${moment.name}">
+          <input type="checkbox" id="toggle-${moment.slug}" checked="${moment.enabled}" onchange="${() => {toggleMoment(moment.slug); this.draw()}}">
+          <label for="toggle-${moment.slug}">
           ${moment.enabled ? 
-            html`<a href="${'/settings/' + moment.name.toLowerCase()}">${t.direct(moment.name)}</a>` : 
+            html`<a href="${'/settings/' + moment.slug}">${t.direct(moment.name)}</a>` : 
             html`<span>${t.direct(moment.name)}</span>
           `}
           </label>
-          <input class="time" type="time" name="time-${moment.name}" value="${moment.time}" onchange="${event => {setMomentTime(moment.name, event.target.value); this.draw()}}">
+          <input class="time" type="time" name="time-${moment.slug}" value="${moment.time}" onchange="${event => {setMomentTime(moment.slug, event.target.value); this.draw()}}">
         </div>
       `)}
 

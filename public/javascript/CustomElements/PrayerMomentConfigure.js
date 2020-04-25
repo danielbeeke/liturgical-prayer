@@ -1,23 +1,13 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
 import {html} from '../vendor/lighterhtml.js';
-import {PrayerData} from '../Helpers/PrayerData.js';
 import {toggleCategory, setCategoriesOrder} from '../Actions/ScheduleActions.js';
 import Sortable from '../vendor/sortable.complete.esm.js';
 
 customElements.define('prayer-moment-configure', class PrayerMomentConfigure extends BaseElement {
 
   async connectedCallback() {
-    let prayerData = new PrayerData();
-    let momentName = this.root.router.part(2);
-    let s = Store.getState().schedule;
-    let moment = s.moments.find(moment => moment.name.toLowerCase() === momentName);
-    this.categories = await prayerData.categories();
-    this.categories = this.categories.sort((a, b) => {
-      let aInstance = moment.prayerCategories.find(category => category.name === a.name);
-      let bInstance = moment.prayerCategories.find(category => category.name === b.name);
-      return aInstance.order - bInstance.order;
-    });
+    let slug = this.root.router.part(2);
 
     this.draw();
     let list = this.querySelector('.categories');
@@ -25,9 +15,9 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
       onUpdate: () => {
         let order = {};
         [...list.children].forEach((child, index) => {
-          order[child.dataset.name] = index;
+          order[child.dataset.slug] = index;
         });
-        setCategoriesOrder(moment.name, order);
+        setCategoriesOrder(slug, order);
       }
     });
   }
@@ -39,12 +29,14 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
 
   draw () {
     let s = Store.getState().schedule;
-    let momentName = this.root.router.part(2);
-    let moment = s.moments.find(moment => moment.name.toLowerCase() === momentName);
+    let slug = this.root.router.part(2);
+    let moment = s.moments.find(moment => moment.slug === slug);
+    let categories = [...moment.prayerCategories].sort((a, b) => a.order - b.order);
+
     let t = this.root.t;
 
-    let categoryIsEnabled = (categoryName) => {
-      let category = moment.prayerCategories.find(category => category.name === categoryName);
+    let categoryIsEnabled = (categorySlug) => {
+      let category = categories.find(category => category.slug === categorySlug);
       if (category) {
         return category.enabled;
       }
@@ -54,14 +46,14 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
       <h1>${t.direct(moment.name)}</h1>
 
       <div class="categories">
-      ${this.categories.map(category => html`
-        <div class="prayer-category" data-name="${category.name}">
-          <input type="checkbox" id="toggle-${category.name}" 
-          checked="${categoryIsEnabled(category.name)}" 
-          onchange="${() => {toggleCategory(moment.name, category.name); this.draw()}}">
+      ${categories.map(category => html`
+        <div class="prayer-category" data-slug="${category.slug}">
+          <input type="checkbox" id="toggle-${category.slug}" 
+          checked="${categoryIsEnabled(category.slug)}" 
+          onchange="${() => {toggleCategory(moment.slug, category.slug); this.draw()}}">
           
-          <label for="toggle-${category.name}">${t.direct(category.name)}</label>
-          <a href="/prayer-category/${category.name}" class="tooltip">i</a>
+          <label for="toggle-${category.slug}">${t.direct(category.name)}</label>
+          <a href="/prayer-category/${category.slug}" class="tooltip">i</a>
         </div>
       `)}
       </div>

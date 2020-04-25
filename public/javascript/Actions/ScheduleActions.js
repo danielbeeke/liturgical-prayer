@@ -1,39 +1,39 @@
 import {Store} from '../Core/Store.js';
 
-export const toggleMoment = (momentName) => {
+export const toggleMoment = (momentSlug) => {
   Store.dispatch({
     type: 'moment-toggle',
     payload: {
-      momentName: momentName
+      momentSlug: momentSlug
     }
   })
 };
 
-export const setMomentTime = (momentName, time) => {
+export const setMomentTime = (momentSlug, time) => {
   Store.dispatch({
     type: 'set-moment-time',
     payload: {
-      momentName: momentName,
+      momentSlug: momentSlug,
       time: time
     }
   })
 };
 
-export const toggleCategory = (momentName, categoryName) => {
+export const toggleCategory = (momentSlug, categorySlug) => {
   Store.dispatch({
     type: 'category-toggle',
     payload: {
-      momentName: momentName,
-      categoryName: categoryName
+      momentSlug: momentSlug,
+      categorySlug: categorySlug
     }
   })
 };
 
-export const setCategoriesOrder = (momentName, order) => {
+export const setCategoriesOrder = (momentSlug, order) => {
   Store.dispatch({
     type: 'set-category-order',
     payload: {
-      momentName: momentName,
+      momentSlug: momentSlug,
       order: order
     }
   })
