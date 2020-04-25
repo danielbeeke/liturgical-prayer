@@ -1,4 +1,5 @@
 export let Translations = {
+  'Back': 'Terug',
   'Welcome!': 'Welkom!',
   'Morning': 'Ochtend',
   'Afternoon': 'Middag',

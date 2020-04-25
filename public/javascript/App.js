@@ -11,6 +11,7 @@ import './CustomElements/PrayerMomentsSelect.js';
 import './CustomElements/PrayerHome.js';
 import './CustomElements/PrayerPray.js';
 import './CustomElements/PrayerMomentConfigure.js';
+import './CustomElements/PrayerCategoryDetails.js';
 
 import {I14n} from './Helpers/I14n.js';
 import {Router} from './Core/Router.js';
@@ -29,7 +30,8 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
       'pray': { template: html`<prayer-home />` },
       'settings': { template: html`<prayer-moments-select />` },
       'settings\/([a-z]*)': { template: html`<prayer-moment-configure />` },
-      'pray\/([a-z]*)': { template: html`<prayer-pray />` }
+      'pray\/([a-z]*)': { template: html`<prayer-pray />` },
+      'settings\/([a-z]*)\/prayer-category\/([a-z]*)': { template: html`<prayer-category-details />` },
     };
 
     this.router = new Router({

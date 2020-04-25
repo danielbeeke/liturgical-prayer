@@ -53,7 +53,7 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
           onchange="${() => {toggleCategory(moment.slug, category.slug); this.draw()}}">
           
           <label for="toggle-${category.slug}">${t.direct(category.name)}</label>
-          <a href="/prayer-category/${category.slug}" class="tooltip">i</a>
+          <a href="/settings/${slug}/prayer-category/${category.slug}" class="tooltip">i</a>
         </div>
       `)}
       </div>
