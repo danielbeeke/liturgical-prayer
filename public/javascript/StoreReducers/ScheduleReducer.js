@@ -74,5 +74,11 @@ export function ScheduleReducer (state = initialState, action) {
       category.items = category.items.filter(item => item !== action.payload.prayerPoint);
     }
 
+    if (action.type === 'set-prayer-points-order') {
+      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
+      let category = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
+      category.items = action.payload.prayerPoints;
+    }
+
   });
 }

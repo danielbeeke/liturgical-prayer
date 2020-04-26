@@ -31,7 +31,6 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
   disconnectedCallback() {
     super.disconnectedCallback();
     this.sortable.destroy();
-    this.sortable = null;
   }
 
   draw () {

@@ -1,7 +1,8 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {html} from '../vendor/lighterhtml.js';
 import {Store} from '../Core/Store.js';
-import {deleteFreeCategory, addPrayerPoint, deletePrayerPoint} from '../Actions/ScheduleActions.js';
+import {deleteFreeCategory, addPrayerPoint, deletePrayerPoint, setPrayerPointsOrder} from '../Actions/ScheduleActions.js';
+import {Sortable} from '../Helpers/Sortable.js';
 
 customElements.define('prayer-category-details', class PrayerCategoryDetails extends BaseElement {
 
@@ -10,18 +11,41 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
     this.addText = '';
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    let list = this.querySelector('.prayer-items');
+    this.sortable = new Sortable(list);
+    list.addEventListener('sorted', () => {
+      let prayerPoints = [...list.children].map(child => child.dataset.name);
+
+      // Sort them to their original place so lighterHTML may do its work.
+      [...list.children]
+      .sort((a,b)=> a.dataset.order > b.dataset.order ? 1 : -1)
+      .map(node => list.appendChild(node));
+
+      setPrayerPointsOrder(this.moment.slug, this.category.slug, prayerPoints);
+      this.draw();
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.sortable.destroy();
+  }
+
   addPrayerPoint () {
     addPrayerPoint(this.moment.slug, this.category.slug, this.addText);
     this.addText = null;
   }
 
   draw () {
+    let t = this.root.t;
+
     let s = Store.getState().schedule;
     let momentSlug = this.root.router.part(2);
     this.moment = s.moments.find(moment => moment.slug === momentSlug);
     let slug = this.root.router.part(4);
     this.category = this.moment.prayerCategories.find(category => category.slug === slug);
-    let t = this.root.t;
 
     return html`
       <a href="/settings/${this.moment.slug}">${t.direct('Back')}</a>
@@ -29,14 +53,14 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
       <p>${this.category.description}</p>
 
       ${this.category.isFreeForm ? html`
-        <ul>
-        ${this.category.items.map(item => html`
-          <li>
+        <div class="prayer-items sortable">
+        ${this.category.items.map((item, index) => html`
+          <div data-name="${item}" data-order="${index}">
               <span>${item}</span>
               <button onclick="${() => {deletePrayerPoint(this.moment.slug, this.category.slug, item); this.draw()}}" class="button">${t.direct('Delete')}</button>
-          </li>
+          </div>
         `)}
-        </ul>
+        </div>
         
         <div>
           <label>${this.category.items.length ? t.direct('Add another') : t.direct('Add your first prayer point')}</label>
