@@ -11,15 +11,17 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
     this.dataset.items = s.moments.filter(moment => moment.enabled).length;
 
     return html`
-    <prayer-background />
-    
     ${s.moments.map(moment => moment.enabled ? html`
+      <div>
       <a class="prayer-moment" href="${'/pray/' + moment.slug}">
         <span class="inner">${t.direct(moment.name)}</span>
       </a>
+      </div>
     ` : html``)}
 
-    <a href="/settings">${t`Settings`}</a>
+    <div>
+        <a href="/settings">${t`Settings`}</a>
+    </div>
 
     `;
   }

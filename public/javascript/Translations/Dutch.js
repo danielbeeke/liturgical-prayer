@@ -15,4 +15,5 @@ export let Translations = {
   'Delete': 'Verwijder',
   'Edit': 'Bewerken',
   'Title': 'Titel',
+  'Read more': 'Lees meer',
 };

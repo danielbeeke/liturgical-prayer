@@ -14,23 +14,26 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
   connectedCallback() {
     super.connectedCallback();
     let list = this.querySelector('.prayer-items');
-    this.sortable = new Sortable(list);
-    list.addEventListener('sorted', () => {
-      let prayerPoints = [...list.children].map(child => child.dataset.name);
 
-      // Sort them to their original place so lighterHTML may do its work.
-      [...list.children]
-      .sort((a,b)=> a.dataset.order > b.dataset.order ? 1 : -1)
-      .map(node => list.appendChild(node));
+    if (list) {
+      this.sortable = new Sortable(list);
+      list.addEventListener('sorted', () => {
+        let prayerPoints = [...list.children].map(child => child.dataset.name);
 
-      setPrayerPointsOrder(this.moment.slug, this.category.slug, prayerPoints);
-      this.draw();
-    });
+        // Sort them to their original place so lighterHTML may do its work.
+        [...list.children]
+        .sort((a,b)=> a.dataset.order > b.dataset.order ? 1 : -1)
+        .map(node => list.appendChild(node));
+
+        setPrayerPointsOrder(this.moment.slug, this.category.slug, prayerPoints);
+        this.draw();
+      });
+    }
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    this.sortable.destroy();
+    if (this.sortable) this.sortable.destroy();
   }
 
   addPrayerPoint () {

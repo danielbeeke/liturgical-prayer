@@ -33,7 +33,7 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
       '^settings$': { template: html`<prayer-moments-select />` },
       '^settings\/([a-z]*)$': { template: html`<prayer-moment-configure />` },
       '^pray\/([a-z]*)$': { template: html`<prayer-pray />` },
-      '^settings\/([a-z]*)\/prayer-category\/([a-z]*)$': { template: html`<prayer-category-details />` },
+      '^settings\/([a-z]*)\/prayer-category\/([a-z\-]*)$': { template: html`<prayer-category-details />` },
       '^settings\/([a-z]*)\/create-free-category$': { template: html`<prayer-create-free-category />` },
     };
 
