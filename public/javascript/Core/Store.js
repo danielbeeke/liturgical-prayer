@@ -6,12 +6,14 @@ import {savableSlicer} from '../Helpers/SavableSlicer.js';
 
 import {AppReducer} from '../StoreReducers/AppReducer.js';
 import {ScheduleReducer} from '../StoreReducers/ScheduleReducer.js';
+import {PrayReducer} from '../StoreReducers/PrayReducer.js';
 
 const initialState = {};
 
 const reducers = sharedCombineReducers({
   app: AppReducer,
-  schedule: ScheduleReducer
+  schedule: ScheduleReducer,
+  pray: PrayReducer
 });
 
 const middleware = applyMiddleware(
