@@ -29,12 +29,12 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
     this.t = await I14n(a.language);
 
     let routes = {
-      'pray': { template: html`<prayer-home />` },
-      'settings': { template: html`<prayer-moments-select />` },
-      'settings\/([a-z]*)': { template: html`<prayer-moment-configure />` },
-      'pray\/([a-z]*)': { template: html`<prayer-pray />` },
-      'settings\/([a-z]*)\/prayer-category\/([a-z]*)': { template: html`<prayer-category-details />` },
-      'settings\/([a-z]*)\/create-free-category': { template: html`<prayer-create-free-category />` },
+      '^pray$': { template: html`<prayer-home />` },
+      '^settings$': { template: html`<prayer-moments-select />` },
+      '^settings\/([a-z]*)$': { template: html`<prayer-moment-configure />` },
+      '^pray\/([a-z]*)$': { template: html`<prayer-pray />` },
+      '^settings\/([a-z]*)\/prayer-category\/([a-z]*)$': { template: html`<prayer-category-details />` },
+      '^settings\/([a-z]*)\/create-free-category$': { template: html`<prayer-create-free-category />` },
     };
 
     this.router = new Router({

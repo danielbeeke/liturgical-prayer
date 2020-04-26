@@ -2,7 +2,7 @@ import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
 import {html} from '../vendor/lighterhtml.js';
 import {toggleCategory, setCategoriesOrder} from '../Actions/ScheduleActions.js';
-import Sortable from '../vendor/sortable.complete.esm.js';
+import {Sortable} from '../Helpers/Sortable.js';
 
 customElements.define('prayer-moment-configure', class PrayerMomentConfigure extends BaseElement {
 
@@ -11,27 +11,27 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
 
     this.draw();
     let list = this.querySelector('.categories');
-    this.sortable = Sortable.create(list, {
-      onUpdate: () => {
-        let order = {};
-        [...list.children].forEach((child, index) => {
-          order[child.dataset.slug] = index;
-        });
+    this.sortable = new Sortable(list);
+    list.addEventListener('sorted', () => {
+      let order = {};
+      [...list.children].forEach((child, index) => {
+        order[child.dataset.slug] = index;
+      });
 
-        // Sort them to their original place so lighterHTML may do its work.
-        [...list.children]
-        .sort((a,b)=> a.dataset.order > b.dataset.order ? 1 : -1)
-        .map(node => list.appendChild(node));
+      // Sort them to their original place so lighterHTML may do its work.
+      [...list.children]
+      .sort((a,b)=> a.dataset.order > b.dataset.order ? 1 : -1)
+      .map(node => list.appendChild(node));
 
-        setCategoriesOrder(slug, order);
-        this.draw();
-      }
+      setCategoriesOrder(slug, order);
+      this.draw();
     });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.sortable.destroy();
+    this.sortable = null;
   }
 
   draw () {
@@ -54,7 +54,7 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
 
       <a class="button" href="/settings/${slug}/create-free-category">${t.direct('Create category')}</a>
 
-      <div class="categories">
+      <div class="categories sortable">
       ${categories.map(category => html`
         <div class="prayer-category" data-order="${category.order}" data-slug="${category.slug}">
           <input type="checkbox" id="toggle-${category.slug}" 
