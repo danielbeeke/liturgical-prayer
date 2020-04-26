@@ -12,11 +12,11 @@ export const markPrayer = (date, momentSlug, categorySlug, prayerId) => {
   })
 };
 
-export const clearPrayerCategory = (categoryName) => {
+export const clearPrayerCategory = (categorySlug) => {
   Store.dispatch({
     type: 'clear-prayer-category',
     payload: {
-      categoryName: categoryName,
+      categorySlug: categorySlug,
     }
   })
 };

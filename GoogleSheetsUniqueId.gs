@@ -1,4 +1,4 @@
-function generateUID () {
+function generateUID() {
   let ALPHABET = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
   let rtn = '';
   for (let i = 0; i < 5; i++) {
@@ -17,15 +17,15 @@ function onEdit(evt) {
   let headerIdx = headers.indexOf("UniqueID") + 1;
 
   if (headerIdx !== -1) {
-    rangeValues.forEach(function(row,index){
+    rangeValues.forEach(function (row, index) {
       let conc = row.join("").length;
 
-      if(conc > 0) {
-        let idRange = sheet.getRange( range.getRow() + index, headerIdx );
-        let idCell = idRange.getCell( 1, 1 );
+      if (conc > 0) {
+        let idRange = sheet.getRange(range.getRow() + index, headerIdx);
+        let idCell = idRange.getCell(1, 1);
         let idValue = idCell.getValue();
         if (idValue === "") {
-          idCell.setValue( generateUID() );
+          idCell.setValue(generateUID());
         }
       }
     });

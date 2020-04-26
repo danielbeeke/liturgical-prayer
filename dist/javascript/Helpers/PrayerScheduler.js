@@ -40,8 +40,8 @@ export class PrayerScheduler {
     let allPrayers = prayerData[prayerCategory.name];
     let unusedPrayers = allPrayers.filter(prayer => !this.p.usedPrayers.includes(prayer.UniqueID));
 
-    if (!unusedPrayers.length) {
-      clearPrayerCategory(prayerCategory.name);
+    if (!unusedPrayers) {
+      clearPrayerCategory(prayerCategory.slug);
       return Object.assign({}, allPrayers[0], {
         category: prayerCategory
       });
