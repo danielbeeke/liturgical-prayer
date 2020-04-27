@@ -51,7 +51,7 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
     this.category = this.moment.prayerCategories.find(category => category.slug === slug);
 
     return html`
-      <a href="/settings/${this.moment.slug}">${t.direct('Back')}</a>
+      <prayer-menu />
       <h1>${this.category.name}</h1>
       <p>${this.category.description}</p>
 
@@ -60,15 +60,15 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
         ${this.category.items.map((item, index) => html`
           <div data-name="${item}" data-order="${index}">
               <span>${item}</span>
-              <button onclick="${() => {deletePrayerPoint(this.moment.slug, this.category.slug, item); this.draw()}}" class="button">${t.direct('Delete')}</button>
+              <button onclick="${() => {deletePrayerPoint(this.moment.slug, this.category.slug, item); this.draw()}}" class="button small">${t.direct('Delete')}</button>
           </div>
         `)}
         </div>
         
-        <div>
+        <div class="field">
           <label>${this.category.items.length ? t.direct('Add another') : t.direct('Add your first prayer point')}</label>
           <input name="add-text" value="${this.addText}" onchange="${event => this.addText = event.target.value}" type="text">
-          <button onclick="${() => {this.addPrayerPoint(); this.draw()}}">${t.direct('Add')}</button>
+          <button class="button" onclick="${() => {this.addPrayerPoint(); this.draw()}}">${t.direct('Add')}</button>
         </div>      
         
         <button class="button" onclick="${() => {deleteFreeCategory(this.moment.slug, this.category.slug); this.root.router.navigate(`/settings/${this.moment.slug}`)}}">${t.direct('Delete category')}</button>

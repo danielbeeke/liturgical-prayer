@@ -1,0 +1,17 @@
+.button {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  background: white;
+  cursor: pointer;
+
+  &.small {
+    font-size: 13px;
+    padding: 0 8px;
+  }
+
+  &.active {
+    background: black;
+    color: white;
+  }
+}

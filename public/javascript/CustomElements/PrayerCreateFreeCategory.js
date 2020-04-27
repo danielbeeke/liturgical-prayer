@@ -62,20 +62,24 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     return html`
     <h1>${t.direct('Create category')}</h1>
     
+    <div class="field">
     <label>${t.direct('Title')}</label>
     <select onchange="${event => {this.selected = event.target.value; this.draw()}}">
         ${this.suggestions.map(suggestion => html`
           <option value="${suggestion.slug}">${suggestion.Title}</option>
         `)}
     </select>
+    </div>
     
+    <div class="field">
     ${this.selected === 'other' ? html`
       <label>${t.direct('Title')}</label>
       <input type="text" onchange="${event => this.otherText = event.target.value}">
     ` : html``}
+    </div>
     
     <button class="button" onclick="${() => this.createCategory()}">${t.direct('Save')}</button>
-    
+    <prayer-menu />
     `;
   }
 });

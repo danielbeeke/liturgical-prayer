@@ -1,5 +1,6 @@
 import {Store} from '../Core/Store.js';
 import {clearPrayerCategory} from '../Actions/PrayActions.js';
+import {html} from '../vendor/lighterhtml.js';
 
 export class PrayerScheduler {
 
@@ -10,23 +11,41 @@ export class PrayerScheduler {
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    let assignedPrayerId = this.p.calendar?.[year]?.[month]?.[day]?.[momentSlug]?.[prayerCategory.slug];
 
-    if (assignedPrayerId) {
-      let allPrayers = prayerData[prayerCategory.name];
-      let foundPrayer = allPrayers.find(prayer => prayer.UniqueID === assignedPrayerId);
+    if (prayerCategory.isFreeForm) {
 
-      if (!foundPrayer) {
-        throw new Error('Could not find prayer: ' + assignedPrayerId)
-      }
-
-      return Object.assign({}, foundPrayer, {
-        category: prayerCategory,
+      return {
+        Title: prayerCategory.name,
+        Content: html`
+          <ul>
+            ${prayerCategory.items.map(item => html`
+              <li>${item}</li>
+            `)}
+          </ul>
+        `,
         marked: true,
-      });
+        category: prayerCategory,
+      }
     }
     else {
-      return this.getNextPrayer(prayerCategory);
+      let assignedPrayerId = this.p.calendar?.[year]?.[month]?.[day]?.[momentSlug]?.[prayerCategory.slug];
+
+      if (assignedPrayerId) {
+        let allPrayers = prayerData[prayerCategory.name];
+        let foundPrayer = allPrayers.find(prayer => prayer.UniqueID === assignedPrayerId);
+
+        if (!foundPrayer) {
+          throw new Error('Could not find prayer: ' + assignedPrayerId)
+        }
+
+        return Object.assign({}, foundPrayer, {
+          category: prayerCategory,
+          marked: true,
+        });
+      }
+      else {
+        return this.getNextPrayer(prayerCategory);
+      }
     }
   }
 

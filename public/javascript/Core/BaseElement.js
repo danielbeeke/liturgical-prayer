@@ -24,7 +24,9 @@ export class BaseElement extends HTMLElement {
           link.addEventListener('click', event => {
             event.preventDefault();
             that.root.router.navigate(link.getAttribute('href'));
-          })
+          });
+
+          if (link.getAttribute('href') === location.pathname) link.classList.add('active');
         }
       })
     };

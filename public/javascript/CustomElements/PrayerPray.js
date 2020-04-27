@@ -13,7 +13,7 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
     let moment = s.moments.find(moment => moment.slug === slug);
     let t = this.root.t;
 
-    let activeCategories = moment.prayerCategories.filter(category => category.enabled && !category.isFreeForm);
+    let activeCategories = moment.prayerCategories.filter(category => category.enabled).sort((a, b) => a.order - b.order);
     let prayerScheduler = new PrayerScheduler();
     let prayers = activeCategories.map(category => prayerScheduler.getPrayer(date, category, moment.slug));
 
@@ -24,7 +24,6 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
     });
 
     return html`
-        <a href="/pray">Home</a>
         <h1>${t.direct(moment.name)}</h1>
         
         ${prayers.map(prayer => html`
@@ -36,6 +35,7 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
           </div>
         `)}
         
+        <prayer-menu />
     `;
   }
 });

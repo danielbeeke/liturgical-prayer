@@ -28,7 +28,7 @@ customElements.define('prayer-moments-select', class PrayerMomentsSelect extends
         </div>
       `)}
 
-      <a href="/pray">home</a>
+      <prayer-menu />
     `;
   }
 });

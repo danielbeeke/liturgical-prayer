@@ -1,11 +1,19 @@
 .sortable {
+  margin-top: 30px;
+
   & > * {
-    display: block;
-    margin: 1px;
+    display: flex;
+    align-items: center;
+    margin: 3px;
     padding: 10px;
     border-radius: 4px;
     cursor: move;
     background: #fff;
+    border: 1px solid lightgrey;
+
+    .button {
+      margin-left: auto;
+    }
 
     &:hover {
       background: #ffffe0;

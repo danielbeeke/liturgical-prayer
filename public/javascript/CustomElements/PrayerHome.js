@@ -19,10 +19,7 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
       </div>
     ` : html``)}
 
-    <div>
-        <a href="/settings">${t`Settings`}</a>
-    </div>
-
+    <prayer-menu />
     `;
   }
 });
