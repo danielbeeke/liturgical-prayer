@@ -1,9 +1,17 @@
 import {produce} from "../vendor/immer.js";
 import {Slugify} from '../Helpers/Slugify.js';
+let moments = prayerData['Moments'];
 
 let initialCategories = prayerData['Categories'].map((category, index) => {
+  let allowedMoments = [];
+
+  moments.forEach(moment => {
+    if (category[moment.Title]) allowedMoments.push(moment.Title);
+  });
+
   return {
     enabled: true,
+    moments: allowedMoments,
     order: index,
     isFreeForm: false,
     name: category.Title,
@@ -12,13 +20,23 @@ let initialCategories = prayerData['Categories'].map((category, index) => {
   }
 });
 
-let initialState = {
-  moments: [
-    { name: 'Morning', slug: 'morning', prayerCategories: [...initialCategories], enabled: true},
-    { name: 'Afternoon', slug: 'afternoon', prayerCategories: [...initialCategories], enabled: false },
-    { name: 'Evening', slug: 'evening', prayerCategories: [...initialCategories], enabled: true },
-  ]
+let isEnabledFor = (momentName) => {
+  return (category) => category.moments.includes(momentName)
 };
+
+let initialState = {
+  moments: []
+};
+
+moments.forEach(moment => {
+  initialState.moments.push({
+    name: moment.Title,
+    slug: Slugify(moment.Title),
+    prayerCategories: initialCategories.filter(isEnabledFor(moment.Title)),
+    enabled: moment.Enabled
+  })
+});
+
 
 /**
  * Holds information about the schedule, is a Redux reducer

@@ -23,7 +23,7 @@ export class PrayerData {
 
     // First get the index, it tells us how many pages to fetch.
     await fetchPage(1);
-    let totalToFetch = this.pages['Categories'].length + 3;
+    let totalToFetch = this.pages['Categories'].length + 4;
 
     let page = 2;
 
@@ -51,7 +51,7 @@ export class PrayerData {
     data.feed.entry.forEach(row => {
       if (!rows[row.gs$cell.row - 1]) rows.push([]);
       let currentRow = rows[row.gs$cell.row - 1];
-      currentRow.push(row.gs$cell.$t);
+      currentRow[parseInt(row.gs$cell.col)] = row.gs$cell.$t;
     });
 
     let keys = rows.shift();
