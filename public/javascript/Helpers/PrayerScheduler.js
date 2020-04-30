@@ -38,6 +38,12 @@ export class PrayerScheduler {
     }
   }
 
+  /**
+   * Populates the next items of the free prayer category to pray for.
+   * @param date
+   * @param prayerCategory
+   * @returns {{marked: boolean, Content: Hole, Title: *, category: *, items: *[]}}
+   */
   getNextFreePrayer (date, prayerCategory) {
     this.p = Store.getState().pray;
     let year = date.getFullYear();

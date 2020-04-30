@@ -8,8 +8,26 @@ export class PrayerData {
 
   async init () {
     this.pages = {};
-    let page = 1;
-    while (page) {
+
+    let fetchPage = async (page) => {
+      try {
+        let response = await fetch(url(page));
+        let json = await response.json();
+        this.convertToObject(json);
+        page++;
+      }
+      catch (e) {
+        console.log(e)
+      }
+    };
+
+    // First get the index, it tells us how many pages to fetch.
+    await fetchPage(1);
+    let totalToFetch = this.pages['Categories'].length + 3;
+
+    let page = 2;
+
+    while (page && page < totalToFetch) {
       try {
         let response = await fetch(url(page));
         let json = await response.json();

@@ -36,7 +36,9 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
         ${prayers.map(prayer => html`
           <div class="prayer" data-id="${prayer.UniqueID}">
             <small>${prayer.category.name}</small>
-            <h2>${prayer.Title}</h2>
+            ${!prayer.category.isFreeForm ? html`
+                <h2>${prayer.Title}</h2>
+            ` : html``}
             <div class="author">${prayer.Content}</div>            
             <em class="author">${prayer.Author}</em>
           </div>
