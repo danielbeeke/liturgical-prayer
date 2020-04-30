@@ -14,9 +14,9 @@ let initialCategories = prayerData['Categories'].map((category, index) => {
 
 let initialState = {
   moments: [
-    { name: 'Morning', slug: 'morning', prayerCategories: [...initialCategories], enabled: true, time: '07:00'},
-    { name: 'Afternoon', slug: 'afternoon', prayerCategories: [...initialCategories], enabled: false, time: '14:00' },
-    { name: 'Evening', slug: 'evening', prayerCategories: [...initialCategories], enabled: true, time: '21:00' },
+    { name: 'Morning', slug: 'morning', prayerCategories: [...initialCategories], enabled: true},
+    { name: 'Afternoon', slug: 'afternoon', prayerCategories: [...initialCategories], enabled: false },
+    { name: 'Evening', slug: 'evening', prayerCategories: [...initialCategories], enabled: true },
   ]
 };
 

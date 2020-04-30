@@ -1,8 +1,20 @@
 import {Store} from '../Core/Store.js';
 
-export const markPrayer = (date, momentSlug, categorySlug, prayerId) => {
+export const markFreePrayer = (date, momentSlug, categorySlug, items) => {
   Store.dispatch({
-    type: 'mark-prayer',
+    type: 'mark-free-prayer',
+    payload: {
+      items: items,
+      momentSlug: momentSlug,
+      categorySlug: categorySlug,
+      date: date
+    }
+  })
+};
+
+export const markFixedPrayer = (date, momentSlug, categorySlug, prayerId) => {
+  Store.dispatch({
+    type: 'mark-fixed-prayer',
     payload: {
       prayerId: prayerId,
       momentSlug: momentSlug,
@@ -12,9 +24,9 @@ export const markPrayer = (date, momentSlug, categorySlug, prayerId) => {
   })
 };
 
-export const clearPrayerCategory = (categoryName) => {
+export const clearFixedPrayerCategory = (categoryName) => {
   Store.dispatch({
-    type: 'clear-prayer-category',
+    type: 'clear-fixed-prayer-category',
     payload: {
       categoryName: categoryName,
     }

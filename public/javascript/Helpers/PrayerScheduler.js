@@ -1,51 +1,136 @@
 import {Store} from '../Core/Store.js';
-import {clearPrayerCategory} from '../Actions/PrayActions.js';
+import {clearFixedPrayerCategory} from '../Actions/PrayActions.js';
 import {html} from '../vendor/lighterhtml.js';
 
 export class PrayerScheduler {
 
-  // First try to see if this moment and day combination has already been assigned prayers.
-  // If not gather new ones.
-  getPrayer (date, prayerCategory, momentSlug) {
+  /**
+   * Returns a couple of items from the list.
+   * @param date
+   * @param prayerCategory
+   * @param momentSlug
+   * @returns {{marked: boolean, Content: Hole, Title: *, category: *}}
+   */
+  getFreeFormPrayer (date, prayerCategory, momentSlug) {
     this.p = Store.getState().pray;
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
+    let assignedItems = this.p.calendar?.[year]?.[month]?.[day]?.[momentSlug]?.[prayerCategory.slug];
 
-    if (prayerCategory.isFreeForm) {
-
+    if (assignedItems) {
       return {
         Title: prayerCategory.name,
         Content: html`
-          <ul>
-            ${prayerCategory.items.map(item => html`
-              <li>${item}</li>
-            `)}
-          </ul>
-        `,
+        <ul>
+          ${assignedItems.map(item => html`
+            <li>${item}</li>
+          `)}
+        </ul>
+      `,
+        items: assignedItems,
         marked: true,
         category: prayerCategory,
       }
     }
     else {
-      let assignedPrayerId = this.p.calendar?.[year]?.[month]?.[day]?.[momentSlug]?.[prayerCategory.slug];
+      return this.getNextFreePrayer(date, prayerCategory);
+    }
+  }
 
-      if (assignedPrayerId) {
-        let allPrayers = prayerData[prayerCategory.name];
-        let foundPrayer = allPrayers.find(prayer => prayer.UniqueID === assignedPrayerId);
+  getNextFreePrayer (date, prayerCategory) {
+    this.p = Store.getState().pray;
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let currentMonthItems = this.p.calendar?.[year]?.[month] ?? [];
 
-        if (!foundPrayer) {
-          throw new Error('Could not find prayer: ' + assignedPrayerId)
+    let previousYear = month === 1 ? year - 1 : year;
+    let previousMonth = month === 1 ? 12 : month - 1;
+    let previousMonthItems = this.p.calendar?.[previousYear]?.[previousMonth] ?? [];
+
+    let chunks = [];
+
+    let addToChunks = (items) => {
+      for (let [day] of Object.entries(items)) {
+        for (let [categories] of Object.entries(day)) {
+          for (let [categoryContent] of Object.entries(categories)) {
+            if (Array.isArray(categoryContent)) {
+              chunks.push(categoryContent);
+            }
+          }
         }
+      }
+    };
 
-        return Object.assign({}, foundPrayer, {
-          category: prayerCategory,
-          marked: true,
-        });
+    addToChunks(currentMonthItems);
+    addToChunks(previousMonthItems);
+
+    let max = Math.ceil(prayerCategory.items.length / 7);
+
+    let itemsAllowedByDistanceOfPastUsage = [];
+
+    // Check if the item has been used last 7 days.
+    prayerCategory.items.forEach(item => {
+      let found = false;
+      for (let i = 0; i < 7; i++) {
+        if (chunks[i] && chunks[i].includes(item)) {
+          found = true;
+        }
       }
-      else {
-        return this.getNextPrayer(prayerCategory);
+
+      if (!found) {
+        itemsAllowedByDistanceOfPastUsage.push(item);
       }
+    });
+
+    let allowedItems = itemsAllowedByDistanceOfPastUsage.slice(0, max);
+
+    return {
+      Title: prayerCategory.name,
+      Content: html`
+        <ul>
+          ${allowedItems.map(item => html`
+            <li>${item}</li>
+          `)}
+        </ul>
+      `,
+      items: allowedItems,
+      marked: false,
+      category: prayerCategory,
+    };
+  }
+
+
+  /**
+   * First try to see if this moment and day combination has already been assigned prayers.
+   * If not gather new ones.
+   * @param date
+   * @param prayerCategory
+   * @param momentSlug
+   * @returns {any|({} & number & {marked: boolean, category: *})|({} & bigint & {marked: boolean, category: *})|({} & null & {marked: boolean, category: *})|({} & [] & {marked: boolean, category: *})|any}
+   */
+  getFixedPrayer (date, prayerCategory, momentSlug) {
+    this.p = Store.getState().pray;
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let assignedPrayerId = this.p.calendar?.[year]?.[month]?.[day]?.[momentSlug]?.[prayerCategory.slug];
+
+    if (assignedPrayerId) {
+      let allPrayers = prayerData[prayerCategory.name];
+      let foundPrayer = allPrayers.find(prayer => prayer.UniqueID === assignedPrayerId);
+
+      if (!foundPrayer) {
+        throw new Error('Could not find prayer: ' + assignedPrayerId)
+      }
+
+      return Object.assign({}, foundPrayer, {
+        category: prayerCategory,
+        marked: true,
+      });
+    }
+    else {
+      return this.getNextFixedPrayer(prayerCategory);
     }
   }
 
@@ -54,13 +139,13 @@ export class PrayerScheduler {
    * @param prayerCategory
    * @returns {any}
    */
-  getNextPrayer (prayerCategory) {
+  getNextFixedPrayer (prayerCategory) {
     this.p = Store.getState().pray;
     let allPrayers = prayerData[prayerCategory.name];
     let unusedPrayers = allPrayers.filter(prayer => !this.p.usedPrayers.includes(prayer.UniqueID));
 
     if (!unusedPrayers.length) {
-      clearPrayerCategory(prayerCategory.name);
+      clearFixedPrayerCategory(prayerCategory.name);
       return Object.assign({}, allPrayers[0], {
         category: prayerCategory
       });

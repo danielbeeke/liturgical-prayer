@@ -2,7 +2,7 @@ import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
 import {html} from '../vendor/lighterhtml.js';
 import {PrayerScheduler} from '../Helpers/PrayerScheduler.js'
-import {markPrayer} from '../Actions/PrayActions.js';
+import {markFixedPrayer, markFreePrayer} from '../Actions/PrayActions.js';
 
 customElements.define('prayer-pray', class PrayerPray extends BaseElement {
 
@@ -15,11 +15,18 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
 
     let activeCategories = moment.prayerCategories.filter(category => category.enabled).sort((a, b) => a.order - b.order);
     let prayerScheduler = new PrayerScheduler();
-    let prayers = activeCategories.map(category => prayerScheduler.getPrayer(date, category, moment.slug));
+    let prayers = activeCategories.map(category => {
+      return category.isFreeForm ? prayerScheduler.getFreeFormPrayer(date, category, moment.slug) : prayerScheduler.getFixedPrayer(date, category, moment.slug);
+    });
 
     prayers.forEach(prayer => {
       if (!prayer.marked) {
-        markPrayer(date.toDateString(), moment.slug, prayer.category.slug, prayer.UniqueID);
+        if (prayer.category.isFreeForm) {
+          markFreePrayer(date.toDateString(), moment.slug, prayer.category.slug, prayer.items);
+        }
+        else {
+          markFixedPrayer(date.toDateString(), moment.slug, prayer.category.slug, prayer.UniqueID);
+        }
       }
     });
 
