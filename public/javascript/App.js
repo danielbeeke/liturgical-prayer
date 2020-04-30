@@ -41,7 +41,7 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
     this.router = new Router({
       routes: routes,
       debug: false,
-      initialPath: a.path
+      initialPath: location.pathname
     });
 
     /**

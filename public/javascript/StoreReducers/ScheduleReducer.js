@@ -25,7 +25,8 @@ let isEnabledFor = (momentName) => {
 };
 
 let initialState = {
-  moments: []
+  moments: [],
+  freeCategories: []
 };
 
 moments.forEach(moment => {
@@ -37,31 +38,23 @@ moments.forEach(moment => {
   })
 });
 
-
 /**
  * Holds information about the schedule, is a Redux reducer
  */
 export function ScheduleReducer (state = initialState, action) {
   return produce(state, nextState => {
+    let moment = action?.payload?.momentSlug && nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
+    let category = action?.payload?.categorySlug && moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
 
     if (action.type === 'moment-toggle') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
       moment.enabled = !moment.enabled;
     }
 
-    if (action.type === 'set-moment-time') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      moment.time = action.payload.time;
-    }
-
     if (action.type === 'category-toggle') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      let existingCategory = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
-      existingCategory.enabled = !existingCategory.enabled;
+      category.enabled = !category.enabled;
     }
 
     if (action.type === 'set-category-order') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
       for (let [categorySlug, order] of Object.entries(action.payload.order)) {
         let category = moment.prayerCategories.find(category => category.slug === categorySlug);
         category.order = order;
@@ -69,32 +62,23 @@ export function ScheduleReducer (state = initialState, action) {
     }
 
     if (action.type === 'create-category') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
       moment.prayerCategories.push(action.payload.category)
     }
 
     if (action.type === 'delete-category') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      let existingCategory = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
-      let existingCategoryIndex = moment.prayerCategories.indexOf(existingCategory);
+      let existingCategoryIndex = moment.prayerCategories.indexOf(category);
       moment.prayerCategories.splice(existingCategoryIndex, 1);
     }
 
     if (action.type === 'add-prayer-point') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      let category = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
       category.items.push(action.payload.prayerPoint);
     }
 
     if (action.type === 'delete-prayer-point') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      let category = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
       category.items = category.items.filter(item => item !== action.payload.prayerPoint);
     }
 
     if (action.type === 'set-prayer-points-order') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      let category = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
       category.items = action.payload.prayerPoints;
     }
 

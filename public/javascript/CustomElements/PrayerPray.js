@@ -31,7 +31,7 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
     });
 
     return html`
-        <h1>${t.direct(moment.name)}</h1>
+        <h2>${t.direct(moment.name)}</h2>
         
         ${prayers.map(prayer => html`
           <div class="prayer" data-id="${prayer.UniqueID}">

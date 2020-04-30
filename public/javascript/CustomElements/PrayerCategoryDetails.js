@@ -51,8 +51,9 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
     this.category = this.moment.prayerCategories.find(category => category.slug === slug);
 
     return html`
-      <prayer-menu />
-      <h1>${this.category.name}</h1>
+      <a class="button" href="/settings/${momentSlug}">${t.direct('Back')}</a>
+
+      <h2>${this.category.name}</h2>
       <p>${this.category.description}</p>
 
       ${this.category.isFreeForm ? html`

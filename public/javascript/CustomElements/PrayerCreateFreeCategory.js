@@ -58,10 +58,12 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
 
   draw () {
     let t = this.root.t;
+    let momentSlug = this.root.router.part(2);
 
     return html`
-    <h1>${t.direct('Create category')}</h1>
-    
+    <h2>${t.direct('Create category')}</h2>
+          <a class="button" href="/settings/${momentSlug}">${t.direct('Back')}</a>
+
     <div class="field">
     <label>${t.direct('Title')}</label>
     <select onchange="${event => {this.selected = event.target.value; this.draw()}}">
@@ -79,7 +81,6 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     </div>
     
     <button class="button" onclick="${() => this.createCategory()}">${t.direct('Save')}</button>
-    <prayer-menu />
     `;
   }
 });

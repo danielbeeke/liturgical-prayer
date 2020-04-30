@@ -1,7 +1,7 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
 import {html} from '../vendor/lighterhtml.js';
-import {toggleMoment, setMomentTime} from '../Actions/ScheduleActions.js';
+import {toggleMoment} from '../Actions/ScheduleActions.js';
 
 customElements.define('prayer-moments-select', class PrayerMomentsSelect extends BaseElement {
 
@@ -14,7 +14,7 @@ customElements.define('prayer-moments-select', class PrayerMomentsSelect extends
     let s = Store.getState().schedule;
 
     return html`
-      <h1>${t`On which moments do you want to pray?`}</h1>
+      <h2>${t`On which moments do you want to pray?`}</h2>
 
       ${s.moments.map(moment => html`
         <div>

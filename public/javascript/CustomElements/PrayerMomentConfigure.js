@@ -50,8 +50,8 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
     };
 
     return html`
-      <h1>${t.direct(moment.name)}</h1>
-
+      <h2>${t.direct(moment.name)}</h2>
+      <a class="button" href="/settings">${t.direct('Back')}</a>
       <a class="button" href="/settings/${slug}/create-free-category">${t.direct('Create category')}</a>
 
       <div class="categories sortable">
@@ -66,8 +66,6 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
         </div>
       `)}
       </div>
-      
-      <prayer-menu />
     `;
   }
 });
