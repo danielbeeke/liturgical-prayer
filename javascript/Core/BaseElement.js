@@ -17,6 +17,12 @@ export class BaseElement extends HTMLElement {
     this.root = document.querySelector('prayer-app');
     this.draw = function () {
       render(this, () => elementDraw.apply(this, arguments));
+
+
+      /**
+       * After the draw attach click handler for internal hrefs.
+       * @type {NodeListOf<HTMLElementTagNameMap[string]> | NodeListOf<Element> | NodeListOf<SVGElementTagNameMap[string]>}
+       */
       let links = this.querySelectorAll('a');
       links.forEach(link => {
         if (typeof link.hasListener === 'undefined') {
@@ -24,10 +30,16 @@ export class BaseElement extends HTMLElement {
           link.addEventListener('click', event => {
             event.preventDefault();
             that.root.router.navigate(link.getAttribute('href'));
-          })
+          });
+
+          if (link.getAttribute('href') === location.pathname) link.classList.add('active');
         }
       })
     };
+  }
+
+  get route () {
+    return this.root.router.currentRoute;
   }
 
   connectedCallback () {
@@ -38,7 +50,9 @@ export class BaseElement extends HTMLElement {
    * API, needs to be implemented by the child element.
    * Holds the lighterHTML template.
    */
-  draw () {}
+  draw () {
+    throw new Error('Please implement draw() method');
+  }
 
   /**
    * A wrapper around redux-watch.
@@ -47,7 +61,6 @@ export class BaseElement extends HTMLElement {
    * @param callback
    */
   watch (objectPath, callback) {
-
     if (!Array.isArray(objectPath)) { objectPath = [objectPath] }
 
     const wrappedWatch = function(objectPath, callback) {

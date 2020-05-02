@@ -5,7 +5,7 @@ import {isPromise} from '../Helpers/IsPromise.js';
  */
 export function promiseMiddleware({ dispatch }) {
   return next => action => {
-    return isPromise(action.payload) && typeof action.promiseResult === 'undefined'
+    return isPromise(action.payload) && typeof action.success === 'undefined'
       ? action.payload
         .then(result => dispatch({ ...action, payload: result, success: true }))
         .catch(error => {

@@ -8,3 +8,12 @@ export const navigate = (path) => {
     }
   })
 };
+
+export const setLanguage = (language) => {
+  Store.dispatch({
+    type: 'set-language',
+    payload: {
+      language: language
+    }
+  })
+};

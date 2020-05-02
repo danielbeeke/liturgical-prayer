@@ -9,5 +9,6 @@ export function AppReducer (state = {
 }, action) {
   return produce(state, nextState => {
     if (action.type === 'navigate') nextState.path = action.payload.path;
+    if (action.type === 'set-language') nextState.language = action.payload.language;
   });
 }

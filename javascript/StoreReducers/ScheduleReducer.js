@@ -1,9 +1,17 @@
 import {produce} from "../vendor/immer.js";
 import {Slugify} from '../Helpers/Slugify.js';
+let moments = prayerData['Moments'];
 
 let initialCategories = prayerData['Categories'].map((category, index) => {
+  let allowedMoments = [];
+
+  moments.forEach(moment => {
+    if (category[moment.Title]) allowedMoments.push(moment.Title);
+  });
+
   return {
     enabled: true,
+    moments: allowedMoments,
     order: index,
     isFreeForm: false,
     name: category.Title,
@@ -12,38 +20,42 @@ let initialCategories = prayerData['Categories'].map((category, index) => {
   }
 });
 
-let initialState = {
-  moments: [
-    { name: 'Morning', slug: 'morning', prayerCategories: [...initialCategories], enabled: true, time: '07:00'},
-    { name: 'Afternoon', slug: 'afternoon', prayerCategories: [...initialCategories], enabled: false, time: '14:00' },
-    { name: 'Evening', slug: 'evening', prayerCategories: [...initialCategories], enabled: true, time: '21:00' },
-  ]
+let isEnabledFor = (momentName) => {
+  return (category) => category.moments.includes(momentName)
 };
+
+let initialState = {
+  moments: [],
+  freeCategories: []
+};
+
+moments.forEach(moment => {
+  initialState.moments.push({
+    name: moment.Title,
+    slug: Slugify(moment.Title),
+    prayerCategories: initialCategories.filter(isEnabledFor(moment.Title)),
+    enabled: moment.Enabled
+  })
+});
 
 /**
  * Holds information about the schedule, is a Redux reducer
  */
 export function ScheduleReducer (state = initialState, action) {
   return produce(state, nextState => {
+    let moment = action?.payload?.momentSlug && nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
+    let category = action?.payload?.categorySlug && moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
+    let freeCategory = action?.payload?.categorySlug && nextState.freeCategories.find(category => category.slug === action.payload.categorySlug);
 
     if (action.type === 'moment-toggle') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
       moment.enabled = !moment.enabled;
     }
 
-    if (action.type === 'set-moment-time') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      moment.time = action.payload.time;
-    }
-
     if (action.type === 'category-toggle') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      let existingCategory = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
-      existingCategory.enabled = !existingCategory.enabled;
+      category.enabled = !category.enabled;
     }
 
     if (action.type === 'set-category-order') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
       for (let [categorySlug, order] of Object.entries(action.payload.order)) {
         let category = moment.prayerCategories.find(category => category.slug === categorySlug);
         category.order = order;
@@ -51,33 +63,50 @@ export function ScheduleReducer (state = initialState, action) {
     }
 
     if (action.type === 'create-category') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      moment.prayerCategories.push(action.payload.category)
+      nextState.freeCategories.push({
+        name: action.payload.category.name,
+        slug: action.payload.category.slug,
+        items: action.payload.category.items
+      });
+
+      let {items, ...slimCategory} = action.payload.category;
+
+      /**
+       * Add the category to all the moments
+       */
+      nextState.moments.forEach(innerMoment => {
+        innerMoment.prayerCategories.push(Object.assign({}, slimCategory, { enabled: innerMoment.slug === moment.slug}));
+      });
     }
 
     if (action.type === 'delete-category') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      let existingCategory = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
-      let existingCategoryIndex = moment.prayerCategories.indexOf(existingCategory);
-      moment.prayerCategories.splice(existingCategoryIndex, 1);
+      /**
+       * Remove the category from all the moments
+       */
+      nextState.moments.forEach(moment => {
+        let category = action?.payload?.categorySlug && moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
+        let existingCategoryIndex = moment.prayerCategories.indexOf(category);
+        moment.prayerCategories.splice(existingCategoryIndex, 1);
+      });
+
+      /**
+       * Remove it from the free categories.
+       */
+      let foundCategory = nextState.freeCategories.find(freeCategory => freeCategory.slug === category.slug);
+      let existingFreeCategoryIndex = nextState.freeCategories.indexOf(foundCategory);
+      nextState.freeCategories.splice(existingFreeCategoryIndex, 1);
     }
 
     if (action.type === 'add-prayer-point') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      let category = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
-      category.items.push(action.payload.prayerPoint);
+      freeCategory.items.push(action.payload.prayerPoint);
     }
 
     if (action.type === 'delete-prayer-point') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      let category = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
-      category.items = category.items.filter(item => item !== action.payload.prayerPoint);
+      freeCategory.items = freeCategory.items.filter(item => item !== action.payload.prayerPoint);
     }
 
     if (action.type === 'set-prayer-points-order') {
-      let moment = nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-      let category = moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
-      category.items = action.payload.prayerPoints;
+      freeCategory.items = action.payload.prayerPoints;
     }
 
   });

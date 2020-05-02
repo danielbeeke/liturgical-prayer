@@ -11,6 +11,8 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     let t = this.root.t;
     this.selected = '';
     this.otherText = '';
+    let s = Store.getState().schedule;
+    this.categoryExists = false;
 
     this.suggestions = [{
       Title: t.direct('- Select -'),
@@ -23,18 +25,23 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     }), {
       Title: t.direct('Other...'),
       Description: '',
-      slug: 'other'
+      slug: '_other_'
     }];
 
+    this.existingCategories = [
+      ...s.freeCategories.map(freeCategory => freeCategory.slug),
+      ...prayerData['Categories'].map(prayerCategory => Slugify(prayerCategory.Title))
+    ];
+
+    this.suggestions = this.suggestions.filter(suggestion => !this.existingCategories.includes(suggestion.slug))
   }
 
   createCategory () {
     let s = Store.getState().schedule;
-    let momentSlug = this.root.router.part(2);
-    let moment = s.moments.find(moment => moment.slug === momentSlug);
+    let moment = s.moments.find(moment => moment.slug === this.route.parameters.moment);
     let selectedSuggestion = this.suggestions.find(suggestion => suggestion.slug === this.selected);
 
-    let category = this.selected === 'other' ? {
+    return this.selected === '_other_' ? {
       name: this.otherText,
       enabled: true,
       isFreeForm: true,
@@ -51,31 +58,50 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
       order: moment.prayerCategories.length,
       slug: Slugify(selectedSuggestion.Title)
     };
+  }
 
-    createFreeCategory(momentSlug, category);
-    this.root.router.navigate(`/settings/${momentSlug}`);
+  saveCategory () {
+    let category = this.createCategory();
+    if (!this.existingCategories.includes(category.slug)) {
+      createFreeCategory(this.route.parameters.moment, category);
+      this.root.router.navigate(`/settings/${this.route.parameters.moment}`);
+    }
+  }
+
+  validate () {
+    let category = this.createCategory();
+    this.categoryExists = this.existingCategories.includes(category.slug);
+    this.draw();
   }
 
   draw () {
     let t = this.root.t;
 
     return html`
-    <h1>${t.direct('Create category')}</h1>
-    
+    <h2>${t.direct('Create category')}</h2>
+          <a class="button" href="/settings/${this.route.parameters.moment}">${t.direct('Back')}</a>
+
+    <div class="field">
     <label>${t.direct('Title')}</label>
     <select onchange="${event => {this.selected = event.target.value; this.draw()}}">
         ${this.suggestions.map(suggestion => html`
           <option value="${suggestion.slug}">${suggestion.Title}</option>
         `)}
     </select>
+    </div>
     
-    ${this.selected === 'other' ? html`
+    <div class="field">
+    ${this.selected === '_other_' ? html`
       <label>${t.direct('Title')}</label>
-      <input type="text" onchange="${event => this.otherText = event.target.value}">
+      <input type="text" onkeyup="${event => {this.otherText = event.target.value; this.validate()}}">
     ` : html``}
+    </div>
     
-    <button class="button" onclick="${() => this.createCategory()}">${t.direct('Save')}</button>
-    
+    ${this.categoryExists ? html`
+    <span>${t`The category already exists`}</span>
+    ` : html`
+    <button class="button" onclick="${() => this.saveCategory()}">${t.direct('Save')}</button>
+    `}
     `;
   }
 });

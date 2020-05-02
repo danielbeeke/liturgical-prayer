@@ -1,4 +1,6 @@
-const url = (tab) => `https://spreadsheets.google.com/feeds/cells/18qkOV9qO0B5WyKn99L2S2Aa8O6DMy839ABvpWnrGl6o/${tab}/public/values?alt=json`;
+import {Settings} from '../Settings.js';
+
+const url = (tab) => `https://spreadsheets.google.com/feeds/cells/${Settings.googleSheetId}/${tab}/public/values?alt=json`;
 
 export class PrayerData {
 
@@ -8,8 +10,26 @@ export class PrayerData {
 
   async init () {
     this.pages = {};
-    let page = 1;
-    while (page) {
+
+    let fetchPage = async (page) => {
+      try {
+        let response = await fetch(url(page));
+        let json = await response.json();
+        this.convertToObject(json);
+        page++;
+      }
+      catch (e) {
+        console.log(e)
+      }
+    };
+
+    // First get the index, it tells us how many pages to fetch.
+    await fetchPage(1);
+    let totalToFetch = this.pages['Categories'].length + 3;
+
+    let page = 2;
+
+    while (page && page <= totalToFetch) {
       try {
         let response = await fetch(url(page));
         let json = await response.json();
@@ -33,7 +53,7 @@ export class PrayerData {
     data.feed.entry.forEach(row => {
       if (!rows[row.gs$cell.row - 1]) rows.push([]);
       let currentRow = rows[row.gs$cell.row - 1];
-      currentRow.push(row.gs$cell.$t);
+      currentRow[parseInt(row.gs$cell.col)] = row.gs$cell.$t;
     });
 
     let keys = rows.shift();
