@@ -47,6 +47,11 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
     let s = Store.getState().schedule;
     this.moment = s.moments.find(moment => moment.slug === this.route.parameters.moment);
     this.category = this.moment.prayerCategories.find(category => category.slug === this.route.parameters.category);
+    this.freeCategory = s.freeCategories.find(category => category.slug === this.route.parameters.category);
+
+    if (!this.category) {
+      this.root.router.navigate('/settings');
+    }
 
     return html`
       <a class="button" href="/settings/${this.route.parameters.moment}">${t.direct('Back')}</a>
@@ -56,7 +61,7 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
 
       ${this.category.isFreeForm ? html`
         <div class="prayer-items sortable">
-        ${this.category.items.map((item, index) => html`
+        ${this.freeCategory.items.map((item, index) => html`
           <div data-name="${item}" data-order="${index}">
               <span>${item}</span>
               <button onclick="${() => {deletePrayerPoint(this.moment.slug, this.category.slug, item); this.draw()}}" class="button small">${t.direct('Delete')}</button>
@@ -65,7 +70,7 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
         </div>
         
         <div class="field">
-          <label>${this.category.items.length ? t.direct('Add another') : t.direct('Add your first prayer point')}</label>
+          <label>${this.freeCategory.items.length ? t.direct('Add another') : t.direct('Add your first prayer point')}</label>
           <input name="add-text" value="${this.addText}" onchange="${event => this.addText = event.target.value}" type="text">
           <button class="button" onclick="${() => {this.addPrayerPoint(); this.draw()}}">${t.direct('Add')}</button>
         </div>      

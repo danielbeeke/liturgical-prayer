@@ -18,7 +18,7 @@ import './CustomElements/PrayerMenu.js';
 
 import {I14n} from './Helpers/I14n.js';
 import {Router} from './Core/Router.js';
-import {html} from './vendor/lighterhtml.js';
+import {Routes} from './Core/Routes.js'
 
 customElements.define('prayer-app', class PrayerApp extends BaseElement {
 
@@ -29,17 +29,8 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
     let a = Store.getState().app;
     this.t = await I14n(a.language);
 
-    let routes = {
-      'pray': { template: html`<prayer-home class="page" /><prayer-menu />` },
-      'settings': { template: html`<prayer-settings class="page" /><prayer-menu />` },
-      'settings/:moment': { template: html`<prayer-moment-configure />` },
-      'pray/:moment': { template: html`<prayer-pray class="page" /><prayer-menu />` },
-      'settings/:moment/prayer-category/:category': { template: html`<prayer-category-details />` },
-      'settings/:moment/create-free-category': { template: html`<prayer-create-free-category />` },
-    };
-
     this.router = new Router({
-      routes: routes,
+      routes: Routes,
       debug: false,
       initialPath: location.pathname.substr(1) ? location.pathname.substr(1) : 'pray'
     });

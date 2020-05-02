@@ -11,6 +11,8 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     let t = this.root.t;
     this.selected = '';
     this.otherText = '';
+    let s = Store.getState().schedule;
+    this.categoryExists = false;
 
     this.suggestions = [{
       Title: t.direct('- Select -'),
@@ -23,9 +25,15 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     }), {
       Title: t.direct('Other...'),
       Description: '',
-      slug: 'other'
+      slug: '_other_'
     }];
 
+    this.existingCategories = [
+      ...s.freeCategories.map(freeCategory => freeCategory.slug),
+      ...prayerData['Categories'].map(prayerCategory => Slugify(prayerCategory.Title))
+    ];
+
+    this.suggestions = this.suggestions.filter(suggestion => !this.existingCategories.includes(suggestion.slug))
   }
 
   createCategory () {
@@ -33,7 +41,7 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     let moment = s.moments.find(moment => moment.slug === this.route.parameters.moment);
     let selectedSuggestion = this.suggestions.find(suggestion => suggestion.slug === this.selected);
 
-    let category = this.selected === 'other' ? {
+    return this.selected === '_other_' ? {
       name: this.otherText,
       enabled: true,
       isFreeForm: true,
@@ -50,9 +58,20 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
       order: moment.prayerCategories.length,
       slug: Slugify(selectedSuggestion.Title)
     };
+  }
 
-    createFreeCategory(this.route.parameters.moment, category);
-    this.root.router.navigate(`/settings/${this.route.parameters.moment}`);
+  saveCategory () {
+    let category = this.createCategory();
+    if (!this.existingCategories.includes(category.slug)) {
+      createFreeCategory(this.route.parameters.moment, category);
+      this.root.router.navigate(`/settings/${this.route.parameters.moment}`);
+    }
+  }
+
+  validate () {
+    let category = this.createCategory();
+    this.categoryExists = this.existingCategories.includes(category.slug);
+    this.draw();
   }
 
   draw () {
@@ -72,13 +91,17 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     </div>
     
     <div class="field">
-    ${this.selected === 'other' ? html`
+    ${this.selected === '_other_' ? html`
       <label>${t.direct('Title')}</label>
-      <input type="text" onchange="${event => this.otherText = event.target.value}">
+      <input type="text" onkeyup="${event => {this.otherText = event.target.value; this.validate()}}">
     ` : html``}
     </div>
     
-    <button class="button" onclick="${() => this.createCategory()}">${t.direct('Save')}</button>
+    ${this.categoryExists ? html`
+    <span>${t`The category already exists`}</span>
+    ` : html`
+    <button class="button" onclick="${() => this.saveCategory()}">${t.direct('Save')}</button>
+    `}
     `;
   }
 });

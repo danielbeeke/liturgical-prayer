@@ -46,6 +46,7 @@ export class PrayerScheduler {
    */
   getNextFreePrayer (date, prayerCategory) {
     this.p = Store.getState().pray;
+    this.s = Store.getState().schedule;
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let currentMonthItems = this.p.calendar?.[year]?.[month] ?? [];
@@ -71,12 +72,14 @@ export class PrayerScheduler {
     addToChunks(currentMonthItems);
     addToChunks(previousMonthItems);
 
-    let max = Math.ceil(prayerCategory.items.length / 7);
+    let freeCategory = this.s.freeCategories.find(freeCategory => freeCategory.slug === prayerCategory.slug);
+
+    let max = Math.ceil(freeCategory.items.length / 7);
 
     let itemsAllowedByDistanceOfPastUsage = [];
 
     // Check if the item has been used last 7 days.
-    prayerCategory.items.forEach(item => {
+    freeCategory.items.forEach(item => {
       let found = false;
       for (let i = 0; i < 7; i++) {
         if (chunks[i] && chunks[i].includes(item)) {
