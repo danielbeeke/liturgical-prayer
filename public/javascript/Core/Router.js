@@ -49,10 +49,25 @@ export class Router {
   add(route, routeOptions) {
     let newRoute = typeof route === 'string' ? Router.cleanPath(route) : route;
 
-    newRoute = new RegExp(newRoute);
+    let newRouteSplit = newRoute.split('/');
+    let replacedParts = [];
+    let tokens = [];
+    newRouteSplit.forEach(part => {
+      if (part.substr(0, 1) === ':') {
+        replacedParts.push('([a-z\\-]*)');
+        tokens.push(part.substr(1));
+      }
+      else {
+        replacedParts.push(part);
+      }
+    });
+
+    let regexRoute = '^' + replacedParts.join('/') + '$';
+    newRoute = new RegExp(regexRoute);
 
     this.routes.push(Object.assign({
       path: route,
+      tokens: tokens,
       route: newRoute,
     }, routeOptions));
 
@@ -152,7 +167,14 @@ export class Router {
       if (match !== null) {
         match.shift();
 
-        activeRoute = route;
+        let tokens = {};
+        route.tokens.forEach((tokenName, index) => {
+          tokens[tokenName] = match[index];
+        });
+
+        activeRoute = Object.assign({}, route, {
+          parameters: tokens
+        });
 
         if (this.options.debug) {
           console.log(`Syncing: /${path}`);

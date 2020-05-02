@@ -3,3 +3,4 @@ node_modules
 certs
 .publish
 dist
+public/Settings.js

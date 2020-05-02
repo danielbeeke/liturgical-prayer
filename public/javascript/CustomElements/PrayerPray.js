@@ -9,8 +9,7 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
   draw () {
     let date = new Date();
     let s = Store.getState().schedule;
-    let slug = this.root.router.part(2);
-    let moment = s.moments.find(moment => moment.slug === slug);
+    let moment = s.moments.find(moment => moment.slug === this.route.parameters.moment);
     let t = this.root.t;
 
     let activeCategories = moment.prayerCategories.filter(category => category.enabled).sort((a, b) => a.order - b.order);
@@ -35,16 +34,19 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
         
         ${prayers.map(prayer => html`
           <div class="prayer" data-id="${prayer.UniqueID}">
-            <small>${prayer.category.name}</small>
+            <small class="category">${prayer.category.name}</small>
             ${!prayer.category.isFreeForm ? html`
-                <h2>${prayer.Title}</h2>
+                <h2 class="title">${prayer.Title}</h2>
             ` : html``}
-            <div class="author">${prayer.Content}</div>            
+            ${prayer.category.isFreeForm ? html`
+                <div class="content">${prayer.Content}</div>
+            ` : html`
+                <div class="content">${{html: prayer.Content.toString().replace(/(?:\r\n|\r|\n)/g, '<br>')}}</div>
+                <span class="amen">Amen</span>  
+            `}          
             <em class="author">${prayer.Author}</em>
           </div>
         `)}
-        
-        <prayer-menu />
     `;
   }
 });

@@ -30,8 +30,7 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
 
   createCategory () {
     let s = Store.getState().schedule;
-    let momentSlug = this.root.router.part(2);
-    let moment = s.moments.find(moment => moment.slug === momentSlug);
+    let moment = s.moments.find(moment => moment.slug === this.route.parameters.moment);
     let selectedSuggestion = this.suggestions.find(suggestion => suggestion.slug === this.selected);
 
     let category = this.selected === 'other' ? {
@@ -52,17 +51,16 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
       slug: Slugify(selectedSuggestion.Title)
     };
 
-    createFreeCategory(momentSlug, category);
-    this.root.router.navigate(`/settings/${momentSlug}`);
+    createFreeCategory(this.route.parameters.moment, category);
+    this.root.router.navigate(`/settings/${this.route.parameters.moment}`);
   }
 
   draw () {
     let t = this.root.t;
-    let momentSlug = this.root.router.part(2);
 
     return html`
     <h2>${t.direct('Create category')}</h2>
-          <a class="button" href="/settings/${momentSlug}">${t.direct('Back')}</a>
+          <a class="button" href="/settings/${this.route.parameters.moment}">${t.direct('Back')}</a>
 
     <div class="field">
     <label>${t.direct('Title')}</label>

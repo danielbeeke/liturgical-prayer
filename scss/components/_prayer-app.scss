@@ -1,5 +1,16 @@
 prayer-app {
-  display: block;
-  height: 100%;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+
+  > .page {
+    padding: 20px;
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+
+    > *:last-child {
+      padding-bottom: 50px;
+    }
+  }
 }

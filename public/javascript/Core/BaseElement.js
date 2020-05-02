@@ -38,6 +38,10 @@ export class BaseElement extends HTMLElement {
     };
   }
 
+  get route () {
+    return this.root.router.currentRoute;
+  }
+
   connectedCallback () {
     this.draw();
   }

@@ -31,8 +31,9 @@ function mixString (a, b, asCodeString) {
 
 export async function I14n (language) {
   let translations = {};
+  translations[language] = {};
   if (['Dutch'].includes(language)) {
-    translations = (await import(`../Translations/${language}.js`)).Translations;
+    translations[language] = (await import(`../Translations/${language}.js`)).Translations;
   }
 
   /**
@@ -57,7 +58,7 @@ export async function I14n (language) {
       /**
        * Translation is not available.
        */
-      if (typeof translations[codeString] === 'undefined') {
+      if (typeof translations[language][codeString] === 'undefined') {
         return new TranslatedText(mixString(stringsToTranslate, values));
       }
 
@@ -65,7 +66,7 @@ export async function I14n (language) {
        * We have a translation. Fill in the tokens.
        */
       else {
-        let translatedString = translations[codeString];
+        let translatedString = translations[language][codeString];
         let tokens = Object.assign({}, ...values);
 
         let replacements = translatedString.match(/\{[a-zA-Z]*}/g);
@@ -82,11 +83,11 @@ export async function I14n (language) {
   };
 
   translate.direct = (variable) => {
-    if (typeof translations[variable] === 'undefined') {
+    if (typeof translations[language][variable] === 'undefined') {
       return new TranslatedText(variable);
     }
     else {
-      return new TranslatedText(translations[variable]);
+      return new TranslatedText(translations[language][variable]);
     }
   };
 

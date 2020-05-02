@@ -9,7 +9,7 @@
   --radius: 4px; }
 
 html {
-  height: 100%;
+  height: 100vh;
   font-size: 16px;
   line-height: 24px;
   font-weight: 700;
@@ -18,7 +18,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  height: 100%;
+  height: 100vh;
   color: #444; }
 
 *:after, *:before, * {
@@ -88,15 +88,28 @@ Usage:
     width: 100%; }
 
 prayer-app {
-  display: block;
-  height: 100%;
-  padding: 20px; }
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  prayer-app > .page {
+    padding: 20px;
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    prayer-app > .page > *:last-child {
+      padding-bottom: 50px; }
 
 prayer-menu {
-  position: -webkit-sticky;
-  position: sticky;
-  bottom: 0;
-  left: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -105,8 +118,27 @@ prayer-menu {
   width: 100%;
   background: white;
   padding: 20px;
-  margin-top: 50px;
   border-top: 1px solid black; }
+
+prayer-pray .prayer {
+  margin-bottom: 40px; }
+  prayer-pray .prayer .category {
+    opacity: .5;
+    letter-spacing: 2px;
+    text-transform: uppercase; }
+  prayer-pray .prayer .title {
+    margin-top: 0;
+    line-height: 1.5; }
+  prayer-pray .prayer .author {
+    display: block;
+    margin-top: 30px;
+    width: 100%;
+    text-align: right; }
+  prayer-pray .prayer .amen {
+    display: block;
+    font-style: italic;
+    font-weight: 180;
+    margin-top: 20px; }
 
 .sortable {
   margin-top: 30px; }

@@ -15,4 +15,5 @@ export let Translations = {
   'Edit': 'Bewerken',
   'Title': 'Titel',
   'Read more': 'Lees meer',
+  'What language do you speak?': 'Welke taal spreek je?'
 };

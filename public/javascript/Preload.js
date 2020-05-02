@@ -1,4 +1,6 @@
-const url = (tab) => `https://spreadsheets.google.com/feeds/cells/18qkOV9qO0B5WyKn99L2S2Aa8O6DMy839ABvpWnrGl6o/${tab}/public/values?alt=json`;
+import {Settings} from '../Settings.js';
+
+const url = (tab) => `https://spreadsheets.google.com/feeds/cells/${Settings.googleSheetId}/${tab}/public/values?alt=json`;
 
 export class PrayerData {
 
@@ -23,11 +25,11 @@ export class PrayerData {
 
     // First get the index, it tells us how many pages to fetch.
     await fetchPage(1);
-    let totalToFetch = this.pages['Categories'].length + 4;
+    let totalToFetch = this.pages['Categories'].length + 3;
 
     let page = 2;
 
-    while (page && page < totalToFetch) {
+    while (page && page <= totalToFetch) {
       try {
         let response = await fetch(url(page));
         let json = await response.json();

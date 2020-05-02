@@ -7,8 +7,6 @@ import {Sortable} from '../Helpers/Sortable.js';
 customElements.define('prayer-moment-configure', class PrayerMomentConfigure extends BaseElement {
 
   async connectedCallback() {
-    let slug = this.root.router.part(2);
-
     this.draw();
     let list = this.querySelector('.categories');
 
@@ -24,7 +22,7 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
       .sort((a,b)=> a.dataset.order > b.dataset.order ? 1 : -1)
       .map(node => list.appendChild(node));
 
-      setCategoriesOrder(slug, order);
+      setCategoriesOrder(this.route.parameters.moment, order);
       this.draw();
     });
   }
@@ -36,8 +34,7 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
 
   draw () {
     let s = Store.getState().schedule;
-    let slug = this.root.router.part(2);
-    let moment = s.moments.find(moment => moment.slug === slug);
+    let moment = s.moments.find(moment => moment.slug === this.route.parameters.moment);
     let categories = [...moment.prayerCategories].sort((a, b) => a.order - b.order);
 
     let t = this.root.t;
@@ -52,7 +49,7 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
     return html`
       <h2>${t.direct(moment.name)}</h2>
       <a class="button" href="/settings">${t.direct('Back')}</a>
-      <a class="button" href="/settings/${slug}/create-free-category">${t.direct('Create category')}</a>
+      <a class="button" href="/settings/${this.route.parameters.moment}/create-free-category">${t.direct('Create category')}</a>
 
       <div class="categories sortable">
       ${categories.map(category => html`
@@ -62,7 +59,7 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
           onchange="${() => {toggleCategory(moment.slug, category.slug); this.draw()}}">
           
           <span>${t.direct(category.name)}</span>
-          <a href="/settings/${slug}/prayer-category/${category.slug}" class="button small">${category.isFreeForm ? t.direct('Edit') : t.direct('Read more')}</a>
+          <a href="/settings/${this.route.parameters.moment}/prayer-category/${category.slug}" class="button small">${category.isFreeForm ? t.direct('Edit') : t.direct('Read more')}</a>
         </div>
       `)}
       </div>

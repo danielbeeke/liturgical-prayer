@@ -7,7 +7,7 @@
 import {BaseElement} from './Core/BaseElement.js';
 import {Store} from './Core/Store.js';
 
-import './CustomElements/PrayerMomentsSelect.js';
+import './CustomElements/PrayerSettings.js';
 import './CustomElements/PrayerHome.js';
 import './CustomElements/PrayerPray.js';
 import './CustomElements/PrayerMomentConfigure.js';
@@ -30,18 +30,18 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
     this.t = await I14n(a.language);
 
     let routes = {
-      '^pray$': { template: html`<prayer-home />` },
-      '^settings$': { template: html`<prayer-moments-select />` },
-      '^settings\/([a-z]*)$': { template: html`<prayer-moment-configure />` },
-      '^pray\/([a-z]*)$': { template: html`<prayer-pray />` },
-      '^settings\/([a-z]*)\/prayer-category\/([a-z\-]*)$': { template: html`<prayer-category-details />` },
-      '^settings\/([a-z]*)\/create-free-category$': { template: html`<prayer-create-free-category />` },
+      'pray': { template: html`<prayer-home class="page" /><prayer-menu />` },
+      'settings': { template: html`<prayer-settings class="page" /><prayer-menu />` },
+      'settings/:moment': { template: html`<prayer-moment-configure />` },
+      'pray/:moment': { template: html`<prayer-pray class="page" /><prayer-menu />` },
+      'settings/:moment/prayer-category/:category': { template: html`<prayer-category-details />` },
+      'settings/:moment/create-free-category': { template: html`<prayer-create-free-category />` },
     };
 
     this.router = new Router({
       routes: routes,
       debug: false,
-      initialPath: location.pathname
+      initialPath: location.pathname.substr(1) ? location.pathname.substr(1) : 'pray'
     });
 
     /**
@@ -52,11 +52,20 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
       this.draw();
     });
 
+    /**
+     * Rerender everything if the language is changed.
+     */
+    this.watch('app.language', async (language) => {
+      this.t = await I14n(language);
+      [...this.children].forEach(child => typeof child.draw !== 'undefined' ? child.draw() : null);
+    });
+
+
     this.draw();
   }
 
   draw () {
-    return this.router.currentRoute.template;
+    return this.router.currentRoute ? this.router.currentRoute.template : null;
   }
 
 });

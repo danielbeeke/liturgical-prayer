@@ -45,13 +45,11 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
     let t = this.root.t;
 
     let s = Store.getState().schedule;
-    let momentSlug = this.root.router.part(2);
-    this.moment = s.moments.find(moment => moment.slug === momentSlug);
-    let slug = this.root.router.part(4);
-    this.category = this.moment.prayerCategories.find(category => category.slug === slug);
+    this.moment = s.moments.find(moment => moment.slug === this.route.parameters.moment);
+    this.category = this.moment.prayerCategories.find(category => category.slug === this.route.parameters.category);
 
     return html`
-      <a class="button" href="/settings/${momentSlug}">${t.direct('Back')}</a>
+      <a class="button" href="/settings/${this.route.parameters.moment}">${t.direct('Back')}</a>
 
       <h2>${this.category.name}</h2>
       <p>${this.category.description}</p>

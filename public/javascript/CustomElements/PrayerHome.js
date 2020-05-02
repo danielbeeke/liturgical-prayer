@@ -8,7 +8,7 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
     let s = Store.getState().schedule;
     let t = this.root.t;
 
-    this.dataset.items = s.moments.filter(moment => moment.enabled).length;
+    this.dataset.items = s.moments.filter(moment => moment.enabled).length.toString();
 
     return html`
     ${s.moments.map(moment => moment.enabled ? html`
@@ -18,8 +18,6 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
       </a>
       </div>
     ` : html``)}
-
-    <prayer-menu />
     `;
   }
 });
