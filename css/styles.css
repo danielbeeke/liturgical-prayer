@@ -1,5 +1,5 @@
 :root {
-  --color-primary: #ffc72d;
+  --color-primary: #4f8543;
   --color-secondary: #e1f4fc;
   --color-tertiary: #0b2e50;
   --color-gray: #aaa;
@@ -100,6 +100,10 @@ prayer-app {
     height: calc(100vh - 100px);
     overflow-y: auto; }
 
+prayer-icon {
+  display: inline-block;
+  max-width: 40px; }
+
 prayer-menu {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -110,6 +114,19 @@ prayer-menu {
   background: white;
   padding: 20px;
   border-top: 1px solid black; }
+
+prayer-moment-configure .prayer-category {
+  -webkit-transition: -webkit-filter var(--speed) var(--easing);
+  transition: -webkit-filter var(--speed) var(--easing);
+  -o-transition: filter var(--speed) var(--easing);
+  transition: filter var(--speed) var(--easing);
+  transition: filter var(--speed) var(--easing), -webkit-filter var(--speed) var(--easing); }
+  prayer-moment-configure .prayer-category:not(.enabled) {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1); }
+  prayer-moment-configure .prayer-category.enabled {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0); }
 
 prayer-pray .prayer {
   margin-bottom: 40px; }
@@ -130,6 +147,24 @@ prayer-pray .prayer {
     font-style: italic;
     font-weight: 180;
     margin-top: 20px; }
+
+prayer-settings .moment {
+  padding: 10px 0;
+  -webkit-transition: -webkit-filter var(--speed) var(--easing);
+  transition: -webkit-filter var(--speed) var(--easing);
+  -o-transition: filter var(--speed) var(--easing);
+  transition: filter var(--speed) var(--easing);
+  transition: filter var(--speed) var(--easing), -webkit-filter var(--speed) var(--easing); }
+  prayer-settings .moment:not(.enabled) {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1); }
+  prayer-settings .moment label {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
 
 .sortable {
   margin-top: 30px; }
@@ -157,3 +192,55 @@ prayer-pray .prayer {
       -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
       opacity: 0.5; }
+
+input[type="checkbox"] {
+  display: none; }
+
+input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 50px; }
+  input[type="checkbox"] + label:before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    display: block;
+    cursor: pointer;
+    width: 40px;
+    border-radius: 15px;
+    height: 16px;
+    content: '';
+    margin-right: 10px;
+    background: lightgray;
+    -webkit-box-shadow: inset 2px 0 4px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 2px 0 4px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%); }
+  input[type="checkbox"] + label:after {
+    cursor: pointer;
+    -webkit-transition: background var(--speed) var(--easing), -webkit-transform var(--speed) var(--easing);
+    transition: background var(--speed) var(--easing), -webkit-transform var(--speed) var(--easing);
+    -o-transition: transform var(--speed) var(--easing), background var(--speed) var(--easing);
+    transition: transform var(--speed) var(--easing), background var(--speed) var(--easing);
+    transition: transform var(--speed) var(--easing), background var(--speed) var(--easing), -webkit-transform var(--speed) var(--easing);
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: 1px solid white;
+    border-radius: 50%;
+    -webkit-box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+    background: darkgray;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%); }
+
+input[type="checkbox"]:checked + label:after {
+  -webkit-transform: translate(20px, -50%);
+  -ms-transform: translate(20px, -50%);
+  transform: translate(20px, -50%);
+  background: var(--color-primary); }

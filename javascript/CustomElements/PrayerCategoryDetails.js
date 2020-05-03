@@ -71,7 +71,7 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
         
         <div class="field">
           <label>${this.freeCategory.items.length ? t.direct('Add another') : t.direct('Add your first prayer point')}</label>
-          <input name="add-text" value="${this.addText}" onchange="${event => this.addText = event.target.value}" type="text">
+          <input .value="${this.addText}" onchange="${event => this.addText = event.target.value}" type="text">
           <button class="button" onclick="${() => {this.addPrayerPoint(); this.draw()}}">${t.direct('Add')}</button>
         </div>      
         

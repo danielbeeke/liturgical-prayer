@@ -19,13 +19,11 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
       <h2>${t`On which moments do you want to pray?`}</h2>
 
       ${s.moments.map(moment => html`
-        <div>
+        <div class="moment ${moment.enabled ? 'enabled' : ''}">
           <input type="checkbox" id="toggle-${moment.slug}" checked="${moment.enabled}" onchange="${() => {toggleMoment(moment.slug); this.draw()}}">
           <label for="toggle-${moment.slug}">
-          ${moment.enabled ? 
-            html`<a href="${'/settings/' + moment.slug}">${t.direct(moment.name)}</a>` : 
-            html`<span>${t.direct(moment.name)}</span>
-          `}
+            <prayer-icon name="${moment.icon}" />
+            <a href="${'/settings/' + moment.slug}">${t.direct(moment.name)}</a>
           </label>
         </div>
       `)}

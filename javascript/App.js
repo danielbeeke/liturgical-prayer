@@ -15,6 +15,7 @@ import './CustomElements/PrayerCategoryDetails.js';
 import './CustomElements/PrayerCreateFreeCategory.js';
 import './CustomElements/PrayerBackground.js';
 import './CustomElements/PrayerMenu.js';
+import './CustomElements/PrayerIcon.js';
 
 import {I14n} from './Helpers/I14n.js';
 import {Router} from './Core/Router.js';

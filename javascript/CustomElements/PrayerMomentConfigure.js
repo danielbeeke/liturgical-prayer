@@ -47,18 +47,20 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
     };
 
     return html`
-      <h2>${t.direct(moment.name)}</h2>
       <a class="button" href="/settings">${t.direct('Back')}</a>
+      <h2>${t.direct(moment.name)}</h2>
       <a class="button" href="/settings/${this.route.parameters.moment}/create-free-category">${t.direct('Create category')}</a>
 
       <div class="categories sortable">
       ${categories.map(category => html`
-        <div class="prayer-category" data-order="${category.order}" data-slug="${category.slug}">
+        <div class="prayer-category ${categoryIsEnabled(category.slug) ? 'enabled' : ''}" data-order="${category.order}" data-slug="${category.slug}">
           <input type="checkbox" id="toggle-${category.slug}" 
           checked="${categoryIsEnabled(category.slug)}" 
           onchange="${() => {toggleCategory(moment.slug, category.slug); this.draw()}}">
-          
-          <span>${t.direct(category.name)}</span>
+          <label for="toggle-${category.slug}">
+            <prayer-icon name="${category.icon}"></prayer-icon>
+            ${t.direct(category.name)}
+          </label>
           <a href="/settings/${this.route.parameters.moment}/prayer-category/${category.slug}" class="button small">${category.isFreeForm ? t.direct('Edit') : t.direct('Read more')}</a>
         </div>
       `)}

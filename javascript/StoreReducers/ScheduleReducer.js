@@ -15,6 +15,7 @@ let initialCategories = prayerData['Categories'].map((category, index) => {
     order: index,
     isFreeForm: false,
     name: category.Title,
+    icon: category.Icon,
     slug: Slugify(category.Title),
     description: category.Description,
   }
@@ -32,6 +33,7 @@ let initialState = {
 moments.forEach(moment => {
   initialState.moments.push({
     name: moment.Title,
+    icon: moment.Icon,
     slug: Slugify(moment.Title),
     prayerCategories: initialCategories.filter(isEnabledFor(moment.Title)),
     enabled: moment.Enabled
