@@ -1,5 +1,5 @@
 import {BaseElement} from '../Core/BaseElement.js';
-import {html} from '../vendor/lighterhtml.js';
+import {html} from '../vendor/uhtml.js';
 import {Store} from '../Core/Store.js';
 import {deleteFreeCategory, addPrayerPoint, deletePrayerPoint, setPrayerPointsOrder} from '../Actions/ScheduleActions.js';
 import {Sortable} from '../Helpers/Sortable.js';
@@ -54,7 +54,7 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
     }
 
     return html`
-      <a class="button" href="/settings/${this.route.parameters.moment}">${t.direct('Back')}</a>
+      <a class="button" href="${`/settings/${this.route.parameters.moment}`}">${t.direct('Back')}</a>
 
       <h2>${this.category.name}</h2>
       <p>${this.category.description}</p>
@@ -71,7 +71,7 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
         
         <div class="field">
           <label>${this.freeCategory.items.length ? t.direct('Add another') : t.direct('Add your first prayer point')}</label>
-          <input name="add-text" value="${this.addText}" onchange="${event => this.addText = event.target.value}" type="text">
+          <input .value="${this.addText}" onchange="${event => this.addText = event.target.value}" type="text">
           <button class="button" onclick="${() => {this.addPrayerPoint(); this.draw()}}">${t.direct('Add')}</button>
         </div>      
         

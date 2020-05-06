@@ -1,4 +1,4 @@
-import {html} from '../vendor/lighterhtml.js';
+import {html} from '../vendor/uhtml.js';
 
 export const Routes = {
   'pray': { template: html`<prayer-home class="page" /><prayer-menu />` },

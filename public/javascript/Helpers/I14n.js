@@ -1,7 +1,13 @@
-class TranslatedText {
+import {Hole} from '../vendor/uhtml.js';
+
+class TranslatedText extends Hole {
   constructor(text, context) {
+    super();
     this.text = text;
+    this.template = [text];
+    this.values = [];
     this.context = context;
+    this.type = 'html';
   }
 
   toString () {

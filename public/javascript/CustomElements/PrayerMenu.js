@@ -1,5 +1,5 @@
 import {BaseElement} from '../Core/BaseElement.js';
-import {html} from '../vendor/lighterhtml.js';
+import {html} from '../vendor/uhtml.js';
 
 customElements.define('prayer-menu', class PrayerMenu extends BaseElement {
 

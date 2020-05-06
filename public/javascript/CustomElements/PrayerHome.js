@@ -1,6 +1,6 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
-import {html} from '../vendor/lighterhtml.js';
+import {html} from '../vendor/uhtml.js';
 
 customElements.define('prayer-home', class PrayerHome extends BaseElement {
 
@@ -17,7 +17,7 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
         <span class="inner">${t.direct(moment.name)}</span>
       </a>
       </div>
-    ` : html``)}
+    ` : html`<span></span>`)}
     `;
   }
 });

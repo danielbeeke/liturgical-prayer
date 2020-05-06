@@ -1,0 +1,13 @@
+prayer-moment-configure {
+  .prayer-category {
+    transition: filter var(--speed) var(--easing);
+
+    &:not(.enabled) {
+      filter: grayscale(1);
+    }
+
+    &.enabled {
+      filter: grayscale(0);
+    }
+  }
+}

@@ -18,4 +18,5 @@ export let Translations = {
   'What language do you speak?': 'Welke taal spreek je?',
   'Dutch': 'Nederlands',
   'English': 'Engels',
+  'Interface language': 'Interface taal',
 };

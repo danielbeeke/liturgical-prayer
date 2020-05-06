@@ -1,8 +1,9 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
-import {html} from '../vendor/lighterhtml.js';
+import {html} from '../vendor/uhtml.js';
 import {PrayerScheduler} from '../Helpers/PrayerScheduler.js'
 import {markFixedPrayer, markFreePrayer} from '../Actions/PrayActions.js';
+import {toLines} from '../Helpers/toLines.js';
 
 customElements.define('prayer-pray', class PrayerPray extends BaseElement {
 
@@ -41,7 +42,7 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
             ${prayer.category.isFreeForm ? html`
                 <div class="content">${prayer.Content}</div>
             ` : html`
-                <div class="content">${{html: prayer.Content.toString().replace(/(?:\r\n|\r|\n)/g, '<br>')}}</div>
+                <div class="content">${toLines(prayer.Content).map(line => html`${line}<br />`)}</div>
                 <span class="amen">Amen</span>  
             `}          
             <em class="author">${prayer.Author}</em>

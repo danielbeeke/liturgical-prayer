@@ -1,0 +1,15 @@
+prayer-settings {
+  .moment {
+    padding: 10px 0;
+    transition: filter var(--speed) var(--easing);
+
+    &:not(.enabled) {
+      filter: grayscale(1);
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

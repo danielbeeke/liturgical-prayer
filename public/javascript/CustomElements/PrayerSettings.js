@@ -1,6 +1,6 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
-import {html} from '../vendor/lighterhtml.js';
+import {html} from '../vendor/uhtml.js';
 import {toggleMoment} from '../Actions/ScheduleActions.js';
 import {setLanguage} from '../Actions/AppActions.js';
 
@@ -19,13 +19,11 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
       <h2>${t`On which moments do you want to pray?`}</h2>
 
       ${s.moments.map(moment => html`
-        <div>
-          <input type="checkbox" id="toggle-${moment.slug}" checked="${moment.enabled}" onchange="${() => {toggleMoment(moment.slug); this.draw()}}">
-          <label for="toggle-${moment.slug}">
-          ${moment.enabled ? 
-            html`<a href="${'/settings/' + moment.slug}">${t.direct(moment.name)}</a>` : 
-            html`<span>${t.direct(moment.name)}</span>
-          `}
+        <div class="${'moment ' + moment.enabled ? 'enabled' : ''}">
+          <input type="checkbox" id="${'toggle-' + moment.slug}" checked="${moment.enabled}" onchange="${() => {toggleMoment(moment.slug); this.draw()}}">
+          <label for="${'toggle-' + moment.slug}">
+            <prayer-icon name="${moment.icon}" />
+            <a href="${'/settings/' + moment.slug}">${t.direct(moment.name)}</a>
           </label>
         </div>
       `)}

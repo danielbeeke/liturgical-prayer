@@ -1,6 +1,7 @@
 import {Store} from '../Core/Store.js';
 import {clearFixedPrayerCategory} from '../Actions/PrayActions.js';
-import {html} from '../vendor/lighterhtml.js';
+import {html} from '../vendor/uhtml.js';
+import {Content} from '../Content.js';
 
 export class PrayerScheduler {
 
@@ -126,7 +127,7 @@ export class PrayerScheduler {
     let assignedPrayerId = this.p.calendar?.[year]?.[month]?.[day]?.[momentSlug]?.[prayerCategory.slug];
 
     if (assignedPrayerId) {
-      let allPrayers = prayerData[prayerCategory.name];
+      let allPrayers = Content[prayerCategory.name];
       let foundPrayer = allPrayers.find(prayer => prayer.UniqueID === assignedPrayerId);
 
       if (!foundPrayer) {
@@ -150,7 +151,11 @@ export class PrayerScheduler {
    */
   getNextFixedPrayer (prayerCategory) {
     this.p = Store.getState().pray;
-    let allPrayers = prayerData[prayerCategory.name];
+    if (!Content[prayerCategory.name]) {
+      throw new Error(`The category: ${prayerCategory.name} could not be found in the content data.`);
+    }
+
+    let allPrayers = Content[prayerCategory.name];
     let unusedPrayers = allPrayers.filter(prayer => !this.p.usedPrayers.includes(prayer.UniqueID));
 
     if (!unusedPrayers.length) {

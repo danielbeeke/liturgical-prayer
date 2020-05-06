@@ -1,4 +1,5 @@
 import {produce} from "../vendor/immer.js";
+import {Content} from '../Content.js';
 
 /**
  * Holds information about the schedule, is a Redux reducer
@@ -30,7 +31,7 @@ export function PrayReducer (state = {
     }
 
     if (action.type === 'clear-fixed-prayer-category') {
-      let allPrayersIds = prayerData[action.payload.categoryName].map(prayer => prayer.UniqueID);
+      let allPrayersIds = Content[action.payload.categoryName].map(prayer => prayer.UniqueID);
       nextState.usedPrayers = nextState.usedPrayers.filter(prayer => !allPrayersIds.includes(prayer));
     }
 

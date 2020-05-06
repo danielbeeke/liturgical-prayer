@@ -1,4 +1,4 @@
-import {render} from '../vendor/lighterhtml.js';
+import {render} from '../vendor/uhtml.js';
 import {watch} from '../vendor/ReduxWatch.js';
 import {Store} from "./Store.js";
 

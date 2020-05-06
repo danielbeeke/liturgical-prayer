@@ -1,0 +1,9 @@
+{
+  "name": "LiturgicalPrayerApp",
+  "short_name": "LiturgicalPrayer",
+  "start_url": ".",
+  "display": "fullscreen",
+  "background_color": "#fff",
+  "description": "A liturgical prayer app.",
+  "orientation": "portrait"
+}

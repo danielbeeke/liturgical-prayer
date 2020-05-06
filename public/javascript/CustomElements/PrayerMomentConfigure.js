@@ -1,6 +1,6 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
-import {html} from '../vendor/lighterhtml.js';
+import {html} from '../vendor/uhtml.js';
 import {toggleCategory, setCategoriesOrder} from '../Actions/ScheduleActions.js';
 import {Sortable} from '../Helpers/Sortable.js';
 
@@ -47,19 +47,21 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
     };
 
     return html`
-      <h2>${t.direct(moment.name)}</h2>
       <a class="button" href="/settings">${t.direct('Back')}</a>
-      <a class="button" href="/settings/${this.route.parameters.moment}/create-free-category">${t.direct('Create category')}</a>
+      <h2>${t.direct(moment.name)}</h2>
+      <a class="button" href="${`/settings/${this.route.parameters.moment}/create-free-category`}">${t.direct('Create category')}</a>
 
       <div class="categories sortable">
       ${categories.map(category => html`
-        <div class="prayer-category" data-order="${category.order}" data-slug="${category.slug}">
-          <input type="checkbox" id="toggle-${category.slug}" 
+        <div class="${'prayer-category ' + categoryIsEnabled(category.slug) ? 'enabled' : ''}" data-order="${category.order}" data-slug="${category.slug}">
+          <input type="checkbox" id="${'toggle-' + category.slug}" 
           checked="${categoryIsEnabled(category.slug)}" 
           onchange="${() => {toggleCategory(moment.slug, category.slug); this.draw()}}">
-          
-          <span>${t.direct(category.name)}</span>
-          <a href="/settings/${this.route.parameters.moment}/prayer-category/${category.slug}" class="button small">${category.isFreeForm ? t.direct('Edit') : t.direct('Read more')}</a>
+          <label for="${'toggle-' + category.slug}">
+            ${category.icon ? html`<prayer-icon name="${category.icon}"></prayer-icon>` : html``}
+            ${t.direct(category.name)}
+              <a href="${`/settings/${this.route.parameters.moment}/prayer-category/${category.slug}`}" class="button small">${category.isFreeForm ? t.direct('Edit') : t.direct('Read more')}</a>
+          </label>
         </div>
       `)}
       </div>

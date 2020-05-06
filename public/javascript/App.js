@@ -15,6 +15,7 @@ import './CustomElements/PrayerCategoryDetails.js';
 import './CustomElements/PrayerCreateFreeCategory.js';
 import './CustomElements/PrayerBackground.js';
 import './CustomElements/PrayerMenu.js';
+import './CustomElements/PrayerIcon.js';
 
 import {I14n} from './Helpers/I14n.js';
 import {Router} from './Core/Router.js';
@@ -50,7 +51,6 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
       this.t = await I14n(language);
       [...this.children].forEach(child => typeof child.draw !== 'undefined' ? child.draw() : null);
     });
-
 
     this.draw();
   }

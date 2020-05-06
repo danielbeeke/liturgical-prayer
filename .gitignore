@@ -4,3 +4,4 @@ certs
 .publish
 dist
 public/Settings.js
+public/Settings.mjs

@@ -1,10 +1,11 @@
 import {BaseElement} from '../Core/BaseElement.js';
-import {html} from '../vendor/lighterhtml.js';
+import {html} from '../vendor/uhtml.js';
+import {Content} from '../Content.js';
 
 customElements.define('prayer-background', class PrayerBackground extends BaseElement {
 
   draw () {
-    let background = prayerData['Backgrounds'][0];
+    let background = Content['Backgrounds'][0];
 
     return html`
       ${background.Type === 'video' ? 
