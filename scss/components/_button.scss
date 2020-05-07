@@ -1,14 +1,13 @@
 .button {
-  border: 1px solid black;
   border-radius: 10px;
-  padding: 10px;
-  background: white;
+  background: var(--color-primary);
   cursor: pointer;
+  color: white;
+  font-preset: button;
+  padding-bottom: 1rs;
+  padding-left: 2rs;
+  padding-right: 2rs;
 
-  &.small {
-    font-size: 13px;
-    padding: 0 8px;
-  }
 
   &.active {
     background: black;

@@ -1,0 +1,32 @@
+.moment.card {
+  height: 100%;
+  display: block;
+  flex: 0 0 60vw;
+  margin-left: 4rs;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+
+  .image {
+    width: 100%;
+    height: calc(100% - 5rs);
+    background-size: cover;
+    background-position: center;
+  }
+
+  .title {
+    background: var(--color-secondary);
+    position: absolute;
+    font-preset: title;
+    bottom: 0;
+    padding-left: 2rs;
+    width: 100%;
+    padding-bottom: 1rs;
+  }
+
+  .button {
+    position: absolute;
+    bottom: 7rs;
+    left: 2rs;
+  }
+}

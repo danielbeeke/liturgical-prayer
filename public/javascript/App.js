@@ -17,6 +17,8 @@ import './CustomElements/PrayerBackground.js';
 import './CustomElements/PrayerMenu.js';
 import './CustomElements/PrayerIcon.js';
 
+import {toggleGrid} from './Actions/AppActions.js';
+
 import {I14n} from './Helpers/I14n.js';
 import {Router} from './Core/Router.js';
 import {Routes} from './Core/Routes.js'
@@ -34,6 +36,14 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
       routes: Routes,
       debug: false,
       initialPath: location.pathname.substr(1) ? location.pathname.substr(1) : 'pray'
+    });
+
+    // Helper for vertical grid.
+    window.addEventListener('keyup', event => {
+      if (event.shiftKey && event.key === 'G') {
+        event.preventDefault();
+        toggleGrid();
+      }
     });
 
     /**
@@ -56,6 +66,8 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
   }
 
   draw () {
+    let a = Store.getState().app;
+    this.dataset.gridEnabled = a.verticalGridEnabled;
     return this.router.currentRoute ? this.router.currentRoute.template : null;
   }
 

@@ -18,15 +18,19 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
     return html`
       <h2>${t`On which moments do you want to pray?`}</h2>
 
+      <div class="item-list">
       ${s.moments.map(moment => html`
-        <div class="${'moment ' + moment.enabled ? 'enabled' : ''}">
-          <input type="checkbox" id="${'toggle-' + moment.slug}" checked="${moment.enabled}" onchange="${() => {toggleMoment(moment.slug); this.draw()}}">
+        <div class="${'item moment ' + (moment.enabled ? 'enabled' : '')}">
+          <input type="checkbox" id="${'toggle-' + moment.slug}" .checked="${moment.enabled}" onchange="${() => {toggleMoment(moment.slug); this.draw()}}">
           <label for="${'toggle-' + moment.slug}">
-            <prayer-icon name="${moment.icon}" />
-            <a href="${'/settings/' + moment.slug}">${t.direct(moment.name)}</a>
+            <span class="title">${t.direct(moment.name)}</span>
           </label>
+          <a href="${'/settings/' + moment.slug}">
+            <prayer-icon name="pencil" />
+          </a>
         </div>
       `)}
+      </div>
       
       <h2>${t`What language do you speak?`}</h2>
       
@@ -38,6 +42,8 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
             `)}            
         </select>
       </div>
+      
+      <div class="end"></div>
     `;
   }
 });

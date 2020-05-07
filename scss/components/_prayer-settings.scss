@@ -1,12 +1,12 @@
 prayer-settings {
+  padding: 4rs;
+
+  h2 {
+    font-preset: header3;
+    margin-bottom: 3rs;
+  }
+
   .moment {
-    padding: 10px 0;
-    transition: filter var(--speed) var(--easing);
-
-    &:not(.enabled) {
-      filter: grayscale(1);
-    }
-
     label {
       display: flex;
       align-items: center;

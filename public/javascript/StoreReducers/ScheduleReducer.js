@@ -35,7 +35,8 @@ let initialState = {
 moments.forEach(moment => {
   initialState.moments.push({
     name: moment.Title,
-    icon: moment.Icon,
+    color: moment.Color,
+    background: moment.Background,
     slug: Slugify(moment.Title),
     prayerCategories: initialCategories.filter(isEnabledFor(moment.Title)),
     enabled: moment.Enabled

@@ -1,0 +1,61 @@
+{
+  "document-row-size": "8px",
+  "presets": {
+    "paragraphs": {
+      "font-family": "Inter var",
+      "rows": 6,
+      "font-weight": 200,
+      "font-size": "17px",
+      "base-line-percentage": 0.6
+    },
+    "header1": {
+      "font-family": "Inter var",
+      "rows": 6,
+      "font-weight": 570,
+      "font-size": "37px",
+      "base-line-percentage": 0.84
+    },
+    "header2": {
+      "font-family": "Inter var",
+      "rows": 2,
+      "font-weight": 570,
+      "font-size": "20px",
+      "letter-spacing": "-0.5px",
+      "base-line-percentage": 0.84
+    },
+    "header3": {
+      "font-family": "Inter var",
+      "rows": 5,
+      "font-weight": 670,
+      "font-size": "26px",
+      "base-line-percentage": 0.84
+    },
+    "title": {
+      "font-family": "Inter var",
+      "rows": 3,
+      "font-weight": 670,
+      "font-size": "12px",
+      "letter-spacing": "1px",
+      "text-transform": "uppercase",
+      "base-line-percentage": 0.84
+    },
+    "button": {
+      "font-family": "Inter var",
+      "rows": 3,
+      "font-weight": 470,
+      "font-size": "12px",
+      "letter-spacing": "1px",
+      "text-transform": "uppercase",
+      "base-line-percentage": 0.84
+    },
+    "menu": {
+      "font-family": "Inter var",
+      "rows": 2,
+      "font-weight": 670,
+      "font-size": "11px",
+      "letter-spacing": ".5px",
+      "text-transform": "uppercase",
+      "base-line-percentage": 0.84
+    }
+  }
+}

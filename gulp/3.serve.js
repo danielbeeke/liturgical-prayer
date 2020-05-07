@@ -23,7 +23,8 @@ gulp.task('browsersync', () => {
   });
 
   gulp.watch(['public/javascript/**/*']).on('change', reload);
-  gulp.watch('scss/**/*', { usePolling: true }, gulp.series('css'));
+  gulp.watch('scss/**/*', gulp.series('css'));
+  gulp.watch('font-presets.json', gulp.series('css'));
 });
 
 gulp.task('serve', gulp.series('css', 'browsersync'));

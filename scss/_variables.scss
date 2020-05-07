@@ -1,8 +1,9 @@
 :root {
-  --color-primary: #4f8543;
-  --color-secondary: #e1f4fc;
-  --color-tertiary: #0b2e50;
-  --color-gray: #aaa;
+  --color-primary: #83af7a;
+  --color-secondary: #{lighten(#BCDDB4, 10)};
+  --color-gray: #ccc;
+  --color-gray-dark: #777;
+  --color-black: #2a2a2a;
 
   --speed: .3s;
   --easing: cubic-bezier(.67,-0.07,.49,.93);

@@ -2,7 +2,55 @@ prayer-menu {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  background: white;
-  padding: 20px;
-  border-top: 1px solid black;
+  background: var(--color-secondary);
+  padding-bottom: 2rs;
+
+  .menu-item {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    position: relative;
+    margin-top: -2rs;
+    color: var(--color-gray-dark);
+
+    .title {
+      padding-top: 1rs;
+      font-preset: menu;
+      margin-left: -30px;
+      margin-right: -30px;
+    }
+
+    &:after {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      background: var(--color-gray);
+      display: block;
+      content: '';
+      position: absolute;
+      z-index: -1;
+      bottom: 3.6rs;
+    }
+
+    prayer-icon {
+      opacity: .7;
+    }
+
+    &.active {
+      color: var(--color-black);
+
+      prayer-icon {
+        transform: translateY(-1rs);
+        opacity: 1;
+      }
+
+      &:after {
+        width: 66px;
+        height: 66px;
+        background: var(--color-primary);
+      }
+    }
+  }
 }

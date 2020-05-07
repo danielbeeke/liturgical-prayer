@@ -58,7 +58,6 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
           checked="${categoryIsEnabled(category.slug)}" 
           onchange="${() => {toggleCategory(moment.slug, category.slug); this.draw()}}">
           <label for="${'toggle-' + category.slug}">
-            ${category.icon ? html`<prayer-icon name="${category.icon}"></prayer-icon>` : html``}
             ${t.direct(category.name)}
               <a href="${`/settings/${this.route.parameters.moment}/prayer-category/${category.slug}`}" class="button small">${category.isFreeForm ? t.direct('Edit') : t.direct('Read more')}</a>
           </label>

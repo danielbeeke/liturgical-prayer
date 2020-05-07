@@ -7,8 +7,19 @@ customElements.define('prayer-menu', class PrayerMenu extends BaseElement {
     let t = this.root.t;
 
     return html`
-      <a class="button" href="/pray">${t.direct('Home')}</a>
-      <a class="button" href="/settings">${t.direct('Settings')}</a>
+      <a class="menu-item" href="/about">
+        <prayer-icon name="info" />
+        <span class="title">${t.direct('About')}</span>
+      </a>
+      <a class="menu-item" href="/pray">
+        <prayer-icon name="compass" />
+        <span class="title">${t.direct('Home')}</span>
+      </a>
+      <a class="menu-item" href="/settings">
+        <prayer-icon name="settings" />
+        <span class="title">${t.direct('Settings')}</span>
+      </a>
+
     `;
   }
 });
