@@ -17,3 +17,9 @@ export const setLanguage = (language) => {
     }
   })
 };
+
+export const toggleGrid = () => {
+  Store.dispatch({
+    type: 'toggle-grid'
+  })
+};

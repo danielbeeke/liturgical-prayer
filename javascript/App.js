@@ -13,9 +13,11 @@ import './CustomElements/PrayerPray.js';
 import './CustomElements/PrayerMomentConfigure.js';
 import './CustomElements/PrayerCategoryDetails.js';
 import './CustomElements/PrayerCreateFreeCategory.js';
-import './CustomElements/PrayerBackground.js';
 import './CustomElements/PrayerMenu.js';
 import './CustomElements/PrayerIcon.js';
+import './CustomElements/PrayerAbout.js';
+
+import {toggleGrid} from './Actions/AppActions.js';
 
 import {I14n} from './Helpers/I14n.js';
 import {Router} from './Core/Router.js';
@@ -36,6 +38,14 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
       initialPath: location.pathname.substr(1) ? location.pathname.substr(1) : 'pray'
     });
 
+    // Helper for vertical grid.
+    window.addEventListener('keyup', event => {
+      if (event.shiftKey && event.key === 'G') {
+        event.preventDefault();
+        toggleGrid();
+      }
+    });
+
     /**
      * Keep the router in sync with the store and draw after each route change.
      */
@@ -52,11 +62,12 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
       [...this.children].forEach(child => typeof child.draw !== 'undefined' ? child.draw() : null);
     });
 
-
     this.draw();
   }
 
   draw () {
+    let a = Store.getState().app;
+    this.dataset.gridEnabled = a.verticalGridEnabled;
     return this.router.currentRoute ? this.router.currentRoute.template : null;
   }
 

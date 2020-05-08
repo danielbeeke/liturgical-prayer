@@ -1,4 +1,4 @@
-import {render} from '../vendor/lighterhtml.js';
+import {render} from '../vendor/uhtml.js';
 import {watch} from '../vendor/ReduxWatch.js';
 import {Store} from "./Store.js";
 
@@ -15,9 +15,19 @@ export class BaseElement extends HTMLElement {
     const elementDraw = this.draw;
     let that = this;
     this.root = document.querySelector('prayer-app');
+
     this.draw = function () {
       render(this, () => elementDraw.apply(this, arguments));
 
+      let page = document.querySelector('.page');
+
+      if (page) {
+        setTimeout(() => {
+          page.classList.remove('hidden');
+        });
+      }
+
+      this.afterDraw();
 
       /**
        * After the draw attach click handler for internal hrefs.
@@ -29,7 +39,22 @@ export class BaseElement extends HTMLElement {
           link.hasListener = true;
           link.addEventListener('click', event => {
             event.preventDefault();
-            that.root.router.navigate(link.getAttribute('href'));
+
+            let page = document.querySelector('.page');
+
+            if (page) {
+              page.addEventListener('transitionend', () => {
+                that.root.router.navigate(link.getAttribute('href'));
+              }, {once: true});
+              page.classList.add('hidden');
+            }
+            else {
+              that.root.router.navigate(link.getAttribute('href'));
+            }
+
+            links.forEach(innerLink => {
+              innerLink.classList.remove('active')
+            });
           });
 
           if (link.getAttribute('href') === location.pathname) link.classList.add('active');
@@ -82,4 +107,6 @@ export class BaseElement extends HTMLElement {
       clearInterval(this.interval)
     }
   }
+
+  afterDraw () {}
 }

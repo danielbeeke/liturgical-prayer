@@ -1,8 +1,9 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
-import {html} from '../vendor/lighterhtml.js';
+import {html} from '../vendor/uhtml.js';
 import {toggleCategory, setCategoriesOrder} from '../Actions/ScheduleActions.js';
 import {Sortable} from '../Helpers/Sortable.js';
+import {addWbr} from '../Helpers/addWbr.js';
 
 customElements.define('prayer-moment-configure', class PrayerMomentConfigure extends BaseElement {
 
@@ -47,24 +48,30 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
     };
 
     return html`
-      <a class="button" href="/settings">${t.direct('Back')}</a>
-      <h2>${t.direct(moment.name)}</h2>
-      <a class="button" href="/settings/${this.route.parameters.moment}/create-free-category">${t.direct('Create category')}</a>
+      <h2 class="page-title">${t.direct(moment.name)}</h2>
 
-      <div class="categories sortable">
+      <div class="categories sortable item-list">
       ${categories.map(category => html`
-        <div class="prayer-category ${categoryIsEnabled(category.slug) ? 'enabled' : ''}" data-order="${category.order}" data-slug="${category.slug}">
-          <input type="checkbox" id="toggle-${category.slug}" 
-          checked="${categoryIsEnabled(category.slug)}" 
+        <div class="${'prayer-category item ' + (categoryIsEnabled(category.slug) ? 'enabled' : '')}" data-order="${category.order}" data-slug="${category.slug}">
+          <prayer-icon name="handle" />
+          <input type="checkbox" id="${'toggle-' + category.slug}" 
+          .checked="${categoryIsEnabled(category.slug)}" 
           onchange="${() => {toggleCategory(moment.slug, category.slug); this.draw()}}">
-          <label for="toggle-${category.slug}">
-            <prayer-icon name="${category.icon}"></prayer-icon>
-            ${t.direct(category.name)}
+          <label for="${'toggle-' + category.slug}">
+            <span class="title">${addWbr(t.direct(category.name))}</span>
           </label>
-          <a href="/settings/${this.route.parameters.moment}/prayer-category/${category.slug}" class="button small">${category.isFreeForm ? t.direct('Edit') : t.direct('Read more')}</a>
+          <a href="${`/settings/${this.route.parameters.moment}/prayer-category/${category.slug}`}">
+            <prayer-icon name="${category.isFreeForm ? 'pencil' : 'info'}" />
+          </a>
         </div>
       `)}
       </div>
+      
+      <a class="button" href="${`/settings/${this.route.parameters.moment}/create-free-category`}">
+        ${t.direct('Create category')}
+        <prayer-icon name="arrow-right" />
+      </a>
+      
     `;
   }
 });

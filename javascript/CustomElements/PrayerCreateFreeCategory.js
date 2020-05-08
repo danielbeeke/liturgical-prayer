@@ -1,8 +1,9 @@
 import {BaseElement} from '../Core/BaseElement.js';
-import {html} from '../vendor/lighterhtml.js';
+import {html} from '../vendor/uhtml.js';
 import {Slugify} from '../Helpers/Slugify.js';
 import {createFreeCategory} from '../Actions/ScheduleActions.js';
 import {Store} from '../Core/Store.js';
+import {Content} from '../Content.js';
 
 customElements.define('prayer-create-free-category', class PrayerCreateFreeCategory extends BaseElement {
 
@@ -18,7 +19,7 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
       Title: t.direct('- Select -'),
       Description: '',
       slug: ''
-    }, ...prayerData['Suggestions'].map(suggestion => {
+    }, ...Content['Suggestions'].map(suggestion => {
       return Object.assign(suggestion, {
         slug: Slugify(suggestion.Title)
       })
@@ -30,7 +31,7 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
 
     this.existingCategories = [
       ...s.freeCategories.map(freeCategory => freeCategory.slug),
-      ...prayerData['Categories'].map(prayerCategory => Slugify(prayerCategory.Title))
+      ...Content['Categories'].map(prayerCategory => Slugify(prayerCategory.Title))
     ];
 
     this.suggestions = this.suggestions.filter(suggestion => !this.existingCategories.includes(suggestion.slug))
@@ -78,8 +79,7 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     let t = this.root.t;
 
     return html`
-    <h2>${t.direct('Create category')}</h2>
-          <a class="button" href="/settings/${this.route.parameters.moment}">${t.direct('Back')}</a>
+    <h2 class="page-title">${t.direct('Create category')}</h2>
 
     <div class="field">
     <label>${t.direct('Title')}</label>

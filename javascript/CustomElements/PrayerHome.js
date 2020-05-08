@@ -1,6 +1,6 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
-import {html} from '../vendor/lighterhtml.js';
+import {html} from '../vendor/uhtml.js';
 
 customElements.define('prayer-home', class PrayerHome extends BaseElement {
 
@@ -11,13 +11,23 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
     this.dataset.items = s.moments.filter(moment => moment.enabled).length.toString();
 
     return html`
-    ${s.moments.map(moment => moment.enabled ? html`
-      <div>
-      <a class="prayer-moment" href="${'/pray/' + moment.slug}">
-        <span class="inner">${t.direct(moment.name)}</span>
-      </a>
-      </div>
-    ` : html``)}
+
+    <span class="prefix">${t`Welcome,`}</span>
+    <h1 class="title">${t`Some beautiful prayers are to be prayed.`}</h1>
+    
+    <div class="moments slider">
+      ${s.moments.filter(moment => moment.enabled).map(moment => html`
+        <a class="moment card" href="${'/pray/' + moment.slug}">
+        <div class="image" style="${`background-image: url(${moment.background});`}"></div>
+            <span class="button">${t`Pray`}</span>
+          <span class="title">${t.direct(moment.name)}</span>
+        </a>
+      `)}
+      
+      <div class="end"></div>
+    </div>
+    
+    <div class="end"></div>
     `;
   }
 });
