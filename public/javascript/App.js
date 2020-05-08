@@ -13,9 +13,9 @@ import './CustomElements/PrayerPray.js';
 import './CustomElements/PrayerMomentConfigure.js';
 import './CustomElements/PrayerCategoryDetails.js';
 import './CustomElements/PrayerCreateFreeCategory.js';
-import './CustomElements/PrayerBackground.js';
 import './CustomElements/PrayerMenu.js';
 import './CustomElements/PrayerIcon.js';
+import './CustomElements/PrayerAbout.js';
 
 import {toggleGrid} from './Actions/AppActions.js';
 

@@ -16,7 +16,7 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
     let a = Store.getState().app;
 
     return html`
-      <h2>${t`On which moments do you want to pray?`}</h2>
+      <h2 class="page-title">${t`On which moments do you want to pray?`}</h2>
 
       <div class="item-list">
       ${s.moments.map(moment => html`

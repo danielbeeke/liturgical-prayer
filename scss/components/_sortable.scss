@@ -3,7 +3,7 @@
     cursor: move;
 
     &.active {
-      background: #ccc;
+      background: var(--color-primary);
     }
 
     &.dragging {

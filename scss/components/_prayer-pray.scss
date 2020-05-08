@@ -1,30 +1,25 @@
 prayer-pray {
   .prayer {
-    margin-bottom: 40px;
+    margin-bottom: 6rs;
 
     .category {
       opacity: .5;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-preset: button;
     }
 
     .title {
-      margin-top: 0;
-      line-height: 1.5;
+      font-preset: header3;
     }
 
     .author {
       display: block;
-      margin-top: 30px;
       width: 100%;
-      text-align: right;
+      font-preset: author;
     }
 
     .amen {
       display: block;
-      font-style: italic;
-      font-weight: 180;
-      margin-top: 20px;
+      font-preset: author;
     }
   }
 }

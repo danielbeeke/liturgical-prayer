@@ -7,4 +7,13 @@
     font-preset: menu;
     margin-bottom: 1rs;
   }
+
+  .field-inner {
+    display: flex;
+
+    .button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
 }

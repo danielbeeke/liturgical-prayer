@@ -146,7 +146,7 @@ Sortable.prototype = {
     this._itemClass( this._clickItem, "add", "active" );
 
     this._dragItem = document.createElement( item.tagName );
-    this._dragItem.className = "dragging";
+    this._dragItem.classList = item.classList;
     this._dragItem.innerHTML = item.innerHTML;
     this._dragItem.style["position"] = "absolute";
     this._dragItem.style["z-index"] = "999";

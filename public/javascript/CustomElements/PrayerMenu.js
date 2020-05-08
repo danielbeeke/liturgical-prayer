@@ -8,7 +8,7 @@ customElements.define('prayer-menu', class PrayerMenu extends BaseElement {
 
     return html`
       <a class="menu-item" href="/about">
-        <prayer-icon name="info" />
+        <prayer-icon name="info_big" />
         <span class="title">${t.direct('About')}</span>
       </a>
       <a class="menu-item" href="/pray">

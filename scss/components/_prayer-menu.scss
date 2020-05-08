@@ -20,6 +20,7 @@ prayer-menu {
       font-preset: menu;
       margin-left: -30px;
       margin-right: -30px;
+      transition: all var(--speed) var(--easing);
     }
 
     &:after {
@@ -32,12 +33,15 @@ prayer-menu {
       position: absolute;
       z-index: -1;
       bottom: 3.6rs;
+      transition: all var(--speed) var(--easing);
     }
 
     prayer-icon {
       opacity: .7;
+      transition: all var(--speed) var(--easing);
     }
 
+    &:hover,
     &.active {
       color: var(--color-black);
 

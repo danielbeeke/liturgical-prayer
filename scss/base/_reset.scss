@@ -25,9 +25,20 @@ iframe {
   border: 0;
 }
 
+*:focus {
+  outline: none;
+}
+*::-moz-focus-inner {
+  border: none;
+}
+
 a:link,
 a:visited {
   color: var(--color-tertiary);
+}
+
+p {
+  font-preset: paragraphs;
 }
 
 #__bs_notify__ {

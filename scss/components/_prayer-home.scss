@@ -15,13 +15,12 @@ prayer-home {
   }
 
   .slider {
-    flex: 0 0 calc(100vh - 40rs);
+    flex: 0 0 calc(100vh - 50rs);
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
     margin: 0 -4rs;
     scrollbar-width: none;
-    border-bottom: 8rs solid transparent;
 
     .end {
       margin-left: 4rs;

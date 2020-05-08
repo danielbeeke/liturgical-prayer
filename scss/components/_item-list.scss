@@ -8,7 +8,7 @@
     padding-left: 1rs;
     padding-right: 1rs;
     display: flex;
-    transition: all var(--speed) var(--easing);
+    transition: opacity var(--speed) var(--easing), filter var(--speed) var(--easing);
     align-items: center;
 
     .title {

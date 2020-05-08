@@ -31,23 +31,27 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
     });
 
     return html`
-        <h2>${t.direct(moment.name)}</h2>
-        
-        ${prayers.map(prayer => html`
-          <div class="prayer" data-id="${prayer.UniqueID}">
-            <small class="category">${prayer.category.name}</small>
-            ${!prayer.category.isFreeForm ? html`
-                <h2 class="title">${prayer.Title}</h2>
-            ` : html``}
-            ${prayer.category.isFreeForm ? html`
-                <div class="content">${prayer.Content}</div>
-            ` : html`
-                <div class="content">${toLines(prayer.Content).map(line => html`${line}<br />`)}</div>
-                <span class="amen">Amen</span>  
-            `}          
-            <em class="author">${prayer.Author}</em>
-          </div>
-        `)}
+      <a class="menu-item" href="/pray">
+        <prayer-icon name="cross" />
+      </a>
+
+      <h2 class="page-title">${t.direct(moment.name)}</h2>
+      
+      ${prayers.map(prayer => html`
+        <div class="prayer" data-id="${prayer.UniqueID}">
+          <small class="category">${prayer.category.name}</small>
+          ${prayer.Author ? html`<em class="author">${prayer.Author}</em>` : html`<span></span>`}
+          ${!prayer.category.isFreeForm ? html`
+              <h2 class="title">${prayer.Title}</h2>
+          ` : html``}
+          ${prayer.category.isFreeForm ? html`
+              <p class="content">${prayer.Content}</p>
+          ` : html`
+              <p class="content">${toLines(prayer.Content).map(line => html`${line}<br />`)}</p>
+              <span class="amen">Amen</span>  
+          `}          
+        </div>
+      `)}
     `;
-  }
+    }
 });
