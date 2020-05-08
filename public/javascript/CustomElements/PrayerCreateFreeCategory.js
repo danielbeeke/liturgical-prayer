@@ -80,7 +80,6 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
 
     return html`
     <h2>${t.direct('Create category')}</h2>
-          <a class="button" href="${`/settings/${this.route.parameters.moment}`}">${t.direct('Back')}</a>
 
     <div class="field">
     <label>${t.direct('Title')}</label>

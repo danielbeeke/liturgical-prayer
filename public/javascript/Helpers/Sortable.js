@@ -150,6 +150,7 @@ Sortable.prototype = {
     this._dragItem.innerHTML = item.innerHTML;
     this._dragItem.style["position"] = "absolute";
     this._dragItem.style["z-index"] = "999";
+    this._dragItem.style["display"] = "inline-flex";
     this._dragItem.style["left"] = ( item.offsetLeft || 0 ) + "px";
     this._dragItem.style["top"] = ( item.offsetTop || 0 ) + "px";
     this._dragItem.style["width"] = ( item.offsetWidth || 0 ) + "px";

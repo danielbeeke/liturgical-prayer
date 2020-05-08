@@ -5,11 +5,11 @@
     background: var(--color-secondary);
     margin-bottom: 1rs;
     border-radius: 8px;
-    padding-left: 2rs;
-    padding-right: 2rs;
+    padding-left: 1rs;
+    padding-right: 1rs;
     display: flex;
-    justify-content: space-between;
-    transition: filter var(--speed) var(--easing);
+    transition: all var(--speed) var(--easing);
+    align-items: center;
 
     .title {
       font-preset: title;
@@ -17,9 +17,21 @@
       transition: opacity var(--speed) var(--easing);
     }
 
+    label {
+      flex: 1 1 auto;
+      word-break: break-word;
+      margin-top: 1rs;
+      margin-bottom: 1rs;
+    }
+
     prayer-icon {
       margin-top: 1rs;
+      transform: translateY(-2px);
       transition: opacity var(--speed) var(--easing);
+    }
+
+    *:last-child {
+      margin-left: auto;
     }
 
     &:not(.enabled) {

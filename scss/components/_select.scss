@@ -4,7 +4,7 @@ select {
   border-radius: 8px;
   border: 0;
   background: var(--color-secondary);
-  font-preset: title;
+  font-preset: select;
   padding-bottom: 1rs;
   padding-left: 1rs;
   padding-right: 1rs;
@@ -16,6 +16,11 @@ select {
   -webkit-appearance: none;
   appearance: none;
   cursor: pointer;
+
+  &:-moz-focusring {
+    color: rgba(0,0,0,0);
+    text-shadow: 0 0 0 var(--color-black);
+  }
 
   &:focus {
     outline: none;

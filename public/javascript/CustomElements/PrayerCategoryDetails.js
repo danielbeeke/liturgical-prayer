@@ -54,8 +54,6 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
     }
 
     return html`
-      <a class="button" href="${`/settings/${this.route.parameters.moment}`}">${t.direct('Back')}</a>
-
       <h2>${this.category.name}</h2>
       <p>${this.category.description}</p>
 

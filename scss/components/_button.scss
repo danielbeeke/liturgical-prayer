@@ -2,15 +2,17 @@
   border-radius: 10px;
   background: var(--color-primary);
   cursor: pointer;
-  color: white;
   font-preset: button;
-  padding-bottom: 1rs;
   padding-left: 2rs;
   padding-right: 2rs;
+  padding-bottom: 1rs;
+  text-decoration: none;
+  color: var(--color-black);
+  display: inline-flex;
+  border: 0;
 
-
-  &.active {
-    background: black;
-    color: white;
+  prayer-icon {
+    margin-top: 2px;
+    max-height: 5px;
   }
 }

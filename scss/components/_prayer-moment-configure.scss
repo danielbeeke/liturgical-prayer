@@ -1,13 +1,13 @@
 prayer-moment-configure {
-  .prayer-category {
-    transition: filter var(--speed) var(--easing);
+  padding: 4rs;
 
-    &:not(.enabled) {
-      filter: grayscale(1);
-    }
+  h2 {
+    font-preset: header3;
+    margin-bottom: 3rs;
+  }
 
-    &.enabled {
-      filter: grayscale(0);
-    }
+  prayer-icon[name="handle"] {
+    margin-right: 10px;
+    pointer-events: none;
   }
 }

@@ -38,7 +38,7 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
         <label>${t`Interface language`}</label>
         <select onchange="${event => setLanguage(event.target.value)}">
             ${['English', 'Dutch'].map(language => html`
-                <option value="${language}" selected="${a.language === language}">${t.direct(language)}</option>
+                <option value="${language}" .selected="${a.language === language}">${t.direct(language)}</option>
             `)}            
         </select>
       </div>

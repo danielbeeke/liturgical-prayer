@@ -58,19 +58,26 @@ a:visited {
   border-radius: 10px;
   background: var(--color-primary);
   cursor: pointer;
-  color: white;
-  font-preset: button;padding-bottom: 8px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: 1px;font-size: 12px;font-weight: 470;font-family: Inter var;
+  font-preset: button;padding-bottom: 9px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var;
   padding-left: 16px;
-  padding-right: 16px; }
-  .button.active {
-    background: black;
-    color: white; }
+  padding-right: 16px;
+  text-decoration: none;
+  color: var(--color-black);
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border: 0; }
+  .button prayer-icon {
+    margin-top: 2px;
+    max-height: 5px; }
 
-.field label {
-  display: block;
-  width: 100%;
-  font-preset: menu;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var;
-  margin-bottom: 8px; }
+.field {
+  margin-bottom: 16px; }
+  .field label {
+    display: block;
+    width: 100%;
+    font-preset: menu;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    margin-bottom: 8px; }
 
 .item-list {
   margin-bottom: 32px; }
@@ -78,29 +85,39 @@ a:visited {
     background: var(--color-secondary);
     margin-bottom: 8px;
     border-radius: 8px;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-transition: -webkit-filter var(--speed) var(--easing);
-    transition: -webkit-filter var(--speed) var(--easing);
-    -o-transition: filter var(--speed) var(--easing);
-    transition: filter var(--speed) var(--easing);
-    transition: filter var(--speed) var(--easing), -webkit-filter var(--speed) var(--easing); }
+    -webkit-transition: all var(--speed) var(--easing);
+    -o-transition: all var(--speed) var(--easing);
+    transition: all var(--speed) var(--easing);
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
     .item-list .item .title {
-      font-preset: title;padding-bottom: 8px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: 1px;font-size: 12px;font-weight: 670;font-family: Inter var;
+      font-preset: title;padding-bottom: 16px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
       -webkit-transition: opacity var(--speed) var(--easing);
       -o-transition: opacity var(--speed) var(--easing);
       transition: opacity var(--speed) var(--easing); }
+    .item-list .item label {
+      -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      word-break: break-word;
+      margin-top: 8px;
+      margin-bottom: 8px; }
     .item-list .item prayer-icon {
       margin-top: 8px;
+      -webkit-transform: translateY(-2px);
+      -ms-transform: translateY(-2px);
+      transform: translateY(-2px);
       -webkit-transition: opacity var(--speed) var(--easing);
       -o-transition: opacity var(--speed) var(--easing);
       transition: opacity var(--speed) var(--easing); }
+    .item-list .item *:last-child {
+      margin-left: auto; }
     .item-list .item:not(.enabled) {
       -webkit-filter: grayscale(1);
       filter: grayscale(1); }
@@ -126,7 +143,7 @@ a:visited {
   .moment.card .title {
     background: var(--color-secondary);
     position: absolute;
-    font-preset: title;padding-bottom: 8px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: 1px;font-size: 12px;font-weight: 670;font-family: Inter var;
+    font-preset: title;padding-bottom: 8px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
     bottom: 0;
     padding-left: 16px;
     width: 100%; }
@@ -171,6 +188,18 @@ prayer-app {
     width: 100%; }
   prayer-app[data-grid-enabled="true"]:before {
     opacity: 1; }
+
+prayer-category-details {
+  padding: 32px; }
+  prayer-category-details h2 {
+    font-preset: header3;padding-bottom: 5px;padding-top: 11px;line-height: 40px;font-size: 26px;font-weight: 670;font-family: Inter var;
+    margin-bottom: 24px; }
+
+prayer-create-free-category {
+  padding: 32px; }
+  prayer-create-free-category h2 {
+    font-preset: header3;padding-bottom: 5px;padding-top: 11px;line-height: 40px;font-size: 26px;font-weight: 670;font-family: Inter var;
+    margin-bottom: 24px; }
 
 prayer-home {
   display: -webkit-box;
@@ -264,18 +293,14 @@ prayer-menu {
         height: 66px;
         background: var(--color-primary); }
 
-prayer-moment-configure .prayer-category {
-  -webkit-transition: -webkit-filter var(--speed) var(--easing);
-  transition: -webkit-filter var(--speed) var(--easing);
-  -o-transition: filter var(--speed) var(--easing);
-  transition: filter var(--speed) var(--easing);
-  transition: filter var(--speed) var(--easing), -webkit-filter var(--speed) var(--easing); }
-  prayer-moment-configure .prayer-category:not(.enabled) {
-    -webkit-filter: grayscale(1);
-    filter: grayscale(1); }
-  prayer-moment-configure .prayer-category.enabled {
-    -webkit-filter: grayscale(0);
-    filter: grayscale(0); }
+prayer-moment-configure {
+  padding: 32px; }
+  prayer-moment-configure h2 {
+    font-preset: header3;padding-bottom: 5px;padding-top: 11px;line-height: 40px;font-size: 26px;font-weight: 670;font-family: Inter var;
+    margin-bottom: 24px; }
+  prayer-moment-configure prayer-icon[name="handle"] {
+    margin-right: 10px;
+    pointer-events: none; }
 
 prayer-pray .prayer {
   margin-bottom: 40px; }
@@ -302,13 +327,6 @@ prayer-settings {
   prayer-settings h2 {
     font-preset: header3;padding-bottom: 5px;padding-top: 11px;line-height: 40px;font-size: 26px;font-weight: 670;font-family: Inter var;
     margin-bottom: 24px; }
-  prayer-settings .moment label {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center; }
 
 select {
   display: block;
@@ -316,7 +334,7 @@ select {
   border-radius: 8px;
   border: 0;
   background: var(--color-secondary);
-  font-preset: title;padding-bottom: 8px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: 1px;font-size: 12px;font-weight: 670;font-family: Inter var;
+  font-preset: select;padding-bottom: 8px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: 1px;font-size: 12px;font-weight: 670;font-family: Inter var;
   padding-left: 8px;
   padding-right: 8px;
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
@@ -327,35 +345,21 @@ select {
   -webkit-appearance: none;
   appearance: none;
   cursor: pointer; }
+  select:-moz-focusring {
+    color: rgba(0, 0, 0, 0);
+    text-shadow: 0 0 0 var(--color-black); }
   select:focus {
     outline: none; }
 
-.sortable {
-  margin-top: 30px; }
-  .sortable > * {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    margin: 3px;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: move;
-    background: #fff;
-    border: 1px solid lightgrey; }
-    .sortable > * .button {
-      margin-left: auto; }
-    .sortable > *:hover {
-      background: #ffffe0; }
-    .sortable > *.active {
-      background: #ccc; }
-    .sortable > *.dragging {
-      background: #e0ffff;
-      -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-      opacity: 0.5; }
+.sortable > * {
+  cursor: move; }
+  .sortable > *.active {
+    background: #ccc; }
+  .sortable > *.dragging {
+    background: #e0ffff;
+    -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    opacity: 0.5; }
 
 input[type="checkbox"] {
   display: none; }

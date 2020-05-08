@@ -1,26 +1,11 @@
 .sortable {
-  margin-top: 30px;
-
   & > * {
-    display: flex;
-    align-items: center;
-    margin: 3px;
-    padding: 10px;
-    border-radius: 4px;
     cursor: move;
-    background: #fff;
-    border: 1px solid lightgrey;
 
-    .button {
-      margin-left: auto;
-    }
-
-    &:hover {
-      background: #ffffe0;
-    }
     &.active {
       background: #ccc;
     }
+
     &.dragging {
       background: #e0ffff;
       box-shadow: 0 4px 20px rgba(0,0,0,0.5);
