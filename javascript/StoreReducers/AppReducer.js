@@ -6,7 +6,8 @@ import {produce} from "../vendor/immer.js";
 export function AppReducer (state = {
   path: 'pray',
   language: 'English',
-  verticalGridEnabled: false
+  verticalGridEnabled: false,
+  bible: 'de4e12af7f28f599-02'
 }, action) {
   return produce(state, nextState => {
     if (action.type === 'navigate') nextState.path = action.payload.path;
