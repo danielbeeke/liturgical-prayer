@@ -37,8 +37,18 @@ export class BaseElement extends HTMLElement {
       links.forEach(link => {
         if (typeof link.hasListener === 'undefined') {
           link.hasListener = true;
+
+          if (link.getAttribute('href') === location.pathname) link.classList.add('active');
+
           link.addEventListener('click', event => {
             event.preventDefault();
+
+            if (link.getAttribute('href') === location.pathname) return;
+
+            links.forEach(innerLink => {
+              let isCurrent = innerLink.getAttribute('href') === link.getAttribute('href');
+              innerLink.classList[isCurrent ? 'add' : 'remove']('active')
+            });
 
             let page = document.querySelector('.page');
 
@@ -51,13 +61,8 @@ export class BaseElement extends HTMLElement {
             else {
               that.root.router.navigate(link.getAttribute('href'));
             }
-
-            links.forEach(innerLink => {
-              innerLink.classList.remove('active')
-            });
           });
 
-          if (link.getAttribute('href') === location.pathname) link.classList.add('active');
         }
       })
     };
@@ -109,4 +114,8 @@ export class BaseElement extends HTMLElement {
   }
 
   afterDraw () {}
+
+  tokenize (content) {
+    return this.root.tokenizer.replace(content);
+  }
 }

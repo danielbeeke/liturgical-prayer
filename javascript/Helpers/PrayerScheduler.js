@@ -22,13 +22,6 @@ export class PrayerScheduler {
     if (assignedItems) {
       return {
         Title: prayerCategory.name,
-        Content: html`
-        <ul>
-          ${assignedItems.map(item => html`
-            <li>${item}</li>
-          `)}
-        </ul>
-      `,
         items: assignedItems,
         marked: true,
         category: prayerCategory,
@@ -97,13 +90,6 @@ export class PrayerScheduler {
 
     return {
       Title: prayerCategory.name,
-      Content: html`
-        <ul>
-          ${allowedItems.map(item => html`
-            <li>${item}</li>
-          `)}
-        </ul>
-      `,
       items: allowedItems,
       marked: false,
       category: prayerCategory,
@@ -158,6 +144,10 @@ export class PrayerScheduler {
     let allPrayers = Content[prayerCategory.name];
     let unusedPrayers = allPrayers.filter(prayer => !this.p.usedPrayers.includes(prayer.UniqueID));
 
+    if (prayerCategory.shuffle) {
+      unusedPrayers = this.shuffle([...unusedPrayers]);
+    }
+
     if (!unusedPrayers.length) {
       clearFixedPrayerCategory(prayerCategory.name);
       return Object.assign({}, allPrayers[0], {
@@ -169,6 +159,25 @@ export class PrayerScheduler {
         category: prayerCategory
       });
     }
+  }
+
+  shuffle(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   }
 
 }

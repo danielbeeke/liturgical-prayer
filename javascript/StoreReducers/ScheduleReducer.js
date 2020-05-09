@@ -18,6 +18,7 @@ let initialCategories = Content['Categories'].map((category, index) => {
     isFreeForm: false,
     name: category.Title,
     icon: category.Icon,
+    shuffle: category.Shuffle,
     slug: Slugify(category.Title),
     description: category.Description,
   }

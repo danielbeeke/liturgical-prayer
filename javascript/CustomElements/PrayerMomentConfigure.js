@@ -48,7 +48,10 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
     };
 
     return html`
-      <h2 class="page-title">${t.direct(moment.name)}</h2>
+      <h2 class="page-title">
+        <a class="back-button" href="/settings"><prayer-icon name="arrow-left" /></a>
+        ${t.direct(moment.name)}
+      </h2>
 
       <div class="categories sortable item-list">
       ${categories.map(category => html`

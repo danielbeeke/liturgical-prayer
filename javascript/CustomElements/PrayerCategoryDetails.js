@@ -54,7 +54,10 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
     }
 
     return html`
-      <h2 class="page-title">${this.category.name}</h2>
+      <h2 class="page-title">
+        <a class="back-button" href="${'/settings/' + this.moment.slug}"><prayer-icon name="arrow-left" /></a>
+        ${this.category.name}
+      </h2>
       <p>${this.category.description}</p>
 
       ${this.category.isFreeForm ? html`

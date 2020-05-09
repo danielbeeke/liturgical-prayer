@@ -2,7 +2,8 @@ import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
 import {html} from '../vendor/uhtml.js';
 import {toggleMoment} from '../Actions/ScheduleActions.js';
-import {setLanguage} from '../Actions/AppActions.js';
+import {setBible} from '../Actions/AppActions.js';
+import {Content} from '../Content.js';
 
 customElements.define('prayer-settings', class PrayerSettings extends BaseElement {
 
@@ -14,6 +15,8 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
     let t = this.root.t;
     let s = Store.getState().schedule;
     let a = Store.getState().app;
+    let bibles = Content.Bibles;
+    let englishBibles = bibles.filter(bible => bible.language.id === 'eng');
 
     return html`
       <h2 class="page-title">${t`On which moments do you want to pray?`}</h2>
@@ -32,20 +35,18 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
       `)}
       </div>
       
-           
+      <h2>${t`What bible translation do you want?`}</h2>
+      
+      <div class="field">
+        <label>${t`Bible translation`}</label>
+        <select onchange="${event => setBible(event.target.value)}">
+            ${englishBibles.map(bible => html`
+                <option value="${bible.id}" .selected="${a.bible === bible.id}">${bible.name}</option>
+            `)}            
+        </select>
+      </div>
+      
       <div class="end"></div>
     `;
-
-    /*
-      <h2>${t`What language do you speak?`}</h2>
-      <div class="field">
-      <label>${t`Interface language`}</label>
-      <select onchange="${event => setLanguage(event.target.value)}">
-          ${['English', 'Dutch'].map(language => html`
-              <option value="${language}" .selected="${a.language === language}">${t.direct(language)}</option>
-          `)}
-      </select>
-    </div>
-     */
   }
 });

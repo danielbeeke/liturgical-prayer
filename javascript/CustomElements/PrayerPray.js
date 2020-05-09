@@ -42,23 +42,24 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
 
 
       <div class="slider">
-      ${prayers.map((prayer, index) => html`
-        <div class="prayer" data-id="${prayer.UniqueID}">
+      ${prayers.map((prayer, index) => {
+        let category = prayer.category.isFreeForm ? t.direct('Your category') : (prayer.category.name !== prayer.Title ? prayer.category.name : '');
+        
+        return html`<div class="prayer" data-id="${prayer.UniqueID}">
           <div class="header">
-            <small class="category">${prayer.category.isFreeForm ? t.direct('Your category') : prayer.category.name}</small>
-            ${prayer.Author ? html`<em class="author">${prayer.Author}</em>` : html`<span></span>`}
+            ${category ? html`<small class="category"><prayer-icon name="tag" />${category}</small>` : html`` }
             <h2 class="title">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</h2>
+            ${prayer.Author ? html`<em class="author"><prayer-icon name="author" />${prayer.Author}</em>` : html``}
           </div>
           <div class="inner">
-            ${prayer.category.isFreeForm ? html`
-                <p class="content">${prayer.Content}</p>
-            ` : html`
-                <p class="content">${toLines(prayer.Content)}</p>
-                <span class="amen">Amen</span>  
-            `}                  
+            <p class="content">${prayer.category.isFreeForm ? 
+              prayer.items.map(item => html`<span class="prayer-item">${item}</span>`) : 
+              toLines(this.tokenize(prayer.Content, this.draw))}
+            </p>
+            <span class="amen">Amen</span>  
           </div>
-        </div>
-      `)}
+        </div>`      
+      })}
       </div>
     `;
     }

@@ -18,6 +18,15 @@ export const setLanguage = (language) => {
   })
 };
 
+export const setBible = (bible) => {
+  Store.dispatch({
+    type: 'set-bible',
+    payload: {
+      bible: bible
+    }
+  })
+};
+
 export const toggleGrid = () => {
   Store.dispatch({
     type: 'toggle-grid'
