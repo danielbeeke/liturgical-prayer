@@ -313,6 +313,9 @@ prayer-home {
 prayer-icon {
   display: inline-block;
   max-width: 40px; }
+  prayer-icon svg {
+    width: 100%;
+    height: 100%; }
 
 prayer-main-menu.page {
   padding: 0;
