@@ -75,3 +75,9 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
   }
 
 });
+
+window.oncontextmenu = function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  return false;
+};

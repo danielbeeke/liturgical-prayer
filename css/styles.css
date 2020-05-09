@@ -314,8 +314,7 @@ prayer-icon {
   display: inline-block;
   max-width: 40px; }
   prayer-icon svg {
-    width: 100%;
-    height: 100%; }
+    width: 100%; }
 
 prayer-main-menu.page {
   padding: 0;
@@ -341,6 +340,8 @@ prayer-main-menu.page {
       margin-right: 16px; }
     prayer-main-menu.page .menu-item .title {
       font-preset: header2;padding-bottom: 7px;padding-top: 9px;line-height: 16px;letter-spacing: -0.5px;font-size: 20px;font-weight: 570;font-family: Inter var; }
+    prayer-main-menu.page .menu-item:last-child {
+      margin-bottom: 80px; }
     prayer-main-menu.page .menu-item:hover {
       background: var(--color-primary);
       color: white; }
