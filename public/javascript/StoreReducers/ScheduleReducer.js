@@ -53,7 +53,7 @@ moments.forEach(moment => {
 export function ScheduleReducer (state = initialState, action) {
   return produce(state, nextState => {
     let moment = action?.payload?.momentSlug && nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-    let category = action?.payload?.categorySlug && moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
+    let category = action?.payload?.categorySlug && moment && moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
     let freeCategory = action?.payload?.categorySlug && nextState.freeCategories.find(category => category.slug === action.payload.categorySlug);
 
     if (action.type === 'moment-toggle') {
@@ -118,6 +118,12 @@ export function ScheduleReducer (state = initialState, action) {
       let item = freeCategory.items.find(item => item.slug === action.payload.prayerPointSlug);
       let ItemIndex = freeCategory.items.indexOf(item);
       freeCategory.items.splice(ItemIndex, 1);
+    }
+
+    if (action.type === 'update-prayer-point') {
+      let item = freeCategory.items.find(item => item.slug === action.payload.prayerPointSlug);
+      item.title = action.payload.title;
+      item.description = action.payload.description;
     }
 
     if (action.type === 'set-prayer-points-order') {

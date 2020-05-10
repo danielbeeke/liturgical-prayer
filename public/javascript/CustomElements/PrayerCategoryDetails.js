@@ -73,7 +73,7 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
                 <span class="title">${item.title}</span>
                 ${item.description ? html`<em class="description">${item.description}</em>` : html``}
               </label>
-              <a onclick="${() => {deletePrayerPoint(this.moment.slug, this.category.slug, item.slug); this.draw()}}"><prayer-icon name="cross" /></a>
+              <a href="${`/settings/${this.moment.slug}/prayer-category/${this.freeCategory.slug}/${item.slug}`}"><prayer-icon name="pencil" /></a>
             </div>
           `)}
           </div>
