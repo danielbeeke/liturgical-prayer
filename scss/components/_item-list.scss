@@ -11,6 +11,7 @@
 
     .title {
       font-preset: title;
+      text-transform: none;
       padding-bottom: 1rs;
       transition: opacity var(--speed) var(--easing);
     }

@@ -11,9 +11,19 @@
   display: inline-flex;
   border: 0;
 
+  &.secondary {
+    background: var(--color-secondary);
+  }
+
+  &.danger {
+    background: var(--color-danger);
+  }
+
   prayer-icon {
     margin-top: 2px;
     max-height: 5px;
-    margin-right: -7px;
+    margin-right: -5px;
+    width: 24px;
+    margin-left: 6px;
   }
 }

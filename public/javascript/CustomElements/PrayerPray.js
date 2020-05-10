@@ -23,7 +23,7 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
     prayers.forEach(prayer => {
       if (!prayer.marked) {
         if (prayer.category.isFreeForm) {
-          markFreePrayer(date.toDateString(), moment.slug, prayer.category.slug, prayer.items);
+          markFreePrayer(date.toDateString(), moment.slug, prayer.category.slug, prayer.items.map(item => item.slug));
         }
         else {
           markFixedPrayer(date.toDateString(), moment.slug, prayer.category.slug, prayer.UniqueID);
@@ -46,7 +46,7 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
       <div class="slider">
       ${prayers.map((prayer, index) => {
         let category = prayer.category.isFreeForm ? t.direct('Your category') : (prayer.category.name !== prayer.Title ? prayer.category.name : '');
-        
+              
         return html`<div class="prayer" data-id="${prayer.UniqueID}">
           <div class="header">
             <h2 class="title">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</h2>
@@ -57,7 +57,10 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
           </div>
           <div class="inner">
             <p class="content">${prayer.category.isFreeForm ? 
-              prayer.items.map(item => html`<span class="prayer-item">${item}</span>`) : 
+              prayer.items.map(item => html`
+                <span class="prayer-item">${item.title}</span>
+                ${item.description ? html`<em class="description">${item.description}</em>` : ''}
+              `) : 
               toLines(this.tokenize(prayer.Content, this.draw))}
             </p>
             <span class="amen">Amen</span>  

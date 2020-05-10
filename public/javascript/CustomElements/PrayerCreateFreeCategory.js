@@ -65,7 +65,7 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     let category = this.createCategory();
     if (!this.existingCategories.includes(category.slug)) {
       createFreeCategory(this.route.parameters.moment, category);
-      this.root.router.navigate(`/settings/${this.route.parameters.moment}`);
+      this.root.router.navigate(`/settings/${this.route.parameters.moment}/prayer-category/${category.slug}`);
     }
   }
 
@@ -93,12 +93,12 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     </select>
     </div>
     
-    <div class="field">
+
     ${this.selected === '_other_' ? html`
-      <label>${t.direct('Title')}</label>
-      <input type="text" onkeyup="${event => {this.otherText = event.target.value; this.validate()}}">
+      <div class="field">      <label>${t.direct('Title')}</label>
+        <input type="text" onkeyup="${event => {this.otherText = event.target.value; this.validate()}}">
+      </div>
     ` : html``}
-    </div>
     
     ${this.categoryExists ? html`
     <span>${t`The category already exists`}</span>

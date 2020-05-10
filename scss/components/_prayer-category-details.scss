@@ -11,5 +11,15 @@ prayer-category-details {
     a {
       cursor: pointer;
     }
+
+    .title {
+      margin-bottom: -1rs;
+    }
+
+    .description {
+      font-preset: title;
+      opacity: .6;
+      text-transform: none;
+    }
   }
 }

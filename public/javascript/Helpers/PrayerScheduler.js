@@ -13,13 +13,16 @@ export class PrayerScheduler {
    * @returns {{marked: boolean, Content: Hole, Title: *, category: *}}
    */
   getFreeFormPrayer (date, prayerCategory, momentSlug) {
+    this.s = Store.getState().schedule;
     this.p = Store.getState().pray;
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    let assignedItems = this.p.calendar?.[year]?.[month]?.[day]?.[momentSlug]?.[prayerCategory.slug];
+    let assignedItemIds = this.p.calendar?.[year]?.[month]?.[day]?.[momentSlug]?.[prayerCategory.slug];
+    let freeCategory = this.s.freeCategories.find(freeCategory => freeCategory.slug === prayerCategory.slug);
+    let assignedItems = assignedItemIds.length ? freeCategory.items.filter(item => assignedItemIds.includes(item.slug)) : [];
 
-    if (assignedItems) {
+    if (assignedItems.length) {
       return {
         Title: prayerCategory.name,
         items: assignedItems,
@@ -76,7 +79,7 @@ export class PrayerScheduler {
     freeCategory.items.forEach(item => {
       let found = false;
       for (let i = 0; i < 7; i++) {
-        if (chunks[i] && chunks[i].includes(item)) {
+        if (chunks[i] && chunks[i].includes(item.slug)) {
           found = true;
         }
       }

@@ -21,9 +21,11 @@
     margin-top: 0;
   }
 
+  textarea,
   input {
     min-width: 40px;
     font-preset: menu;
+    text-transform: none;
     cursor: pointer;
     flex: 1 1 auto;
     transition: border var(--speed) var(--easing);
@@ -42,7 +44,7 @@
 
     .button {
       margin-left: 1rs;
-      flex: 1 1 auto;
+      flex: 0 0 auto;
     }
   }
 }
