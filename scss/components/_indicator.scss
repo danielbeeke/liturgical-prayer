@@ -1,0 +1,21 @@
+.indicator {
+  display: flex;
+  background: var(--color-secondary);
+  padding-left: 4rs;
+  width: calc(100vw - 8rs);
+  flex-wrap: wrap;
+
+  .indicator-item {
+    height: .5rs;
+    margin-top: .5rs;
+    border-radius: 4px;
+    margin-bottom: 1rs;
+    flex: 0 0 3rs;
+    margin-right: 1rs;
+    background: var(--color-gray);
+
+    &.active {
+      background: var(--color-primary);
+    }
+  }
+}

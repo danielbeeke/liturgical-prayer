@@ -1,3 +1,15 @@
 prayer-category-details {
+  .prayer-point {
+    prayer-icon[name="handle"] {
+      pointer-events: none;
+    }
 
+    label {
+      margin-left: 1rs;
+    }
+
+    a {
+      cursor: pointer;
+    }
+  }
 }

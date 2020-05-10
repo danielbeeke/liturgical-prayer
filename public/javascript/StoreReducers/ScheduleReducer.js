@@ -18,6 +18,7 @@ let initialCategories = Content['Categories'].map((category, index) => {
     isFreeForm: false,
     name: category.Title,
     icon: category.Icon,
+    shuffle: category.Shuffle,
     slug: Slugify(category.Title),
     description: category.Description,
   }
@@ -36,6 +37,9 @@ moments.forEach(moment => {
   initialState.moments.push({
     name: moment.Title,
     color: moment.Color,
+    from: moment.Starts,
+    till: moment.Ends,
+    colorBackground: moment['Background Color'],
     background: moment.Background,
     slug: Slugify(moment.Title),
     prayerCategories: initialCategories.filter(isEnabledFor(moment.Title)),
@@ -112,6 +116,11 @@ export function ScheduleReducer (state = initialState, action) {
 
     if (action.type === 'set-prayer-points-order') {
       freeCategory.items = action.payload.prayerPoints;
+    }
+
+    if (action.type === 'set-moment-time') {
+      moment.from = action.payload.from;
+      moment.till = action.payload.till;
     }
 
   });

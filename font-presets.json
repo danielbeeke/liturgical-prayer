@@ -5,8 +5,8 @@
       "font-family": "Inter var",
       "rows": 3,
       "font-weight": 300,
-      "font-size": "18px",
-      "base-line-percentage": 0.6
+      "font-size": "16px",
+      "base-line-percentage": 0.86
     },
     "header1": {
       "font-family": "Inter var",
@@ -18,16 +18,16 @@
     "header2": {
       "font-family": "Inter var",
       "rows": 2,
-      "font-weight": 570,
-      "font-size": "20px",
+      "font-weight": 470,
+      "font-size": "18px",
       "letter-spacing": "-0.5px",
       "base-line-percentage": 0.84
     },
     "header3": {
       "font-family": "Inter var",
-      "rows": 5,
-      "font-weight": 670,
-      "font-size": "26px",
+      "rows": 4,
+      "font-weight": 700,
+      "font-size": "20px",
       "base-line-percentage": 0.84
     },
     "title": {

@@ -10,4 +10,13 @@ prayer-moment-configure {
     margin-right: 10px;
     pointer-events: none;
   }
+
+  .create-category-title {
+    margin-top: 5rs;
+    margin-bottom: 0;
+  }
+
+  .create-category-title + p {
+    margin-top: 2rs;
+  }
 }

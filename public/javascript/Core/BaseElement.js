@@ -15,9 +15,19 @@ export class BaseElement extends HTMLElement {
     const elementDraw = this.draw;
     let that = this;
     this.root = document.querySelector('prayer-app');
+
     this.draw = function () {
       render(this, () => elementDraw.apply(this, arguments));
 
+      let page = document.querySelector('.page');
+
+      if (page) {
+        setTimeout(() => {
+          page.classList.remove('hidden');
+        });
+      }
+
+      this.afterDraw();
 
       /**
        * After the draw attach click handler for internal hrefs.
@@ -27,12 +37,32 @@ export class BaseElement extends HTMLElement {
       links.forEach(link => {
         if (typeof link.hasListener === 'undefined') {
           link.hasListener = true;
-          link.addEventListener('click', event => {
-            event.preventDefault();
-            that.root.router.navigate(link.getAttribute('href'));
-          });
 
           if (link.getAttribute('href') === location.pathname) link.classList.add('active');
+
+          link.addEventListener('click', event => {
+            event.preventDefault();
+
+            if (link.getAttribute('href') === location.pathname) return;
+
+            links.forEach(innerLink => {
+              let isCurrent = innerLink.getAttribute('href') === link.getAttribute('href');
+              innerLink.classList[isCurrent ? 'add' : 'remove']('active')
+            });
+
+            let page = document.querySelector('.page');
+
+            if (page) {
+              page.addEventListener('transitionend', () => {
+                that.root.router.navigate(link.getAttribute('href'));
+              }, {once: true});
+              page.classList.add('hidden');
+            }
+            else {
+              that.root.router.navigate(link.getAttribute('href'));
+            }
+          });
+
         }
       })
     };
@@ -81,5 +111,11 @@ export class BaseElement extends HTMLElement {
     if (this.interval) {
       clearInterval(this.interval)
     }
+  }
+
+  afterDraw () {}
+
+  tokenize (content) {
+    return this.root.tokenizer.replace(content);
   }
 }

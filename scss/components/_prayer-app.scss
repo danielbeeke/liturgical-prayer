@@ -7,9 +7,16 @@ prayer-app {
     overflow-y: auto;
     flex: 1 1 auto;
     padding: 4rs;
+    transition: all .2s var(--easing);
 
     > .end {
-      border-bottom: 10rs solid transparent;
+      border-bottom: 8rs solid transparent;
+    }
+
+    &.hidden {
+      opacity: 0;
+      transform: translateY(-5px);
+      pointer-events: none;
     }
   }
 

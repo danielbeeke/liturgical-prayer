@@ -1,4 +1,8 @@
 prayer-icon {
   display: inline-block;
   max-width: 40px;
+
+  svg {
+    width: 100%;
+  }
 }

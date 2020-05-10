@@ -1,0 +1,63 @@
+prayer-main-menu.page {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 1rs 4rs 1rs 4rs;
+    position: relative;
+    border-bottom: 1px dashed var(--color-primary);
+    margin-bottom: -1px;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--color-secondary);
+      z-index: -1;
+    }
+
+    prayer-icon {
+      position: absolute;
+      margin-right: 2rs;
+      width: 4rs;
+      top: 50%;
+      transform: translateY(-50%) translateY(2px);
+    }
+
+    .title {
+      font-preset: header2;
+      margin-left: 6rs;
+      padding-bottom: 1rs;
+    }
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 10rs;
+    }
+
+    &:hover {
+      color: white;
+      &:not(:last-child) {
+        border-bottom: 1px dashed var(--color-secondary);
+      }
+
+      &:after {
+        background: var(--color-primary);
+      }
+
+      prayer-icon {
+        * {
+          fill: white;
+        }
+      }
+    }
+  }
+}

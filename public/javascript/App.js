@@ -15,13 +15,15 @@ import './CustomElements/PrayerCategoryDetails.js';
 import './CustomElements/PrayerCreateFreeCategory.js';
 import './CustomElements/PrayerMenu.js';
 import './CustomElements/PrayerIcon.js';
-import './CustomElements/PrayerAbout.js';
+import './CustomElements/PrayerPage.js';
+import './CustomElements/PrayerMainMenu.js';
 
 import {toggleGrid} from './Actions/AppActions.js';
 
 import {I14n} from './Helpers/I14n.js';
 import {Router} from './Core/Router.js';
 import {Routes} from './Core/Routes.js'
+import {Tokenizer} from './Helpers/Tokenizer.js';
 
 customElements.define('prayer-app', class PrayerApp extends BaseElement {
 
@@ -31,6 +33,7 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
   async connectedCallback () {
     let a = Store.getState().app;
     this.t = await I14n(a.language);
+    this.tokenizer = new Tokenizer();
 
     this.router = new Router({
       routes: Routes,
@@ -72,3 +75,9 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
   }
 
 });
+
+window.oncontextmenu = function(event) {
+  event.preventDefault();
+  event.stopPropagation();
+  return false;
+};

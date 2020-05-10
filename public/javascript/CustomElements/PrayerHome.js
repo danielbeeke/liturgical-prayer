@@ -1,12 +1,13 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
 import {html} from '../vendor/uhtml.js';
+import {getCurrentActiveMoment} from '../Helpers/getCurrentActiveMoment.js';
 
 customElements.define('prayer-home', class PrayerHome extends BaseElement {
 
   draw () {
-    let s = Store.getState().schedule;
     let t = this.root.t;
+    let s = Store.getState().schedule;
 
     this.dataset.items = s.moments.filter(moment => moment.enabled).length.toString();
 
@@ -17,9 +18,12 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
     
     <div class="moments slider">
       ${s.moments.filter(moment => moment.enabled).map(moment => html`
-        <a class="moment card" href="${'/pray/' + moment.slug}">
-        <div class="image" style="${`background-image: url(${moment.background});`}"></div>
-            <span class="button">${t`Pray`}</span>
+        <a class="moment card" data-moment="${moment.slug}" href="${'/pray/' + moment.slug}" style="${`--color-primary: ${moment.color};  --color-secondary: ${moment.colorBackground}`}">
+          <div class="image" style="${`background-image: url(${moment.background});`}"></div>
+          <span class="button">
+            ${t`Pray`}
+            <prayer-icon name="arrow-right" />
+          </span>
           <span class="title">${t.direct(moment.name)}</span>
         </a>
       `)}
@@ -29,5 +33,12 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
     
     <div class="end"></div>
     `;
+  }
+
+  afterDraw() {
+    let s = Store.getState().schedule;
+    let activeMoment = getCurrentActiveMoment(s.moments);
+    let activeMomentCard = this.querySelector(`[data-moment="${activeMoment.slug}"]`);
+    activeMomentCard.scrollIntoView();
   }
 });

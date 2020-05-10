@@ -10,13 +10,16 @@
   --radius: 4px; }
 
 html {
-  height: 100vh; }
+  height: 100%; }
 
 body {
   padding: 0;
   margin: 0;
-  height: 100vh;
-  color: #444; }
+  height: 100%;
+  width: 100vw;
+  overflow: hidden;
+  color: #444;
+  overscroll-behavior-y: contain; }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0; }
@@ -37,12 +40,21 @@ iframe {
 *::-moz-focus-inner {
   border: none; }
 
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent; }
+  *::-webkit-scrollbar {
+    display: none; }
+
 a:link,
 a:visited {
   color: var(--color-tertiary); }
 
 p {
-  font-preset: paragraphs;padding-bottom: 6px;padding-top: 10px;line-height: 24px;font-size: 18px;font-weight: 300;font-family: Inter var; }
+  font-preset: paragraphs;padding-bottom: 2px;padding-top: 6px;line-height: 24px;font-size: 16px;font-weight: 300;font-family: Inter var; }
 
 #__bs_notify__ {
   display: none; }
@@ -63,6 +75,20 @@ p {
   font-named-instance: 'Italic';
   src: url("/fonts/Inter-italic.var.woff2?v=3.13") format("woff2"); }
 
+.back-button {
+  position: relative;
+  width: 40px;
+  margin-right: 36px; }
+  .back-button prayer-icon {
+    top: 1px;
+    position: absolute;
+    background: var(--color-secondary);
+    height: 24px;
+    width: 26px;
+    border-radius: 8px; }
+    .back-button prayer-icon path {
+      fill: var(--color-primary); }
+
 .button {
   border-radius: 10px;
   background: var(--color-primary);
@@ -78,70 +104,143 @@ p {
   border: 0; }
   .button prayer-icon {
     margin-top: 2px;
-    max-height: 5px; }
+    max-height: 5px;
+    margin-right: -7px; }
 
 .field {
-  margin-bottom: 16px; }
+  margin-bottom: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
   .field label {
     display: block;
     width: 100%;
     font-preset: menu;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var;
     margin-bottom: 8px; }
+  .field .description {
+    font-preset: menu;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    text-transform: none;
+    font-style: italic;
+    color: #6a6a6a; }
+  .field p {
+    margin-top: 0; }
+  .field input {
+    min-width: 40px;
+    font-preset: menu;padding-right: 8px;padding-left: 8px;padding-bottom: 11px;padding-top: 11px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    cursor: pointer;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    -webkit-transition: border var(--speed) var(--easing);
+    -o-transition: border var(--speed) var(--easing);
+    transition: border var(--speed) var(--easing);
+    border: 1px solid var(--color-secondary);
+    margin-bottom: -1px; }
+    .field input:focus {
+      border: 1px solid var(--color-primary); }
   .field .field-inner {
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex; }
-    .field .field-inner .button {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0; }
-
-.item-list {
-  margin-bottom: 32px; }
-  .item-list .item {
-    background: var(--color-secondary);
-    margin-bottom: 8px;
-    border-radius: 8px;
-    padding-left: 8px;
-    padding-right: 8px;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-transition: opacity var(--speed) var(--easing), -webkit-filter var(--speed) var(--easing);
-    transition: opacity var(--speed) var(--easing), -webkit-filter var(--speed) var(--easing);
-    -o-transition: opacity var(--speed) var(--easing), filter var(--speed) var(--easing);
-    transition: opacity var(--speed) var(--easing), filter var(--speed) var(--easing);
-    transition: opacity var(--speed) var(--easing), filter var(--speed) var(--easing), -webkit-filter var(--speed) var(--easing);
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center; }
-    .item-list .item .title {
-      font-preset: title;padding-bottom: 16px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
-      -webkit-transition: opacity var(--speed) var(--easing);
-      -o-transition: opacity var(--speed) var(--easing);
-      transition: opacity var(--speed) var(--easing); }
-    .item-list .item label {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap; }
+    .field .field-inner .button {
+      margin-left: 8px;
       -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
-      flex: 1 1 auto;
-      word-break: break-word;
-      margin-top: 8px;
-      margin-bottom: 8px; }
-    .item-list .item prayer-icon {
-      margin-top: 8px;
-      -webkit-transform: translateY(-2px);
-      -ms-transform: translateY(-2px);
-      transform: translateY(-2px);
-      -webkit-transition: opacity var(--speed) var(--easing);
-      -o-transition: opacity var(--speed) var(--easing);
-      transition: opacity var(--speed) var(--easing); }
-    .item-list .item *:last-child {
-      margin-left: auto; }
-    .item-list .item:not(.enabled) {
-      -webkit-filter: grayscale(1);
-      filter: grayscale(1); }
-      .item-list .item:not(.enabled) .title,
-      .item-list .item:not(.enabled) prayer-icon {
-        opacity: .4; }
+      flex: 1 1 auto; }
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-bottom: 32px; }
+  .row .field {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 calc(50% - 8px);
+    flex: 0 0 calc(50% - 8px);
+    margin-bottom: 0; }
+  .row .field + .field {
+    margin-left: 16px; }
+  .row > .description {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%; }
+
+.indicator {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: var(--color-secondary);
+  padding-left: 32px;
+  width: calc(100vw - 64px);
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  .indicator .indicator-item {
+    height: 4px;
+    margin-top: 4px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 24px;
+    flex: 0 0 24px;
+    margin-right: 8px;
+    background: var(--color-gray); }
+    .indicator .indicator-item.active {
+      background: var(--color-primary); }
+
+.item-list .item {
+  background: var(--color-secondary);
+  margin-bottom: 8px;
+  border-radius: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: opacity var(--speed) var(--easing), -webkit-filter var(--speed) var(--easing);
+  transition: opacity var(--speed) var(--easing), -webkit-filter var(--speed) var(--easing);
+  -o-transition: opacity var(--speed) var(--easing), filter var(--speed) var(--easing);
+  transition: opacity var(--speed) var(--easing), filter var(--speed) var(--easing);
+  transition: opacity var(--speed) var(--easing), filter var(--speed) var(--easing), -webkit-filter var(--speed) var(--easing);
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  .item-list .item .title {
+    font-preset: title;padding-bottom: 16px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    -webkit-transition: opacity var(--speed) var(--easing);
+    -o-transition: opacity var(--speed) var(--easing);
+    transition: opacity var(--speed) var(--easing); }
+  .item-list .item label {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    word-break: break-word;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 16px; }
+  .item-list .item prayer-icon {
+    margin-top: 8px;
+    -webkit-transform: translateY(-2px);
+    -ms-transform: translateY(-2px);
+    transform: translateY(-2px);
+    -webkit-transition: opacity var(--speed) var(--easing);
+    -o-transition: opacity var(--speed) var(--easing);
+    transition: opacity var(--speed) var(--easing); }
+  .item-list .item *:last-child {
+    margin-left: auto; }
+  .item-list .item:not(.enabled) {
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1); }
+    .item-list .item:not(.enabled) .title,
+    .item-list .item:not(.enabled) prayer-icon {
+      opacity: .4; }
 
 .moment.card {
   height: 100%;
@@ -171,7 +270,7 @@ p {
     left: 16px; }
 
 .page-title {
-  font-preset: header3;padding-bottom: 5px;padding-top: 11px;line-height: 40px;font-size: 26px;font-weight: 670;font-family: Inter var;
+  font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
   margin-bottom: 24px; }
 
 prayer-app {
@@ -188,9 +287,18 @@ prayer-app {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
-    padding: 32px; }
+    padding: 32px;
+    -webkit-transition: all 0.2s var(--easing);
+    -o-transition: all 0.2s var(--easing);
+    transition: all 0.2s var(--easing); }
     prayer-app > .page > .end {
-      border-bottom: 80px solid transparent; }
+      border-bottom: 64px solid transparent; }
+    prayer-app > .page.hidden {
+      opacity: 0;
+      -webkit-transform: translateY(-5px);
+      -ms-transform: translateY(-5px);
+      transform: translateY(-5px);
+      pointer-events: none; }
   prayer-app:before {background-image:  url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjgwIiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgODAgMzIiPjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSIxIiB4PSIwIiB5PSIwIiBmaWxsPSJibGFjayIvPjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSIxIiB4PSI0MCIgeT0iMCIgZmlsbD0icmVkIi8+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEiIHg9IjAiIHk9IjgiIGZpbGw9ImdyZWVuIi8+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEiIHg9IjQwIiB5PSI4IiBmaWxsPSJibHVlIi8+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEiIHg9IjAiIHk9IjE2IiBmaWxsPSJncmVlbiIvPjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSIxIiB4PSI0MCIgeT0iMTYiIGZpbGw9ImJsdWUiLz48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iMSIgeD0iMCIgeT0iMjQiIGZpbGw9ImdyZWVuIi8+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEiIHg9IjQwIiB5PSIyNCIgZmlsbD0iYmx1ZSIvPjwvc3ZnPg==");
     opacity: 0;
     z-index: 100;
@@ -211,10 +319,19 @@ prayer-app {
   prayer-app[data-grid-enabled="true"]:before {
     opacity: 1; }
 
+prayer-category-details .prayer-point prayer-icon[name="handle"] {
+  pointer-events: none; }
+
+prayer-category-details .prayer-point label {
+  margin-left: 8px; }
+
+prayer-category-details .prayer-point a {
+  cursor: pointer; }
+
 prayer-create-free-category {
   padding: 32px; }
   prayer-create-free-category h2 {
-    font-preset: header3;padding-bottom: 5px;padding-top: 11px;line-height: 40px;font-size: 26px;font-weight: 670;font-family: Inter var;
+    font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
     margin-bottom: 24px; }
 
 prayer-home {
@@ -227,16 +344,16 @@ prayer-home {
   flex-direction: column;
   padding: 32px 32px 0 32px; }
   prayer-home > .prefix {
-    font-preset: header2;padding-bottom: 7px;padding-top: 9px;line-height: 16px;letter-spacing: -0.5px;font-size: 20px;font-weight: 570;font-family: Inter var;
+    font-preset: header2;padding-bottom: 6px;padding-top: 10px;line-height: 16px;letter-spacing: -0.5px;font-size: 18px;font-weight: 470;font-family: Inter var;
     display: block;
     margin-bottom: 8px; }
   prayer-home > .title {
-    font-preset: header3;padding-bottom: 5px;padding-top: 11px;line-height: 40px;font-size: 26px;font-weight: 670;font-family: Inter var;
+    font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
     margin-bottom: 40px; }
   prayer-home .slider {
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 calc(100vh - 400px);
-    flex: 0 0 calc(100vh - 400px);
+    -ms-flex: 0 0 calc(100vh - 336px);
+    flex: 0 0 calc(100vh - 336px);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -244,16 +361,86 @@ prayer-home {
     flex-wrap: nowrap;
     overflow-x: auto;
     margin: 0 -32px;
-    scrollbar-width: none; }
+    padding-top: 16px;
+    padding-bottom: 16px;
+    scrollbar-width: none;
+    min-height: 200px;
+    -ms-scroll-snap-type: mandatory;
+    scroll-snap-type: mandatory;
+    -ms-scroll-snap-points-x: repeat(60vw);
+    scroll-snap-points-x: repeat(60vw);
+    -ms-scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 32px; }
     prayer-home .slider .end {
       margin-left: 32px;
       -webkit-box-flex: 0;
       -ms-flex: 0 0 1px;
       flex: 0 0 1px; }
+  prayer-home .moment.card {
+    scroll-snap-align: start;
+    -webkit-box-shadow: 0 2px 9px -2px rgba(8, 27, 9, 0.32);
+    box-shadow: 0 2px 9px -2px rgba(8, 27, 9, 0.32); }
 
 prayer-icon {
   display: inline-block;
   max-width: 40px; }
+  prayer-icon svg {
+    width: 100%; }
+
+prayer-main-menu.page {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  prayer-main-menu.page .menu-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-decoration: none;
+    padding: 8px 32px 8px 32px;
+    position: relative;
+    border-bottom: 1px dashed var(--color-primary);
+    margin-bottom: -1px; }
+    prayer-main-menu.page .menu-item:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--color-secondary);
+      z-index: -1; }
+    prayer-main-menu.page .menu-item prayer-icon {
+      position: absolute;
+      margin-right: 16px;
+      width: 32px;
+      top: 50%;
+      -webkit-transform: translateY(-50%) translateY(2px);
+      -ms-transform: translateY(-50%) translateY(2px);
+      transform: translateY(-50%) translateY(2px); }
+    prayer-main-menu.page .menu-item .title {
+      font-preset: header2;padding-bottom: 14px;padding-top: 10px;line-height: 16px;letter-spacing: -0.5px;font-size: 18px;font-weight: 470;font-family: Inter var;
+      margin-left: 48px; }
+    prayer-main-menu.page .menu-item:last-child {
+      border-bottom: none;
+      margin-bottom: 80px; }
+    prayer-main-menu.page .menu-item:hover {
+      color: white; }
+      prayer-main-menu.page .menu-item:hover:not(:last-child) {
+        border-bottom: 1px dashed var(--color-secondary); }
+      prayer-main-menu.page .menu-item:hover:after {
+        background: var(--color-primary); }
+      prayer-main-menu.page .menu-item:hover prayer-icon * {
+        fill: white; }
 
 prayer-menu {
   display: -webkit-box;
@@ -301,6 +488,9 @@ prayer-menu {
       -o-transition: all var(--speed) var(--easing);
       transition: all var(--speed) var(--easing); }
     prayer-menu .menu-item prayer-icon {
+      width: 36px;
+      height: 40px;
+      display: block;
       opacity: .7;
       -webkit-transition: all var(--speed) var(--easing);
       -o-transition: all var(--speed) var(--easing);
@@ -320,31 +510,112 @@ prayer-menu {
 prayer-moment-configure {
   padding: 32px; }
   prayer-moment-configure h2 {
-    font-preset: header3;padding-bottom: 5px;padding-top: 11px;line-height: 40px;font-size: 26px;font-weight: 670;font-family: Inter var;
+    font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
     margin-bottom: 24px; }
   prayer-moment-configure prayer-icon[name="handle"] {
     margin-right: 10px;
     pointer-events: none; }
+  prayer-moment-configure .create-category-title {
+    margin-top: 40px;
+    margin-bottom: 0; }
+  prayer-moment-configure .create-category-title + p {
+    margin-top: 16px; }
+
+prayer-pray.page {
+  padding: 0;
+  height: 100vh;
+  overflow: hidden; }
+
+prayer-pray .pre-header {
+  background: var(--color-secondary); }
+
+prayer-pray .close-prayers {
+  position: fixed;
+  top: 40px;
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+  right: 32px;
+  z-index: 4; }
+
+prayer-pray .moment {
+  display: block;
+  color: var(--color-primary);
+  font-preset: button;padding-right: 32px;padding-left: 32px;padding-bottom: 9px;padding-top: 15px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var; }
 
 prayer-pray .prayer {
-  margin-bottom: 48px; }
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100vw;
+  flex: 0 0 100vw;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  scroll-snap-align: start;
+  margin-bottom: 48px;
+  scrollbar-width: none; }
+  prayer-pray .prayer .header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background: var(--color-secondary);
+    padding: 0 32px 16px; }
+  prayer-pray .prayer .inner {
+    padding: 0 32px; }
+  prayer-pray .prayer prayer-icon {
+    -webkit-transform: translateY(3px);
+    -ms-transform: translateY(3px);
+    transform: translateY(3px);
+    width: 20px;
+    margin-right: 4px;
+    margin-bottom: -8px; }
+    prayer-pray .prayer prayer-icon * {
+      fill: var(--color-primary); }
   prayer-pray .prayer .category {
-    opacity: .5;
-    font-preset: button;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var; }
+    color: var(--color-primary);
+    font-preset: button;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var;
+    margin-right: 16px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex; }
   prayer-pray .prayer .title {
-    font-preset: header3;padding-bottom: 5px;padding-top: 11px;line-height: 40px;font-size: 26px;font-weight: 670;font-family: Inter var; }
+    clear: both;
+    font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var; }
   prayer-pray .prayer .author {
     display: block;
-    width: 100%;
-    font-preset: author;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var; }
+    font-preset: author;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    color: var(--color-primary); }
+    prayer-pray .prayer .author prayer-icon {
+      -webkit-transform: translateY(5px);
+      -ms-transform: translateY(5px);
+      transform: translateY(5px); }
   prayer-pray .prayer .amen {
     display: block;
-    font-preset: author;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var; }
+    font-preset: author;padding-bottom: 28px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var; }
+  prayer-pray .prayer .meta {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+
+prayer-pray .slider {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-scroll-snap-type: mandatory;
+  scroll-snap-type: mandatory;
+  -ms-scroll-snap-points-x: repeat(100vw);
+  scroll-snap-points-x: repeat(100vw);
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory; }
 
 prayer-settings {
   padding: 32px; }
   prayer-settings h2 {
-    font-preset: header3;padding-bottom: 5px;padding-top: 11px;line-height: 40px;font-size: 26px;font-weight: 670;font-family: Inter var;
+    font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
     margin-bottom: 24px; }
 
 select {
@@ -355,7 +626,7 @@ select {
   background: var(--color-secondary);
   font-preset: select;padding-bottom: 8px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: 1px;font-size: 12px;font-weight: 670;font-family: Inter var;
   padding-left: 8px;
-  padding-right: 8px;
+  padding-right: 24px;
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat, repeat;
   background-position: right 16px top 50%;
@@ -363,7 +634,9 @@ select {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  cursor: pointer; }
+  cursor: pointer;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis; }
   select:-moz-focusring {
     color: rgba(0, 0, 0, 0);
     text-shadow: 0 0 0 var(--color-black); }
@@ -426,3 +699,514 @@ input[type="checkbox"]:checked + label:after {
   -ms-transform: translate(20px, -50%);
   transform: translate(20px, -50%);
   background: var(--color-primary); }
+
+.scripture-styles {
+  /* HTML5 display-role reset for older browsers */
+  color: #111111;
+  -webkit-font-smoothing: antialiased; }
+  .scripture-styles html,
+  .scripture-styles body,
+  .scripture-styles div,
+  .scripture-styles span,
+  .scripture-styles applet,
+  .scripture-styles object,
+  .scripture-styles iframe,
+  .scripture-styles h1,
+  .scripture-styles h2,
+  .scripture-styles h3,
+  .scripture-styles h4,
+  .scripture-styles h5,
+  .scripture-styles h6,
+  .scripture-styles p,
+  .scripture-styles blockquote,
+  .scripture-styles pre,
+  .scripture-styles a,
+  .scripture-styles abbr,
+  .scripture-styles acronym,
+  .scripture-styles address,
+  .scripture-styles big,
+  .scripture-styles cite,
+  .scripture-styles code,
+  .scripture-styles del,
+  .scripture-styles dfn,
+  .scripture-styles em,
+  .scripture-styles img,
+  .scripture-styles ins,
+  .scripture-styles kbd,
+  .scripture-styles q,
+  .scripture-styles s,
+  .scripture-styles samp,
+  .scripture-styles small,
+  .scripture-styles strike,
+  .scripture-styles strong,
+  .scripture-styles sub,
+  .scripture-styles sup,
+  .scripture-styles tt,
+  .scripture-styles var,
+  .scripture-styles b,
+  .scripture-styles u,
+  .scripture-styles i,
+  .scripture-styles center,
+  .scripture-styles dl,
+  .scripture-styles dt,
+  .scripture-styles dd,
+  .scripture-styles ol,
+  .scripture-styles ul,
+  .scripture-styles li,
+  .scripture-styles fieldset,
+  .scripture-styles form,
+  .scripture-styles label,
+  .scripture-styles legend,
+  .scripture-styles table,
+  .scripture-styles caption,
+  .scripture-styles tbody,
+  .scripture-styles tfoot,
+  .scripture-styles thead,
+  .scripture-styles tr,
+  .scripture-styles th,
+  .scripture-styles td,
+  .scripture-styles article,
+  .scripture-styles aside,
+  .scripture-styles canvas,
+  .scripture-styles details,
+  .scripture-styles embed,
+  .scripture-styles figure,
+  .scripture-styles figcaption,
+  .scripture-styles footer,
+  .scripture-styles header,
+  .scripture-styles hgroup,
+  .scripture-styles menu,
+  .scripture-styles nav,
+  .scripture-styles output,
+  .scripture-styles ruby,
+  .scripture-styles section,
+  .scripture-styles summary,
+  .scripture-styles time,
+  .scripture-styles mark,
+  .scripture-styles audio,
+  .scripture-styles video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: inherit;
+    vertical-align: baseline; }
+  .scripture-styles article,
+  .scripture-styles aside,
+  .scripture-styles details,
+  .scripture-styles figcaption,
+  .scripture-styles figure,
+  .scripture-styles footer,
+  .scripture-styles header,
+  .scripture-styles hgroup,
+  .scripture-styles menu,
+  .scripture-styles nav,
+  .scripture-styles section {
+    display: block; }
+  .scripture-styles ol,
+  .scripture-styles ul {
+    list-style: none; }
+  .scripture-styles blockquote,
+  .scripture-styles q {
+    quotes: none; }
+  .scripture-styles blockquote:before,
+  .scripture-styles blockquote:after,
+  .scripture-styles q:before,
+  .scripture-styles q:after {
+    content: "";
+    content: none; }
+  .scripture-styles table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+
+.scripture-styles .c {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.3em; }
+
+.scripture-styles .ca {
+  font-style: italic;
+  font-weight: normal;
+  color: #777777; }
+  .scripture-styles .ca:before {
+    content: "("; }
+  .scripture-styles .ca:after {
+    content: ")" !important; }
+
+.scripture-styles .cl {
+  text-align: center;
+  font-weight: bold; }
+
+.scripture-styles .cd {
+  font-style: italic; }
+
+.scripture-styles .v,
+.scripture-styles .vp,
+.scripture-styles sup[class^="v"] {
+  color: black;
+  font-size: 0.7em;
+  letter-spacing: -0.03em;
+  vertical-align: 0.25em;
+  line-height: 0;
+  font-family: sans-serif;
+  font-weight: bold;
+  top: inherit; }
+  .scripture-styles .v:after,
+  .scripture-styles .vp:after,
+  .scripture-styles sup[class^="v"]:after {
+    content: "\a0"; }
+
+.scripture-styles sup + sup:before {
+  content: "\a0"; }
+
+.scripture-styles .va {
+  font-style: italic; }
+  .scripture-styles .va:before {
+    content: "("; }
+  .scripture-styles .va:after {
+    content: ")" !important; }
+
+.scripture-styles .x {
+  font-size: 16px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  padding: 0 0.4em;
+  margin: 0 0.1em;
+  text-indent: 0;
+  text-align: left;
+  border-radius: 4px;
+  border: 1px solid #dcdcdc; }
+
+.scripture-styles .xo {
+  font-weight: bold; }
+
+.scripture-styles .xk {
+  font-style: italic; }
+
+.scripture-styles .xq {
+  font-style: italic; }
+
+.scripture-styles .notelink {
+  text-decoration: underline;
+  padding: 0.1em; }
+  .scripture-styles .notelink, .scripture-styles .notelink:hover, .scripture-styles .notelink:active, .scripture-styles .notelink:visited {
+    color: #6a6a6a; }
+  .scripture-styles .notelink sup {
+    font-size: 0.7em;
+    letter-spacing: -0.03em;
+    vertical-align: 0.25em;
+    line-height: 0;
+    font-family: sans-serif;
+    font-weight: bold; }
+  .scripture-styles .notelink + sup:before {
+    content: "\a0"; }
+
+.scripture-styles .f {
+  font-size: 16px;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 0.4em;
+  margin: 0 0.1em;
+  text-indent: 0;
+  text-align: left;
+  border-radius: 4px;
+  border: 1px solid #dcdcdc; }
+
+.scripture-styles .fr {
+  font-weight: bold; }
+
+.scripture-styles .fk {
+  font-style: italic;
+  font-variant: small-caps; }
+
+.scripture-styles [class^="fq"] {
+  font-style: italic; }
+
+.scripture-styles .fl {
+  font-style: italic;
+  font-weight: bold; }
+
+.scripture-styles .fv {
+  color: #515151;
+  font-size: 0.75em;
+  letter-spacing: -0.03em;
+  vertical-align: 0.25em;
+  line-height: 0;
+  font-family: sans-serif;
+  font-weight: bold; }
+  .scripture-styles .fv:after {
+    content: "\a0"; }
+
+.scripture-styles .h {
+  text-align: center;
+  font-style: italic; }
+
+.scripture-styles [class^="imt"],
+.scripture-styles [class^="is"] {
+  text-align: center;
+  font-weight: bold;
+  font-size: 27px;
+  line-height: 0;
+  margin-top: 0;
+  margin-bottom: 0; }
+
+.scripture-styles [class^="ip"] {
+  text-indent: 1em; }
+
+.scripture-styles .ipi {
+  padding-left: 1em;
+  padding-right: 1em; }
+
+.scripture-styles .im {
+  text-indent: 0; }
+
+.scripture-styles .imi {
+  text-indent: 0; }
+
+.scripture-styles .ipq {
+  font-style: italic; }
+
+.scripture-styles .ipr {
+  text-align: right;
+  text-indent: 0; }
+
+.scripture-styles .iq2 {
+  text-indent: 1em; }
+
+.scripture-styles [class^="ili"] {
+  padding-left: 1em;
+  text-indent: -1em; }
+
+.scripture-styles .iot {
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 0;
+  margin-top: 0;
+  margin-bottom: 0px; }
+
+.scripture-styles .ior {
+  font-style: italic; }
+
+.scripture-styles .iex {
+  text-indent: 1em; }
+
+.scripture-styles .iqt {
+  text-indent: 1em;
+  font-style: italic; }
+
+.scripture-styles [class^="p"] {
+  text-indent: 1em; }
+
+.scripture-styles .m {
+  text-indent: 0 !important; }
+
+.scripture-styles .pmo {
+  text-indent: 0; }
+
+.scripture-styles .pmr {
+  text-align: right; }
+
+.scripture-styles .mi {
+  text-indent: 0; }
+
+.scripture-styles .pc {
+  text-align: center;
+  text-indent: 0; }
+
+.scripture-styles .cls {
+  text-align: right; }
+
+.scripture-styles [class^="li"] {
+  padding-left: 1em;
+  text-indent: -1em; }
+
+.scripture-styles .b {
+  height: 0; }
+
+.scripture-styles [class^="q"] {
+  padding-left: 1em;
+  text-indent: -1em; }
+
+.scripture-styles .qr {
+  text-align: right;
+  font-style: italic; }
+
+.scripture-styles .qc {
+  text-align: center; }
+
+.scripture-styles .qs {
+  font-style: italic;
+  text-align: right; }
+
+.scripture-styles .qa {
+  text-align: center;
+  font-style: italic;
+  font-size: 1.1em; }
+
+.scripture-styles .qac {
+  padding: 0;
+  text-indent: 0;
+  font-style: italic; }
+
+.scripture-styles .qt {
+  font-style: italic;
+  text-indent: 0;
+  padding: 0;
+  margin: 0; }
+
+.scripture-styles .bk {
+  font-style: italic; }
+
+.scripture-styles .nd {
+  font-variant: small-caps; }
+
+.scripture-styles .add {
+  font-style: italic; }
+
+.scripture-styles .dc {
+  font-style: italic; }
+
+.scripture-styles .k {
+  font-weight: bold;
+  font-style: italic; }
+
+.scripture-styles .lit {
+  text-align: right;
+  font-weight: bold; }
+
+.scripture-styles .pn {
+  font-weight: bold;
+  text-decoration: underline; }
+
+.scripture-styles .sls {
+  font-style: italic; }
+
+.scripture-styles .tl {
+  font-style: italic; }
+
+.scripture-styles .wj {
+  color: #cc0000; }
+
+.scripture-styles .em {
+  font-style: italic; }
+
+.scripture-styles .bd {
+  font-weight: bold; }
+
+.scripture-styles .it {
+  font-style: italic; }
+
+.scripture-styles .bdit {
+  font-weight: bold;
+  font-style: italic; }
+
+.scripture-styles .no {
+  font-weight: normal;
+  font-style: normal; }
+
+.scripture-styles .sc {
+  font-variant: small-caps; }
+
+.scripture-styles .qt {
+  font-style: italic; }
+
+.scripture-styles .sig {
+  font-weight: normal;
+  font-style: italic; }
+
+.scripture-styles table {
+  width: 100%;
+  display: table; }
+
+.scripture-styles .tr {
+  display: table-row; }
+
+.scripture-styles [class^="th"] {
+  font-style: italic;
+  display: table-cell; }
+
+.scripture-styles [class^="thr"] {
+  text-align: right;
+  padding: 0 0; }
+
+.scripture-styles [class^="tc"] {
+  display: table-cell; }
+
+.scripture-styles [class^="tcr"] {
+  text-align: right;
+  padding: 0 0; }
+
+.scripture-styles [class^="mt"] {
+  font-weight: bold;
+  letter-spacing: normal; }
+
+.scripture-styles .mt,
+.scripture-styles .mt1,
+.scripture-styles .mt2 {
+  font-size: 40px;
+  line-height: 0;
+  margin-top: 0;
+  margin-bottom: 0; }
+
+.scripture-styles .mt2 {
+  font-size: 34px;
+  margin-top: 0;
+  font-style: italic;
+  font-weight: normal; }
+
+.scripture-styles [class^="ms"],
+.scripture-styles .ms,
+.scripture-styles .ms1,
+.scripture-styles .ms2,
+.scripture-styles .ms3 {
+  font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var; }
+
+.scripture-styles .mr {
+  font-size: 0.9em;
+  margin-bottom: 0;
+  font-weight: normal;
+  font-style: italic; }
+
+.scripture-styles .s,
+.scripture-styles .s1,
+.scripture-styles .s2,
+.scripture-styles .s3,
+.scripture-styles .s4 {
+  font-weight: bold;
+  font-size: 27px;
+  line-height: 0;
+  margin-bottom: 0;
+  margin-top: 0px; }
+
+.scripture-styles .sr {
+  font-weight: normal;
+  font-style: italic;
+  font-size: inherit;
+  letter-spacing: normal; }
+
+.scripture-styles .r {
+  font-size: 18px;
+  font-weight: normal;
+  font-style: italic;
+  letter-spacing: normal; }
+
+.scripture-styles .rq {
+  font-size: inherit;
+  line-height: 0;
+  font-style: italic;
+  text-align: right;
+  letter-spacing: normal; }
+
+.scripture-styles .d {
+  font-style: italic;
+  font-size: inherit;
+  letter-spacing: normal; }
+
+.scripture-styles .sp {
+  text-align: left;
+  font-weight: normal;
+  font-style: italic;
+  font-size: inherit;
+  letter-spacing: normal; }

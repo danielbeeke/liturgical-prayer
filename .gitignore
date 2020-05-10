@@ -5,3 +5,4 @@ certs
 dist
 public/Settings.js
 public/Settings.mjs
+settings.json

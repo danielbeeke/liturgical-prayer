@@ -54,17 +54,26 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
     }
 
     return html`
-      <h2 class="page-title">${this.category.name}</h2>
+      <h2 class="page-title">
+        <a class="back-button" href="${'/settings/' + this.moment.slug}"><prayer-icon name="arrow-left" /></a>
+        ${this.category.name}
+      </h2>
       <p>${this.category.description}</p>
 
       ${this.category.isFreeForm ? html`
-        <div class="prayer-items sortable item-list">
-        ${this.freeCategory.items.map((item, index) => html`
-          <div class="item" data-name="${item}" data-order="${index}">
-              <span>${item}</span>
-              <button onclick="${() => {deletePrayerPoint(this.moment.slug, this.category.slug, item); this.draw()}}" class="button small">${t.direct('Delete')}</button>
+        <div class="field">
+          <label>${t`Your prayer points`}</label>
+          <div class="prayer-items sortable item-list">
+          ${this.freeCategory.items.map((item, index) => html`
+            <div class="item prayer-point" data-name="${item}" data-order="${index}">
+              <prayer-icon name="handle" />
+              <label>
+                <span class="title">${item}</span>
+              </label>
+              <a onclick="${() => {deletePrayerPoint(this.moment.slug, this.category.slug, item); this.draw()}}"><prayer-icon name="cross" /></a>
+            </div>
+          `)}
           </div>
-        `)}
         </div>
         
         <div class="field">
@@ -75,7 +84,10 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
           </div>
         </div>      
         
-        <button class="button" onclick="${() => {deleteFreeCategory(this.moment.slug, this.category.slug); this.root.router.navigate(`/settings/${this.moment.slug}`)}}">${t.direct('Delete category')}</button>
+        <button class="button" onclick="${() => {deleteFreeCategory(this.moment.slug, this.category.slug); this.root.router.navigate(`/settings/${this.moment.slug}`)}}">
+            ${t.direct('Delete category')}
+            <prayer-icon name="cross" />
+        </button>
       ` : html``}
     `;
   }

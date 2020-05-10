@@ -1,5 +1,7 @@
 .field {
-  margin-bottom: 2rs;
+  margin-bottom: 4rs;
+  display: flex;
+  flex-direction: column;
 
   label {
     display: block;
@@ -8,12 +10,58 @@
     margin-bottom: 1rs;
   }
 
+  .description {
+    font-preset: menu;
+    text-transform: none;
+    font-style: italic;
+    color: #6a6a6a;
+  }
+
+  p {
+    margin-top: 0;
+  }
+
+  input {
+    min-width: 40px;
+    font-preset: menu;
+    cursor: pointer;
+    flex: 1 1 auto;
+    transition: border var(--speed) var(--easing);
+    border: 1px solid var(--color-secondary);
+    padding: 1rs;
+    margin-bottom: -1px;
+
+    &:focus {
+      border: 1px solid var(--color-primary);
+    }
+  }
+
   .field-inner {
     display: flex;
+    flex-wrap: nowrap;
 
     .button {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+      margin-left: 1rs;
+      flex: 1 1 auto;
     }
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 4rs;
+
+  .field {
+    flex: 0 0 calc(50% - #{1rs});
+    margin-bottom: 0;
+  }
+
+  .field + .field {
+    margin-left: 2rs;
+  }
+
+  > .description {
+    flex: 0 0 100%;
   }
 }

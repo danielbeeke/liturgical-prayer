@@ -1,0 +1,18 @@
+.back-button {
+  position: relative;
+  width: 5rs;
+  margin-right: 4.5rs;
+
+  prayer-icon {
+    top: 1px;
+    position: absolute;
+    background: var(--color-secondary);
+    height: 3rs;
+    width: 26px;
+    border-radius: 8px;
+
+    path {
+      fill: var(--color-primary);
+    }
+  }
+}

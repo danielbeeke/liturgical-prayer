@@ -1,6 +1,4 @@
 .item-list {
-  margin-bottom: 4rs;
-
   .item {
     background: var(--color-secondary);
     margin-bottom: 1rs;
@@ -22,6 +20,7 @@
       word-break: break-word;
       margin-top: 1rs;
       margin-bottom: 1rs;
+      margin-right: 2rs;
     }
 
     prayer-icon {

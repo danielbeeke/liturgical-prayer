@@ -1,0 +1,5 @@
+.scripture-styles {
+  @include style-reset; // Clear out all the inherited styles and get back to a clean slate
+  color: $base-font-color;
+  -webkit-font-smoothing: antialiased;
+}

@@ -7,17 +7,19 @@ customElements.define('prayer-menu', class PrayerMenu extends BaseElement {
     let t = this.root.t;
 
     return html`
-      <a class="menu-item" href="/about">
-        <prayer-icon name="info_big" />
-        <span class="title">${t.direct('About')}</span>
+      <a class="${'menu-item' + (location.pathname === '/settings' ? ' active' : '')}" href="/settings">
+        <prayer-icon name="settings" />
+        <span class="title">${t.direct('Settings')}</span>
       </a>
-      <a class="menu-item" href="/pray">
+
+      <a class="${'menu-item' + (location.pathname === '/pray' ? ' active' : '')}" href="/pray">
         <prayer-icon name="compass" />
         <span class="title">${t.direct('Home')}</span>
       </a>
-      <a class="menu-item" href="/settings">
-        <prayer-icon name="settings" />
-        <span class="title">${t.direct('Settings')}</span>
+
+      <a class="${'menu-item' + (location.pathname === '/menu' ? ' active' : '')}" href="/menu">
+        <prayer-icon name="dots" />
+        <span class="title">${t.direct('Menu')}</span>
       </a>
 
     `;

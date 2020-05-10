@@ -37,6 +37,9 @@ prayer-menu {
     }
 
     prayer-icon {
+      width: 36px;
+      height: 40px;
+      display: block;
       opacity: .7;
       transition: all var(--speed) var(--easing);
     }
