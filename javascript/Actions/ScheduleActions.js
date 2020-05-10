@@ -72,6 +72,18 @@ export const addPrayerPoint = (momentSlug, categorySlug, prayerPoint, descriptio
   })
 };
 
+export const updatePrayerPoint = (categorySlug, prayerPointSlug, title, description) => {
+  Store.dispatch({
+    type: 'update-prayer-point',
+    payload: {
+      categorySlug: categorySlug,
+      prayerPointSlug: prayerPointSlug,
+      title: title,
+      description: description
+    }
+  })
+};
+
 export const deletePrayerPoint = (momentSlug, categorySlug, prayerPointSlug) => {
   Store.dispatch({
     type: 'delete-prayer-point',
