@@ -93,12 +93,12 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     </select>
     </div>
     
-    <div class="field">
+
     ${this.selected === '_other_' ? html`
-      <label>${t.direct('Title')}</label>
-      <input type="text" onkeyup="${event => {this.otherText = event.target.value; this.validate()}}">
+      <div class="field">      <label>${t.direct('Title')}</label>
+        <input type="text" onkeyup="${event => {this.otherText = event.target.value; this.validate()}}">
+      </div>
     ` : html``}
-    </div>
     
     ${this.categoryExists ? html`
     <span>${t`The category already exists`}</span>

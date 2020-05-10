@@ -107,11 +107,17 @@ export function ScheduleReducer (state = initialState, action) {
     }
 
     if (action.type === 'add-prayer-point') {
-      freeCategory.items.push(action.payload.prayerPoint);
+      freeCategory.items.push({
+        slug: Slugify(action.payload.prayerPoint),
+        title: action.payload.prayerPoint,
+        description: action.payload.description
+      });
     }
 
     if (action.type === 'delete-prayer-point') {
-      freeCategory.items = freeCategory.items.filter(item => item !== action.payload.prayerPoint);
+      let item = freeCategory.items.find(item => item.slug === action.payload.prayerPointSlug);
+      let ItemIndex = freeCategory.items.indexOf(item);
+      freeCategory.items.splice(ItemIndex, 1);
     }
 
     if (action.type === 'set-prayer-points-order') {

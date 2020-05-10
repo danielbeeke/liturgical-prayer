@@ -60,24 +60,25 @@ export const deleteFreeCategory = (momentSlug, categorySlug) => {
   })
 };
 
-export const addPrayerPoint = (momentSlug, categorySlug, prayerPoint) => {
+export const addPrayerPoint = (momentSlug, categorySlug, prayerPoint, description) => {
   Store.dispatch({
     type: 'add-prayer-point',
     payload: {
       momentSlug: momentSlug,
       categorySlug: categorySlug,
-      prayerPoint: prayerPoint
+      prayerPoint: prayerPoint,
+      description: description
     }
   })
 };
 
-export const deletePrayerPoint = (momentSlug, categorySlug, prayerPoint) => {
+export const deletePrayerPoint = (momentSlug, categorySlug, prayerPointSlug) => {
   Store.dispatch({
     type: 'delete-prayer-point',
     payload: {
       momentSlug: momentSlug,
       categorySlug: categorySlug,
-      prayerPoint: prayerPoint
+      prayerPointSlug: prayerPointSlug
     }
   })
 };

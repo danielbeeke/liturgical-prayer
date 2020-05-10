@@ -9,6 +9,7 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
   constructor() {
     super();
     this.addText = '';
+    this.addDescription = '';
   }
 
   connectedCallback() {
@@ -37,8 +38,9 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
   }
 
   addPrayerPoint () {
-    addPrayerPoint(this.moment.slug, this.category.slug, this.addText);
+    addPrayerPoint(this.moment.slug, this.category.slug, this.addText, this.addDescription);
     this.addText = null;
+    this.addDescription = null;
   }
 
   draw () {
@@ -60,34 +62,49 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
       </h2>
       <p>${this.category.description}</p>
 
-      ${this.category.isFreeForm ? html`
+      ${this.category.isFreeForm && this.freeCategory.items.length ? html`
         <div class="field">
           <label>${t`Your prayer points`}</label>
           <div class="prayer-items sortable item-list">
           ${this.freeCategory.items.map((item, index) => html`
-            <div class="item prayer-point" data-name="${item}" data-order="${index}">
+            <div class="item prayer-point enabled" data-name="${item}" data-order="${index}">
               <prayer-icon name="handle" />
               <label>
-                <span class="title">${item}</span>
+                <span class="title">${item.title}</span>
+                ${item.description ? html`<em class="description">${item.description}</em>` : html``}
               </label>
-              <a onclick="${() => {deletePrayerPoint(this.moment.slug, this.category.slug, item); this.draw()}}"><prayer-icon name="cross" /></a>
+              <a onclick="${() => {deletePrayerPoint(this.moment.slug, this.category.slug, item.slug); this.draw()}}"><prayer-icon name="cross" /></a>
             </div>
           `)}
           </div>
         </div>
-        
+      ` : html``}
+      ${this.category.isFreeForm ? html`
         <div class="field">
-          <label>${this.freeCategory.items.length ? t.direct('Add another') : t.direct('Add your first prayer point')}</label>
+          <label>${t.direct('Add a prayer point')}</label>
           <div class="field-inner">
             <input .value="${this.addText}" onchange="${event => this.addText = event.target.value}" type="text">
-            <button class="button" onclick="${() => {this.addPrayerPoint(); this.draw()}}">${t.direct('Add')}</button>          
           </div>
         </div>      
         
-        <button class="button" onclick="${() => {deleteFreeCategory(this.moment.slug, this.category.slug); this.root.router.navigate(`/settings/${this.moment.slug}`)}}">
+        <div class="field">
+          <label>${t.direct('Add a description (optional)')}</label>
+          <div class="field-inner">
+            <textarea onchange="${event => this.addDescription = event.target.value}" .value="${this.addDescription}"></textarea>
+          </div>
+        </div>      
+
+        <div class="row">
+          <button class="button" onclick="${() => {this.addPrayerPoint(); this.draw()}}">${t.direct('Add')}</button>        
+        </div>
+
+        <button class="button danger" onclick="${() => {deleteFreeCategory(this.moment.slug, this.category.slug); this.root.router.navigate(`/settings/${this.moment.slug}`)}}">
             ${t.direct('Delete category')}
-            <prayer-icon name="cross" />
-        </button>
+            <prayer-icon name="remove" />
+        </button>        
+
+        
+        <div class="end"></div>
       ` : html``}
     `;
   }

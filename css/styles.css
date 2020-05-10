@@ -1,6 +1,7 @@
 :root {
   --color-primary: #83af7a;
   --color-secondary: #dbedd7;
+  --color-danger: #dd5b3f;
   --color-gray: #ccc;
   --color-gray-dark: #777;
   --color-black: #2a2a2a;
@@ -102,10 +103,16 @@ p {
   display: -ms-inline-flexbox;
   display: inline-flex;
   border: 0; }
+  .button.secondary {
+    background: var(--color-secondary); }
+  .button.danger {
+    background: var(--color-danger); }
   .button prayer-icon {
     margin-top: 2px;
     max-height: 5px;
-    margin-right: -7px; }
+    margin-right: -5px;
+    width: 24px;
+    margin-left: 6px; }
 
 .field {
   margin-bottom: 32px;
@@ -128,9 +135,11 @@ p {
     color: #6a6a6a; }
   .field p {
     margin-top: 0; }
+  .field textarea,
   .field input {
     min-width: 40px;
     font-preset: menu;padding-right: 8px;padding-left: 8px;padding-bottom: 11px;padding-top: 11px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    text-transform: none;
     cursor: pointer;
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
@@ -140,6 +149,7 @@ p {
     transition: border var(--speed) var(--easing);
     border: 1px solid var(--color-secondary);
     margin-bottom: -1px; }
+    .field textarea:focus,
     .field input:focus {
       border: 1px solid var(--color-primary); }
   .field .field-inner {
@@ -150,9 +160,9 @@ p {
     flex-wrap: nowrap; }
     .field .field-inner .button {
       margin-left: 8px;
-      -webkit-box-flex: 1;
-      -ms-flex: 1 1 auto;
-      flex: 1 1 auto; }
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+      flex: 0 0 auto; }
 
 .row {
   display: -webkit-box;
@@ -213,7 +223,8 @@ p {
   -ms-flex-align: center;
   align-items: center; }
   .item-list .item .title {
-    font-preset: title;padding-bottom: 16px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    font-preset: title;padding-bottom: 12px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    text-transform: none;
     -webkit-transition: opacity var(--speed) var(--easing);
     -o-transition: opacity var(--speed) var(--easing);
     transition: opacity var(--speed) var(--easing); }
@@ -260,7 +271,7 @@ p {
   .moment.card .title {
     background: var(--color-secondary);
     position: absolute;
-    font-preset: title;padding-bottom: 8px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    font-preset: title;padding-bottom: 12px;padding-top: 12px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
     bottom: 0;
     padding-left: 16px;
     width: 100%; }
@@ -327,6 +338,14 @@ prayer-category-details .prayer-point label {
 
 prayer-category-details .prayer-point a {
   cursor: pointer; }
+
+prayer-category-details .prayer-point .title {
+  margin-bottom: -8px; }
+
+prayer-category-details .prayer-point .description {
+  font-preset: title;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
+  opacity: .6;
+  text-transform: none; }
 
 prayer-create-free-category {
   padding: 32px; }
