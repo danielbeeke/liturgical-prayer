@@ -38,7 +38,10 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
   afterDraw() {
     let s = Store.getState().schedule;
     let activeMoment = getCurrentActiveMoment(s.moments);
-    let activeMomentCard = this.querySelector(`[data-moment="${activeMoment.slug}"]`);
-    activeMomentCard.scrollIntoView();
+
+    if (activeMoment) {
+      let activeMomentCard = this.querySelector(`[data-moment="${activeMoment.slug}"]`);
+      activeMomentCard.scrollIntoView();
+    }
   }
 });
