@@ -65,7 +65,7 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     let category = this.createCategory();
     if (!this.existingCategories.includes(category.slug)) {
       createFreeCategory(this.route.parameters.moment, category);
-      this.root.router.navigate(`/settings/${this.route.parameters.moment}`);
+      this.root.router.navigate(`/settings/${this.route.parameters.moment}/prayer-category/${category.slug}`);
     }
   }
 
