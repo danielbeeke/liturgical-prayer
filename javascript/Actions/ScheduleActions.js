@@ -9,6 +9,17 @@ export const toggleMoment = (momentSlug) => {
   })
 };
 
+export const setMomentTime = (momentSlug, from, till) => {
+  Store.dispatch({
+    type: 'set-moment-time',
+    payload: {
+      momentSlug: momentSlug,
+      from: from,
+      till: till
+    }
+  })
+};
+
 export const toggleCategory = (momentSlug, categorySlug) => {
   Store.dispatch({
     type: 'category-toggle',

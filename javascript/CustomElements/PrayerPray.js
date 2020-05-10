@@ -12,6 +12,7 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
     let s = Store.getState().schedule;
     let moment = s.moments.find(moment => moment.slug === this.route.parameters.moment);
     let t = this.root.t;
+    this.setAttribute('style', `--color-primary: ${moment.color}; --color-secondary: ${moment.colorBackground}`);
 
     let activeCategories = moment.prayerCategories.filter(category => category.enabled).sort((a, b) => a.order - b.order);
     let prayerScheduler = new PrayerScheduler();
@@ -35,11 +36,12 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
         <prayer-icon name="cross" />
       </a>
 
-      <span class="moment">${t.direct(moment.name)}</span>
-      <div class="indicator">
-          ${prayers.map((prayer, index) => html`<div class="${'indicator-item' + (index === 0 ? ' active' : '')}"></div>`)}
+      <div class="pre-header">
+        <span class="moment">${t.direct(moment.name)}</span>
+        <div class="indicator">
+            ${prayers.map((prayer, index) => html`<div class="${'indicator-item' + (index === 0 ? ' active' : '')}"></div>`)}
+        </div>      
       </div>
-
 
       <div class="slider">
       ${prayers.map((prayer, index) => {
@@ -47,9 +49,11 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
         
         return html`<div class="prayer" data-id="${prayer.UniqueID}">
           <div class="header">
-            ${category ? html`<small class="category"><prayer-icon name="tag" />${category}</small>` : html`` }
             <h2 class="title">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</h2>
-            ${prayer.Author ? html`<em class="author"><prayer-icon name="author" />${prayer.Author}</em>` : html``}
+            <div class="meta">
+              ${category ? html`<small class="category"><prayer-icon name="tag" />${category}</small>` : html`` }
+              ${prayer.Author ? html`<em class="author"><prayer-icon name="author" />${prayer.Author}</em>` : html``}            
+            </div>
           </div>
           <div class="inner">
             <p class="content">${prayer.category.isFreeForm ? 

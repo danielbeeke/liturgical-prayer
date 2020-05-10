@@ -79,7 +79,10 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     let t = this.root.t;
 
     return html`
-    <h2 class="page-title">${t.direct('Create category')}</h2>
+    <h2 class="page-title">
+        <a class="back-button" href="${'/settings/' + this.route.parameters.moment}"><prayer-icon name="arrow-left" /></a>
+        ${t.direct('Create category')}
+    </h2>
 
     <div class="field">
     <label>${t.direct('Title')}</label>

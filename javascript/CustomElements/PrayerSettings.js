@@ -19,24 +19,28 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
     let englishBibles = bibles.filter(bible => bible.language.id === 'eng');
 
     return html`
-      <h2 class="page-title">${t`On which moments do you want to pray?`}</h2>
+      <h2 class="page-title">${t`When and how do you want to pray?`}</h2>
 
-      <div class="item-list">
-      ${s.moments.map(moment => html`
-        <div class="${'item moment ' + (moment.enabled ? 'enabled' : '')}">
-          <input type="checkbox" id="${'toggle-' + moment.slug}" .checked="${moment.enabled}" onchange="${() => {toggleMoment(moment.slug); this.draw()}}">
-          <label for="${'toggle-' + moment.slug}">
-            <span class="title">${t.direct(moment.name)}</span>
-          </label>
-          <a href="${'/settings/' + moment.slug}">
-            <prayer-icon name="pencil" />
-          </a>
+      <div class="field">
+        <label>
+          ${t.direct('Enabled moments and settings')}
+        </label>
+        
+        <div class="item-list">
+        ${s.moments.map(moment => html`
+          <div class="${'item moment ' + (moment.enabled ? 'enabled' : '')}" style="${`--color-primary: ${moment.color};`}">
+            <input type="checkbox" id="${'toggle-' + moment.slug}" .checked="${moment.enabled}" onchange="${() => {toggleMoment(moment.slug); this.draw()}}">
+            <label for="${'toggle-' + moment.slug}">
+              <span class="title">${t.direct(moment.name)}</span>
+            </label>
+            <a href="${'/settings/' + moment.slug}">
+              <prayer-icon name="pencil" />
+            </a>
+          </div>
+        `)}
         </div>
-      `)}
       </div>
-      
-      <h2>${t`What bible translation do you want?`}</h2>
-      
+
       <div class="field">
         <label>${t`Bible translation`}</label>
         <select onchange="${event => setBible(event.target.value)}">
