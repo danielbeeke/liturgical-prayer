@@ -20,7 +20,7 @@ export class PrayerScheduler {
     let day = date.getDate();
     let assignedItemIds = this.p.calendar?.[year]?.[month]?.[day]?.[momentSlug]?.[prayerCategory.slug];
     let freeCategory = this.s.freeCategories.find(freeCategory => freeCategory.slug === prayerCategory.slug);
-    let assignedItems = assignedItemIds.length ? freeCategory.items.filter(item => assignedItemIds.includes(item.slug)) : [];
+    let assignedItems = assignedItemIds && assignedItemIds.length ? freeCategory.items.filter(item => assignedItemIds.includes(item.slug)) : [];
 
     if (assignedItems.length) {
       return {
@@ -55,11 +55,11 @@ export class PrayerScheduler {
     let chunks = [];
 
     let addToChunks = (items) => {
-      for (let [day] of Object.entries(items)) {
-        for (let [categories] of Object.entries(day)) {
-          for (let [categoryContent] of Object.entries(categories)) {
-            if (Array.isArray(categoryContent)) {
-              chunks.push(categoryContent);
+      for (let [day, moments] of Object.entries(items)) {
+        for (let [moment, categories] of Object.entries(moments)) {
+          for (let [category, Content] of Object.entries(categories)) {
+            if (Array.isArray(Content)) {
+              chunks.push(Content);
             }
           }
         }

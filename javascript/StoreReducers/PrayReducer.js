@@ -31,8 +31,8 @@ export function PrayReducer (state = {
     }
 
     if (action.type === 'clear-fixed-prayer-category') {
-      let allPrayersIds = Content[action.payload.categoryName].map(prayer => prayer.UniqueID);
-      nextState.usedPrayers = nextState.usedPrayers.filter(prayer => !allPrayersIds.includes(prayer));
+      let categoryPrayersIds = Content[action.payload.categoryName].map(prayer => prayer.UniqueID);
+      nextState.usedPrayers = nextState.usedPrayers.filter(prayer => !categoryPrayersIds.includes(prayer));
     }
 
     if (action.type === 'mark-free-prayer') {
