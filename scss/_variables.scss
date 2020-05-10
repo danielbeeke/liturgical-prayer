@@ -1,3 +1,5 @@
+$tablet: 700px;
+
 :root {
   --color-primary: #83af7a;
   --color-secondary: #{lighten(#BCDDB4, 10)};
@@ -10,4 +12,11 @@
   --easing: cubic-bezier(.67,-0.07,.49,.93);
   --padding: 7px;
   --radius: 4px;
+  --max-width-panel: 2000px;
+}
+
+@include tablet {
+    :root {
+      --max-width-panel: 500px;
+    }
 }

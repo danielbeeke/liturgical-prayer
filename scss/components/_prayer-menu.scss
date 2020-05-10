@@ -61,3 +61,15 @@ prayer-menu {
     }
   }
 }
+
+@include tablet {
+  prayer-menu {
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    padding-left: 5rs;
+
+    .menu-item {
+      margin-right: 8rs;
+    }
+  }
+}

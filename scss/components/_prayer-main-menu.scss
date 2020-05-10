@@ -2,6 +2,7 @@ prayer-main-menu.page {
   padding: 0;
   display: flex;
   flex-direction: column;
+  max-width: var(--max-width-panel);
 
   .menu-item {
     display: flex;

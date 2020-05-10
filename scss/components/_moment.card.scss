@@ -31,3 +31,10 @@
     left: 2rs;
   }
 }
+
+@include tablet {
+  .moment.card {
+    max-width: 20vw;
+    max-height: 60vh;
+  }
+}

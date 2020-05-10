@@ -2,6 +2,7 @@
   margin-bottom: 4rs;
   display: flex;
   flex-direction: column;
+  max-width: var(--max-width-panel);
 
   label {
     display: block;
@@ -58,6 +59,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 4rs;
+  max-width: var(--max-width-panel);
 
   .field {
     flex: 0 0 calc(50% - #{1rs});

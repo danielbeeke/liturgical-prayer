@@ -8,7 +8,12 @@
   --speed: .3s;
   --easing: cubic-bezier(.67,-0.07,.49,.93);
   --padding: 7px;
-  --radius: 4px; }
+  --radius: 4px;
+  --max-width-panel: 2000px; }
+
+@media all and (min-width: 700px) {
+  :root {
+    --max-width-panel: 500px; } }
 
 html {
   height: 100%; }
@@ -122,7 +127,8 @@ p {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
-  flex-direction: column; }
+  flex-direction: column;
+  max-width: var(--max-width-panel); }
   .field label {
     display: block;
     width: 100%;
@@ -173,7 +179,8 @@ p {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-bottom: 32px; }
+  margin-bottom: 32px;
+  max-width: var(--max-width-panel); }
   .row .field {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 calc(50% - 8px);
@@ -282,6 +289,11 @@ p {
     position: absolute;
     bottom: 56px;
     left: 16px; }
+
+@media all and (min-width: 700px) {
+  .moment.card {
+    max-width: 20vw;
+    max-height: 60vh; } }
 
 .page-title {
   font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
@@ -418,7 +430,8 @@ prayer-main-menu.page {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
-  flex-direction: column; }
+  flex-direction: column;
+  max-width: var(--max-width-panel); }
   prayer-main-menu.page .menu-item {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -529,6 +542,19 @@ prayer-menu {
         height: 66px;
         background: var(--color-primary); }
 
+@media all and (min-width: 700px) {
+  prayer-menu {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    padding-left: 40px; }
+    prayer-menu .menu-item {
+      margin-right: 64px; } }
+
 prayer-moment-configure {
   padding: 32px; }
   prayer-moment-configure h2 {
@@ -635,7 +661,8 @@ prayer-pray .slider {
   scroll-snap-type: x mandatory; }
 
 prayer-settings {
-  padding: 32px; }
+  padding: 32px;
+  max-width: var(--max-width-panel); }
   prayer-settings h2 {
     font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
     margin-bottom: 24px; }
@@ -725,7 +752,8 @@ input[type="checkbox"]:checked + label:after {
 .scripture-styles {
   /* HTML5 display-role reset for older browsers */
   color: #111111;
-  -webkit-font-smoothing: antialiased; }
+  -webkit-font-smoothing: antialiased;
+  max-width: var(--max-width-panel); }
   .scripture-styles html,
   .scripture-styles body,
   .scripture-styles div,
