@@ -29,6 +29,16 @@ export class BaseElement extends HTMLElement {
 
       this.afterDraw();
 
+      let inputs = this.querySelectorAll('input,textarea');
+      inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+          document.body.classList.add('has-focused-input');
+        });
+        input.addEventListener('blur', () => {
+          document.body.classList.remove('has-focused-input');
+        });
+      });
+
       /**
        * After the draw attach click handler for internal hrefs.
        * @type {NodeListOf<HTMLElementTagNameMap[string]> | NodeListOf<Element> | NodeListOf<SVGElementTagNameMap[string]>}
