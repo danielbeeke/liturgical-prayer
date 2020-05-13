@@ -20,6 +20,21 @@ let getPoint = function( e )
   return { x: pointX, y: pointY };
 };
 
+function isTouchDevice() {
+  let prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
+
+  let mq = function (query) {
+    return window.matchMedia(query).matches;
+  };
+
+  if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+    return true;
+  }
+
+  let query = ['(', prefixes.join('touch-enabled),('), 'heartz', ')'].join('');
+  return mq(query);
+}
+
 export function Sortable ( container, options ) {
     if( container && container instanceof Element ) {
       this._container = container;
@@ -35,13 +50,16 @@ export function Sortable ( container, options ) {
       this._container.style["position"] = "static";
 
       this.handlers = {
-        // "mousedown": this._onPress.bind( this ),
         "touchstart": this._onPress.bind( this ),
-        // "mouseup": this._onRelease.bind( this ),
         "touchend": this._onRelease.bind( this ),
-        // "mousemove": this._onMove.bind( this ),
         "touchmove": this._onMove.bind( this ),
       };
+
+      if (!isTouchDevice()) {
+        this.handlers['mousedown'] =  this._onPress.bind( this );
+        this.handlers['mouseup'] =  this._onRelease.bind( this );
+        this.handlers['mousemove'] =  this._onMove.bind( this );
+      }
 
       for (let [eventName, handler] of Object.entries(this.handlers)) {
         document.body.addEventListener( eventName, handler, true );
