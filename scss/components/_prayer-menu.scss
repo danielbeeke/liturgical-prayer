@@ -76,6 +76,7 @@ prayer-menu {
   }
 }
 
+body.is-sorting,
 body.has-focused-input {
   prayer-app .page {
     flex: 0 0 100%;
@@ -84,4 +85,8 @@ body.has-focused-input {
   prayer-menu {
     transform: translateY(calc(100% + #{3rs}));
   }
+}
+
+body.is-sorting {
+  overflow: hidden !important;
 }

@@ -6,10 +6,16 @@ let _w = window,
 // get position of mouse/touch in relation to viewport
 let getPoint = function( e )
 {
+
   let scrollX = Math.max( 0, _w.pageXOffset || _d.scrollLeft || _b.scrollLeft || 0 ) - ( _d.clientLeft || 0 ),
     scrollY = Math.max( 0, _w.pageYOffset || _d.scrollTop || _b.scrollTop || 0 ) - ( _d.clientTop || 0 ),
     pointX  = e ? ( Math.max( 0, e.pageX || e.clientX || 0 ) - scrollX ) : 0,
     pointY  = e ? ( Math.max( 0, e.pageY || e.clientY || 0 ) - scrollY ) : 0;
+
+  if (!pointX && !pointY) {
+    pointX = e.targetTouches[0].pageX;
+    pointY = e.targetTouches[0].pageY;
+  }
 
   return { x: pointX, y: pointY };
 };
@@ -29,11 +35,11 @@ export function Sortable ( container, options ) {
       this._container.style["position"] = "static";
 
       this.handlers = {
-        "mousedown": this._onPress.bind( this ),
+        // "mousedown": this._onPress.bind( this ),
         "touchstart": this._onPress.bind( this ),
-        "mouseup": this._onRelease.bind( this ),
+        // "mouseup": this._onRelease.bind( this ),
         "touchend": this._onRelease.bind( this ),
-        "mousemove": this._onMove.bind( this ),
+        // "mousemove": this._onMove.bind( this ),
         "touchmove": this._onMove.bind( this ),
       };
 
@@ -179,6 +185,7 @@ Sortable.prototype = {
       e.preventDefault();
 
       this._dragging = true;
+      document.body.classList.add('is-sorting');
       this._click = getPoint( e );
       this._makeDragItem( e.target );
       this._onMove( e );
@@ -189,6 +196,7 @@ Sortable.prototype = {
   _onRelease: function( e )
   {
     this._dragging = false;
+    document.body.classList.remove('is-sorting');
     this._trashDragItem();
     if (e.target.classList.contains('dragging')) {
       this._container.dispatchEvent(new CustomEvent('sorted'));
