@@ -300,7 +300,7 @@ p {
   margin-bottom: 24px; }
 
 prayer-app {
-  height: 100vh;
+  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -331,7 +331,7 @@ prayer-app {
     position: absolute;
     content: '';
     top: 0;
-    min-height: 100vh;
+    min-height: 100%;
     left: 50%;
     -webkit-transition: opacity var(--speed) var(--easing);
     -o-transition: opacity var(--speed) var(--easing);
@@ -386,8 +386,8 @@ prayer-home {
     margin-bottom: 40px; }
   prayer-home .slider {
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 calc(100vh - 336px);
-    flex: 0 0 calc(100vh - 336px);
+    -ms-flex: 0 0 calc(100% - 336px);
+    flex: 0 0 calc(100% - 336px);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -485,7 +485,15 @@ prayer-menu {
   justify-content: space-around;
   width: 100%;
   background: var(--color-secondary);
-  padding-bottom: 16px; }
+  padding-bottom: 16px;
+  -webkit-transition: -webkit-transform var(--speed) var(--easing);
+  transition: -webkit-transform var(--speed) var(--easing);
+  -o-transition: transform var(--speed) var(--easing);
+  transition: transform var(--speed) var(--easing);
+  transition: transform var(--speed) var(--easing), -webkit-transform var(--speed) var(--easing);
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0); }
   prayer-menu .menu-item {
     z-index: 1;
     display: -webkit-box;
@@ -555,6 +563,16 @@ prayer-menu {
     prayer-menu .menu-item {
       margin-right: 64px; } }
 
+body.has-focused-input prayer-app .page {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%; }
+
+body.has-focused-input prayer-menu {
+  -webkit-transform: translateY(calc(100% + 24px));
+  -ms-transform: translateY(calc(100% + 24px));
+  transform: translateY(calc(100% + 24px)); }
+
 prayer-moment-configure {
   padding: 32px; }
   prayer-moment-configure h2 {
@@ -571,7 +589,7 @@ prayer-moment-configure {
 
 prayer-pray.page {
   padding: 0;
-  height: 100vh;
+  height: 100%;
   overflow: hidden; }
 
 prayer-pray .pre-header {
@@ -595,7 +613,7 @@ prayer-pray .prayer {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 100vw;
   flex: 0 0 100vw;
-  height: calc(100vh - 64px);
+  height: calc(100% - 64px);
   overflow-y: auto;
   scroll-snap-align: start;
   margin-bottom: 48px;

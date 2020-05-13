@@ -4,6 +4,8 @@ prayer-menu {
   width: 100%;
   background: var(--color-secondary);
   padding-bottom: 2rs;
+  transition: transform var(--speed) var(--easing);
+  transform: translateY(0);
 
   .menu-item {
     z-index: 1;
@@ -71,5 +73,15 @@ prayer-menu {
     .menu-item {
       margin-right: 8rs;
     }
+  }
+}
+
+body.has-focused-input {
+  prayer-app .page {
+    flex: 0 0 100%;
+  }
+
+  prayer-menu {
+    transform: translateY(calc(100% + #{3rs}));
   }
 }

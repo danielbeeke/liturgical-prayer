@@ -1,7 +1,7 @@
 prayer-pray {
   &.page {
     padding: 0;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
   }
 
@@ -26,7 +26,7 @@ prayer-pray {
 
   .prayer {
     flex: 0 0 100vw;
-    height: calc(100vh - 64px);
+    height: calc(100% - 64px);
     overflow-y: auto;
     scroll-snap-align: start;
     margin-bottom: 6rs;
