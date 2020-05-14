@@ -258,8 +258,9 @@ p {
     margin-left: auto; }
   .item-list .item:not(.enabled) {
     -webkit-filter: grayscale(1);
-    filter: grayscale(1);
-    pointer-events: none; }
+    filter: grayscale(1); }
+    .item-list .item:not(.enabled) a {
+      pointer-events: none; }
     .item-list .item:not(.enabled) .title,
     .item-list .item:not(.enabled) prayer-icon {
       opacity: .4; }
