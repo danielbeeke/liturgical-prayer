@@ -707,26 +707,82 @@ prayer-settings {
 #remote-storage .rs-widget {
   margin: 0;
   opacity: 1;
-  padding: 16px;
+  padding: 0 16px;
   -webkit-box-shadow: none;
   box-shadow: none;
   max-width: 100%;
   border-radius: 8px;
-  background: var(--color-secondary); }
+  background: var(--color-secondary);
+  position: relative; }
+  #remote-storage .rs-widget:not(.rs-state-initial):not(.rs-state-choose) {
+    padding-left: 72px; }
+  #remote-storage .rs-widget .rs-connected-buttons {
+    padding-top: 8px; }
+  #remote-storage .rs-widget .rs-big-headline {
+    text-align: left !important;
+    margin: 0;
+    font-preset: button;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var;
+    margin-bottom: 16px;
+    margin-top: 8px; }
+  #remote-storage .rs-widget .rs-content {
+    padding: 0; }
+  #remote-storage .rs-widget .rs-short-desc {
+    margin: 0;
+    text-align: left !important;
+    font-preset: title;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    margin-bottom: 24px; }
   #remote-storage .rs-widget .rs-sub-headline {
+    margin: 0;
     font-preset: button;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var;
     height: auto;
-    word-break: normal; }
+    display: block;
+    word-break: normal;
+    margin-top: -16px;
+    margin-bottom: 8px; }
   #remote-storage .rs-widget .rs-small-headline {
+    margin: 0;
+    margin-top: 8px;
     font-preset: title;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
     height: auto;
     word-break: normal; }
+  #remote-storage .rs-widget .rs-button-wrap {
+    margin-top: 0; }
   #remote-storage .rs-widget .rs-box-connected {
     height: auto; }
   #remote-storage .rs-widget #rs-main-logo-remotestorage {
     display: none; }
   #remote-storage .rs-widget .rs-button {
-    background: white; }
+    margin-bottom: 0;
+    background: white;
+    border: 0;
+    border-radius: 8px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-preset: button;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var;
+    margin-bottom: 16px; }
+    #remote-storage .rs-widget .rs-button > div {
+      padding: 0; }
+    #remote-storage .rs-widget .rs-button:hover * {
+      fill: var(--color-black); }
+  #remote-storage .rs-widget .rs-widget-icon {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); }
+  #remote-storage .rs-widget.rs-state-choose .rs-button {
+    font-preset: button;padding-bottom: 9px;padding-top: 15px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var;
+    padding-left: 56px;
+    position: relative; }
+    #remote-storage .rs-widget.rs-state-choose .rs-button svg {
+      left: 8px;
+      position: absolute;
+      height: 32px;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%); }
 
 select {
   display: block;

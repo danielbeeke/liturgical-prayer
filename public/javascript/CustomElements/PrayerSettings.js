@@ -12,8 +12,8 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
   }
 
   afterDraw() {
-    // const widget = new Widget(this.root.storage);
-    // widget.attach('remote-storage');
+    const widget = new Widget(this.root.storage);
+    widget.attach('remote-storage');
   }
 
   draw () {
@@ -54,7 +54,12 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
             `)}            
         </select>
       </div>
-           
+      
+      <div class="field">
+        <label>${t`Sync data`}</label>
+        <div id="remote-storage"></div>
+      </div>
+      
       
       <div class="end"></div>
     `;

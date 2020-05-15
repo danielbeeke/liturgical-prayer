@@ -35,14 +35,17 @@ client.declareType('settings', {
   "type": "object",
 });
 
-// Store.subscribe(function () {
-//   const state = Store.getState();
-//   client.storeObject('settings', 'settings', state);
-// });
-//
-// remoteStorage.on('connected', () => {
-//   client.getObject('settings').then(remoteState => {
-//     delete remoteState['@context'];
-//     Store.replaceState(remoteState);
-//   });
-// });
+Store.subscribe(function () {
+  const state = Object.assign({}, Store.getState());
+  client.storeObject('settings', 'settings', state);
+});
+
+remoteStorage.on('sync-done', () => {
+  client.getObject('settings').then(remoteState => {
+    delete remoteState['@context'];
+    Store.replaceState(remoteState);
+    let app = document.querySelector('prayer-app');
+    app.draw();
+    [...app.children].forEach(child => typeof child.draw !== 'undefined' ? child.draw() : null);
+  });
+});
