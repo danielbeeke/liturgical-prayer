@@ -3,6 +3,8 @@ prayer-pray {
     padding: 0;
     height: 100%;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .pre-header {
@@ -93,6 +95,7 @@ prayer-pray {
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
+    flex: 0 0 100%;
 
     scroll-snap-type: mandatory;
     scroll-snap-points-x: repeat(100vw);

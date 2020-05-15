@@ -1,0 +1,37 @@
+.remotestorage-widget-modal-backdrop {
+  display: none !important;
+}
+
+#remote-storage .rs-widget {
+  margin: 0;
+  opacity: 1;
+  padding: 2rs;
+  box-shadow: none;
+  max-width: 100%;
+  border-radius: 8px;
+  background: var(--color-secondary);
+
+  .rs-sub-headline {
+    font-preset: button;
+    height: auto;
+    word-break: normal;
+  }
+
+  .rs-small-headline {
+    font-preset: title;
+    height: auto;
+    word-break: normal;
+  }
+
+  .rs-box-connected {
+    height: auto;
+  }
+
+  #rs-main-logo-remotestorage {
+    display: none;
+  }
+
+  .rs-button {
+    background: white;
+  }
+}

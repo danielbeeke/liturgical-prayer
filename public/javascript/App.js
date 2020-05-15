@@ -4,9 +4,10 @@
  *
  * Created by Daniël Beeke
  */
+
 import {BaseElement} from './Core/BaseElement.js';
 import {Store} from './Core/Store.js';
-
+import {remoteStorage} from './Core/RemoteStorage.js';
 import './CustomElements/PrayerSettings.js';
 import './CustomElements/PrayerHome.js';
 import './CustomElements/PrayerPray.js';
@@ -18,6 +19,7 @@ import './CustomElements/PrayerIcon.js';
 import './CustomElements/PrayerPage.js';
 import './CustomElements/PrayerMainMenu.js';
 import './CustomElements/PrayerCategoryPrayerPoint.js';
+import './CustomElements/PrayerCategoryPrayerPointCreate.js';
 
 import {toggleGrid} from './Actions/AppActions.js';
 
@@ -33,6 +35,9 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
    */
   async connectedCallback () {
     let a = Store.getState().app;
+
+    this.storage = remoteStorage;
+
     this.t = await I14n(a.language);
     this.tokenizer = new Tokenizer();
 
@@ -64,6 +69,10 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
     this.watch('app.language', async (language) => {
       this.t = await I14n(language);
       [...this.children].forEach(child => typeof child.draw !== 'undefined' ? child.draw() : null);
+    });
+
+    this.watch('app.verticalGridEnabled', (enabled) => {
+      this.dataset.gridEnabled = enabled;
     });
 
     this.draw();

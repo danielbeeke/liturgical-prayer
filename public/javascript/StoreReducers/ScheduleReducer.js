@@ -12,7 +12,7 @@ let initialCategories = Content['Categories'].map((category, index) => {
   });
 
   return {
-    enabled: true,
+    enabled: category.Enabled,
     moments: allowedMoments,
     order: index,
     isFreeForm: false,
@@ -52,9 +52,9 @@ moments.forEach(moment => {
  */
 export function ScheduleReducer (state = initialState, action) {
   return produce(state, nextState => {
-    let moment = action?.payload?.momentSlug && nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
-    let category = action?.payload?.categorySlug && moment && moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
-    let freeCategory = action?.payload?.categorySlug && nextState.freeCategories.find(category => category.slug === action.payload.categorySlug);
+    let moment = action.payload && action.payload.momentSlug && nextState.moments.find(moment => moment.slug === action.payload.momentSlug);
+    let category = action.payload && action.payload.categorySlug && moment && moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
+    let freeCategory = action.payload && action.payload.categorySlug && nextState.freeCategories.find(category => category.slug === action.payload.categorySlug);
 
     if (action.type === 'moment-toggle') {
       moment.enabled = !moment.enabled;
@@ -93,7 +93,7 @@ export function ScheduleReducer (state = initialState, action) {
        * Remove the category from all the moments
        */
       nextState.moments.forEach(moment => {
-        let category = action?.payload?.categorySlug && moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
+        let category = action.payload && action.payload.categorySlug && moment.prayerCategories.find(category => category.slug === action.payload.categorySlug);
         let existingCategoryIndex = moment.prayerCategories.indexOf(category);
         moment.prayerCategories.splice(existingCategoryIndex, 1);
       });
@@ -110,7 +110,8 @@ export function ScheduleReducer (state = initialState, action) {
       freeCategory.items.push({
         slug: Slugify(action.payload.prayerPoint),
         title: action.payload.prayerPoint,
-        description: action.payload.description
+        description: action.payload.description,
+        order: freeCategory.items.length
       });
     }
 
@@ -127,7 +128,10 @@ export function ScheduleReducer (state = initialState, action) {
     }
 
     if (action.type === 'set-prayer-points-order') {
-      freeCategory.items = action.payload.prayerPoints;
+      for (let [prayerPointSlug, order] of Object.entries(action.payload.order)) {
+        let category = freeCategory.items.find(category => category.slug === prayerPointSlug);
+        category.order = order;
+      }
     }
 
     if (action.type === 'set-moment-time') {

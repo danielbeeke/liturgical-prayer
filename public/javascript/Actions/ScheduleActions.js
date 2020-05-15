@@ -95,13 +95,13 @@ export const deletePrayerPoint = (momentSlug, categorySlug, prayerPointSlug) => 
   })
 };
 
-export const setPrayerPointsOrder = (momentSlug, categorySlug, prayerPoints) => {
+export const setPrayerPointsOrder = (momentSlug, categorySlug, order) => {
   Store.dispatch({
     type: 'set-prayer-points-order',
     payload: {
       momentSlug: momentSlug,
       categorySlug: categorySlug,
-      prayerPoints: prayerPoints
+      order: order
     }
   })
 };

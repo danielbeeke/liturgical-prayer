@@ -1,16 +1,10 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {html} from '../vendor/uhtml.js';
 import {Store} from '../Core/Store.js';
-import {deleteFreeCategory, addPrayerPoint, deletePrayerPoint, setPrayerPointsOrder} from '../Actions/ScheduleActions.js';
+import {deleteFreeCategory, setPrayerPointsOrder} from '../Actions/ScheduleActions.js';
 import {Sortable} from '../Helpers/Sortable.js';
 
 customElements.define('prayer-category-details', class PrayerCategoryDetails extends BaseElement {
-
-  constructor() {
-    super();
-    this.addText = '';
-    this.addDescription = '';
-  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -19,14 +13,17 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
     if (list) {
       this.sortable = new Sortable(list);
       list.addEventListener('sorted', () => {
-        let prayerPoints = [...list.children].map(child => child.dataset.name);
+        let order = {};
+        [...list.children].forEach((child, index) => {
+          order[child.dataset.slug] = index;
+        });
 
         // Sort them to their original place so lighterHTML may do its work.
         [...list.children]
         .sort((a,b)=> a.dataset.order > b.dataset.order ? 1 : -1)
         .map(node => list.appendChild(node));
 
-        setPrayerPointsOrder(this.moment.slug, this.category.slug, prayerPoints);
+        setPrayerPointsOrder(this.moment.slug, this.category.slug, order);
         this.draw();
       });
     }
@@ -35,12 +32,6 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
   disconnectedCallback() {
     super.disconnectedCallback();
     if (this.sortable) this.sortable.destroy();
-  }
-
-  addPrayerPoint () {
-    addPrayerPoint(this.moment.slug, this.category.slug, this.addText, this.addDescription);
-    this.addText = null;
-    this.addDescription = null;
   }
 
   draw () {
@@ -66,8 +57,8 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
         <div class="field">
           <label>${t`Your prayer points`}</label>
           <div class="prayer-items sortable item-list">
-          ${this.freeCategory.items.map((item, index) => html`
-            <div class="item prayer-point enabled" data-name="${item}" data-order="${index}">
+          ${[...this.freeCategory.items].sort((a, b) => a.order - b.order).map((item, index) => html`
+            <div class="item prayer-point enabled" data-slug="${item.slug}" data-order="${item.order}">
               <prayer-icon name="handle" />
               <label>
                 <span class="title">${item.title}</span>
@@ -80,24 +71,11 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
         </div>
       ` : html``}
       ${this.category.isFreeForm ? html`
-        <div class="field">
-          <label>${t.direct('Add a prayer point')}</label>
-          <div class="field-inner">
-            <input .value="${this.addText}" onchange="${event => this.addText = event.target.value}" type="text">
-          </div>
-        </div>      
+        <a class="button" href="${`/settings/${this.moment.slug}/prayer-category/${this.category.slug}/create`}">
+          ${t.direct('Create prayer point')}
+          <prayer-icon name="arrow-right" />
+        </a>
         
-        <div class="field">
-          <label>${t.direct('Add a description (optional)')}</label>
-          <div class="field-inner">
-            <textarea onchange="${event => this.addDescription = event.target.value}" .value="${this.addDescription}"></textarea>
-          </div>
-        </div>      
-
-        <div class="row">
-          <button class="button" onclick="${() => {this.addPrayerPoint(); this.draw()}}">${t.direct('Add')}</button>        
-        </div>
-
         <button class="button danger" onclick="${() => {deleteFreeCategory(this.moment.slug, this.category.slug); this.root.router.navigate(`/settings/${this.moment.slug}`)}}">
             ${t.direct('Delete category')}
             <prayer-icon name="remove" />

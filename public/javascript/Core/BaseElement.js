@@ -105,7 +105,12 @@ export class BaseElement extends HTMLElement {
 
     const wrappedWatch = function(objectPath, callback) {
       return Store.subscribe(watch(Store.getState, objectPath)((newVal, oldVal, objectPath) => {
-        callback(newVal.get(objectPath), oldVal.get(objectPath));
+        let oldValue = oldVal.get(objectPath);
+        let newValue = newVal.get(objectPath);
+
+        if (newValue !== oldValue) {
+          callback(newValue, oldValue);
+        }
       }));
     };
 

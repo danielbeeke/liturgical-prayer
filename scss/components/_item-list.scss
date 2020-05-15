@@ -24,6 +24,7 @@
       margin-right: 2rs;
     }
 
+    img,
     prayer-icon {
       margin-top: 1rs;
       transform: translateY(-2px);
@@ -42,6 +43,7 @@
       }
 
       .title,
+      img,
       prayer-icon {
         opacity: .4;
       }

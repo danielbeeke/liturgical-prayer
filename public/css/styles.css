@@ -107,7 +107,8 @@ p {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  border: 0; }
+  border: 0;
+  margin-bottom: 16px; }
   .button.secondary {
     background: var(--color-secondary); }
   .button.danger {
@@ -246,6 +247,7 @@ p {
     margin-top: 8px;
     margin-bottom: 8px;
     margin-right: 16px; }
+  .item-list .item img,
   .item-list .item prayer-icon {
     margin-top: 8px;
     -webkit-transform: translateY(-2px);
@@ -262,6 +264,7 @@ p {
     .item-list .item:not(.enabled) a {
       pointer-events: none; }
     .item-list .item:not(.enabled) .title,
+    .item-list .item:not(.enabled) img,
     .item-list .item:not(.enabled) prayer-icon {
       opacity: .4; }
 
@@ -320,7 +323,7 @@ prayer-app {
     -o-transition: all 0.2s var(--easing);
     transition: all 0.2s var(--easing); }
     prayer-app > .page > .end {
-      border-bottom: 64px solid transparent; }
+      border-bottom: 112px solid transparent; }
     prayer-app > .page.hidden {
       opacity: 0;
       -webkit-transform: translateY(-5px);
@@ -388,8 +391,8 @@ prayer-home {
     margin-bottom: 40px; }
   prayer-home .slider {
     -webkit-box-flex: 0;
-    -ms-flex: 0 0 calc(100% - 336px);
-    flex: 0 0 calc(100% - 336px);
+    -ms-flex: 0 0 calc(100% - 264px);
+    flex: 0 0 calc(100% - 264px);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -400,7 +403,7 @@ prayer-home {
     padding-top: 16px;
     padding-bottom: 16px;
     scrollbar-width: none;
-    min-height: 200px;
+    min-height: 250px;
     -ms-scroll-snap-type: mandatory;
     scroll-snap-type: mandatory;
     -ms-scroll-snap-points-x: repeat(60vw);
@@ -495,7 +498,9 @@ prayer-menu {
   transition: transform var(--speed) var(--easing), -webkit-transform var(--speed) var(--easing);
   -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
-  transform: translateY(0); }
+  transform: translateY(0);
+  position: fixed;
+  bottom: 0; }
   prayer-menu .menu-item {
     z-index: 1;
     display: -webkit-box;
@@ -565,12 +570,6 @@ prayer-menu {
     prayer-menu .menu-item {
       margin-right: 64px; } }
 
-body.is-sorting prayer-app .page,
-body.has-focused-input prayer-app .page {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 100%;
-  flex: 0 0 100%; }
-
 body.is-sorting prayer-menu,
 body.has-focused-input prayer-menu {
   -webkit-transform: translateY(calc(100% + 24px));
@@ -597,7 +596,14 @@ prayer-moment-configure {
 prayer-pray.page {
   padding: 0;
   height: 100%;
-  overflow: hidden; }
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
 
 prayer-pray .pre-header {
   background: var(--color-secondary); }
@@ -678,6 +684,9 @@ prayer-pray .slider {
   flex-wrap: nowrap;
   overflow-x: auto;
   scrollbar-width: none;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
   -ms-scroll-snap-type: mandatory;
   scroll-snap-type: mandatory;
   -ms-scroll-snap-points-x: repeat(100vw);
@@ -691,6 +700,33 @@ prayer-settings {
   prayer-settings h2 {
     font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
     margin-bottom: 24px; }
+
+.remotestorage-widget-modal-backdrop {
+  display: none !important; }
+
+#remote-storage .rs-widget {
+  margin: 0;
+  opacity: 1;
+  padding: 16px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  max-width: 100%;
+  border-radius: 8px;
+  background: var(--color-secondary); }
+  #remote-storage .rs-widget .rs-sub-headline {
+    font-preset: button;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var;
+    height: auto;
+    word-break: normal; }
+  #remote-storage .rs-widget .rs-small-headline {
+    font-preset: title;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    height: auto;
+    word-break: normal; }
+  #remote-storage .rs-widget .rs-box-connected {
+    height: auto; }
+  #remote-storage .rs-widget #rs-main-logo-remotestorage {
+    display: none; }
+  #remote-storage .rs-widget .rs-button {
+    background: white; }
 
 select {
   display: block;
@@ -716,6 +752,8 @@ select {
     text-shadow: 0 0 0 var(--color-black); }
   select:focus {
     outline: none; }
+  select option {
+    padding: 0; }
 
 .sortable > * {
   cursor: move; }
@@ -726,6 +764,9 @@ select {
     -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     opacity: 0.5; }
+
+.sortable .drag-ghost {
+  opacity: .9; }
 
 input[type="checkbox"] {
   display: none; }

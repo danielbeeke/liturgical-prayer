@@ -3,6 +3,7 @@ import {promiseMiddleware} from '../Middleware/PromiseMiddleware.js';
 import persistState from '../vendor/redux-localstorage/persistState.js';
 import {sharedCombineReducers} from '../Helpers/SharedCombineReducers.js';
 import {savableSlicer} from '../Helpers/SavableSlicer.js';
+import {remoteStorage} from './RemoteStorage.js';
 
 import {AppReducer} from '../StoreReducers/AppReducer.js';
 import {ScheduleReducer} from '../StoreReducers/ScheduleReducer.js';
@@ -22,9 +23,26 @@ const middleware = applyMiddleware(
 
 const composeEnhancers = typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 
-let enhancers = typeof navigator !== 'undefined' ?
-composeEnhancers(middleware, persistState(null, {
-  slicer: savableSlicer
-})) : middleware;
+let enhancers = composeEnhancers(middleware, persistState(null, {
+  slicer: savableSlicer,
+}));
+
 
 export const Store = createStore(reducers, initialState, enhancers);
+
+const client = remoteStorage.scope('/LiturgicalPrayerApp/');
+client.declareType('settings', {
+  "type": "object",
+});
+
+// Store.subscribe(function () {
+//   const state = Store.getState();
+//   client.storeObject('settings', 'settings', state);
+// });
+//
+// remoteStorage.on('connected', () => {
+//   client.getObject('settings').then(remoteState => {
+//     delete remoteState['@context'];
+//     Store.replaceState(remoteState);
+//   });
+// });

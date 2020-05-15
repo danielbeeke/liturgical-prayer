@@ -11,6 +11,11 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
     this.draw()
   }
 
+  afterDraw() {
+    // const widget = new Widget(this.root.storage);
+    // widget.attach('remote-storage');
+  }
+
   draw () {
     let t = this.root.t;
     let s = Store.getState().schedule;
@@ -23,7 +28,7 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
 
       <div class="field">
         <label>
-          ${t.direct('Enabled moments and settings')}
+          ${t.direct('Moments and settings')}
         </label>
         
         <div class="item-list">
@@ -49,6 +54,7 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
             `)}            
         </select>
       </div>
+           
       
       <div class="end"></div>
     `;

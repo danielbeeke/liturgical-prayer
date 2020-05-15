@@ -148,6 +148,11 @@ export function createStore(reducer, preloadedState, enhancer) {
 
     return currentState;
   }
+
+  function replaceState(state) {
+    currentState = state;
+  }
+
   /**
    * Adds a change listener. It will be called any time an action is dispatched,
    * and some part of the state tree may potentially have changed. You may then
@@ -335,6 +340,7 @@ export function createStore(reducer, preloadedState, enhancer) {
     dispatch: dispatch,
     subscribe: subscribe,
     getState: getState,
+    replaceState: replaceState,
     replaceReducer: replaceReducer
   }, _ref2[result] = observable, _ref2;
 }

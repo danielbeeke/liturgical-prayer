@@ -26,5 +26,9 @@ select {
   &:focus {
     outline: none;
   }
+
+  option {
+    padding: 0;
+  }
 }
 

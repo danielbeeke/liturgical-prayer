@@ -39,7 +39,7 @@ customElements.define('prayer-category-prayer-point', class PrayerCategoryPrayer
         }">${t.direct('Update')}</button>        
       </div>
 
-        <button class="button danger" onclick="${() => {deletePrayerPoint(this.moment.slug, this.freeCategory.slug, item.slug); this.root.router.navigate(categoryUrl)}}">
+        <button class="button danger" onclick="${() => {deletePrayerPoint(this.route.parameters.moment, this.freeCategory.slug, item.slug); this.root.router.navigate(categoryUrl)}}">
             ${t.direct('Delete')}
             <prayer-icon name="remove" />
         </button>        

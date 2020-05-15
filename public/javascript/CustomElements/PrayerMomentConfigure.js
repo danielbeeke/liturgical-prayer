@@ -72,11 +72,23 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
               <span class="title">${addWbr(t.direct(category.name))}</span>
             </label>
             <a href="${`/settings/${this.route.parameters.moment}/prayer-category/${category.slug}`}">
-              <prayer-icon name="${category.isFreeForm ? 'pencil' : 'info'}" />
+              <img  src="${`/images/${category.isFreeForm ? 'pencil' : 'info'}.svg`}" />
             </a>
           </div>
         `)}
         </div>      
+      </div>
+      
+      <div class="field">
+        <label>${t.direct('Create your own category')}</label>
+        <p>
+          ${t`Do you want to pray for your family, friends, church or city? Create category and add your own prayer points.`}
+          <br /><br />
+          <a class="button" href="${`/settings/${this.route.parameters.moment}/create-free-category`}">
+          ${t.direct('Create category')}
+          <prayer-icon name="arrow-right" />
+        </a>
+        </p>      
       </div>
       
       <div class="row">
@@ -96,17 +108,6 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
    
       </div>
     
-      <div class="field">
-        <label>${t.direct('Create your own category')}</label>
-        <p>
-          ${t`Do you want to pray for your family, friends, church or city? Create category and add your own prayer points.`}
-          <br /><br />
-          <a class="button" href="${`/settings/${this.route.parameters.moment}/create-free-category`}">
-          ${t.direct('Create category')}
-          <prayer-icon name="arrow-right" />
-        </a>
-        </p>      
-      </div>
      
       <div class="end"></div>
     `;

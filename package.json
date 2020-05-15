@@ -21,6 +21,8 @@
     "node-fetch": "^2.6.0",
     "postcss": "^7.0.29",
     "require-dir": "^0.3.2",
+    "rollup": "^2.10.0",
+    "rollup-plugin-uglify": "^6.0.4",
     "url": "^0.11.0"
   },
   "browserslist": [

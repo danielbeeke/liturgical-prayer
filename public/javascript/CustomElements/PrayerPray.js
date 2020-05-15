@@ -61,7 +61,7 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
                 <span class="prayer-item">${item.title}</span>
                 ${item.description ? html`<em class="description">${item.description}</em>` : ''}
               `) : 
-              toLines(this.tokenize(prayer.Content, this.draw))}
+              toLines(this.tokenize(prayer.Content))}
             </p>
             <span class="amen">Amen</span>  
           </div>

@@ -6,7 +6,7 @@ import {Content} from '../Content.js';
  */
 export function PrayReducer (state = {
   usedPrayers: [],
-  calendar: {}
+  calendar: []
 }, action) {
   return produce(state, nextState => {
 
@@ -17,12 +17,21 @@ export function PrayReducer (state = {
       let day = date.getDate();
       let momentSlug = action.payload.momentSlug;
       let categorySlug = action.payload.categorySlug;
+      let dateString = `${year}-${month}-${day}`;
 
-      if (!nextState.calendar[year]) nextState.calendar[year] = {};
-      if (!nextState.calendar[year][month]) nextState.calendar[year][month] = {};
-      if (!nextState.calendar[year][month][day]) nextState.calendar[year][month][day] = {};
-      if (!nextState.calendar[year][month][day][momentSlug]) nextState.calendar[year][month][day][momentSlug] = {};
-      nextState.calendar[year][month][day][momentSlug][categorySlug] = content;
+      let currentDateObject = nextState.calendar.find(item => item.date === dateString);
+      if (!currentDateObject) {
+        currentDateObject = {
+          date: dateString
+        };
+        nextState.calendar.push(currentDateObject);
+      }
+
+      if (!currentDateObject[momentSlug]) {
+        currentDateObject[momentSlug] = {};
+      }
+
+      currentDateObject[momentSlug][categorySlug] = content;
     };
 
     if (action.type === 'mark-fixed-prayer') {

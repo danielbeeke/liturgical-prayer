@@ -164,7 +164,7 @@ export class Router {
     for (let route of this.routes) {
       const match = path.match(route.route);
 
-      if (match !== null) {
+      if (match !== null && !activeRoute) {
         match.shift();
 
         let tokens = {};

@@ -6,6 +6,8 @@ prayer-menu {
   padding-bottom: 2rs;
   transition: transform var(--speed) var(--easing);
   transform: translateY(0);
+  position: fixed;
+  bottom: 0;
 
   .menu-item {
     z-index: 1;
@@ -78,10 +80,6 @@ prayer-menu {
 
 body.is-sorting,
 body.has-focused-input {
-  prayer-app .page {
-    flex: 0 0 100%;
-  }
-
   prayer-menu {
     transform: translateY(calc(100% + #{3rs}));
   }

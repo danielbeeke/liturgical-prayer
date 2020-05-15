@@ -18,7 +18,10 @@ export class PrayerScheduler {
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    let assignedItemIds = this.p.calendar?.[year]?.[month]?.[day]?.[momentSlug]?.[prayerCategory.slug];
+    let dateString = `${year}-${month}-${day}`;
+    let currentDateObject = this.p.calendar.find(item => item.date === dateString);
+    let assignedItemIds = currentDateObject && currentDateObject[momentSlug] && currentDateObject[momentSlug][prayerCategory.slug];
+
     let freeCategory = this.s.freeCategories.find(freeCategory => freeCategory.slug === prayerCategory.slug);
     let assignedItems = assignedItemIds && assignedItemIds.length ? freeCategory.items.filter(item => assignedItemIds.includes(item.slug)) : [];
 
@@ -44,13 +47,12 @@ export class PrayerScheduler {
   getNextFreePrayer (date, prayerCategory) {
     this.p = Store.getState().pray;
     this.s = Store.getState().schedule;
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let currentMonthItems = this.p.calendar?.[year]?.[month] ?? [];
 
-    let previousYear = month === 1 ? year - 1 : year;
-    let previousMonth = month === 1 ? 12 : month - 1;
-    let previousMonthItems = this.p.calendar?.[previousYear]?.[previousMonth] ?? [];
+    // for (let [date, moments] of Object.entries(this.p.calendar)) {
+    //
+    // }
+
+    let previousItems = {};
 
     let chunks = [];
 
@@ -66,8 +68,7 @@ export class PrayerScheduler {
       }
     };
 
-    addToChunks(currentMonthItems);
-    addToChunks(previousMonthItems);
+    addToChunks(previousItems);
 
     let freeCategory = this.s.freeCategories.find(freeCategory => freeCategory.slug === prayerCategory.slug);
 
@@ -113,7 +114,10 @@ export class PrayerScheduler {
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    let assignedPrayerId = this.p.calendar?.[year]?.[month]?.[day]?.[momentSlug]?.[prayerCategory.slug];
+
+    let dateString = `${year}-${month}-${day}`;
+    let currentDateObject = this.p.calendar.find(item => item.date === dateString);
+    let assignedPrayerId = currentDateObject ? currentDateObject[momentSlug] && currentDateObject[momentSlug][prayerCategory.slug] : false;
 
     if (assignedPrayerId) {
       let allPrayers = Content[prayerCategory.name];
