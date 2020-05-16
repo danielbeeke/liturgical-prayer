@@ -28,7 +28,7 @@ prayer-pray {
 
   .prayer {
     flex: 0 0 100vw;
-    height: calc(100% - 64px);
+    height: 100%;
     overflow-y: auto;
     scroll-snap-align: start;
     margin-bottom: 6rs;
