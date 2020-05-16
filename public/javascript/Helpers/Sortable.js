@@ -201,8 +201,6 @@ Sortable.prototype = {
   {
     if( e && e.target && e.target.parentNode === this._container )
     {
-      e.preventDefault();
-
       this._dragging = true;
       document.body.classList.add('is-sorting');
       this._click = getPoint( e );
@@ -227,8 +225,6 @@ Sortable.prototype = {
   {
     if( this._dragItem && this._dragging )
     {
-      e.preventDefault();
-
       let point     = getPoint( e );
       let container = this._container;
 

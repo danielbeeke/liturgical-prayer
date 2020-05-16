@@ -3,6 +3,19 @@ prayer-main-menu.page {
   display: flex;
   flex-direction: column;
   max-width: var(--max-width-panel);
+  position: relative;
+  padding-top: 6rs;
+
+  &:after {
+    position: absolute;
+    content: '';
+    background: var(--color-secondary);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+  }
 
   .menu-item {
     display: flex;
@@ -40,12 +53,13 @@ prayer-main-menu.page {
     }
 
     &:last-child {
-      border-bottom: none;
       margin-bottom: 10rs;
+      border-bottom: 0;
     }
 
     &:hover {
       color: white;
+
       &:not(:last-child) {
         border-bottom: 1px dashed var(--color-secondary);
       }

@@ -78,7 +78,7 @@ customElements.define('remote-storage-widget', class RemoteStorageWidget extends
     let t = this.root.t;
     let readMore = html`
       ${t.direct('This app allows you to sync the data with a storage of your choice.')} 
-      <a class="rs-help" href="https://remotestorage.io/" target="_blank">${t.direct('Information')}</a>.
+      <a class="rs-help" href="https://remotestorage.io/" target="_blank">${t.direct('Read more about syncing')}</a>.
     `;
 
     let choose = html`<div class="choose">
@@ -89,12 +89,12 @@ customElements.define('remote-storage-widget', class RemoteStorageWidget extends
       ${this.rs.apiKeys.hasOwnProperty('dropbox') ? html`<button class="button has-icon dropbox secondary block" onclick="${() => this.rs["dropbox"].connect()}">
         Dropbox
         <img class="dropbox-logo" src="/images/dropbox.svg">
-      </button>` : ''}
+      </button><br>` : ''}
       
       ${this.rs.apiKeys.hasOwnProperty('googledrive') ? html`<button class="button has-icon googledrive secondary block" onclick="${() => this.rs["googledrive"].connect()}">
         Google Drive
         <img class="googledrive-logo" src="/images/googledrive.svg">
-      </button>` : ''}
+      </button><br>` : ''}
       
       <button class="button rs secondary block has-icon" onclick="${() => {this.showLogin = true; this.draw()}}">
         RemoteStorage

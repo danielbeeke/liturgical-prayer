@@ -21,6 +21,7 @@ import './CustomElements/PrayerMainMenu.js';
 import './CustomElements/PrayerCategoryPrayerPoint.js';
 import './CustomElements/PrayerCategoryPrayerPointCreate.js';
 import './CustomElements/RemoteStorageWidget.js';
+import {html} from './vendor/uhtml.js';
 
 import {toggleGrid} from './Actions/AppActions.js';
 
@@ -82,7 +83,10 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
   draw () {
     let a = Store.getState().app;
     this.dataset.gridEnabled = a.verticalGridEnabled;
-    return this.router.currentRoute ? this.router.currentRoute.template : null;
+    return html`
+      ${this.router.currentRoute ? this.router.currentRoute.template : null}
+      <prayer-menu />
+    `;
   }
 
 });

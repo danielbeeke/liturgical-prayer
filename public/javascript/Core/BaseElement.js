@@ -43,7 +43,7 @@ export class BaseElement extends HTMLElement {
        * After the draw attach click handler for internal hrefs.
        * @type {NodeListOf<HTMLElementTagNameMap[string]> | NodeListOf<Element> | NodeListOf<SVGElementTagNameMap[string]>}
        */
-      let links = this.querySelectorAll('a');
+      let links = document.querySelectorAll('a');
       links.forEach(link => {
         if (typeof link.hasListener === 'undefined') {
           link.hasListener = true;

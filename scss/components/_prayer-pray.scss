@@ -95,7 +95,7 @@ prayer-pray {
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
-    flex: 0 0 100%;
+    flex: 1 1 100%;
 
     scroll-snap-type: mandatory;
     scroll-snap-points-x: repeat(100vw);

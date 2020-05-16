@@ -36,8 +36,11 @@ iframe {
 }
 
 * {
-  user-select: none;
   -webkit-tap-highlight-color: transparent;
+
+  &:not(input):not(textarea) {
+    user-select: none;
+  }
 
   &::-webkit-scrollbar {
     display: none;

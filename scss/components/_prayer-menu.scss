@@ -4,11 +4,12 @@ prayer-menu {
   width: 100%;
   background: var(--color-secondary);
   padding-bottom: 2rs;
-  transition: transform var(--speed) var(--easing);
+  transition: transform var(--speed) var(--easing), opacity var(--speed) var(--easing);
   transform: translateY(0);
   position: fixed;
   bottom: 0;
   box-shadow: 0 0 10px rgba(black, .1);
+  opacity: 1;
 
   .menu-item {
     z-index: 1;
@@ -79,11 +80,11 @@ prayer-menu {
   }
 }
 
-body.is-sorting,
-body.has-focused-input {
-  prayer-menu {
-    transform: translateY(calc(100% + #{5rs}));
-  }
+.page.hide-menu + prayer-menu,
+body.is-sorting prayer-menu,
+body.has-focused-input prayer-menu {
+  transform: translateY(calc(100% + #{5rs}));
+  opacity: 0;
 }
 
 body.is-sorting {
