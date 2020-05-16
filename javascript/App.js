@@ -6344,6 +6344,39 @@ let exports = {};
 
 let RemoteStorage = exports.RemoteStorage;
 
+const navigate = (path) => {
+  Store.dispatch({
+    type: 'navigate',
+    payload: {
+      path: path
+    }
+  });
+};
+
+const setBible = (bible) => {
+  Store.dispatch({
+    type: 'set-bible',
+    payload: {
+      bible: bible
+    }
+  });
+};
+
+const toggleGrid = () => {
+  Store.dispatch({
+    type: 'toggle-grid'
+  });
+};
+
+const replaceState = (state) => {
+  Store.dispatch({
+    type: 'replace-state',
+    payload: {
+      state: state
+    }
+  });
+};
+
 const remoteStorage = new RemoteStorage();
 remoteStorage.setSyncInterval(360000);
 remoteStorage.setApiKeys({
@@ -6352,6 +6385,22 @@ remoteStorage.setApiKeys({
 });
 remoteStorage.access.claim('LiturgicalPrayerApp', 'rw');
 remoteStorage.caching.enable('/LiturgicalPrayerApp/');
+
+remoteStorage.client = remoteStorage.scope('/LiturgicalPrayerApp/');
+remoteStorage.client.declareType('settings', {
+  "type": "object",
+});
+
+remoteStorage.client.on('change', function (event) {
+  if (['remote'].includes(event.origin)) {
+    let remoteState = event.newValue;
+    delete remoteState['@context'];
+    replaceState(remoteState);
+    let app = document.querySelector('prayer-app');
+    app.draw();
+    [...app.children].forEach(child => typeof child.draw !== 'undefined' ? child.draw() : null);
+  }
+});
 
 var obj;
 var NOTHING = typeof Symbol !== "undefined" ? Symbol("immer-nothing") : ( obj = {}, obj["immer-nothing"] = true, obj );
@@ -8072,6 +8121,11 @@ function AppReducer (state = {
     if (action.type === 'set-language') nextState.language = action.payload.language;
     if (action.type === 'set-bible') nextState.bible = action.payload.bible;
     if (action.type === 'toggle-grid') nextState.verticalGridEnabled = !nextState.verticalGridEnabled;
+    if (action.type === 'replace-state') {
+      for (let [key, value] of Object.entries(action.payload.state.app)) {
+        nextState[key] = value;
+      }
+    }
   });
 }
 
@@ -8225,6 +8279,11 @@ function ScheduleReducer (state = initialState, action) {
       moment.till = action.payload.till;
     }
 
+    if (action.type === 'replace-state') {
+      for (let [key, value] of Object.entries(action.payload.state.schedule)) {
+        nextState[key] = value;
+      }
+    }
   });
 }
 
@@ -8275,6 +8334,11 @@ function PrayReducer (state = {
       setCurrentMomentCategoryContent(action.payload.items);
     }
 
+    if (action.type === 'replace-state') {
+      for (let [key, value] of Object.entries(action.payload.state.pray)) {
+        nextState[key] = value;
+      }
+    }
   });
 }
 
@@ -8299,32 +8363,21 @@ let enhancers = composeEnhancers(middleware, persistState(null, {
 
 const Store = createStore(reducers, initialState$1, enhancers);
 
-const client = remoteStorage.scope('/LiturgicalPrayerApp/');
-client.declareType('settings', {
-  "type": "object",
-});
-
-let lastState = null;
+let lastState = Store.getState();
 let slice$1 = savableSlicer();
 Store.subscribe(function () {
   const state = slice$1(Store.getState());
-
+  /**
+   * Make sure we only write out on change and not on load.
+   */
   if (JSON.stringify(state) !== JSON.stringify(lastState)) {
-    client.storeObject('settings', 'settings', state);
+    remoteStorage.client.storeObject('settings', 'settings', state);
     lastState = state;
   }
 });
 
-remoteStorage.on('sync-done', () => {
-  client.getObject('settings').then(remoteState => {
-    if (remoteState) {
-      delete remoteState['@context'];
-      Store.replaceState(remoteState);
-      let app = document.querySelector('prayer-app');
-      app.draw();
-      [...app.children].forEach(child => typeof child.draw !== 'undefined' ? child.draw() : null);
-    }
-  });
+remoteStorage.on('connected', () => {
+  remoteStorage.client.getObject('settings');
 });
 
 /**
@@ -8567,30 +8620,6 @@ const setPrayerPointsOrder = (momentSlug, categorySlug, order) => {
       categorySlug: categorySlug,
       order: order
     }
-  });
-};
-
-const navigate = (path) => {
-  Store.dispatch({
-    type: 'navigate',
-    payload: {
-      path: path
-    }
-  });
-};
-
-const setBible = (bible) => {
-  Store.dispatch({
-    type: 'set-bible',
-    payload: {
-      bible: bible
-    }
-  });
-};
-
-const toggleGrid = () => {
-  Store.dispatch({
-    type: 'toggle-grid'
   });
 };
 
@@ -9885,9 +9914,7 @@ customElements.define('remote-storage-widget', class RemoteStorageWidget extends
   }
 
   sync () {
-    this.rs.startSync().then(() => {
-      this.draw();
-    });
+    this.rs.client.getObject('settings');
   }
 
   statusText () {
@@ -9937,13 +9964,14 @@ customElements.define('remote-storage-widget', class RemoteStorageWidget extends
         <div class="field-inner">
             <input type="text" .value="${this.remoteStorageEmail}" onkeyup="${event => this.remoteStorageEmail = event.target.value}" name="rs-user-address" placeholder="user@provider.com" autocapitalize="off">
         </div>
+
+        <span class="buttons">
+          <button id="submit-remotestorage" name="submit-remotestorage" type="submit" class="button">${t.direct('Connect')}</button>
+          <button class="button secondary" onclick="${event => {event.preventDefault(); this.showLogin = false; this.draw();}}">${t.direct('Cancel')}</button>
+        </span>
+
       </form>
       
-      <span class="buttons">
-        <button type="submit" class="button">${t.direct('Connect')}</button>
-        <button class="button secondary" onclick="${event => {event.preventDefault(); this.showLogin = false; this.draw();}}">${t.direct('Cancel')}</button>
-      </span>
-
     </div>`;
 
     let error = html`<div class="errors">

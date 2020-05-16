@@ -747,18 +747,20 @@ remote-storage-widget .is-syncing .rs-loop-icon {
     transform: rotate(360deg); } }
 
 remote-storage-widget .rs-main-logo {
-  margin-top: 8px;
   height: 32px;
+  border-radius: 8px;
   display: block;
   float: left;
-  margin-right: 16px;
-  margin-left: 8px; }
+  margin-right: 8px; }
 
 remote-storage-widget .title {
-  font-preset: header2;padding-bottom: 6px;padding-top: 10px;line-height: 16px;letter-spacing: -0.5px;font-size: 18px;font-weight: 470;font-family: Inter var; }
+  font-preset: title;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var; }
 
 remote-storage-widget .description {
-  margin-bottom: 16px; }
+  margin-bottom: 8px;
+  -webkit-transform: translateY(-2.4px);
+  -ms-transform: translateY(-2.4px);
+  transform: translateY(-2.4px); }
 
 remote-storage-widget form {
   margin-bottom: 16px;
@@ -766,22 +768,28 @@ remote-storage-widget form {
 
 remote-storage-widget .buttons {
   display: block;
-  height: 40px; }
+  height: 40px;
+  margin-top: 16px; }
 
 remote-storage-widget .connected {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
   padding: 8px;
+  padding-bottom: 0;
   border-radius: 8px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   background: var(--color-secondary); }
   remote-storage-widget .connected .title {
     margin-bottom: -8px; }
+  remote-storage-widget .connected .rs-connected-text {
+    margin-right: auto; }
   remote-storage-widget .connected .description {
     margin-bottom: 0; }
-  remote-storage-widget .connected .rs-connected-buttons {
-    margin-top: 8px;
-    margin-left: auto; }
 
 select {
   display: block;
