@@ -139,5 +139,10 @@ export function ScheduleReducer (state = initialState, action) {
       moment.till = action.payload.till;
     }
 
+    if (action.type === 'replace-state') {
+      for (let [key, value] of Object.entries(action.payload.state.schedule)) {
+        nextState[key] = value;
+      }
+    }
   });
 }

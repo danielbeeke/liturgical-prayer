@@ -30,30 +30,19 @@ let enhancers = composeEnhancers(middleware, persistState(null, {
 
 export const Store = createStore(reducers, initialState, enhancers);
 
-const client = remoteStorage.scope('/LiturgicalPrayerApp/');
-client.declareType('settings', {
-  "type": "object",
-});
-
-let lastState = null;
+let lastState = Store.getState();
 let slice = savableSlicer();
 Store.subscribe(function () {
   const state = slice(Store.getState());
-
+  /**
+   * Make sure we only write out on change and not on load.
+   */
   if (JSON.stringify(state) !== JSON.stringify(lastState)) {
-    client.storeObject('settings', 'settings', state);
+    remoteStorage.client.storeObject('settings', 'settings', state);
     lastState = state;
   }
 });
 
-remoteStorage.on('sync-done', () => {
-  client.getObject('settings').then(remoteState => {
-    if (remoteState) {
-      delete remoteState['@context'];
-      Store.replaceState(remoteState);
-      let app = document.querySelector('prayer-app');
-      app.draw();
-      [...app.children].forEach(child => typeof child.draw !== 'undefined' ? child.draw() : null);
-    }
-  });
+remoteStorage.on('connected', () => {
+  remoteStorage.client.getObject('settings');
 });

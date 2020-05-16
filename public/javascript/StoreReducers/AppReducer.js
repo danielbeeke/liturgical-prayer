@@ -14,5 +14,10 @@ export function AppReducer (state = {
     if (action.type === 'set-language') nextState.language = action.payload.language;
     if (action.type === 'set-bible') nextState.bible = action.payload.bible;
     if (action.type === 'toggle-grid') nextState.verticalGridEnabled = !nextState.verticalGridEnabled;
+    if (action.type === 'replace-state') {
+      for (let [key, value] of Object.entries(action.payload.state.app)) {
+        nextState[key] = value;
+      }
+    }
   });
 }

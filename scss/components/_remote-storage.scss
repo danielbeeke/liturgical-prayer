@@ -14,20 +14,20 @@ remote-storage-widget {
   }
 
   .rs-main-logo {
-    margin-top: 1rs;
     height: 4rs;
+    border-radius: 8px;
     display: block;
     float: left;
-    margin-right: 2rs;
-    margin-left: 1rs;
+    margin-right: 1rs;
   }
 
   .title {
-    font-preset: header2;
+    font-preset: title;
   }
 
   .description {
-    margin-bottom: 2rs;
+    margin-bottom: 1rs;
+    transform: translateY(-.3rs);
   }
 
   form {
@@ -38,25 +38,28 @@ remote-storage-widget {
   .buttons {
     display: block;
     height: 5rs;
+    margin-top: 2rs;
   }
 
   .connected {
     display: flex;
+    flex-wrap: wrap;
     padding: 1rs;
+    padding-bottom: 0;
     border-radius: 8px;
+    justify-content: space-between;
     background: var(--color-secondary);
 
     .title {
       margin-bottom: -1rs;
     }
 
-    .description {
-      margin-bottom: 0;
+    .rs-connected-text {
+      margin-right: auto;
     }
 
-    .rs-connected-buttons {
-      margin-top: 1rs;
-      margin-left: auto;
+    .description {
+      margin-bottom: 0;
     }
   }
 }

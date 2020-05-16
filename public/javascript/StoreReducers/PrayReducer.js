@@ -48,5 +48,10 @@ export function PrayReducer (state = {
       setCurrentMomentCategoryContent(action.payload.items);
     }
 
+    if (action.type === 'replace-state') {
+      for (let [key, value] of Object.entries(action.payload.state.pray)) {
+        nextState[key] = value;
+      }
+    }
   });
 }

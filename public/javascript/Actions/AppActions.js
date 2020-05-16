@@ -32,3 +32,12 @@ export const toggleGrid = () => {
     type: 'toggle-grid'
   })
 };
+
+export const replaceState = (state) => {
+  Store.dispatch({
+    type: 'replace-state',
+    payload: {
+      state: state
+    }
+  })
+};

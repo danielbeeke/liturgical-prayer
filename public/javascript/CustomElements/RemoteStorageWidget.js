@@ -61,9 +61,7 @@ customElements.define('remote-storage-widget', class RemoteStorageWidget extends
   }
 
   sync () {
-    this.rs.startSync().then(() => {
-      this.draw();
-    });
+    this.rs.client.getObject('settings');
   }
 
   statusText () {
@@ -113,13 +111,14 @@ customElements.define('remote-storage-widget', class RemoteStorageWidget extends
         <div class="field-inner">
             <input type="text" .value="${this.remoteStorageEmail}" onkeyup="${event => this.remoteStorageEmail = event.target.value}" name="rs-user-address" placeholder="user@provider.com" autocapitalize="off">
         </div>
+
+        <span class="buttons">
+          <button id="submit-remotestorage" name="submit-remotestorage" type="submit" class="button">${t.direct('Connect')}</button>
+          <button class="button secondary" onclick="${event => {event.preventDefault(); this.showLogin = false; this.draw()}}">${t.direct('Cancel')}</button>
+        </span>
+
       </form>
       
-      <span class="buttons">
-        <button type="submit" class="button">${t.direct('Connect')}</button>
-        <button class="button secondary" onclick="${event => {event.preventDefault(); this.showLogin = false; this.draw()}}">${t.direct('Cancel')}</button>
-      </span>
-
     </div>`;
 
     let error = html`<div class="errors">
