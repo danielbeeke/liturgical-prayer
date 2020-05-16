@@ -527,7 +527,9 @@ prayer-menu {
   -ms-transform: translateY(0);
   transform: translateY(0);
   position: fixed;
-  bottom: 0; }
+  bottom: 0;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
   prayer-menu .menu-item {
     z-index: 1;
     display: -webkit-box;

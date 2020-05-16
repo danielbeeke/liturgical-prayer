@@ -8,6 +8,7 @@ prayer-menu {
   transform: translateY(0);
   position: fixed;
   bottom: 0;
+  box-shadow: 0 0 10px rgba(black, .1);
 
   .menu-item {
     z-index: 1;
