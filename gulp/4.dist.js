@@ -4,7 +4,7 @@ const gulp = require('gulp');
 const clean = require('gulp-clean');
 const rename = require('gulp-rename');
 const rollup = require('rollup');
-const uglify = require('rollup-plugin-uglify');
+const terser = require('rollup-plugin-terser').terser;
 
 gulp.task('clean', () => {
   return gulp.src(['dist/*']).pipe(clean({read: false}));
@@ -25,7 +25,11 @@ gulp.task('rollup', () => {
   return rollup.rollup({
     input: './public/javascript/App.js',
     plugins: [
-      uglify
+      terser({
+        output: {
+          comments: false
+        }
+      })
     ]
   }).then(bundle => {
     return bundle.write({

@@ -346,9 +346,9 @@ prayer-app {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 32px;
-    -webkit-transition: all 0.2s var(--easing);
-    -o-transition: all 0.2s var(--easing);
-    transition: all 0.2s var(--easing); }
+    -webkit-transition: all var(--speed) var(--easing);
+    -o-transition: all var(--speed) var(--easing);
+    transition: all var(--speed) var(--easing); }
     prayer-app > .page > .end {
       border-bottom: 112px solid transparent; }
     prayer-app > .page.hidden {

@@ -7,7 +7,7 @@ prayer-app {
     overflow-y: auto;
     flex: 1 1 auto;
     padding: 4rs;
-    transition: all .2s var(--easing);
+    transition: all var(--speed) var(--easing);
 
     > .end {
       border-bottom: 14rs solid transparent;

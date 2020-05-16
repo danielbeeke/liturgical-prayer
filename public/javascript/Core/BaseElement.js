@@ -59,6 +59,12 @@ export class BaseElement extends HTMLElement {
 
             if (link.getAttribute('href') === location.pathname) return;
 
+            let activeLinks = document.body.querySelectorAll('a.active');
+
+            [...activeLinks].forEach(activeLink => {
+              activeLink.classList.remove('active');
+            });
+
             links.forEach(innerLink => {
               let isCurrent = innerLink.getAttribute('href') === link.getAttribute('href');
               innerLink.classList[isCurrent ? 'add' : 'remove']('active')
