@@ -3,6 +3,7 @@
   --color-secondary: #dbedd7;
   --color-danger: #dd5b3f;
   --color-gray: #ccc;
+  --color-gray-light: #f7f7f7;
   --color-gray-dark: #777;
   --color-black: #2a2a2a;
   --speed: .3s;
@@ -343,8 +344,8 @@ prayer-app {
   prayer-app > .page {
     overflow-y: auto;
     -webkit-box-flex: 1;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
+    -ms-flex: 1 1 100%;
+    flex: 1 1 100%;
     padding: 32px;
     -webkit-transition: all var(--speed) var(--easing);
     -o-transition: all var(--speed) var(--easing);
@@ -463,7 +464,18 @@ prayer-main-menu.page {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  max-width: var(--max-width-panel); }
+  max-width: var(--max-width-panel);
+  position: relative;
+  padding-top: 48px; }
+  prayer-main-menu.page:after {
+    position: absolute;
+    content: '';
+    background: var(--color-secondary);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; }
   prayer-main-menu.page .menu-item {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -498,8 +510,8 @@ prayer-main-menu.page {
       font-preset: header2;padding-bottom: 14px;padding-top: 10px;line-height: 16px;letter-spacing: -0.5px;font-size: 18px;font-weight: 470;font-family: Inter var;
       margin-left: 48px; }
     prayer-main-menu.page .menu-item:last-child {
-      border-bottom: none;
-      margin-bottom: 80px; }
+      margin-bottom: 80px;
+      border-bottom: 0; }
     prayer-main-menu.page .menu-item:hover {
       color: white; }
       prayer-main-menu.page .menu-item:hover:not(:last-child) {
@@ -713,9 +725,9 @@ prayer-pray .slider {
   flex-wrap: nowrap;
   overflow-x: auto;
   scrollbar-width: none;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 100%;
-  flex: 0 0 100%;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 100%;
+  flex: 1 1 100%;
   -ms-scroll-snap-type: mandatory;
   scroll-snap-type: mandatory;
   -ms-scroll-snap-points-x: repeat(100vw);
