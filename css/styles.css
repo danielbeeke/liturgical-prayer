@@ -531,18 +531,19 @@ prayer-menu {
   width: 100%;
   background: var(--color-secondary);
   padding-bottom: 16px;
-  -webkit-transition: -webkit-transform var(--speed) var(--easing);
-  transition: -webkit-transform var(--speed) var(--easing);
-  -o-transition: transform var(--speed) var(--easing);
-  transition: transform var(--speed) var(--easing);
-  transition: transform var(--speed) var(--easing), -webkit-transform var(--speed) var(--easing);
+  -webkit-transition: opacity var(--speed) var(--easing), -webkit-transform var(--speed) var(--easing);
+  transition: opacity var(--speed) var(--easing), -webkit-transform var(--speed) var(--easing);
+  -o-transition: transform var(--speed) var(--easing), opacity var(--speed) var(--easing);
+  transition: transform var(--speed) var(--easing), opacity var(--speed) var(--easing);
+  transition: transform var(--speed) var(--easing), opacity var(--speed) var(--easing), -webkit-transform var(--speed) var(--easing);
   -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
   transform: translateY(0);
   position: fixed;
   bottom: 0;
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  opacity: 1; }
   prayer-menu .menu-item {
     z-index: 1;
     display: -webkit-box;
@@ -612,11 +613,13 @@ prayer-menu {
     prayer-menu .menu-item {
       margin-right: 64px; } }
 
+.page.hide-menu + prayer-menu,
 body.is-sorting prayer-menu,
 body.has-focused-input prayer-menu {
   -webkit-transform: translateY(calc(100% + 40px));
   -ms-transform: translateY(calc(100% + 40px));
-  transform: translateY(calc(100% + 40px)); }
+  transform: translateY(calc(100% + 40px));
+  opacity: 0; }
 
 body.is-sorting {
   overflow: hidden !important; }
