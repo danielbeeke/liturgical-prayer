@@ -1,0 +1,10 @@
+<svg class="rs-main-logo" id="rs-main-logo-dropbox" width="40" height="36"
+     xml:space="preserve" stroke-miterlimit="1.4142"
+     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104 97"
+     stroke-linejoin="round" version="1.1" clip-rule="evenodd">
+      <path d="m30.691 0l-30.691 20.039 21.221 16.994 30.946-19.108-21.476-17.925z" fill="#007ee5"/>
+    <path d="m0 54.028l30.691 20.039 21.476-17.926-30.945-19.108-21.222 16.995z" fill="#007ee5"/>
+    <path d="m52.167 56.142l21.477 17.926 30.696-20.039-21.227-16.995-30.946 19.108z" fill="#007ee5"/>
+    <path d="m104.34 20.039l-30.696-20.039-21.477 17.925 30.946 19.108 21.227-16.994z" fill="#007ee5"/>
+    <path d="m52.23 59.998l-21.538 17.873-9.218-6.018v6.747l30.756 18.443 30.756-18.443v-6.747l-9.216 6.018-21.54-17.873z" fill="#007ee5"/>
+    </svg>
