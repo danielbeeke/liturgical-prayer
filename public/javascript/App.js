@@ -20,6 +20,7 @@ import './CustomElements/PrayerPage.js';
 import './CustomElements/PrayerMainMenu.js';
 import './CustomElements/PrayerCategoryPrayerPoint.js';
 import './CustomElements/PrayerCategoryPrayerPointCreate.js';
+import './CustomElements/RemoteStorageWidget.js';
 
 import {toggleGrid} from './Actions/AppActions.js';
 

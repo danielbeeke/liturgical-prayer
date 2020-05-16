@@ -1,115 +1,62 @@
-.remotestorage-widget-modal-backdrop {
-  display: none !important;
-}
-
-#remote-storage .rs-widget {
-  margin: 0;
-  opacity: 1;
-  padding: 0 2rs;
-  box-shadow: none;
-  max-width: 100%;
-  border-radius: 8px;
-  background: var(--color-secondary);
-  position: relative;
-
-  &:not(.rs-state-initial):not(.rs-state-choose) {
-    padding-left: 9rs;
+remote-storage-widget {
+  [data-online="false"] img {
+    filter: grayscale(1);
   }
 
-  .rs-connected-buttons {
-    padding-top: 1rs;
+  .is-syncing .rs-loop-icon {
+    animation: rs-spin 1s linear infinite;
   }
 
-  .rs-big-headline {
-    text-align: left !important;
-    margin: 0;
-    font-preset: button;
-    margin-bottom: 2rs;
+  @keyframes rs-spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .rs-main-logo {
     margin-top: 1rs;
-  }
-
-  .rs-content {
-    padding: 0;
-  }
-
-  .rs-short-desc {
-    margin: 0;
-    text-align: left !important;
-    font-preset: title;
-    margin-bottom: 3rs;
-  }
-
-  .rs-sub-headline {
-    margin: 0;
-    font-preset: button;
-    height: auto;
+    height: 4rs;
     display: block;
-    word-break: normal;
-    margin-top: -2rs;
-    margin-bottom: 1rs;
+    float: left;
+    margin-right: 2rs;
+    margin-left: 1rs;
   }
 
-  .rs-small-headline {
-    margin: 0;
-    margin-top: 1rs;
-    font-preset: title;
-    height: auto;
-    word-break: normal;
+  .title {
+    font-preset: header2;
   }
 
-  .rs-button-wrap {
-    margin-top: 0;
-  }
-
-  .rs-box-connected {
-    height: auto;
-  }
-
-  #rs-main-logo-remotestorage {
-    display: none;
-  }
-
-  .rs-button {
-    margin-bottom: 0;
-    background: white;
-    border: 0;
-    border-radius: 8px;
-    box-shadow: none;
-    font-preset: button;
+  .description {
     margin-bottom: 2rs;
-
-    > div {
-      padding: 0;
-    }
-
-    &:hover * {
-      fill: var(--color-black);
-    }
   }
 
-  .rs-widget-icon {
-    position: absolute;
-    top: 50%;
-    left: 2rs;
-    transform: translateY(-50%);
+  form {
+    margin-bottom: 2rs;
+    display: block;
   }
 
-  &.rs-state-choose {
-    .rs-button {
-      font-preset: button;
-      padding-top: 1rs;
-      padding-bottom: 1rs;
-      padding-left: 7rs;
-      position: relative;
+  .buttons {
+    display: block;
+    height: 5rs;
+  }
 
-      svg {
-        left: 1rs;
-        position: absolute;
-        height: 4rs;
-        top: 50%;
-        transform: translateY(-50%);
+  .connected {
+    display: flex;
+    padding: 1rs;
+    border-radius: 8px;
+    background: var(--color-secondary);
 
-      }
+    .title {
+      margin-bottom: -1rs;
+    }
+
+    .description {
+      margin-bottom: 0;
+    }
+
+    .rs-connected-buttons {
+      margin-top: 1rs;
+      margin-left: auto;
     }
   }
 }

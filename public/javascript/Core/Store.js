@@ -35,17 +35,25 @@ client.declareType('settings', {
   "type": "object",
 });
 
+let lastState = null;
+let slice = savableSlicer();
 Store.subscribe(function () {
-  const state = Object.assign({}, Store.getState());
-  client.storeObject('settings', 'settings', state);
+  const state = slice(Store.getState());
+
+  if (JSON.stringify(state) !== JSON.stringify(lastState)) {
+    client.storeObject('settings', 'settings', state);
+    lastState = state;
+  }
 });
 
 remoteStorage.on('sync-done', () => {
   client.getObject('settings').then(remoteState => {
-    delete remoteState['@context'];
-    Store.replaceState(remoteState);
-    let app = document.querySelector('prayer-app');
-    app.draw();
-    [...app.children].forEach(child => typeof child.draw !== 'undefined' ? child.draw() : null);
+    if (remoteState) {
+      delete remoteState['@context'];
+      Store.replaceState(remoteState);
+      let app = document.querySelector('prayer-app');
+      app.draw();
+      [...app.children].forEach(child => typeof child.draw !== 'undefined' ? child.draw() : null);
+    }
   });
 });

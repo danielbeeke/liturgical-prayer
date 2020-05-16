@@ -51,6 +51,10 @@ export class BaseElement extends HTMLElement {
           if (link.getAttribute('href') === location.pathname) link.classList.add('active');
 
           link.addEventListener('click', event => {
+            if (link.getAttribute('href').substr(0,4) === 'http') {
+              return;
+            }
+
             event.preventDefault();
 
             if (link.getAttribute('href') === location.pathname) return;

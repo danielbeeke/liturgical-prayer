@@ -71,12 +71,12 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
         </div>
       ` : html``}
       ${this.category.isFreeForm ? html`
-        <a class="button" href="${`/settings/${this.moment.slug}/prayer-category/${this.category.slug}/create`}">
+        <a class="button has-icon" href="${`/settings/${this.moment.slug}/prayer-category/${this.category.slug}/create`}">
           ${t.direct('Create prayer point')}
           <prayer-icon name="arrow-right" />
         </a>
         
-        <button class="button danger" onclick="${() => {deleteFreeCategory(this.moment.slug, this.category.slug); this.root.router.navigate(`/settings/${this.moment.slug}`)}}">
+        <button class="button danger has-icon" onclick="${() => {deleteFreeCategory(this.moment.slug, this.category.slug); this.root.router.navigate(`/settings/${this.moment.slug}`)}}">
             ${t.direct('Delete category')}
             <prayer-icon name="remove" />
         </button>        

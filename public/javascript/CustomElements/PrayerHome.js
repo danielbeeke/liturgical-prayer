@@ -20,7 +20,7 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
       ${s.moments.filter(moment => moment.enabled).map(moment => html`
         <a class="moment card" data-moment="${moment.slug}" href="${'/pray/' + moment.slug}" style="${`--color-primary: ${moment.color};  --color-secondary: ${moment.colorBackground}`}">
           <div class="image" style="${`background-image: url(${moment.background});`}"></div>
-          <span class="button">
+          <span class="button has-icon">
             ${t`Pray`}
             <prayer-icon name="arrow-right" />
           </span>

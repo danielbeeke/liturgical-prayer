@@ -8,12 +8,7 @@ import {Content} from '../Content.js';
 customElements.define('prayer-settings', class PrayerSettings extends BaseElement {
 
   connectedCallback() {
-    this.draw()
-  }
-
-  afterDraw() {
-    const widget = new Widget(this.root.storage);
-    widget.attach('remote-storage');
+    this.draw();
   }
 
   draw () {
@@ -57,7 +52,7 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
       
       <div class="field">
         <label>${t`Sync data`}</label>
-        <div id="remote-storage"></div>
+        <remote-storage-widget />
       </div>
       
       

@@ -84,7 +84,7 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
         <p>
           ${t`Do you want to pray for your family, friends, church or city? Create category and add your own prayer points.`}
           <br /><br />
-          <a class="button" href="${`/settings/${this.route.parameters.moment}/create-free-category`}">
+          <a class="button has-icon" href="${`/settings/${this.route.parameters.moment}/create-free-category`}">
           ${t.direct('Create category')}
           <prayer-icon name="arrow-right" />
         </a>
