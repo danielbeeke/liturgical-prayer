@@ -104,7 +104,7 @@ p {
   padding-right: 16px;
   text-decoration: none;
   color: var(--color-black);
-  display: inline;
+  display: inline-block;
   white-space: nowrap;
   border: 0;
   -webkit-box-pack: center;
@@ -780,14 +780,15 @@ remote-storage-widget .connected {
   padding: 8px;
   padding-bottom: 0;
   border-radius: 8px;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   background: var(--color-secondary); }
   remote-storage-widget .connected .title {
     margin-bottom: -8px; }
   remote-storage-widget .connected .rs-connected-text {
-    margin-right: auto; }
+    margin-right: auto;
+    padding-right: 16px; }
   remote-storage-widget .connected .description {
     margin-bottom: 0; }
 

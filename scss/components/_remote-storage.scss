@@ -47,7 +47,7 @@ remote-storage-widget {
     padding: 1rs;
     padding-bottom: 0;
     border-radius: 8px;
-    justify-content: space-between;
+    justify-content: flex-start;
     background: var(--color-secondary);
 
     .title {
@@ -56,6 +56,10 @@ remote-storage-widget {
 
     .rs-connected-text {
       margin-right: auto;
+      padding-right: 2rs;
+    }
+
+    .rs-connected-buttons {
     }
 
     .description {
