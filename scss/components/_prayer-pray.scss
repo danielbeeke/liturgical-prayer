@@ -29,7 +29,7 @@ prayer-pray {
   .prayer {
     flex: 0 0 100vw;
     height: 100%;
-    //overflow-y: auto;
+    overflow-y: auto;
     scroll-snap-align: start;
     scrollbar-width: none;
 
