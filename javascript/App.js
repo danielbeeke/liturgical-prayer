@@ -258,7 +258,7 @@ var e=function(e){return{get:function(t){return e.get(t)},set:function(t,r){retu
 
       </div>
 
-    `}closeApp(){let e=document.exitFullscreen||document.mozCancelFullScreen||document.webkitExitFullscreen||document.msExitFullscreen;e?e.call(document):console.log("Oops. Request method false.")}}),customElements.define("prayer-category-prayer-point",class extends Ut{draw(){let e=this.root.t,t=Nt.getState().schedule;this.freeCategory=t.freeCategories.find(e=>e.slug===this.route.parameters.category);let r=Object.assign({},this.freeCategory.items.find(e=>e.slug===this.route.parameters.item)),n=`/settings/${this.route.parameters.moment}/prayer-category/${this.route.parameters.category}`;return N`
+    `}closeApp(){let e=history.length-1;history.go(e)}}),customElements.define("prayer-category-prayer-point",class extends Ut{draw(){let e=this.root.t,t=Nt.getState().schedule;this.freeCategory=t.freeCategories.find(e=>e.slug===this.route.parameters.category);let r=Object.assign({},this.freeCategory.items.find(e=>e.slug===this.route.parameters.item)),n=`/settings/${this.route.parameters.moment}/prayer-category/${this.route.parameters.category}`;return N`
       <h2 class="page-title">
         <a class="back-button" href="${n}"><prayer-icon name="arrow-left" /></a>
         ${r.title}

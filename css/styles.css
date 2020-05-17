@@ -487,6 +487,7 @@ prayer-main-menu.page {
     -ms-flex-align: center;
     align-items: center;
     text-decoration: none;
+    cursor: pointer;
     padding: 8px 32px 8px 32px;
     position: relative;
     border-bottom: 1px dashed var(--color-primary);
