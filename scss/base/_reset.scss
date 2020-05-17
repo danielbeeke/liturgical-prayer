@@ -36,6 +36,7 @@ iframe {
 }
 
 * {
+  overscroll-behavior: contain;
   -webkit-tap-highlight-color: transparent;
 
   &:not(input):not(textarea) {
