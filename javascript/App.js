@@ -251,14 +251,14 @@ var e=function(e){return{get:function(t){return e.get(t)},set:function(t,r){retu
           <span class="title">${e.direct("Settings")}</span>
         </a>
         
-        <a class="menu-item" onclick="${()=>this.closeApp()}">
+        <span class="menu-item" onclick="${()=>this.closeApp()}">
           <prayer-icon name="power" />
           <span class="title">${e.direct("Close app")}</span>
-        </a>
+        </span>
 
       </div>
 
-    `}closeApp(){let e=history.length-1;history.go(e)}}),customElements.define("prayer-category-prayer-point",class extends Ut{draw(){let e=this.root.t,t=Nt.getState().schedule;this.freeCategory=t.freeCategories.find(e=>e.slug===this.route.parameters.category);let r=Object.assign({},this.freeCategory.items.find(e=>e.slug===this.route.parameters.item)),n=`/settings/${this.route.parameters.moment}/prayer-category/${this.route.parameters.category}`;return N`
+    `}closeApp(){history.go(0)}}),customElements.define("prayer-category-prayer-point",class extends Ut{draw(){let e=this.root.t,t=Nt.getState().schedule;this.freeCategory=t.freeCategories.find(e=>e.slug===this.route.parameters.category);let r=Object.assign({},this.freeCategory.items.find(e=>e.slug===this.route.parameters.item)),n=`/settings/${this.route.parameters.moment}/prayer-category/${this.route.parameters.category}`;return N`
       <h2 class="page-title">
         <a class="back-button" href="${n}"><prayer-icon name="arrow-left" /></a>
         ${r.title}
