@@ -12,6 +12,7 @@ export const Routes = {
   'pray': { template: html`<prayer-home class="page hidden" />` },
   'menu': { template: html`<prayer-main-menu class="page hidden" />` },
   'settings': { template: html`<prayer-settings class="page hidden" />` },
+  'callback': { template: html`<prayer-storage-callback class="page hidden" />` },
   'settings/:moment': { template: html`<prayer-moment-configure class="page hidden" />` },
   'pray/:moment': { template: html`<prayer-pray class="page hidden hide-menu" />` },
   'settings/:moment/prayer-category/:category': { template: html`<prayer-category-details class="page hidden" />` },

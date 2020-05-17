@@ -74,6 +74,17 @@ customElements.define('remote-storage-widget', class RemoteStorageWidget extends
     }
   }
 
+  connect (provider) {
+    history.pushState({}, 'callback', 'callback');
+
+    if (provider === 'remotestorage') {
+      this.rs.connect(this.remoteStorageEmail.trim());
+    }
+    else {
+      this.rs[provider].connect();
+    }
+  }
+
   draw () {
     let t = this.root.t;
     let readMore = html`
@@ -86,12 +97,12 @@ customElements.define('remote-storage-widget', class RemoteStorageWidget extends
         ${readMore}
       </div>
       
-      ${this.rs.apiKeys.hasOwnProperty('dropbox') ? html`<button class="button has-icon dropbox secondary block" onclick="${() => this.rs["dropbox"].connect()}">
+      ${this.rs.apiKeys.hasOwnProperty('dropbox') ? html`<button class="button has-icon dropbox secondary block" onclick="${() => this.connect('dropbox')}">
         Dropbox
         <img class="dropbox-logo" src="/images/dropbox.svg">
       </button><br>` : ''}
       
-      ${this.rs.apiKeys.hasOwnProperty('googledrive') ? html`<button class="button has-icon googledrive secondary block" onclick="${() => this.rs["googledrive"].connect()}">
+      ${this.rs.apiKeys.hasOwnProperty('googledrive') ? html`<button class="button has-icon googledrive secondary block" onclick="${() => this.connect('googledrive')}">
         Google Drive
         <img class="googledrive-logo" src="/images/googledrive.svg">
       </button><br>` : ''}
@@ -107,7 +118,7 @@ customElements.define('remote-storage-widget', class RemoteStorageWidget extends
       <div class="description">
         ${readMore}
       </div>
-      <form name="rs-sign-in-form" class="rs-sign-in-form" onsubmit="${event => {event.preventDefault(); this.rs.connect(this.remoteStorageEmail.trim())}}">
+      <form name="rs-sign-in-form" class="rs-sign-in-form" onsubmit="${event => {event.preventDefault(); this.connect('remotestorage')}}">
         <div class="field-inner">
             <input type="text" .value="${this.remoteStorageEmail}" onkeyup="${event => this.remoteStorageEmail = event.target.value}" name="rs-user-address" placeholder="user@provider.com" autocapitalize="off">
         </div>
