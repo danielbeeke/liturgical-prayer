@@ -54,7 +54,7 @@ export class Router {
     let tokens = [];
     newRouteSplit.forEach(part => {
       if (part.substr(0, 1) === ':') {
-        replacedParts.push('([a-z\\-]*)');
+        replacedParts.push('([\-a-z0-9\\-]*)');
         tokens.push(part.substr(1));
       }
       else {

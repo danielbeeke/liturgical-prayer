@@ -2,7 +2,7 @@
   .item {
     background: var(--color-secondary);
     margin-bottom: 1rs;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     padding-left: 1rs;
     padding-right: 1rs;
     display: flex;

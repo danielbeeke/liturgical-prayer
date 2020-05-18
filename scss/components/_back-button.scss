@@ -1,15 +1,14 @@
 .back-button {
   position: relative;
   width: 5rs;
-  margin-right: 4.5rs;
 
   prayer-icon {
-    top: 1px;
+    top: .5rs;
     position: absolute;
     background: var(--color-secondary);
-    height: 3rs;
+    height: 4rs;
     width: 26px;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
 
     path {
       fill: var(--color-primary);

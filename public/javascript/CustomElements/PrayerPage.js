@@ -9,7 +9,10 @@ customElements.define('prayer-page', class PrayerHome extends BaseElement {
     let page = Content['Pages'].find(page => page.slug === location.pathname.substr(1));
 
     return html`
-      <h2 class="page-title">${page.Title}</h2>
+      <h2 class="page-title">
+        <prayer-icon name="${page.Icon}" />
+        ${page.Title}
+      </h2>
       <p>${toLines(page.Content)}</p>
       <div class="end"></div>
     `;

@@ -22,6 +22,8 @@ import './CustomElements/PrayerCategoryPrayerPoint.js';
 import './CustomElements/PrayerCategoryPrayerPointCreate.js';
 import './CustomElements/PrayerStorageCallback.js';
 import './CustomElements/RemoteStorageWidget.js';
+import './CustomElements/PrayerCalendar.js';
+import './CustomElements/PrayerCalendarDetail.js';
 import {html} from './vendor/uhtml.js';
 
 import {toggleGrid} from './Actions/AppActions.js';

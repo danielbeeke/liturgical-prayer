@@ -9,7 +9,7 @@
   --speed: .3s;
   --easing: cubic-bezier(.67,-0.07,.49,.93);
   --padding: 7px;
-  --radius: 4px;
+  --border-radius: 8px;
   --max-width-panel: 2000px; }
 
 @media all and (min-width: 700px) {
@@ -87,15 +87,14 @@ p {
 
 .back-button {
   position: relative;
-  width: 40px;
-  margin-right: 36px; }
+  width: 40px; }
   .back-button prayer-icon {
-    top: 1px;
+    top: 4px;
     position: absolute;
     background: var(--color-secondary);
-    height: 24px;
+    height: 32px;
     width: 26px;
-    border-radius: 8px; }
+    border-radius: var(--border-radius); }
     .back-button prayer-icon path {
       fill: var(--color-primary); }
 
@@ -120,6 +119,8 @@ p {
     background: var(--color-secondary); }
   .button.danger {
     background: var(--color-danger); }
+  .button.small {
+    font-preset: button-small;padding-bottom: 7px;padding-top: 9px;line-height: 24px;letter-spacing: 1px;font-size: 10px;font-weight: 570;font-family: Inter var; }
   .button.has-icon {
     padding-right: 48px;
     position: relative; }
@@ -136,6 +137,32 @@ p {
       .button.has-icon img svg,
       .button.has-icon prayer-icon svg {
         height: 100%; }
+    .button.has-icon.small {
+      padding-right: 32px; }
+      .button.has-icon.small img,
+      .button.has-icon.small prayer-icon {
+        right: 6px; }
+  .button.has-icon-left {
+    padding-left: 48px;
+    position: relative; }
+    .button.has-icon-left img,
+    .button.has-icon-left prayer-icon {
+      left: 12px;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      display: block;
+      position: absolute;
+      height: 24px; }
+      .button.has-icon-left img svg,
+      .button.has-icon-left prayer-icon svg {
+        height: 100%; }
+    .button.has-icon-left.small {
+      padding-left: 32px; }
+      .button.has-icon-left.small img,
+      .button.has-icon-left.small prayer-icon {
+        left: 6px; }
   .button.only-icon {
     position: relative;
     height: 32px;
@@ -250,7 +277,7 @@ p {
 .item-list .item {
   background: var(--color-secondary);
   margin-bottom: 8px;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   padding-left: 8px;
   padding-right: 8px;
   display: -webkit-box;
@@ -306,7 +333,7 @@ p {
   -ms-flex: 0 0 60vw;
   flex: 0 0 60vw;
   margin-left: 32px;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   position: relative;
   overflow: hidden; }
   .moment.card .image {
@@ -325,6 +352,11 @@ p {
     position: absolute;
     bottom: 56px;
     left: 16px; }
+  .moment.card.history {
+    height: 200px;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 32px; }
 
 @media all and (min-width: 700px) {
   .moment.card {
@@ -334,6 +366,18 @@ p {
 .page-title {
   font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
   margin-bottom: 24px; }
+  .page-title prayer-icon {
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    margin-top: -4px; }
+  .page-title .back-button {
+    float: left;
+    width: 40px;
+    height: 32px; }
+  .page-title .back-button + prayer-icon {
+    margin-left: 5.6px; }
 
 prayer-app {
   height: 100%;
@@ -380,6 +424,64 @@ prayer-app {
     width: 100%; }
   prayer-app[data-grid-enabled="true"]:before {
     opacity: 1; }
+
+prayer-calendar .month-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+
+prayer-calendar .calendar-title {
+  width: 100%;
+  text-align: center;
+  font-preset: button;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var;
+  margin-top: 16px; }
+
+prayer-calendar .calendar {
+  clear: both;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, calc((100% - (6.1 * 8px)) / 7));
+  grid-gap: 8px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: 24px; }
+
+prayer-calendar .day {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-preset: title;padding-bottom: 12px;padding-top: 12px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
+  text-align: center;
+  background: var(--color-gray-light);
+  border-radius: var(--border-radius); }
+
+prayer-calendar .number {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  font-preset: title;padding-bottom: 12px;padding-top: 12px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
+  border-radius: var(--border-radius); }
+  prayer-calendar .number.has-prayers {
+    background: var(--color-secondary);
+    color: var(--color-black); }
+  prayer-calendar .number.selected {
+    background: var(--color-primary);
+    color: white; }
 
 prayer-category-details .prayer-point prayer-icon[name="handle"] {
   pointer-events: none; }
@@ -487,6 +589,7 @@ prayer-main-menu.page {
     -ms-flex-align: center;
     align-items: center;
     text-decoration: none;
+    cursor: pointer;
     padding: 8px 32px 8px 32px;
     position: relative;
     border-bottom: 1px dashed var(--color-primary);
@@ -767,7 +870,7 @@ remote-storage-widget .is-syncing .rs-loop-icon {
 
 remote-storage-widget .rs-main-logo {
   height: 32px;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   display: block;
   float: left;
   margin-right: 8px; }
@@ -798,7 +901,7 @@ remote-storage-widget .connected {
   flex-wrap: wrap;
   padding: 8px;
   padding-bottom: 0;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
@@ -814,7 +917,7 @@ remote-storage-widget .connected {
 select {
   display: block;
   width: 100%;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   border: 0;
   background: var(--color-secondary);
   font-preset: select;padding-bottom: 8px;padding-top: 8px;line-height: 24px;text-transform: uppercase;letter-spacing: 1px;font-size: 12px;font-weight: 670;font-family: Inter var;

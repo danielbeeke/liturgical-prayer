@@ -21,6 +21,11 @@ customElements.define('prayer-main-menu', class PrayerMenu extends BaseElement {
           <span class="title">${t.direct('Home')}</span>
         </a>
 
+        <a class="menu-item" href="/calendar">
+          <prayer-icon name="calendar" />
+          <span class="title">${t.direct('Calendar')}</span>
+        </a>
+
         ${pages.map(page => html`
           <a class="menu-item" href="${'/' + page.slug}">
             <prayer-icon name="${page.Icon}" />
@@ -32,7 +37,7 @@ customElements.define('prayer-main-menu', class PrayerMenu extends BaseElement {
           <prayer-icon name="settings" />
           <span class="title">${t.direct('Settings')}</span>
         </a>
-
+   
       </div>
 
     `;

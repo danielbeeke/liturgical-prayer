@@ -3,7 +3,7 @@
   display: block;
   flex: 0 0 60vw;
   margin-left: 4rs;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   position: relative;
   overflow: hidden;
 
@@ -29,6 +29,13 @@
     position: absolute;
     bottom: 7rs;
     left: 2rs;
+  }
+
+  &.history {
+    height: 200px;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 4rs;
   }
 }
 

@@ -23,6 +23,10 @@
     background: var(--color-danger);
   }
 
+  &.small {
+    font-preset: button-small;
+  }
+
   &.has-icon {
     padding-right: 6rs;
     position: relative;
@@ -38,6 +42,43 @@
 
       svg {
         height: 100%;
+      }
+    }
+
+    &.small {
+      padding-right: 4rs;
+
+      img,
+      prayer-icon {
+        right: 6px;
+      }
+    }
+  }
+
+  &.has-icon-left {
+    padding-left: 6rs;
+    position: relative;
+
+    img,
+    prayer-icon {
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: block;
+      position: absolute;
+      height: 3rs;
+
+      svg {
+        height: 100%;
+      }
+    }
+
+    &.small {
+      padding-left: 4rs;
+
+      img,
+      prayer-icon {
+        left: 6px;
       }
     }
   }

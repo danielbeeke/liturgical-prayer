@@ -19,7 +19,10 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
     let englishBibles = bibles.filter(bible => bible.language.id === 'eng');
 
     return html`
-      <h2 class="page-title">${t`When and how do you want to pray?`}</h2>
+      <h2 class="page-title">
+        <prayer-icon name="settings" />
+        ${t.direct('Settings')}
+      </h2>
 
       <div class="field">
         <label>

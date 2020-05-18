@@ -21,6 +21,7 @@ prayer-main-menu.page {
     display: flex;
     align-items: center;
     text-decoration: none;
+    cursor: pointer;
     padding: 1rs 4rs 1rs 4rs;
     position: relative;
     border-bottom: 1px dashed var(--color-primary);

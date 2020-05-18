@@ -1,4 +1,22 @@
 .page-title {
   font-preset: header3;
   margin-bottom: 3rs;
+
+  prayer-icon {
+    float: left;
+    width: 4rs;
+    height: 4rs;
+    margin-right: 1rs;
+    margin-top: -.5rs;
+  }
+
+  .back-button {
+    float: left;
+    width: 5rs;
+    height: 4rs;
+  }
+
+  .back-button + prayer-icon {
+    margin-left: .7rs;
+  }
 }

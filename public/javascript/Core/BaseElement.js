@@ -29,7 +29,7 @@ export class BaseElement extends HTMLElement {
 
       this.afterDraw();
 
-      let inputs = this.querySelectorAll('input,textarea');
+      let inputs = this.querySelectorAll('input:not(.datepicker-button-input),textarea');
       inputs.forEach(input => {
         input.addEventListener('focus', () => {
           document.body.classList.add('has-focused-input');

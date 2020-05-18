@@ -56,6 +56,14 @@
       "letter-spacing": "1px",
       "base-line-percentage": 0.84
     },
+    "button-small": {
+      "font-family": "Inter var",
+      "rows": 3,
+      "font-weight": 570,
+      "font-size": "10px",
+      "letter-spacing": "1px",
+      "base-line-percentage": 0.84
+    },
     "menu": {
       "font-family": "Inter var",
       "rows": 2,

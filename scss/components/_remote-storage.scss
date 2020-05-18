@@ -15,7 +15,7 @@ remote-storage-widget {
 
   .rs-main-logo {
     height: 4rs;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     display: block;
     float: left;
     margin-right: 1rs;
@@ -46,7 +46,7 @@ remote-storage-widget {
     flex-wrap: wrap;
     padding: 1rs;
     padding-bottom: 0;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     justify-content: flex-start;
     background: var(--color-secondary);
 
