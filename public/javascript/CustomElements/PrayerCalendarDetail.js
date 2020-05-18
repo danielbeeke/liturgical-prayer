@@ -17,8 +17,6 @@ customElements.define('prayer-calendar-detail', class PrayerHome extends BaseEle
     let prayedMomentSlugs = Object.keys(prayedMoments);
     let s = Store.getState().schedule;
 
-    console.log(s.moments)
-
     let dayLabel = new Intl.DateTimeFormat(undefined, {
       year: 'numeric',
       month: 'long',

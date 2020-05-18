@@ -70,7 +70,7 @@ export class BaseElement extends HTMLElement {
               innerLink.classList[isCurrent ? 'add' : 'remove']('active')
             });
 
-            let page = document.querySelector('.page');
+            let page = document.querySelector('.page:not(.no-transition)');
 
             if (page) {
               page.addEventListener('transitionend', () => {
@@ -143,4 +143,9 @@ export class BaseElement extends HTMLElement {
   tokenize (content) {
     return this.root.tokenizer.replace(content);
   }
+
+  /**
+   * If your component will not be re connected you can use this.
+   */
+  forceDraw () {}
 }

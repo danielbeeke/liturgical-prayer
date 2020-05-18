@@ -16,7 +16,7 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
     <span class="prefix">${t`Welcome,`}</span>
     <h1 class="title">${t`Some beautiful prayers are to be prayed.`}</h1>
     
-    <div class="moments slider">
+    <div class="moments moments-slider">
       ${s.moments.filter(moment => moment.enabled).map(moment => html`
         <a class="moment card" data-moment="${moment.slug}" href="${'/pray/' + moment.slug}" style="${`--color-primary: ${moment.color};  --color-secondary: ${moment.colorBackground}`}">
           <div class="image" style="${`background-image: url(${moment.background});`}"></div>

@@ -86,10 +86,19 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
   draw () {
     let a = Store.getState().app;
     this.dataset.gridEnabled = a.verticalGridEnabled;
+
+    if (this.router.currentRoute && this.router.currentRoute.redirect) {
+      this.router.navigate(this.router.currentRoute.redirect);
+    }
+
     return html`
-      ${this.router.currentRoute ? this.router.currentRoute.template : null}
+      ${this.router.currentRoute && this.router.currentRoute.template ? this.router.currentRoute.template : null}
       <prayer-menu />
     `;
+  }
+
+  afterDraw() {
+    this.children[0].forceDraw();
   }
 
 });

@@ -1,0 +1,21 @@
+.moments-slider {
+  flex: 0 0 calc(100% - 33rs);
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin: 0 -4rs;
+  padding-top: 2rs;
+  padding-bottom: 2rs;
+  scrollbar-width: none;
+  min-height: 250px;
+
+  scroll-snap-type: mandatory;
+  scroll-snap-points-x: repeat(60vw);
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 4rs;
+
+  .end {
+    margin-left: 4rs;
+    flex: 0 0 1px;
+  }
+}

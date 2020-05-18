@@ -7,11 +7,14 @@ prayer-calendar {
     justify-content: space-between;
   }
 
+  .page-title {
+    margin-bottom: 1rs;
+  }
+
   .calendar-title {
     width: 100%;
     text-align: center;
     font-preset: button;
-    margin-top: 2rs;
   }
 
   .calendar {
@@ -50,9 +53,28 @@ prayer-calendar {
       color: var(--color-black);
     }
 
-    &.selected {
+    &.active {
       background: var(--color-primary);
       color: white;
+    }
+  }
+
+  .line-calendar {
+    display: flex;
+    overflow-x: scroll;
+    margin-left: -4rs;
+    margin-right: -4rs;
+    scrollbar-width: none;
+    position: sticky;
+    padding-top: 1rs;
+    padding-bottom: 1rs;
+    top: -4rs;
+    z-index: 3;
+    background: white;
+
+    > * {
+      flex: 0 0 4rs;
+      margin-right: 1rs;
     }
   }
 }

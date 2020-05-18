@@ -1,7 +1,7 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {html} from '../vendor/uhtml.js';
 import {Store} from '../Core/Store.js';
-import {updatePrayerPoint, addPrayerPoint, deletePrayerPoint} from '../Actions/ScheduleActions.js';
+import {addPrayerPoint} from '../Actions/ScheduleActions.js';
 
 customElements.define('prayer-category-prayer-point-create', class PrayerCategoryPrayerPoint extends BaseElement {
   draw() {
