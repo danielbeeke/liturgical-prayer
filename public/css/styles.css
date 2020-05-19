@@ -352,16 +352,38 @@ p {
     position: absolute;
     bottom: 56px;
     left: 16px; }
-  .moment.card.history {
-    height: 200px;
-    width: 100%;
-    margin-left: 0;
-    margin-bottom: 32px; }
 
 @media all and (min-width: 700px) {
   .moment.card {
     max-width: 20vw;
     max-height: 60vh; } }
+
+.moment.history {
+  height: 48px;
+  display: block;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 60vw;
+  flex: 0 0 60vw;
+  margin-left: 32px;
+  border-radius: var(--border-radius);
+  position: relative;
+  overflow: hidden; }
+  .moment.history .image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center; }
+  .moment.history .title {
+    position: absolute;
+    font-preset: title;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    top: 50%;
+    color: white;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 0 -1px 2px rgba(0, 0, 0, 0.6), -1px 0 2px rgba(0, 0, 0, 0.6), 1px 0 2px rgba(0, 0, 0, 0.6); }
 
 .moments-slider {
   -webkit-box-flex: 0;
@@ -385,6 +407,10 @@ p {
   -ms-scroll-snap-type: x mandatory;
   scroll-snap-type: x mandatory;
   scroll-padding-left: 32px; }
+  .moments-slider .moment {
+    scroll-snap-align: start;
+    -webkit-box-shadow: 0 2px 9px -2px rgba(8, 27, 9, 0.32);
+    box-shadow: 0 2px 9px -2px rgba(8, 27, 9, 0.32); }
   .moments-slider .end {
     margin-left: 32px;
     -webkit-box-flex: 0;
@@ -510,13 +536,19 @@ prayer-calendar .number {
   justify-content: center;
   text-align: center;
   font-preset: title;padding-bottom: 12px;padding-top: 12px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
-  border-radius: var(--border-radius); }
+  border-radius: var(--border-radius);
+  text-decoration: none; }
   prayer-calendar .number.has-prayers {
     background: var(--color-secondary);
     color: var(--color-black); }
   prayer-calendar .number.active {
     background: var(--color-primary);
     color: white; }
+
+prayer-calendar .sticky-header {
+  top: -32px;
+  position: -webkit-sticky;
+  position: sticky; }
 
 prayer-calendar .line-calendar {
   display: -webkit-box;
@@ -526,17 +558,15 @@ prayer-calendar .line-calendar {
   margin-left: -32px;
   margin-right: -32px;
   scrollbar-width: none;
-  position: -webkit-sticky;
-  position: sticky;
   padding-top: 8px;
   padding-bottom: 8px;
-  top: -32px;
   z-index: 3;
   background: white; }
   prayer-calendar .line-calendar > * {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 32px;
     flex: 0 0 32px;
+    scroll-snap-align: center;
     margin-right: 8px; }
 
 prayer-category-details .prayer-point prayer-icon[name="handle"] {
@@ -578,10 +608,6 @@ prayer-home {
   prayer-home > .title {
     font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
     margin-bottom: 40px; }
-  prayer-home .moment.card {
-    scroll-snap-align: start;
-    -webkit-box-shadow: 0 2px 9px -2px rgba(8, 27, 9, 0.32);
-    box-shadow: 0 2px 9px -2px rgba(8, 27, 9, 0.32); }
 
 prayer-icon {
   display: inline-block;

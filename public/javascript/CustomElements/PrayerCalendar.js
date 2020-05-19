@@ -10,10 +10,10 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
     this.year = parseInt(dateParts[0]);
     this.month = parseInt(dateParts[1]);
     this.day = dateParts[2];
-    let dateString = `${this.year}-${this.month}-${this.day}`;
+    this.dateString = `${this.year}-${this.month}-${this.day}`;
 
     let calendar = Store.getState().pray.calendar;
-    this.selectedDayData = this.day ? calendar.find(item => item.date === dateString) : null;
+    this.selectedDayData = this.day ? calendar.find(item => item.date === this.dateString) : null;
 
     this.previousLink = `/calendar/${this.month === 1 ? this.year - 1 : this.year}-${this.month === 1 ? 12 : this.month - 1}`;
     this.nextLink = `/calendar/${this.month === 12 ? this.year + 1 : this.year}-${this.month === 12 ? 1 : this.month + 1}`;
@@ -42,12 +42,8 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
       let {date, ...prayedMoments} = this.selectedDayData;
       let prayedMomentSlugs = Object.keys(prayedMoments);
       moments = html`${s.moments.filter(moment => prayedMomentSlugs.includes(moment.slug)).map(moment => html`
-        <a class="moment card history" data-moment="${moment.slug}" href="${'/pray/' + moment.slug}" style="${`--color-primary: ${moment.color};  --color-secondary: ${moment.colorBackground}`}">
+        <a class="moment history" data-moment="${moment.slug}" href="${`/calendar/${this.dateString}/${moment.slug}`}" style="${`--color-primary: ${moment.color};  --color-secondary: ${moment.colorBackground}`}">
           <div class="image" style="${`background-image: url(${moment.background});`}"></div>
-          <span class="button has-icon">
-            ${t`Pray`}
-            <prayer-icon name="arrow-right" />
-          </span>
           <span class="title">${t.direct(moment.name)}</span>
         </a>
       `)}`;
@@ -98,10 +94,13 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
       </h2>
 
       ${this.selectedDayData ? html`
-        <div class="line-calendar">${days}<div class="end"></div></div>
-        <div class="line-moments">
-            ${moments}
+        <div class="sticky-header">
+          <div class="line-calendar">${days}<div class="end"></div></div>
+          <div class="moments-slider">
+              ${moments}<div class="end"></div>
+          </div>
         </div>
+        
       ` :
       html`${buttons}<div class="calendar">
         ${weekDays.map(day => html`<div class="day">${day.toString().substr(0, 1)}</div>`)}
@@ -123,12 +122,22 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
   }
 
   afterDraw() {
-    let activeDay = this.querySelector('.number.active');
+    let activeDay = this.querySelector(`.number[href="/calendar/${this.year}-${this.month}-${this.day}"]`);
 
     if (activeDay) {
+      activeDay.classList.add('active');
       setTimeout(() => {
         activeDay.scrollIntoView({inline: 'center', behavior: 'smooth'});
-      }, 300);
+      }, 100);
+    }
+
+    let activeMoment = this.querySelector(`[href="/calendar/${this.year}-${this.month}-${this.day}/${this.route.parameters.moment}"]`);
+
+    if (activeMoment) {
+      activeDay.classList.add('active');
+      setTimeout(() => {
+        activeMoment.scrollIntoView({inline: 'center', behavior: 'smooth'});
+      }, 100);
     }
   }
 

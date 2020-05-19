@@ -30,13 +30,6 @@
     bottom: 7rs;
     left: 2rs;
   }
-
-  &.history {
-    height: 200px;
-    width: 100%;
-    margin-left: 0;
-    margin-bottom: 4rs;
-  }
 }
 
 @include tablet {

@@ -14,6 +14,11 @@
   scroll-snap-type: x mandatory;
   scroll-padding-left: 4rs;
 
+  .moment {
+    scroll-snap-align: start;
+    box-shadow: 0 2px 9px -2px rgba(8, 27, 9, 0.32);
+  }
+
   .end {
     margin-left: 4rs;
     flex: 0 0 1px;

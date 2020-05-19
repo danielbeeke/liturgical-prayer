@@ -11,8 +11,8 @@ Content.Pages.forEach(page => {
 export const Routes = {
   'pray': { template: html`<prayer-home class="page hidden" />` },
   'calendar': { redirect: `/calendar/${(new Date()).getFullYear()}-${(new Date()).getMonth() + 1}` },
-  'calendar/:date': { template: html`<prayer-calendar class="page no-transition hidden" />` },
-  'calendar/:date/detail': { template: html`<prayer-calendar-detail class="page hidden" />` },
+  'calendar/:date': { template: html`<prayer-calendar class="page hidden" />` },
+  'calendar/:date/:moment': { template: html`<prayer-calendar class="page hidden" />` },
   'menu': { template: html`<prayer-main-menu class="page hidden" />` },
   'settings': { template: html`<prayer-settings class="page hidden" />` },
   'callback': { template: html`<prayer-storage-callback class="page hidden" />` },
