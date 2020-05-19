@@ -48,8 +48,6 @@ iframe {
   border: none; }
 
 * {
-  -ms-scroll-chaining: none;
-  overscroll-behavior: contain;
   -webkit-tap-highlight-color: transparent; }
   *:not(input):not(textarea) {
     -webkit-user-select: none;
