@@ -14,6 +14,7 @@ $tablet: 700px;
   --padding: 7px;
   --border-radius: 8px;
   --max-width-panel: 2000px;
+  --selected-row: 0;
 }
 
 @include tablet {

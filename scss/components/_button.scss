@@ -19,6 +19,11 @@
     background: var(--color-secondary);
   }
 
+  &.disabled {
+    filter: grayscale(1);
+    pointer-events: none;
+  }
+
   &.danger {
     background: var(--color-danger);
   }

@@ -51,7 +51,7 @@ export class BaseElement extends HTMLElement {
           if (link.getAttribute('href') === location.pathname) link.classList.add('active');
 
           link.addEventListener('click', event => {
-            if (link.getAttribute('href').substr(0,4) === 'http') {
+            if (!link.getAttribute('href') || link.getAttribute('href').substr(0,4) === 'http') {
               return;
             }
 
@@ -72,7 +72,7 @@ export class BaseElement extends HTMLElement {
 
             let page = document.querySelector('.page:not(.no-transition)');
 
-            if (page) {
+            if (page && !link.classList.contains('no-page-transition')) {
               page.addEventListener('transitionend', () => {
                 that.root.router.navigate(link.getAttribute('href'));
               }, {once: true});

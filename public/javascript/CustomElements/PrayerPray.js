@@ -4,6 +4,7 @@ import {html} from '../vendor/uhtml.js';
 import {PrayerScheduler} from '../Helpers/PrayerScheduler.js'
 import {markFixedPrayer, markFreePrayer} from '../Actions/PrayActions.js';
 import {toLines} from '../Helpers/toLines.js';
+import {observeCurrentPrayer} from '../Helpers/observeCurrentPrayer.js';
 
 customElements.define('prayer-pray', class PrayerPray extends BaseElement {
 
@@ -72,28 +73,6 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
     }
 
     afterDraw() {
-      let indicators = this.querySelectorAll('.indicator-item');
-      let prayers = this.querySelectorAll('.prayer');
-
-      let options = {
-        root: this.querySelector('.slider'),
-        rootMargin: '30px',
-        threshold: .8
-      };
-
-      let observer = new IntersectionObserver((entries, observer) => {
-        let active = [];
-        entries.forEach(entry => {
-          if (entry.isIntersecting) active.push(entry.target);
-        });
-
-        let activeIndex = [...prayers].indexOf(active[0]);
-        indicators.forEach((indicator, index) => indicator.classList[index === activeIndex ? 'add' : 'remove']('active'));
-      }, options);
-
-      prayers.forEach(prayer => {
-        observer.observe(prayer);
-      });
-
+      observeCurrentPrayer();
     }
 });

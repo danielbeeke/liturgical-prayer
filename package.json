@@ -27,7 +27,7 @@
     "url": "^0.11.0"
   },
   "browserslist": [
-    "last 4 versions"
+    "last 2 versions"
   ],
   "ava": {
     "require": [

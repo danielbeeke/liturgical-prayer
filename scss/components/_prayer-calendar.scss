@@ -1,29 +1,88 @@
 prayer-calendar {
   $spacer: 1rs;
   $column: calc((100% - (6.1 * #{$spacer})) / 7);
+  --calendar-transition: .5s;
 
-  .month-buttons {
+  > .header {
     display: flex;
-    justify-content: space-between;
+    overflow: hidden;
+    position: relative;
+    align-items: flex-start;
+    justify-content: flex-start;
+    transition: max-height var(--speed) var(--easing);
+    z-index: 4;
+
+    .page-title {
+      margin-bottom: 0;
+    }
+
+    .button {
+      margin-top: 1rs;
+      transition: all var(--speed) var(--easing);
+    }
+
+    .button + .button {
+      margin-left: 1rs;
+    }
   }
 
-  .page-title {
-    margin-bottom: 1rs;
+  .previous-month {
+    margin-left: auto;
   }
 
-  .calendar-title {
-    width: 100%;
-    text-align: center;
-    font-preset: button;
+  .back-to-month-view {
+    transition: all var(--speed) var(--easing);
+    opacity: 1;
   }
 
   .calendar {
-    clear: both;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, $column);
-    grid-gap: $spacer;
-    box-sizing: border-box;
-    margin-top: 3rs;
+    position: relative;
+    margin-top: 2rs;
+    max-height: 36rs;
+    height: 36rs;
+    z-index: 2;
+    transition: max-height var(--calendar-transition) var(--easing);
+
+    &:before,
+    &:after {
+      background: white;
+      content: '';
+      display: block;
+      left: 0;
+      width: 100%;
+      position: absolute;
+      height: 26rs;
+      z-index: 4;
+      transition: transform var(--calendar-transition) var(--easing);
+      pointer-events: none;
+    }
+
+    &:before {
+      bottom: 100%;
+      height: 16rs;
+    }
+
+    &:after {
+      top: 5rs;
+      transform: translateY(100%);
+      height: 30rs;
+    }
+
+    .inner {
+      z-index: -1;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, $column);
+      grid-gap: $spacer;
+      transition: transform var(--calendar-transition) var(--easing);
+      position: relative;
+      transform: translateY(calc(var(--selected-row) * 6rs * -1));
+    }
+  }
+
+  .calendar ~ * {
+    z-index: 7;
+    position: relative;
   }
 
   .day {
@@ -60,26 +119,39 @@ prayer-calendar {
     }
   }
 
-  .sticky-header {
-    top: -4rs;
-    position: sticky;
+  &:not(.has-selected-day) {
+    .back-to-month-view {
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+      overflow: hidden;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
-  .line-calendar {
-    display: flex;
-    overflow-x: scroll;
-    margin-left: -4rs;
-    margin-right: -4rs;
-    scrollbar-width: none;
-    padding-top: 1rs;
-    padding-bottom: 1rs;
-    z-index: 3;
-    background: white;
+  &.has-selected-day {
+    .calendar {
+      max-height: 6rs;
 
-    > * {
-      flex: 0 0 4rs;
-      scroll-snap-align: center;
-      margin-right: 1rs;
+      &:before {
+        bottom: 100%;
+      }
+
+      &:after {
+        top: 5rs;
+        transform: translateY(0);
+      }
+    }
+
+    .previous-month {
+      transform: rotate(90deg);
+    }
+
+    .next-month {
+      transform: rotate(90deg);
     }
   }
 }
