@@ -559,7 +559,9 @@ prayer-calendar {
     text-align: center;
     font-preset: title;padding-bottom: 12px;padding-top: 12px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
     border-radius: var(--border-radius);
-    text-decoration: none; }
+    text-decoration: none;
+    -webkit-transition: all var(--speed) var(--easing);
+    transition: all var(--speed) var(--easing); }
     prayer-calendar .number.has-prayers {
       background: var(--color-secondary);
       color: var(--color-black); }

@@ -99,6 +99,7 @@ prayer-calendar {
     padding-top: 1rs;
     border-radius: var(--border-radius);
     text-decoration: none;
+    transition: all var(--speed) var(--easing);
 
     &.has-prayers {
       background: var(--color-secondary);

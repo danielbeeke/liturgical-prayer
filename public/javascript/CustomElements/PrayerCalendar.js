@@ -201,6 +201,9 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
     let prayers = this.querySelector('.prayers');
     let link = `/calendar/${this.year}-${this.month}`;
 
+    let activeDay = this.querySelector('.number.active');
+    activeDay.classList.remove('active');
+
     if (prayers) {
       prayers.addEventListener('transitionend', () => {
         this.root.router.navigate(link);
