@@ -138,13 +138,13 @@ prayer-calendar {
     }
   }
 
-  prayer-pray {
-    margin-left: -4rs;
-    margin-right: -4rs;
+  .prayers {
+    padding: 4rs;
     transition: opacity var(--speed) var(--easing);
+    opacity: 1;
+    display: block;
 
     &.hidden {
-      visibility: hidden;
       opacity: 0;
     }
   }

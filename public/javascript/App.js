@@ -23,6 +23,7 @@ import './CustomElements/PrayerCategoryPrayerPointCreate.js';
 import './CustomElements/PrayerStorageCallback.js';
 import './CustomElements/RemoteStorageWidget.js';
 import './CustomElements/PrayerCalendar.js';
+import './CustomElements/PrayerDayOverview.js';
 import {html} from './vendor/uhtml.js';
 
 import {toggleGrid} from './Actions/AppActions.js';

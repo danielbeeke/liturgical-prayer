@@ -1,0 +1,32 @@
+prayer-day-overview {
+  .moment-title {
+    font-preset: header2;
+    margin-bottom: 1rs;
+    background: var(--color-primary);
+    color: white;
+    border-radius: var(--border-radius);
+    padding-left: 2rs;
+    padding-bottom: 1rs;
+    position: sticky;
+    top: 1rs;
+
+    &:after {
+      content: '';
+      display: block;
+      height: 2rs;
+      width: 100%;
+      background: white;
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+    }
+  }
+
+  .prayer-teaser {
+    font-preset: button;
+  }
+
+  .prayer-list {
+    padding-left: 2rs;
+  }
+}

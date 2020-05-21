@@ -331,7 +331,8 @@ p {
   margin-left: 32px;
   border-radius: var(--border-radius);
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+  background: var(--color-gray-light); }
   .moment.card .image {
     width: 100%;
     height: calc(100% - 40px);
@@ -353,32 +354,6 @@ p {
   .moment.card {
     max-width: 20vw;
     max-height: 60vh; } }
-
-.moment.history {
-  height: 48px;
-  display: block;
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 160px;
-  flex: 0 0 160px;
-  margin-left: 32px;
-  border-radius: var(--border-radius);
-  position: relative;
-  overflow: hidden; }
-  .moment.history .image {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center; }
-  .moment.history .title {
-    position: absolute;
-    font-preset: title;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
-    top: 50%;
-    color: white;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    width: 100%;
-    text-align: center;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 0 -1px 2px rgba(0, 0, 0, 0.6), -1px 0 2px rgba(0, 0, 0, 0.6), 1px 0 2px rgba(0, 0, 0, 0.6); }
 
 .moments-slider {
   -webkit-box-flex: 0;
@@ -591,13 +566,13 @@ prayer-calendar {
   prayer-calendar.has-selected-day .next-month {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg); }
-  prayer-calendar prayer-pray {
-    margin-left: -32px;
-    margin-right: -32px;
+  prayer-calendar .prayers {
+    padding: 32px;
     -webkit-transition: opacity var(--speed) var(--easing);
-    transition: opacity var(--speed) var(--easing); }
-    prayer-calendar prayer-pray.hidden {
-      visibility: hidden;
+    transition: opacity var(--speed) var(--easing);
+    opacity: 1;
+    display: block; }
+    prayer-calendar .prayers.hidden {
       opacity: 0; }
   prayer-calendar .prayers-wrapper {
     background: white;
@@ -625,6 +600,31 @@ prayer-create-free-category {
   prayer-create-free-category h2 {
     font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
     margin-bottom: 24px; }
+
+prayer-day-overview .moment-title {
+  font-preset: header2;padding-bottom: 14px;padding-top: 10px;line-height: 16px;letter-spacing: -0.5px;font-size: 18px;font-weight: 470;font-family: Inter var;
+  margin-bottom: 8px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--border-radius);
+  padding-left: 16px;
+  position: sticky;
+  top: 8px; }
+  prayer-day-overview .moment-title:after {
+    content: '';
+    display: block;
+    height: 16px;
+    width: 100%;
+    background: white;
+    position: absolute;
+    bottom: 100%;
+    left: 0; }
+
+prayer-day-overview .prayer-teaser {
+  font-preset: button;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var; }
+
+prayer-day-overview .prayer-list {
+  padding-left: 16px; }
 
 prayer-home {
   display: -webkit-box;
@@ -860,56 +860,6 @@ prayer-pray .moment-switcher {
   padding-left: 0;
   width: auto; }
 
-prayer-pray .prayer {
-  -webkit-box-flex: 0;
-  -ms-flex: 0 0 100vw;
-  flex: 0 0 100vw;
-  height: 100%;
-  overflow-y: auto;
-  scroll-snap-align: start;
-  scrollbar-width: none; }
-  prayer-pray .prayer .header {
-    position: sticky;
-    top: 0;
-    background: var(--color-secondary);
-    padding: 0 32px 16px; }
-  prayer-pray .prayer .inner {
-    padding: 0 32px; }
-  prayer-pray .prayer prayer-icon {
-    -webkit-transform: translateY(3px);
-    transform: translateY(3px);
-    width: 20px;
-    margin-right: 4px;
-    margin-bottom: -8px; }
-    prayer-pray .prayer prayer-icon * {
-      fill: var(--color-primary); }
-  prayer-pray .prayer .category {
-    color: var(--color-primary);
-    font-preset: button;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var;
-    margin-right: 16px;
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: inline-flex; }
-  prayer-pray .prayer .title {
-    clear: both;
-    font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var; }
-  prayer-pray .prayer .author {
-    display: block;
-    font-preset: author;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var;
-    color: var(--color-primary); }
-    prayer-pray .prayer .author prayer-icon {
-      -webkit-transform: translateY(5px);
-      transform: translateY(5px); }
-  prayer-pray .prayer .amen {
-    display: block;
-    font-preset: author;padding-bottom: 28px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var; }
-  prayer-pray .prayer .meta {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap; }
-
 prayer-pray .slider {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -934,6 +884,56 @@ prayer-settings {
   prayer-settings h2 {
     font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
     margin-bottom: 24px; }
+
+.prayer {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 100vw;
+  flex: 0 0 100vw;
+  height: 100%;
+  overflow-y: auto;
+  scroll-snap-align: start;
+  scrollbar-width: none; }
+  .prayer .header {
+    position: sticky;
+    top: 0;
+    background: var(--color-secondary);
+    padding: 0 32px 16px; }
+  .prayer .inner {
+    padding: 0 32px; }
+  .prayer prayer-icon {
+    -webkit-transform: translateY(3px);
+    transform: translateY(3px);
+    width: 20px;
+    margin-right: 4px;
+    margin-bottom: -8px; }
+    .prayer prayer-icon * {
+      fill: var(--color-primary); }
+  .prayer .category {
+    color: var(--color-primary);
+    font-preset: button;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var;
+    margin-right: 16px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex; }
+  .prayer .title {
+    clear: both;
+    font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var; }
+  .prayer .author {
+    display: block;
+    font-preset: author;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    color: var(--color-primary); }
+    .prayer .author prayer-icon {
+      -webkit-transform: translateY(5px);
+      transform: translateY(5px); }
+  .prayer .amen {
+    display: block;
+    font-preset: author;padding-bottom: 28px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var; }
+  .prayer .meta {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
 
 remote-storage-widget [data-online="false"] img {
   -webkit-filter: grayscale(1);

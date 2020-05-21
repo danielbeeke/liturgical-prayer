@@ -8,6 +8,18 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
   constructor() {
     super();
     this.selectedRowAdjustment = 0;
+
+    /**
+     * This triggers an initial ontransitionend.
+     */
+    setTimeout(() => {
+      let calendar = this.querySelector('.calendar');
+      let correctHeight = calendar.offsetHeight;
+      calendar.style.height = parseInt(calendar.offsetHeight) - 1 + 'px';
+      setTimeout(() => {
+        calendar.style.height = correctHeight + 'px';
+      }, 100);
+    });
   }
 
   prepareData () {
@@ -68,9 +80,7 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
       let hasPrayers = !!calendarItem;
 
       if (hasPrayers) {
-        let {date, ...dayData} = calendarItem;
-        let firstMoment = Object.keys(dayData)[0];
-        return html`<a href="${`/calendar/${this.year}-${this.month}-${day}/${firstMoment}`}" class="number has-prayers no-page-transition">
+        return html`<a href="${`/calendar/${this.year}-${this.month}-${day}`}" class="number has-prayers no-page-transition">
           ${day}
         </a>`;
       }
@@ -145,9 +155,9 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
         <prayer-icon name="arrow-right" />
       </button>
 
-      <a href="${`/calendar/${this.year}-${this.month}/choose`}" class="button secondary only-icon no-page-transition back-to-month-view">
+      <button onclick="${() => this.goBack()}" class="button secondary only-icon no-page-transition back-to-month-view">
         <prayer-icon name="cross" />
-      </a>
+      </button>
 
     </div>
       
@@ -159,11 +169,24 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
       </div>
       </div>
       <div class="prayers-wrapper">
-        ${this.selectedDayData ? html`
-          <prayer-pray class="hidden" use-moment-switcher="${Object.keys(dayData).join(',')}" date="${this.dateString}" />
-        ` : ''}
+        ${this.selectedDayData ? html`<prayer-day-overview date="${this.route.parameters.date}" moment="${this.route.parameters.moment}" class="prayers hidden" />` : ''}
       </div>
     `;
+  }
+
+  goBack () {
+    let prayers = this.querySelector('.prayers');
+    let link = `/calendar/${this.year}-${this.month}`;
+
+    if (prayers) {
+      prayers.addEventListener('transitionend', () => {
+        this.root.router.navigate(link);
+      }, { once: true });
+      prayers.classList.add('hidden');
+    }
+    else {
+      this.root.router.navigate(link);
+    }
   }
 
   forceDraw() {
@@ -178,11 +201,12 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
   }
 
   showPrayers () {
-    let prayers = this.querySelector('prayer-pray.hidden');
+    let prayers = this.querySelector('.prayers.hidden');
     if (prayers) {
       requestAnimationFrame(() => {
         prayers.classList.remove('hidden');
       });
     }
   }
+
 });
