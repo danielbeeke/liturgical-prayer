@@ -179,6 +179,14 @@ p {
       .button.only-icon prayer-icon svg {
         height: 100%; }
 
+.close-prayers {
+  position: fixed;
+  top: 40px;
+  -webkit-transform: translateY(-2px);
+  transform: translateY(-2px);
+  right: 32px;
+  z-index: 4; }
+
 .field {
   margin-bottom: 32px;
   display: -webkit-box;
@@ -621,10 +629,14 @@ prayer-day-overview .moment-title {
     left: 0; }
 
 prayer-day-overview .prayer-teaser {
-  font-preset: button;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var; }
+  background: var(--color-gray-light);
+  font-preset: button;padding-right: 16px;padding-left: 16px;padding-bottom: 9px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var;
+  margin-bottom: 8px;
+  border-radius: var(--border-radius); }
 
 prayer-day-overview .prayer-list {
-  padding-left: 16px; }
+  padding: 0;
+  list-style: none; }
 
 prayer-home {
   display: -webkit-box;
@@ -840,14 +852,6 @@ prayer-pray.page {
 prayer-pray .pre-header {
   background: var(--color-secondary); }
 
-prayer-pray .close-prayers {
-  position: fixed;
-  top: 40px;
-  -webkit-transform: translateY(-2px);
-  transform: translateY(-2px);
-  right: 32px;
-  z-index: 4; }
-
 prayer-pray .moment {
   display: block;
   color: var(--color-primary);
@@ -877,6 +881,14 @@ prayer-pray .slider {
   scroll-snap-points-x: repeat(100vw);
   -ms-scroll-snap-type: x mandatory;
   scroll-snap-type: x mandatory; }
+
+prayer-prayer.page {
+  padding: 0; }
+
+prayer-prayer .header {
+  padding-top: 24px !important; }
+  prayer-prayer .header .title {
+    max-width: calc(100% - 32px); }
 
 prayer-settings {
   padding: 32px;
