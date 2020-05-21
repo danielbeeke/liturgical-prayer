@@ -5,5 +5,19 @@
   "display": "fullscreen",
   "background_color": "#fff",
   "description": "A liturgical prayer app.",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "manifest-icon-192.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "manifest-icon-512.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg",
+      "purpose": "maskable any"
+    }
+  ]
 }
