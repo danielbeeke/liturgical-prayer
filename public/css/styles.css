@@ -334,11 +334,10 @@ p {
       opacity: .4; }
 
 .logo-wrapper {
-  margin-top: 4.8px;
-  margin-bottom: 19.2px; }
+  margin-bottom: 16px; }
   .logo-wrapper img {
     display: block;
-    height: 48px; }
+    height: 24px; }
 
 .moment.card {
   height: 100%;
@@ -695,12 +694,12 @@ prayer-main-menu.page {
     height: 100%;
     z-index: -2; }
   prayer-main-menu.page prayer-icon[name="logo"] {
-    height: 48px;
+    height: 24px;
     display: block;
     max-width: 100%;
     width: auto;
     padding-left: 32px;
-    margin-bottom: 32px; }
+    margin-bottom: 40px; }
     prayer-main-menu.page prayer-icon[name="logo"] svg {
       height: 100%;
       width: auto; }

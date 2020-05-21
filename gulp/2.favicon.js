@@ -9,4 +9,4 @@ gulp.task('favicon', function (cb) {
     console.log(stderr);
     cb(err);
   });
-})
+});
