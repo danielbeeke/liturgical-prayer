@@ -3,6 +3,7 @@ import {html} from '../vendor/uhtml.js';
 import {Content} from '../Content.js';
 import {toLines} from '../Helpers/toLines.js';
 import {Slugify} from '../Helpers/Slugify.js';
+import {Store} from '../Core/Store.js';
 
 customElements.define('prayer-prayer', class PrayerPrayer extends BaseElement {
 
@@ -21,19 +22,40 @@ customElements.define('prayer-prayer', class PrayerPrayer extends BaseElement {
   }
 
   getPrayer () {
-    let category = Content['Categories'].find(category => {
+    let t = this.root.t;
+    let prayer;
+    let fixedCategory = Content['Categories'].find(category => {
       return Slugify(category.Title) === this.route.parameters.category;
     });
 
-    if (category && category.Title) {
-      let prayerPage = Content[category.Title];
-      let prayer = prayerPage.find(prayer => prayer.UniqueID === this.route.parameters.prayer);
-      prayer.category = category;
+    if (fixedCategory && fixedCategory.Title) {
+      let prayerPage = Content[fixedCategory.Title];
+      prayer = prayerPage.find(prayer => prayer.UniqueID === this.route.parameters.prayer);
+      prayer.category = fixedCategory;
+    }
+
+    if (!fixedCategory) {
+      let freeCategories = Store.getState().schedule.freeCategories;
+      let freeCategoryOriginal = freeCategories.find(freeCategory => freeCategory.slug === this.route.parameters.category);
+      let freeCategory = Object.assign({ isFreeForm: true }, freeCategoryOriginal);
+
+      prayer = {
+        Title: freeCategory.name,
+        name: freeCategory.name,
+        items: freeCategory.items,
+        marked: true,
+        category: freeCategory,
+      };
+    }
+
+    let category = prayer.category.isFreeForm ? t.direct('Your category') : (prayer.category.name !== prayer.Title ? prayer.category.name : '');
+
+    if (prayer) {
       return html`<div class="prayer" data-id="${prayer.UniqueID}">
         <div class="header">
           <h2 class="title">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</h2>
           <div class="meta">
-            ${category ? html`<small class="category"><prayer-icon name="tag" />${category.Title}</small>` : html``}
+            ${category ? html`<small class="category"><prayer-icon name="tag" />${category}</small>` : html``}
             ${prayer.Author ? html`<em class="author"><prayer-icon name="author" />${prayer.Author}</em>` : html``}            
           </div>
         </div>

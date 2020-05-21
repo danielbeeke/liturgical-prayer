@@ -113,13 +113,16 @@ p {
   -ms-flex-pack: center;
   justify-content: center;
   text-align: center;
-  margin-bottom: 8px; }
+  margin-bottom: 8px;
+  -webkit-transition: all var(--speed) var(--easing);
+  transition: all var(--speed) var(--easing); }
   .button.secondary {
     background: var(--color-secondary); }
   .button.disabled {
     -webkit-filter: grayscale(1);
     filter: grayscale(1);
-    pointer-events: none; }
+    pointer-events: none;
+    opacity: .4; }
   .button.danger {
     background: var(--color-danger); }
   .button.small {

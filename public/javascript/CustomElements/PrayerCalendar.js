@@ -106,11 +106,8 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
 
   next () {
     if (this.selectedDayData) {
-      let numberCount = daysInMonth(this.month - 1, this.year);
-      let firstDayOfMonth = new Date(this.year, this.month - 1, 1);
-      let maxRows = Math.ceil((numberCount + firstDayOfMonth.getDay()) / 7);
 
-      if (this.selectedRow + this.selectedRowAdjustment < maxRows) {
+      if (this.selectedRow + this.selectedRowAdjustment < this.maxRows()) {
         this.selectedRowAdjustment = this.selectedRowAdjustment + 1;
         this.draw();
       }
@@ -134,6 +131,32 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
     }
   }
 
+  maxRows () {
+    let numberCount = daysInMonth(this.month - 1, this.year);
+    let firstDayOfMonth = new Date(this.year, this.month - 1, 1);
+    return Math.ceil((numberCount + firstDayOfMonth.getDay()) / 7);
+  }
+
+  previousIsDisabled () {
+    if (this.selectedDayData) {
+      return (this.selectedRow + this.selectedRowAdjustment) === 1;
+    }
+    else {
+      let firstDate = new Date(Object.values(this.calendar)[0].date);
+      return this.month === firstDate.getMonth() + 1 && this.year === firstDate.getFullYear();
+    }
+  }
+
+  nextIsDisabled () {
+    if (this.selectedDayData) {
+      return (this.selectedRow + this.selectedRowAdjustment) === this.maxRows();
+    }
+    else {
+      let now = new Date();
+      return this.month === now.getMonth() + 1 && this.year === now.getFullYear();
+    }
+  }
+
   draw () {
     this.prepareData();
 
@@ -147,11 +170,11 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
         ${this.getMonthLabel()}
       </h2>
 
-      <button onclick="${() => this.previous()}" class="${`button secondary only-icon no-page-transition previous-month ${this.selectedDayData && this.selectedRow === 1 ? ' disabled' : ''}`}">
+      <button onclick="${() => this.previous()}" class="${`button secondary only-icon no-page-transition previous-month ${this.previousIsDisabled() ? ' disabled' : ''}`}">
         <prayer-icon name="arrow-left" />
       </button>
       
-      <button onclick="${() => this.next()}" class="button secondary only-icon no-page-transition next-month">
+      <button onclick="${() => this.next()}" class="${`button secondary only-icon no-page-transition next-month ${this.nextIsDisabled() ? ' disabled' : ''}`}">
         <prayer-icon name="arrow-right" />
       </button>
 

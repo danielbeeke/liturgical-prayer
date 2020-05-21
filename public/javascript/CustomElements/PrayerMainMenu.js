@@ -23,7 +23,7 @@ customElements.define('prayer-main-menu', class PrayerMenu extends BaseElement {
 
         <a class="menu-item" href="/calendar">
           <prayer-icon name="calendar" />
-          <span class="title">${t.direct('Calendar')}</span>
+          <span class="title">${t.direct('Past prayers')}</span>
         </a>
 
         ${pages.map(page => html`

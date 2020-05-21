@@ -2,7 +2,6 @@ import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
 import {html} from '../vendor/uhtml.js';
 import {PrayerScheduler} from '../Helpers/PrayerScheduler.js';
-import {toLines} from '../Helpers/toLines.js';
 
 customElements.define('prayer-day-overview', class PrayerDayOverview extends BaseElement {
 
