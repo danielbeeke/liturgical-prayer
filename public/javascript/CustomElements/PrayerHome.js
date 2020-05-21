@@ -13,7 +13,10 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
 
     return html`
 
-    <span class="prefix">${t`Welcome,`}</span>
+    <div class="logo-wrapper">
+      <img src="/images/logo.svg">
+    </div>
+    
     <h1 class="title">${t`Some beautiful prayers are to be prayed.`}</h1>
     
     <div class="moments moments-slider">

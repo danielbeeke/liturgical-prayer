@@ -16,6 +16,8 @@ customElements.define('prayer-main-menu', class PrayerMenu extends BaseElement {
     return html`
       <div class="main-menu">
 
+        <prayer-icon name="logo" />
+
         <a class="menu-item" href="/pray">
           <prayer-icon name="compass" />
           <span class="title">${t.direct('Home')}</span>

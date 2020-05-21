@@ -17,6 +17,26 @@ prayer-main-menu.page {
     z-index: -2;
   }
 
+  prayer-icon[name="logo"] {
+    height: 6rs;
+    display: block;
+    max-width: 100%;
+    width: auto;
+    padding-left: 4rs;
+    margin-bottom: 4rs;
+
+    svg {
+      height: 100%;
+      width: auto;
+
+      rect {
+        fill: var(--color-black) !important;
+      }
+
+
+    }
+  }
+
   .menu-item {
     display: flex;
     align-items: center;

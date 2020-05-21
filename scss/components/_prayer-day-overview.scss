@@ -28,6 +28,10 @@ prayer-day-overview {
     padding: 0 2rs 1rs;
     margin-bottom: 1rs;
     border-radius: var(--border-radius);
+
+    a {
+      display: block;
+    }
   }
 
   .prayer-list {

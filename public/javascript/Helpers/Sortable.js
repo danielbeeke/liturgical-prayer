@@ -6,15 +6,14 @@ let _w = window,
 // get position of mouse/touch in relation to viewport
 let getPoint = function( e )
 {
-
   let scrollX = Math.max( 0, _w.pageXOffset || _d.scrollLeft || _b.scrollLeft || 0 ) - ( _d.clientLeft || 0 ),
     scrollY = Math.max( 0, _w.pageYOffset || _d.scrollTop || _b.scrollTop || 0 ) - ( _d.clientTop || 0 ),
     pointX  = e ? ( Math.max( 0, e.pageX || e.clientX || 0 ) - scrollX ) : 0,
     pointY  = e ? ( Math.max( 0, e.pageY || e.clientY || 0 ) - scrollY ) : 0;
 
   if (!pointX && !pointY) {
-    pointX = e.targetTouches[0].pageX;
-    pointY = e.targetTouches[0].pageY;
+    pointX = e.targetTouches[0].pageX - scrollX;
+    pointY = e.targetTouches[0].pageY - scrollY;
   }
 
   return { x: pointX, y: pointY };
