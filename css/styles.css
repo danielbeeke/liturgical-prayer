@@ -619,7 +619,7 @@ prayer-create-free-category {
     margin-bottom: 24px; }
 
 prayer-day-overview .moment-title {
-  font-preset: header2;padding-bottom: 9px;padding-top: 7px;line-height: 24px;letter-spacing: -0.5px;font-size: 16px;font-weight: 570;font-family: Inter var;
+  font-preset: header2;padding-bottom: 13px;padding-top: 11px;line-height: 16px;letter-spacing: -0.5px;font-size: 15px;font-weight: 570;font-family: Inter var;
   margin-bottom: 8px;
   background: var(--color-primary);
   color: white;
@@ -659,7 +659,7 @@ prayer-home {
   flex-direction: column;
   padding: 32px 32px 0 32px; }
   prayer-home > .prefix {
-    font-preset: header2;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: -0.5px;font-size: 16px;font-weight: 570;font-family: Inter var;
+    font-preset: header2;padding-bottom: 5px;padding-top: 11px;line-height: 16px;letter-spacing: -0.5px;font-size: 15px;font-weight: 570;font-family: Inter var;
     display: block;
     margin-bottom: 8px; }
   prayer-home > .title {
@@ -731,13 +731,13 @@ prayer-main-menu.page {
     prayer-main-menu.page .menu-item prayer-icon {
       position: absolute;
       margin-right: 16px;
-      width: 32px;
+      width: 24px;
       top: 50%;
       -webkit-transform: translateY(-50%) translateY(1px);
       transform: translateY(-50%) translateY(1px); }
     prayer-main-menu.page .menu-item .title {
-      font-preset: header2;padding-bottom: 9px;padding-top: 7px;line-height: 24px;letter-spacing: -0.5px;font-size: 16px;font-weight: 570;font-family: Inter var;
-      margin-left: 48px; }
+      font-preset: header2;padding-bottom: 13px;padding-top: 11px;line-height: 16px;letter-spacing: -0.5px;font-size: 15px;font-weight: 570;font-family: Inter var;
+      margin-left: 40px; }
     prayer-main-menu.page .menu-item:last-child {
       margin-bottom: 80px;
       border-bottom: 0; }
