@@ -23,10 +23,15 @@ prayer-day-overview {
   }
 
   .prayer-teaser {
+    background: var(--color-gray-light);
     font-preset: button;
+    padding: 0 2rs 1rs;
+    margin-bottom: 1rs;
+    border-radius: var(--border-radius);
   }
 
   .prayer-list {
-    padding-left: 2rs;
+    padding: 0;
+    list-style: none;
   }
 }

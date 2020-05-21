@@ -42,7 +42,9 @@ customElements.define('prayer-day-overview', class PrayerDayOverview extends Bas
           <ul class="prayer-list">
           ${prayers.map(prayer => {
             return html`
-              <li class="prayer-teaser" data-id="${prayer.UniqueID}">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</li>`          
+              <li class="prayer-teaser" data-id="${prayer.UniqueID}">
+                <a href="${`/prayer/${prayer.category.slug}/${prayer.UniqueID ? prayer.UniqueID : prayer.items.map(item => item.slug).join(',')}?back=${location.pathname}`}">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</a>
+              </li>`          
           })}
           </ul>
         </div>`

@@ -1,0 +1,13 @@
+prayer-prayer {
+  &.page {
+    padding: 0;
+  }
+
+  .header {
+    padding-top: 3rs !important;
+
+    .title {
+      max-width: calc(100% - 4rs);
+    }
+  }
+}

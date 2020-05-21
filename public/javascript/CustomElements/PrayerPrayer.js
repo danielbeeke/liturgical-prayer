@@ -1,0 +1,53 @@
+import {BaseElement} from '../Core/BaseElement.js';
+import {html} from '../vendor/uhtml.js';
+import {Content} from '../Content.js';
+import {toLines} from '../Helpers/toLines.js';
+import {Slugify} from '../Helpers/Slugify.js';
+
+customElements.define('prayer-prayer', class PrayerPrayer extends BaseElement {
+
+  draw () {
+    let query = (new URL(document.location)).searchParams;
+
+    return html`
+      ${query.get('back') ? html`
+        <a class="close-prayers" href="${query.get('back')}">
+          <prayer-icon name="cross" />
+        </a>
+      ` : ''}
+      
+      ${this.getPrayer()}  
+    `;
+  }
+
+  getPrayer () {
+    let category = Content['Categories'].find(category => {
+      return Slugify(category.Title) === this.route.parameters.category;
+    });
+
+    if (category && category.Title) {
+      let prayerPage = Content[category.Title];
+      let prayer = prayerPage.find(prayer => prayer.UniqueID === this.route.parameters.prayer);
+      prayer.category = category;
+      return html`<div class="prayer" data-id="${prayer.UniqueID}">
+        <div class="header">
+          <h2 class="title">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</h2>
+          <div class="meta">
+            ${category ? html`<small class="category"><prayer-icon name="tag" />${category.Title}</small>` : html``}
+            ${prayer.Author ? html`<em class="author"><prayer-icon name="author" />${prayer.Author}</em>` : html``}            
+          </div>
+        </div>
+        <div class="inner">
+          <p class="content">${prayer.category.isFreeForm ?
+        prayer.items.map(item => html`
+              <span class="prayer-item">${item.title}</span>
+              ${item.description ? html`<em class="description">${item.description}</em>` : ''}
+            `) :
+        toLines(this.tokenize(prayer.Content))}
+          </p>
+          <span class="amen">Amen</span>  
+        </div>
+      </div>`;
+    }
+  }
+});

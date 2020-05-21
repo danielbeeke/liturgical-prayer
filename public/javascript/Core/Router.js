@@ -54,7 +54,7 @@ export class Router {
     let tokens = [];
     newRouteSplit.forEach(part => {
       if (part.substr(0, 1) === ':') {
-        replacedParts.push('([\-a-z0-9\\-]*)');
+        replacedParts.push('([\-a-zA-Z0-9\\-]*)');
         tokens.push(part.substr(1));
       }
       else {
@@ -98,7 +98,11 @@ export class Router {
    * @returns {Router} - This router instance
    */
   check() {
-    const hash = Router.cleanPath(location.pathname);
+    let hash = Router.cleanPath(location.pathname + (location.search ? location.search : ''));
+
+    let originalHash = hash;
+
+    hash = hash.split('?')[0];
 
     for (let route of this.routes) {
       const match = hash.match(route.route);
@@ -106,7 +110,7 @@ export class Router {
       if (match !== null) {
         match.shift();
 
-        navigate(hash);
+        navigate(originalHash);
 
         if (this.options.debug) {
           console.log(`Fetching: /${hash}`);
@@ -160,6 +164,9 @@ export class Router {
 
   match (path) {
     path = Router.cleanPath(path);
+
+    path = path.split('?')[0];
+
     let activeRoute = null;
     for (let route of this.routes) {
       const match = path.match(route.route);
@@ -190,7 +197,7 @@ export class Router {
    * @returns {object} - Current route
    */
   get currentRoute() {
-    return this.match(location.pathname);
+    return this.match(location.pathname + (location.search ? location.search : ''));
   }
 
   /**
@@ -203,7 +210,7 @@ export class Router {
       return '';
     }
 
-    return String(path).replace(/^[#\/]+|\/+$|\?.*$/g, '');
+    return String(path).replace(/^[#\/]+|\/+$|$/g, '');
   }
 
   /**

@@ -24,6 +24,7 @@ import './CustomElements/PrayerStorageCallback.js';
 import './CustomElements/RemoteStorageWidget.js';
 import './CustomElements/PrayerCalendar.js';
 import './CustomElements/PrayerDayOverview.js';
+import './CustomElements/PrayerPrayer.js';
 import {html} from './vendor/uhtml.js';
 
 import {toggleGrid} from './Actions/AppActions.js';
@@ -49,7 +50,7 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
     this.router = new Router({
       routes: Routes,
       debug: false,
-      initialPath: location.pathname.substr(1) ? location.pathname.substr(1) : 'pray'
+      initialPath: location.pathname.substr(1) !== '' ? location.pathname + (location.search ? location.search : '') : 'pray'
     });
 
     // Helper for vertical grid.
