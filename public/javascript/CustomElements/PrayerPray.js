@@ -9,9 +9,13 @@ import {observeCurrentPrayer} from '../Helpers/observeCurrentPrayer.js';
 customElements.define('prayer-pray', class PrayerPray extends BaseElement {
 
   draw () {
-    let date = new Date();
+    let date = this.getAttribute('date') ? new Date(this.getAttribute('date')) : new Date();
     let s = Store.getState().schedule;
-    let moment = s.moments.find(moment => moment.slug === this.route.parameters.moment);
+
+    let moment = s.moments.find(moment => moment.slug === this.route.parameters.moment ? this.route.parameters.moment : this.getAttribute('moment'));
+
+    if (!moment) return html`<span></span>`;
+
     let t = this.root.t;
     this.setAttribute('style', `--color-primary: ${moment.color}; --color-secondary: ${moment.colorBackground}`);
 
@@ -32,13 +36,29 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
       }
     });
 
+    let givenMoments = [];
+    if (this.getAttribute('use-moment-switcher') !== null) {
+      let givenMomentNames = this.getAttribute('use-moment-switcher').split(',');
+      givenMoments = s.moments.filter(moment => givenMomentNames.includes(moment.slug));
+    }
+
     return html`
+      ${this.getAttribute('show-close-button') !== null ? html`
       <a class="close-prayers" href="/pray">
         <prayer-icon name="cross" />
       </a>
-
+      ` : ''}
+      
       <div class="pre-header">
-        <span class="moment">${t.direct(moment.name)}</span>
+        ${this.getAttribute('use-moment-switcher') !== null ? html`
+            <select class="moment-switcher">
+              ${givenMoments.map(givenMoment => html`
+                <option value="${givenMoment.slug}" selected="${this.route.parameters.moment === givenMoment.slug}">${givenMoment.name}</option>
+              `)}
+            </select>
+        ` : html`
+            <span class="moment">${t.direct(moment.name)}</span>
+        `}
         <div class="indicator">
             ${prayers.map((prayer, index) => html`<div class="${'indicator-item' + (index === 0 ? ' active' : '')}"></div>`)}
         </div>      
@@ -70,9 +90,15 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
       })}
       </div>
     `;
-    }
+  }
 
-    afterDraw() {
-      observeCurrentPrayer();
-    }
+  afterDraw() {
+    observeCurrentPrayer(this);
+  }
+
+  static get observedAttributes() { return ['date']; }
+
+  attributeChangedCallback () {
+    this.draw();
+  }
 });

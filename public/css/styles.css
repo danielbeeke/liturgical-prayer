@@ -476,7 +476,10 @@ prayer-app {
 
 prayer-calendar {
   --calendar-transition: .5s; }
+  prayer-calendar.page {
+    padding: 0; }
   prayer-calendar > .header {
+    padding: 32px 32px 0 32px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -508,12 +511,13 @@ prayer-calendar {
   prayer-calendar .calendar {
     position: relative;
     margin-top: 16px;
-    max-height: 288px;
     height: 288px;
+    padding-left: 32px;
+    padding-right: 32px;
     z-index: 2;
-    -webkit-transition: max-height var(--calendar-transition) var(--easing);
-    transition: max-height var(--calendar-transition) var(--easing); }
-    prayer-calendar .calendar:before, prayer-calendar .calendar:after {
+    -webkit-transition: height var(--calendar-transition) var(--easing);
+    transition: height var(--calendar-transition) var(--easing); }
+    prayer-calendar .calendar:before {
       background: white;
       content: '';
       display: block;
@@ -526,15 +530,12 @@ prayer-calendar {
       transition: -webkit-transform var(--calendar-transition) var(--easing);
       transition: transform var(--calendar-transition) var(--easing);
       transition: transform var(--calendar-transition) var(--easing), -webkit-transform var(--calendar-transition) var(--easing);
-      pointer-events: none; }
+      pointer-events: none;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0); }
     prayer-calendar .calendar:before {
       bottom: 100%;
       height: 128px; }
-    prayer-calendar .calendar:after {
-      top: 40px;
-      -webkit-transform: translateY(100%);
-      transform: translateY(100%);
-      height: 240px; }
     prayer-calendar .calendar .inner {
       z-index: -1;
       width: 100%;
@@ -552,19 +553,7 @@ prayer-calendar {
     z-index: 7;
     position: relative; }
   prayer-calendar .day {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    font-preset: title;padding-bottom: 12px;padding-top: 12px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
-    text-align: center;
-    background: var(--color-gray-light);
-    border-radius: var(--border-radius); }
+    background: var(--color-gray-light); }
   prayer-calendar .number {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -595,19 +584,24 @@ prayer-calendar {
     padding-left: 0;
     padding-right: 0; }
   prayer-calendar.has-selected-day .calendar {
-    max-height: 48px; }
-    prayer-calendar.has-selected-day .calendar:before {
-      bottom: 100%; }
-    prayer-calendar.has-selected-day .calendar:after {
-      top: 40px;
-      -webkit-transform: translateY(0);
-      transform: translateY(0); }
+    height: 48px; }
   prayer-calendar.has-selected-day .previous-month {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg); }
   prayer-calendar.has-selected-day .next-month {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg); }
+  prayer-calendar prayer-pray {
+    margin-left: -32px;
+    margin-right: -32px;
+    -webkit-transition: opacity var(--speed) var(--easing);
+    transition: opacity var(--speed) var(--easing); }
+    prayer-calendar prayer-pray.hidden {
+      visibility: hidden;
+      opacity: 0; }
+  prayer-calendar .prayers-wrapper {
+    background: white;
+    height: 240px; }
 
 prayer-category-details .prayer-point prayer-icon[name="handle"] {
   pointer-events: none; }
@@ -740,7 +734,8 @@ prayer-menu {
   bottom: 0;
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  opacity: 1; }
+  opacity: 1;
+  z-index: 20; }
   prayer-menu .menu-item {
     z-index: 1;
     display: -webkit-box;
@@ -857,6 +852,13 @@ prayer-pray .moment {
   display: block;
   color: var(--color-primary);
   font-preset: button;padding-right: 32px;padding-left: 32px;padding-bottom: 9px;padding-top: 15px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var; }
+
+prayer-pray .moment-switcher {
+  margin: 0 32px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 0;
+  width: auto; }
 
 prayer-pray .prayer {
   -webkit-box-flex: 0;

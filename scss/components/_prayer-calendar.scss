@@ -2,8 +2,12 @@ prayer-calendar {
   $spacer: 1rs;
   $column: calc((100% - (6.1 * #{$spacer})) / 7);
   --calendar-transition: .5s;
+  &.page {
+    padding: 0;
+  }
 
   > .header {
+    padding: 4rs 4rs 0 4rs;
     display: flex;
     overflow: hidden;
     position: relative;
@@ -38,13 +42,13 @@ prayer-calendar {
   .calendar {
     position: relative;
     margin-top: 2rs;
-    max-height: 36rs;
     height: 36rs;
+    padding-left: 4rs;
+    padding-right: 4rs;
     z-index: 2;
-    transition: max-height var(--calendar-transition) var(--easing);
+    transition: height var(--calendar-transition) var(--easing);
 
-    &:before,
-    &:after {
+    &:before {
       background: white;
       content: '';
       display: block;
@@ -55,6 +59,7 @@ prayer-calendar {
       z-index: 4;
       transition: transform var(--calendar-transition) var(--easing);
       pointer-events: none;
+      transform: translateZ(0);
     }
 
     &:before {
@@ -62,11 +67,6 @@ prayer-calendar {
       height: 16rs;
     }
 
-    &:after {
-      top: 5rs;
-      transform: translateY(100%);
-      height: 30rs;
-    }
 
     .inner {
       z-index: -1;
@@ -86,15 +86,7 @@ prayer-calendar {
   }
 
   .day {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-preset: title;
-    text-align: center;
     background: var(--color-gray-light);
-    padding-bottom: 1rs;
-    padding-top: 1rs;
-    border-radius: var(--border-radius);
   }
 
   .number {
@@ -134,16 +126,7 @@ prayer-calendar {
 
   &.has-selected-day {
     .calendar {
-      max-height: 6rs;
-
-      &:before {
-        bottom: 100%;
-      }
-
-      &:after {
-        top: 5rs;
-        transform: translateY(0);
-      }
+      height: 6rs;
     }
 
     .previous-month {
@@ -153,5 +136,21 @@ prayer-calendar {
     .next-month {
       transform: rotate(90deg);
     }
+  }
+
+  prayer-pray {
+    margin-left: -4rs;
+    margin-right: -4rs;
+    transition: opacity var(--speed) var(--easing);
+
+    &.hidden {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  .prayers-wrapper {
+    background: white;
+    height: 30rs;
   }
 }

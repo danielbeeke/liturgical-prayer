@@ -10,6 +10,7 @@ prayer-menu {
   bottom: 0;
   box-shadow: 0 0 10px rgba(black, .1);
   opacity: 1;
+  z-index: 20;
 
   .menu-item {
     z-index: 1;

@@ -15,6 +15,7 @@ export function observeCurrentPrayer(element) {
     });
 
     let activeIndex = [...prayers].indexOf(active[0]);
+    [...prayers].forEach(prayer => prayer.classList[prayer === active[0] ? 'add' : 'remove']('active'));
     indicators.forEach((indicator, index) => indicator.classList[index === activeIndex ? 'add' : 'remove']('active'));
   }, options);
 

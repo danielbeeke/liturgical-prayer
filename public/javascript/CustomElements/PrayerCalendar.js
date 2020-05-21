@@ -63,10 +63,20 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
     }
 
     return numberDays.map(day => {
-      let hasPrayers = this.dayHasPrayers(this.calendar, day, this.month, this.year);
-      return hasPrayers ? html`<a href="${`/calendar/${this.year}-${this.month}-${day}`}" class="number has-prayers no-page-transition">
-        ${day}
-      </a>` : html`<span class="number">${day}</span>`
+      let dateString = `${this.year}-${this.month}-${day}`;
+      let calendarItem = this.calendar.find(item => item.date === dateString);
+      let hasPrayers = !!calendarItem;
+
+      if (hasPrayers) {
+        let {date, ...dayData} = calendarItem;
+        let firstMoment = Object.keys(dayData)[0];
+        return html`<a href="${`/calendar/${this.year}-${this.month}-${day}/${firstMoment}`}" class="number has-prayers no-page-transition">
+          ${day}
+        </a>`;
+      }
+      else {
+        return html`<span class="number">${day}</span>`
+      }
     });
   }
 
@@ -117,6 +127,8 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
   draw () {
     this.prepareData();
 
+    let {date, ...dayData} = this.selectedDayData ? this.selectedDayData : {};
+
     return html`
       <div class="header">
 
@@ -133,29 +145,25 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
         <prayer-icon name="arrow-right" />
       </button>
 
-      <a href="${`/calendar/${this.year}-${this.month}`}" class="button secondary only-icon no-page-transition back-to-month-view">
+      <a href="${`/calendar/${this.year}-${this.month}/choose`}" class="button secondary only-icon no-page-transition back-to-month-view">
         <prayer-icon name="cross" />
       </a>
 
     </div>
       
-      <div class="calendar" style="${`--selected-row: ${(this.selectedRow + this.selectedRowAdjustment).toString()};`}">
+      <div class="calendar" ontransitionend="${() => this.showPrayers()}" style="${`--selected-row: ${(this.selectedRow + this.selectedRowAdjustment).toString()};`}">
       <div class="inner">
           ${this.getWeekDays().map(day => html`<div class="day number">${day.toString().substr(0, 1)}</div>`)}
           ${this.getEmptyDays().map(day => html`<div class="empty number"></div>`)}
           ${this.getNumberDays()}  
       </div>
       </div>
-      
-      <p>Test</p>
-     
-      <div class="end"></div>
+      <div class="prayers-wrapper">
+        ${this.selectedDayData ? html`
+          <prayer-pray class="hidden" use-moment-switcher="${Object.keys(dayData).join(',')}" date="${this.dateString}" />
+        ` : ''}
+      </div>
     `;
-  }
-
-  dayHasPrayers (calendar, day, month, year) {
-    let dateString = `${year}-${month}-${day}`;
-    return calendar.find(item => item.date === dateString);
   }
 
   forceDraw() {
@@ -163,18 +171,18 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
   }
 
   afterDraw() {
-    let makeActiveAndScrollTo = (selector) => {
-      let element = this.querySelector(selector);
-      if (element) {
-        element.classList.add('active');
-        setTimeout(() => {
-          element.scrollIntoView({inline: 'center', behavior: 'smooth'});
-        }, 50);
-      }
-    };
-
-    makeActiveAndScrollTo(`.number[href="/calendar/${this.year}-${this.month}-${this.day}"]`);
-    makeActiveAndScrollTo(`[href="/calendar/${this.year}-${this.month}-${this.day}/${this.route.parameters.moment}"]`);
+    let prayers = this.querySelector('prayer-pray.hidden');
+    if (prayers) {
+      this.querySelector('.calendar').on
+    }
   }
 
+  showPrayers () {
+    let prayers = this.querySelector('prayer-pray.hidden');
+    if (prayers) {
+      requestAnimationFrame(() => {
+        prayers.classList.remove('hidden');
+      });
+    }
+  }
 });

@@ -10,14 +10,13 @@ Content.Pages.forEach(page => {
 
 export const Routes = {
   'pray': { template: html`<prayer-home class="page hidden" />` },
-  'calendar': { redirect: `/calendar/${(new Date()).getFullYear()}-${(new Date()).getMonth() + 1}` },
-  'calendar/:date': { template: html`<prayer-calendar class="page hidden" />` },
+  'calendar': { redirect: `/calendar/${(new Date()).getFullYear()}-${(new Date()).getMonth() + 1}/choose` },
   'calendar/:date/:moment': { template: html`<prayer-calendar class="page hidden" />` },
   'menu': { template: html`<prayer-main-menu class="page hidden" />` },
   'settings': { template: html`<prayer-settings class="page hidden" />` },
   'callback': { template: html`<prayer-storage-callback class="page hidden" />` },
   'settings/:moment': { template: html`<prayer-moment-configure class="page hidden" />` },
-  'pray/:moment': { template: html`<prayer-pray class="page hidden hide-menu" />` },
+  'pray/:moment': { template: html`<prayer-pray show-close-button class="page hidden hide-menu" />` },
   'settings/:moment/prayer-category/:category': { template: html`<prayer-category-details class="page hidden" />` },
   'settings/:moment/prayer-category/:category/create': { template: html`<prayer-category-prayer-point-create class="page hidden" />` },
   'settings/:moment/prayer-category/:category/:item': { template: html`<prayer-category-prayer-point class="page hidden" />` },
