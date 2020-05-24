@@ -1,40 +1,12 @@
 prayer-main-menu.page {
-  padding: 0;
   display: flex;
   flex-direction: column;
   max-width: var(--max-width-panel);
   position: relative;
-  padding-top: 6rs;
+  padding-top: 4rs;
 
-  &:after {
-    position: absolute;
-    content: '';
-    background: var(--color-secondary);
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-  }
-
-  prayer-icon[name="logo"] {
-    height: 3rs;
-    display: block;
-    max-width: 100%;
-    width: auto;
-    padding-left: 4rs;
+  .logo-wrapper {
     margin-bottom: 5rs;
-
-    svg {
-      height: 100%;
-      width: auto;
-
-      rect {
-        fill: var(--color-black) !important;
-      }
-
-
-    }
   }
 
   .menu-item {
@@ -42,22 +14,12 @@ prayer-main-menu.page {
     align-items: center;
     text-decoration: none;
     cursor: pointer;
-    padding: 1rs 4rs 1rs 4rs;
+    padding: 0rs 2rs 0rs 2rs;
     position: relative;
-    border-bottom: 1px dashed var(--color-primary);
-    margin-bottom: -1px;
-
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--color-secondary);
-      z-index: -1;
-    }
+    border-radius: var(--border-radius);
+    margin-bottom: 1rs;
+    background: var(--color-secondary);
+    transition: all var(--speed) var(--easing);
 
     prayer-icon {
       position: absolute;
@@ -65,11 +27,15 @@ prayer-main-menu.page {
       width: 3rs;
       top: 50%;
       transform: translateY(-50%) translateY(1px);
+
+      * {
+        transition: all var(--speed) var(--easing);
+      }
     }
 
     .title {
       font-preset: header2;
-      margin-left: 5rs;
+      margin-left: 4.5rs;
       padding-bottom: 1rs;
     }
 
@@ -80,14 +46,7 @@ prayer-main-menu.page {
 
     &:hover {
       color: white;
-
-      &:not(:last-child) {
-        border-bottom: 1px dashed var(--color-secondary);
-      }
-
-      &:after {
-        background: var(--color-primary);
-      }
+      background: var(--color-primary);
 
       prayer-icon {
         * {

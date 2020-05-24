@@ -41,9 +41,11 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
       
       <div class="pre-header">
         <span class="moment">${t.direct(moment.name)}</span>
+        ${prayers.length > 1 ? html`
         <div class="indicator">
             ${prayers.map((prayer, index) => html`<div class="${'indicator-item' + (index === 0 ? ' active' : '')}"></div>`)}
-        </div>      
+        </div>
+        ` : ''}
       </div>
 
       <div class="slider">

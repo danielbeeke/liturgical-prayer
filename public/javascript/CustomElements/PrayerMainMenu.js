@@ -8,38 +8,33 @@ customElements.define('prayer-main-menu', class PrayerMenu extends BaseElement {
   draw () {
     let t = this.root.t;
 
-    let pages = Content.Pages.map(page => {
-      page.slug = Slugify(page.Title);
+    let links = Content.Pages.map(page => {
+      page.Slug = '/' + Slugify(page.Title);
       return page;
     });
+
+    links = [...links, ...[
+      { Slug: '/pray', Title: t.direct('Home'), Icon: 'compass', Weight: 1},
+      { Slug: '/calendar', Title: t.direct('Past prayers'), Icon: 'calendar', Weight: 98},
+      { Slug: '/settings', Title: t.direct('Settings'), Icon: 'settings' , Weight: 99},
+    ]];
+
+    links = links.sort((a, b) => a.Weight - b.Weight);
 
     return html`
       <div class="main-menu">
 
-        <prayer-icon name="logo" />
+        <div class="logo-wrapper">
+          <img src="/images/logo.svg">
+        </div>
 
-        <a class="menu-item" href="/pray">
-          <prayer-icon name="compass" />
-          <span class="title">${t.direct('Home')}</span>
-        </a>
-
-        <a class="menu-item" href="/calendar">
-          <prayer-icon name="calendar" />
-          <span class="title">${t.direct('Past prayers')}</span>
-        </a>
-
-        ${pages.map(page => html`
-          <a class="menu-item" href="${'/' + page.slug}">
-            <prayer-icon name="${page.Icon}" />
-            <span class="title">${page.Title}</span>
+        ${links.map(link => html`
+          <a class="menu-item" href="${link.Slug}">
+            <prayer-icon name="${link.Icon}" />
+            <span class="title">${link.Title}</span>
           </a>
         `)}
         
-        <a class="menu-item" href="/settings">
-          <prayer-icon name="settings" />
-          <span class="title">${t.direct('Settings')}</span>
-        </a>
-   
       </div>
 
     `;

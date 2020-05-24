@@ -3,6 +3,7 @@ import {Content} from '../Content.js';
 import {Slugify} from '../Helpers/Slugify.js';
 
 let pageRoutes = {};
+
 Content.Pages.forEach(page => {
   page.slug = Slugify(page.Title);
   pageRoutes[page.slug] = { template: html`<prayer-page class="page hidden" />` };

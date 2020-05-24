@@ -47,8 +47,8 @@ iframe {
   }
 }
 
-a:link,
-a:visited {
+a:link:not(.button),
+a:visited:not(.button) {
   color: var(--color-tertiary);
 }
 

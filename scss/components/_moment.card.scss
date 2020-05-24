@@ -30,6 +30,11 @@
     position: absolute;
     bottom: 7rs;
     left: 2rs;
+    color: var(--color-black);
+
+    * {
+      fill: var(--color-black);
+    }
   }
 }
 

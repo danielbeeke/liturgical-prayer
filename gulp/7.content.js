@@ -16,7 +16,9 @@ let convertToObject = (data) => {
   data.feed.entry.forEach(row => {
     if (!rows[row.gs$cell.row - 1]) rows.push([]);
     let currentRow = rows[row.gs$cell.row - 1];
-    currentRow[parseInt(row.gs$cell.col)] = row.gs$cell.$t;
+    if (currentRow) {
+      currentRow[parseInt(row.gs$cell.col)] = row.gs$cell.$t;
+    }
   });
 
   let keys = rows.shift();
@@ -90,7 +92,11 @@ let init = async () => {
       let response = await fetch(url(page));
       let json = await response.json();
       let item = convertToObject(json);
-      pages[item.title] = item.data;
+
+      if (item) {
+        pages[item.title] = item.data;
+      }
+
       page++;
     }
     catch (e) {
