@@ -1,0 +1,75 @@
+prayer-add-note {
+
+}
+
+$note-size: 60%;
+
+.add-note-panel {
+  position: fixed;
+  top: 100% - $note-size;
+  left: 4rs;
+  height: $note-size;
+  width: calc(100% - 8rs);
+  background: white;
+  border: 1px solid var(--color-primary);
+  border-bottom: none;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  z-index: 4;
+  padding: 2rs 4rs;
+  transition: all var(--speed) var(--easing);
+  transform: translateY(0);
+  box-shadow:
+          0 0 1px 0 rgba(0,0,0,0.08),
+          0 6px 12px 0 rgba(0,0,0,0.07),
+          0 1px 1px 0 rgba(0,0,0,0.07);
+
+  &:after {
+    content: '';
+  }
+
+  &.hidden {
+    pointer-events: none;
+    transform: translateY(100%);
+  }
+
+  .page-title {
+    .close-note-add {
+      cursor: pointer;
+      margin-top: 1rs;
+      float: right;
+    }
+  }
+}
+
+.add-note-button {
+  border-radius: 50%;
+  background: var(--color-primary);
+  width: 6rs;
+  height: 6rs;
+  display: block;
+  position: fixed;
+  bottom: 4rs;
+  right: 4rs;
+  cursor: pointer;
+  appearance: none;
+  border: 0;
+  text-align: center;
+  line-height: 6rs;
+  box-shadow:
+          0 0 1px 0 rgba(0,0,0,0.08),
+          0 6px 12px 0 rgba(0,0,0,0.07),
+          0 1px 1px 0 rgba(0,0,0,0.07);
+
+  prayer-icon {
+    width: 3rs;
+    height: 3rs;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    svg * {
+      fill: white;
+    }
+  }
+}

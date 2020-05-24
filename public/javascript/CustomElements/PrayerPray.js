@@ -8,6 +8,11 @@ import {observeCurrentPrayer} from '../Helpers/observeCurrentPrayer.js';
 
 customElements.define('prayer-pray', class PrayerPray extends BaseElement {
 
+  constructor() {
+    super();
+    this.showNotePanel = false;
+  }
+
   draw () {
     let date = this.getAttribute('date') ? new Date(this.getAttribute('date')) : new Date();
     let s = Store.getState().schedule;
@@ -72,6 +77,9 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
           </div>
         </div>`      
       })}
+      
+      <prayer-add-note />
+      
       </div>
     `;
   }

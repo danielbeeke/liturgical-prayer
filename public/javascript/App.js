@@ -25,6 +25,7 @@ import './CustomElements/RemoteStorageWidget.js';
 import './CustomElements/PrayerCalendar.js';
 import './CustomElements/PrayerDayOverview.js';
 import './CustomElements/PrayerPrayer.js';
+import './CustomElements/PrayerAddNote.js';
 import {html} from './vendor/uhtml.js';
 
 import {toggleGrid} from './Actions/AppActions.js';

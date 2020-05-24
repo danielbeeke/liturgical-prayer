@@ -84,6 +84,64 @@ p {
   font-named-instance: 'Italic';
   src: url("/fonts/Inter-italic.var.woff2?v=3.13") format("woff2"); }
 
+.add-note-panel {
+  position: fixed;
+  top: 40%;
+  left: 32px;
+  height: 60%;
+  width: calc(100% - 64px);
+  background: white;
+  border: 1px solid var(--color-primary);
+  border-bottom: none;
+  border-top-left-radius: var(--border-radius);
+  border-top-right-radius: var(--border-radius);
+  z-index: 4;
+  padding: 16px 32px;
+  -webkit-transition: all var(--speed) var(--easing);
+  transition: all var(--speed) var(--easing);
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  -webkit-box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07);
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07); }
+  .add-note-panel:after {
+    content: ''; }
+  .add-note-panel.hidden {
+    pointer-events: none;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%); }
+  .add-note-panel .page-title .close-note-add {
+    cursor: pointer;
+    margin-top: 8px;
+    float: right; }
+
+.add-note-button {
+  border-radius: 50%;
+  background: var(--color-primary);
+  width: 48px;
+  height: 48px;
+  display: block;
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 0;
+  text-align: center;
+  line-height: 48px;
+  -webkit-box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07);
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07); }
+  .add-note-button prayer-icon {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+    .add-note-button prayer-icon svg * {
+      fill: white; }
+
 .back-button {
   position: relative;
   width: 40px; }
@@ -679,7 +737,8 @@ prayer-icon {
   display: inline-block;
   max-width: 40px; }
   prayer-icon svg {
-    width: 100%; }
+    width: 100%;
+    display: block; }
 
 prayer-main-menu.page {
   display: -webkit-box;
@@ -917,13 +976,13 @@ prayer-settings {
     padding: 0 32px 16px; }
   .prayer .inner {
     padding: 0 32px; }
-  .prayer prayer-icon {
+  .prayer .header prayer-icon {
     -webkit-transform: translateY(3px);
     transform: translateY(3px);
     width: 20px;
     margin-right: 4px;
     margin-bottom: -8px; }
-    .prayer prayer-icon * {
+    .prayer .header prayer-icon * {
       fill: var(--color-primary); }
   .prayer .category {
     color: var(--color-primary);
@@ -937,11 +996,11 @@ prayer-settings {
     font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var; }
   .prayer .author {
     display: block;
-    font-preset: author;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    font-preset: button;padding-bottom: 1px;padding-top: 7px;line-height: 24px;letter-spacing: 1px;font-size: 14px;font-weight: 570;font-family: Inter var;
     color: var(--color-primary); }
     .prayer .author prayer-icon {
-      -webkit-transform: translateY(5px);
-      transform: translateY(5px); }
+      -webkit-transform: translateY(-3px);
+      transform: translateY(-3px); }
   .prayer .amen {
     display: block;
     font-preset: author;padding-bottom: 28px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var; }
