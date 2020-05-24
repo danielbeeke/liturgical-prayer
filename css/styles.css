@@ -682,7 +682,6 @@ prayer-icon {
     width: 100%; }
 
 prayer-main-menu.page {
-  padding: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -694,7 +693,6 @@ prayer-main-menu.page {
   position: relative;
   padding-top: 32px; }
   prayer-main-menu.page .logo-wrapper {
-    padding-left: 32px;
     margin-bottom: 40px; }
   prayer-main-menu.page .menu-item {
     display: -webkit-box;
@@ -705,20 +703,13 @@ prayer-main-menu.page {
     align-items: center;
     text-decoration: none;
     cursor: pointer;
-    padding: 8px 32px 8px 32px;
+    padding: 0px 16px 0px 16px;
     position: relative;
-    border-bottom: 1px dashed var(--color-primary);
-    margin-bottom: -1px; }
-    prayer-main-menu.page .menu-item:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: var(--color-secondary);
-      z-index: -1; }
+    border-radius: var(--border-radius);
+    margin-bottom: 8px;
+    background: var(--color-secondary);
+    -webkit-transition: all var(--speed) var(--easing);
+    transition: all var(--speed) var(--easing); }
     prayer-main-menu.page .menu-item prayer-icon {
       position: absolute;
       margin-right: 16px;
@@ -726,18 +717,18 @@ prayer-main-menu.page {
       top: 50%;
       -webkit-transform: translateY(-50%) translateY(1px);
       transform: translateY(-50%) translateY(1px); }
+      prayer-main-menu.page .menu-item prayer-icon * {
+        -webkit-transition: all var(--speed) var(--easing);
+        transition: all var(--speed) var(--easing); }
     prayer-main-menu.page .menu-item .title {
       font-preset: header2;padding-bottom: 13px;padding-top: 11px;line-height: 16px;letter-spacing: -0.5px;font-size: 15px;font-weight: 570;font-family: Inter var;
-      margin-left: 40px; }
+      margin-left: 36px; }
     prayer-main-menu.page .menu-item:last-child {
       margin-bottom: 80px;
       border-bottom: 0; }
     prayer-main-menu.page .menu-item:hover {
-      color: white; }
-      prayer-main-menu.page .menu-item:hover:not(:last-child) {
-        border-bottom: 1px dashed var(--color-secondary); }
-      prayer-main-menu.page .menu-item:hover:after {
-        background: var(--color-primary); }
+      color: white;
+      background: var(--color-primary); }
       prayer-main-menu.page .menu-item:hover prayer-icon * {
         fill: white; }
 
