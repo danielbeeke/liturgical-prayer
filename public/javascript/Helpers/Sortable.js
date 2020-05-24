@@ -168,6 +168,8 @@ Sortable.prototype = {
     this._clickItem = item;
     this._itemClass( this._clickItem, "add", "active" );
 
+    let page = item.closest('.page');
+
     this._dragItem = document.createElement( item.tagName );
     this._dragItem.classList = item.classList;
     this._dragItem.classList.add('drag-ghost');
@@ -176,7 +178,7 @@ Sortable.prototype = {
     this._dragItem.style["z-index"] = "999";
     this._dragItem.style["display"] = "inline-flex";
     this._dragItem.style["left"] = ( item.offsetLeft || 0 ) + "px";
-    this._dragItem.style["top"] = ( item.offsetTop || 0 ) + "px";
+    this._dragItem.style["top"] = ( (item.offsetTop - page.scrollTop) || 0 ) + "px";
     this._dragItem.style["width"] = ( item.offsetWidth || 0 ) + "px";
 
     this._container.appendChild( this._dragItem );
@@ -213,8 +215,8 @@ Sortable.prototype = {
   {
     this._dragging = false;
     document.body.classList.remove('is-sorting');
-    this._trashDragItem();
-    if (e.target.classList.contains('drag-ghost')) {
+    if (this._dragItem) {
+      this._trashDragItem();
       this._container.dispatchEvent(new CustomEvent('sorted'));
     }
   },
