@@ -73,12 +73,13 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
               `) : 
               toLines(this.tokenize(prayer.Content))}
             </p>
-            <span class="amen">Amen</span>  
+            <span class="amen">Amen</span>
+            
+            <prayer-add-note />
+              
           </div>
         </div>`      
       })}
-      
-      <prayer-add-note />
       
       </div>
     `;

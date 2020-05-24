@@ -84,31 +84,57 @@ p {
   font-named-instance: 'Italic';
   src: url("/fonts/Inter-italic.var.woff2?v=3.13") format("woff2"); }
 
+prayer-add-note {
+  width: 100%; }
+
 .add-note-panel {
-  position: fixed;
-  top: 40%;
-  left: 32px;
-  height: 60%;
-  width: calc(100% - 64px);
-  background: white;
-  border: 1px solid var(--color-primary);
-  border-bottom: none;
-  border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius);
-  z-index: 4;
-  padding: 16px 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 400px;
+  overflow: hidden;
+  width: calc(100% + 64px);
+  background: var(--color-gray-light);
   -webkit-transition: all var(--speed) var(--easing);
   transition: all var(--speed) var(--easing);
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
-  -webkit-box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07);
-  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07); }
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  margin: 0 -32px;
+  padding: 32px;
+  z-index: 1;
+  opacity: 1; }
   .add-note-panel:after {
     content: ''; }
+  .add-note-panel .field {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto; }
+    .add-note-panel .field .field-inner {
+      -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto; }
+    .add-note-panel .field textarea {
+      border-color: var(--color-gray);
+      -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      height: auto; }
   .add-note-panel.hidden {
     pointer-events: none;
-    -webkit-transform: translateY(100%);
-    transform: translateY(100%); }
+    height: 0;
+    opacity: 0;
+    padding: 0 32px; }
   .add-note-panel .page-title .close-note-add {
     cursor: pointer;
     margin-top: 8px;
@@ -119,16 +145,19 @@ p {
   background: var(--color-primary);
   width: 48px;
   height: 48px;
+  left: 100vw;
+  -webkit-transition: all var(--speed) var(--easing);
+  transition: all var(--speed) var(--easing);
   display: block;
-  position: fixed;
+  position: sticky;
   bottom: 32px;
-  right: 32px;
   cursor: pointer;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   border: 0;
   text-align: center;
+  z-index: 4;
   line-height: 48px;
   -webkit-box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07);
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07); }
@@ -141,6 +170,9 @@ p {
     transform: translate(-50%, -50%); }
     .add-note-button prayer-icon svg * {
       fill: white; }
+  .add-note-button.opened {
+    -webkit-transform: translateY(80px);
+    transform: translateY(80px); }
 
 .back-button {
   position: relative;
@@ -250,7 +282,7 @@ p {
   -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
   right: 32px;
-  z-index: 4; }
+  z-index: 6; }
 
 .field {
   margin-bottom: 32px;
@@ -968,12 +1000,14 @@ prayer-settings {
   height: 100%;
   overflow-y: auto;
   scroll-snap-align: start;
-  scrollbar-width: none; }
+  scrollbar-width: none;
+  position: relative; }
   .prayer .header {
     position: sticky;
     top: 0;
     background: var(--color-secondary);
-    padding: 0 32px 16px; }
+    padding: 0 32px 16px;
+    z-index: 5; }
   .prayer .inner {
     padding: 0 32px; }
   .prayer .header prayer-icon {
@@ -1003,7 +1037,7 @@ prayer-settings {
       transform: translateY(-3px); }
   .prayer .amen {
     display: block;
-    font-preset: author;padding-bottom: 28px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var; }
+    font-preset: author;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var; }
   .prayer .meta {
     display: -webkit-box;
     display: -ms-flexbox;

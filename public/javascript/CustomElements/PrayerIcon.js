@@ -3,7 +3,14 @@ import {BaseElement} from '../Core/BaseElement.js';
 customElements.define('prayer-icon', class PrayerIcon extends BaseElement {
 
   async connectedCallback () {
+    await this.loadIcon();
+  }
+
+  async loadIcon () {
     let name = this.getAttribute('name');
+
+    if (!name) return;
+
     if (!window.svgCache) window.svgCache = {};
     if (!window.svgCacheWaiters) window.svgCacheWaiters = {};
 
@@ -34,7 +41,13 @@ customElements.define('prayer-icon', class PrayerIcon extends BaseElement {
     }
     else if (window.svgCache[name]) {
       this.innerHTML = window.svgCache[name];
-
     }
   }
+
+  async attributeChangedCallback(name, oldValue, newValue) {
+    if (newValue && newValue !== oldValue) await this.loadIcon();
+  }
+
+  static get observedAttributes() { return ['name']; }
+
 });

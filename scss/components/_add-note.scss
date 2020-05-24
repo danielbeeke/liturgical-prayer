@@ -1,36 +1,48 @@
 prayer-add-note {
-
+  width: 100%;
 }
 
 $note-size: 60%;
 
 .add-note-panel {
-  position: fixed;
-  top: 100% - $note-size;
-  left: 4rs;
-  height: $note-size;
-  width: calc(100% - 8rs);
-  background: white;
-  border: 1px solid var(--color-primary);
-  border-bottom: none;
-  border-top-left-radius: var(--border-radius);
-  border-top-right-radius: var(--border-radius);
-  z-index: 4;
-  padding: 2rs 4rs;
+  display: flex;
+  flex-direction: column;
+  height: 50rs;
+  overflow: hidden;
+  width: calc(100% + 8rs);
+  background: var(--color-gray-light);
   transition: all var(--speed) var(--easing);
-  transform: translateY(0);
-  box-shadow:
-          0 0 1px 0 rgba(0,0,0,0.08),
-          0 6px 12px 0 rgba(0,0,0,0.07),
-          0 1px 1px 0 rgba(0,0,0,0.07);
+  transform: translateX(0);
+  margin: 0 -4rs;
+  padding: 4rs;
+  z-index: 1;
+  opacity: 1;
 
   &:after {
     content: '';
   }
 
+  .field {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+
+    .field-inner {
+      flex: 1 1 auto;
+    }
+
+    textarea {
+      border-color: var(--color-gray);
+      flex: 1 1 auto;
+      height: auto;
+    }
+  }
+
   &.hidden {
     pointer-events: none;
-    transform: translateY(100%);
+    height: 0;
+    opacity: 0;
+    padding: 0 4rs;
   }
 
   .page-title {
@@ -47,14 +59,16 @@ $note-size: 60%;
   background: var(--color-primary);
   width: 6rs;
   height: 6rs;
+  left: 100vw;
+  transition: all var(--speed) var(--easing);
   display: block;
-  position: fixed;
+  position: sticky;
   bottom: 4rs;
-  right: 4rs;
   cursor: pointer;
   appearance: none;
   border: 0;
   text-align: center;
+  z-index: 4;
   line-height: 6rs;
   box-shadow:
           0 0 1px 0 rgba(0,0,0,0.08),
@@ -71,5 +85,9 @@ $note-size: 60%;
     svg * {
       fill: white;
     }
+  }
+
+  &.opened {
+    transform: translateY(10rs);
   }
 }

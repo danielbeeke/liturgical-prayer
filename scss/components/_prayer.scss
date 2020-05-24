@@ -4,12 +4,14 @@
   overflow-y: auto;
   scroll-snap-align: start;
   scrollbar-width: none;
+  position: relative;
 
   .header {
     position: sticky;
     top: 0;
     background: var(--color-secondary);
     padding: 0 4rs 2rs;
+    z-index: 5;
   }
 
   .inner {
@@ -52,7 +54,6 @@
   .amen {
     display: block;
     font-preset: author;
-    padding-bottom: 3rs;
   }
 
   .meta {
