@@ -1,91 +1,63 @@
 import {render} from '../vendor/uhtml.js';
 import {watch} from '../vendor/ReduxWatch.js';
 import {Store} from "./Store.js";
+import {createHotContext, getHotContext} from '../../../hmr-client.js';
 
 /**
  * Some helpers to easily create Custom Elements composed in a base class.
  */
 export class BaseElement extends HTMLElement {
-  constructor () {
+  constructor (highestImportMeta) {
     super();
+    if (highestImportMeta) this.enableHmr(highestImportMeta.url);
+
     this.interval = false;
     this.subscribers = [];
 
     // Binds draw to the element.
-    const elementDraw = this.draw;
-    let that = this;
     this.root = document.querySelector('prayer-app');
+    this.attachDraw(this.draw);
+  }
 
+  attachDraw (elementDraw) {
     this.draw = function () {
       render(this, () => elementDraw.apply(this, arguments));
-
-      let page = document.querySelector('.page');
-
-      if (page) {
-        setTimeout(() => {
-          page.classList.remove('hidden');
-        });
-      }
-
       this.afterDraw();
+    };
+  }
 
-      let inputs = this.querySelectorAll('input:not(.datepicker-button-input),textarea');
-      inputs.forEach(input => {
-        input.addEventListener('focus', () => {
-          document.body.classList.add('has-focused-input');
-        });
-        input.addEventListener('blur', () => {
-          document.body.classList.remove('has-focused-input');
-        });
-      });
+  enableHmr (url) {
+    createHotContext(url);
+    let hmr = getHotContext(url);
 
-      /**
-       * After the draw attach click handler for internal hrefs.
-       * @type {NodeListOf<HTMLElementTagNameMap[string]> | NodeListOf<Element> | NodeListOf<SVGElementTagNameMap[string]>}
-       */
-      let links = document.querySelectorAll('a');
-      links.forEach(link => {
-        if (typeof link.hasListener === 'undefined') {
-          link.hasListener = true;
+    if (hmr) {
+      // Receive any updates from the dev server, and update accordingly.
+      hmr.accept(({ module }) => {
+        try {
+          let moduleName = Object.keys(module)[0];
+          let item = this.root.customElements.find(customElement => customElement.className.name === moduleName);
+          let newClass = module[moduleName];
+          let oldClass = item.className;
 
-          if (link.getAttribute('href') === location.pathname) link.classList.add('active');
+          for (const [propertyName, propertyDescriptor] of Object.entries(Object.getOwnPropertyDescriptors(newClass.prototype))) {
+            Reflect.defineProperty(oldClass.prototype, propertyName, propertyDescriptor);
+          }
 
-          link.addEventListener('click', event => {
-            if (!link.getAttribute('href') || link.getAttribute('href').substr(0,4) === 'http') {
-              return;
-            }
-
-            event.preventDefault();
-
-            if (link.getAttribute('href') === location.pathname) return;
-
-            let activeLinks = document.body.querySelectorAll('a.active');
-
-            [...activeLinks].forEach(activeLink => {
-              activeLink.classList.remove('active');
-            });
-
-            links.forEach(innerLink => {
-              let isCurrent = innerLink.getAttribute('href') === link.getAttribute('href');
-              innerLink.classList[isCurrent ? 'add' : 'remove']('active')
-            });
-
-            let page = document.querySelector('.page:not(.no-transition)');
-
-            if (page && !link.classList.contains('no-page-transition')) {
-              page.addEventListener('transitionend', () => {
-                that.root.router.navigate(link.getAttribute('href'));
-              }, {once: true});
-              page.classList.add('hidden');
-            }
-            else {
-              that.root.router.navigate(link.getAttribute('href'));
-            }
+          let elements = document.querySelectorAll(item.tag);
+          elements.forEach(element => {
+            element.attachDraw(oldClass.prototype.draw);
+            element.draw();
           });
 
+        } catch (err) {
+          console.log(err);
+          // hmr.invalidate();
         }
-      })
-    };
+      });
+      hmr.dispose(() => {
+        console.log('dispose')
+      });
+    }
   }
 
   get route () {
@@ -138,7 +110,73 @@ export class BaseElement extends HTMLElement {
     }
   }
 
-  afterDraw () {}
+  afterDraw () {
+    let page = document.querySelector('.page');
+    let that = this;
+
+    if (page) {
+      setTimeout(() => {
+        page.classList.remove('hidden');
+      });
+    }
+
+    let inputs = this.querySelectorAll('input:not(.datepicker-button-input),textarea');
+    inputs.forEach(input => {
+      input.addEventListener('focus', () => {
+        document.body.classList.add('has-focused-input');
+      });
+      input.addEventListener('blur', () => {
+        document.body.classList.remove('has-focused-input');
+      });
+    });
+
+    /**
+     * After the draw attach click handler for internal hrefs.
+     * @type {NodeListOf<HTMLElementTagNameMap[string]> | NodeListOf<Element> | NodeListOf<SVGElementTagNameMap[string]>}
+     */
+    let links = document.querySelectorAll('a');
+    links.forEach(link => {
+      if (typeof link.hasListener === 'undefined') {
+        link.hasListener = true;
+
+        if (link.getAttribute('href') === location.pathname) link.classList.add('active');
+
+        link.addEventListener('click', event => {
+          if (!link.getAttribute('href') || link.getAttribute('href').substr(0,4) === 'http') {
+            return;
+          }
+
+          event.preventDefault();
+
+          if (link.getAttribute('href') === location.pathname) return;
+
+          let activeLinks = document.body.querySelectorAll('a.active');
+
+          [...activeLinks].forEach(activeLink => {
+            activeLink.classList.remove('active');
+          });
+
+          links.forEach(innerLink => {
+            let isCurrent = innerLink.getAttribute('href') === link.getAttribute('href');
+            innerLink.classList[isCurrent ? 'add' : 'remove']('active')
+          });
+
+          let page = document.querySelector('.page:not(.no-transition)');
+
+          if (page && !link.classList.contains('no-page-transition')) {
+            page.addEventListener('transitionend', () => {
+              that.root.router.navigate(link.getAttribute('href'));
+            }, {once: true});
+            page.classList.add('hidden');
+          }
+          else {
+            that.root.router.navigate(link.getAttribute('href'));
+          }
+        });
+
+      }
+    })
+  }
 
   tokenize (content) {
     return this.root.tokenizer.replace(content);

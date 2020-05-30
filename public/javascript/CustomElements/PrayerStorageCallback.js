@@ -1,13 +1,13 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {html} from '../vendor/uhtml.js';
 
-customElements.define('prayer-storage-callback', class PrayerStorageCallback extends BaseElement {
+export class PrayerStorageCallback extends BaseElement {
   constructor() {
-    super();
+    super(import.meta);
   }
 
   draw() {
     if (location.hash === '') this.root.router.navigate('/settings');
     return html`<span></span>`;
   }
-});
+}

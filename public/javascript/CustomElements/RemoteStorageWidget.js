@@ -2,10 +2,10 @@ import {BaseElement} from '../Core/BaseElement.js';
 import {html} from '../vendor/uhtml.js';
 import {remoteStorage} from '../Core/RemoteStorage.js';
 
-customElements.define('remote-storage-widget', class RemoteStorageWidget extends BaseElement {
+export class RemoteStorageWidget extends BaseElement {
 
   constructor() {
-    super();
+    super(import.meta);
     this.rs = remoteStorage;
     this.setupHandlers();
     this.showLogin = false;
@@ -172,4 +172,4 @@ customElements.define('remote-storage-widget', class RemoteStorageWidget extends
       ${this.status === 'error' ? error : ''}
     `
   }
-});
+}

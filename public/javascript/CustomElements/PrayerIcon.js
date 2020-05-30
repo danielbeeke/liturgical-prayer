@@ -1,6 +1,10 @@
 import {BaseElement} from '../Core/BaseElement.js';
 
-customElements.define('prayer-icon', class PrayerIcon extends BaseElement {
+export class PrayerIcon extends BaseElement {
+
+  constructor() {
+    super(import.meta);
+  }
 
   async connectedCallback () {
     let name = this.getAttribute('name');
@@ -37,4 +41,4 @@ customElements.define('prayer-icon', class PrayerIcon extends BaseElement {
 
     }
   }
-});
+}

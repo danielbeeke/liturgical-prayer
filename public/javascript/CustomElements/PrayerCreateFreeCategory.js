@@ -5,10 +5,10 @@ import {createFreeCategory} from '../Actions/ScheduleActions.js';
 import {Store} from '../Core/Store.js';
 import {Content} from '../Content.js';
 
-customElements.define('prayer-create-free-category', class PrayerCreateFreeCategory extends BaseElement {
+export class PrayerCreateFreeCategory extends BaseElement {
 
   constructor() {
-    super();
+    super(import.meta);
     let t = this.root.t;
     this.selected = '';
     this.otherText = '';
@@ -107,4 +107,4 @@ customElements.define('prayer-create-free-category', class PrayerCreateFreeCateg
     `}
     `;
   }
-});
+}

@@ -6,7 +6,11 @@ import {markFixedPrayer, markFreePrayer} from '../Actions/PrayActions.js';
 import {toLines} from '../Helpers/toLines.js';
 import {observeCurrentPrayer} from '../Helpers/observeCurrentPrayer.js';
 
-customElements.define('prayer-pray', class PrayerPray extends BaseElement {
+export class PrayerPray extends BaseElement {
+
+  constructor() {
+    super(import.meta);
+  }
 
   draw () {
     let date = this.getAttribute('date') ? new Date(this.getAttribute('date')) : new Date();
@@ -77,7 +81,8 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
   }
 
   afterDraw() {
+    super.afterDraw();
     observeCurrentPrayer(this);
   }
 
-});
+}

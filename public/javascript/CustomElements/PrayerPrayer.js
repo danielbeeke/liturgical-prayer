@@ -5,7 +5,11 @@ import {toLines} from '../Helpers/toLines.js';
 import {Slugify} from '../Helpers/Slugify.js';
 import {Store} from '../Core/Store.js';
 
-customElements.define('prayer-prayer', class PrayerPrayer extends BaseElement {
+export class PrayerPrayer extends BaseElement {
+
+  constructor() {
+    super(import.meta);
+  }
 
   draw () {
     let query = (new URL(document.location)).searchParams;
@@ -72,4 +76,4 @@ customElements.define('prayer-prayer', class PrayerPrayer extends BaseElement {
       </div>`;
     }
   }
-});
+}

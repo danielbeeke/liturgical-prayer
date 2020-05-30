@@ -3,7 +3,12 @@ import {html} from '../vendor/uhtml.js';
 import {Store} from '../Core/Store.js';
 import {addPrayerPoint} from '../Actions/ScheduleActions.js';
 
-customElements.define('prayer-category-prayer-point-create', class PrayerCategoryPrayerPoint extends BaseElement {
+export class PrayerCategoryPrayerPointCreate extends BaseElement {
+
+  constructor() {
+    super(import.meta);
+  }
+
   draw() {
     let t = this.root.t;
     let s = Store.getState().schedule;
@@ -50,5 +55,4 @@ customElements.define('prayer-category-prayer-point-create', class PrayerCategor
     this.addDescription = null;
     this.root.router.navigate(this.categoryUrl);
   }
-
-});
+}

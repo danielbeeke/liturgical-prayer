@@ -3,10 +3,10 @@ import {html} from '../vendor/uhtml.js';
 import {daysInMonth} from '../Helpers/DaysInMonth.js';
 import {Store} from '../Core/Store.js';
 
-customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
+export class PrayerCalendar extends BaseElement {
 
   constructor() {
-    super();
+    super(import.meta);
     this.selectedRowAdjustment = 0;
 
     /**
@@ -220,6 +220,7 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
   }
 
   afterDraw() {
+    super.afterDraw();
     let prayers = this.querySelector('prayer-pray.hidden');
     if (prayers) {
       this.querySelector('.calendar').on
@@ -235,4 +236,4 @@ customElements.define('prayer-calendar', class PrayerHome extends BaseElement {
     }
   }
 
-});
+}

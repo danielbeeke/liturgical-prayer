@@ -5,7 +5,11 @@ import {toggleMoment} from '../Actions/ScheduleActions.js';
 import {setBible} from '../Actions/AppActions.js';
 import {Content} from '../Content.js';
 
-customElements.define('prayer-settings', class PrayerSettings extends BaseElement {
+export class PrayerSettings extends BaseElement {
+
+  constructor() {
+    super(import.meta);
+  }
 
   connectedCallback() {
     this.draw();
@@ -62,4 +66,4 @@ customElements.define('prayer-settings', class PrayerSettings extends BaseElemen
       <div class="end"></div>
     `;
   }
-});
+}

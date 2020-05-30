@@ -4,7 +4,11 @@ import {Store} from '../Core/Store.js';
 import {deleteFreeCategory, setPrayerPointsOrder} from '../Actions/ScheduleActions.js';
 import {Sortable} from '../Helpers/Sortable.js';
 
-customElements.define('prayer-category-details', class PrayerCategoryDetails extends BaseElement {
+export class PrayerCategoryDetails extends BaseElement {
+
+  constructor() {
+    super(import.meta);
+  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -86,4 +90,4 @@ customElements.define('prayer-category-details', class PrayerCategoryDetails ext
       ` : html``}
     `;
   }
-});
+}

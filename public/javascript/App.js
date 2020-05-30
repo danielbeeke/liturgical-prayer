@@ -8,23 +8,7 @@
 import {BaseElement} from './Core/BaseElement.js';
 import {Store} from './Core/Store.js';
 import {remoteStorage} from './Core/RemoteStorage.js';
-import './CustomElements/PrayerSettings.js';
-import './CustomElements/PrayerHome.js';
-import './CustomElements/PrayerPray.js';
-import './CustomElements/PrayerMomentConfigure.js';
-import './CustomElements/PrayerCategoryDetails.js';
-import './CustomElements/PrayerCreateFreeCategory.js';
-import './CustomElements/PrayerMenu.js';
-import './CustomElements/PrayerIcon.js';
-import './CustomElements/PrayerPage.js';
-import './CustomElements/PrayerMainMenu.js';
-import './CustomElements/PrayerCategoryPrayerPoint.js';
-import './CustomElements/PrayerCategoryPrayerPointCreate.js';
-import './CustomElements/PrayerStorageCallback.js';
-import './CustomElements/RemoteStorageWidget.js';
-import './CustomElements/PrayerCalendar.js';
-import './CustomElements/PrayerDayOverview.js';
-import './CustomElements/PrayerPrayer.js';
+
 import {html} from './vendor/uhtml.js';
 
 import {toggleGrid} from './Actions/AppActions.js';
@@ -33,6 +17,47 @@ import {I14n} from './Helpers/I14n.js';
 import {Router} from './Core/Router.js';
 import {Routes} from './Core/Routes.js'
 import {Tokenizer} from './Helpers/Tokenizer.js';
+import {PrayerCalendar} from './CustomElements/PrayerCalendar.js';
+import {PrayerCategoryDetails} from './CustomElements/PrayerCategoryDetails.js';
+import {PrayerCategoryPrayerPoint} from './CustomElements/PrayerCategoryPrayerPoint.js';
+import {PrayerCategoryPrayerPointCreate} from './CustomElements/PrayerCategoryPrayerPointCreate.js';
+import {PrayerCreateFreeCategory} from './CustomElements/PrayerCreateFreeCategory.js';
+import {PrayerDayOverview} from './CustomElements/PrayerDayOverview.js';
+import {PrayerHome} from './CustomElements/PrayerHome.js';
+import {PrayerIcon} from './CustomElements/PrayerIcon.js';
+import {PrayerMainMenu} from './CustomElements/PrayerMainMenu.js';
+import {PrayerMenu} from './CustomElements/PrayerMenu.js';
+import {PrayerMomentConfigure} from './CustomElements/PrayerMomentConfigure.js';
+import {PrayerPray} from './CustomElements/PrayerPray.js';
+import {PrayerPage} from './CustomElements/PrayerPage.js';
+import {PrayerPrayer} from './CustomElements/PrayerPrayer.js';
+import {PrayerSettings} from './CustomElements/PrayerSettings.js';
+import {PrayerStorageCallback} from './CustomElements/PrayerStorageCallback.js';
+import {RemoteStorageWidget} from './CustomElements/RemoteStorageWidget.js';
+
+let customElementItems = [
+  {tag: 'prayer-calendar', className: PrayerCalendar},
+  {tag: 'prayer-category-details', className: PrayerCategoryDetails},
+  {tag: 'prayer-category-prayer-point', className: PrayerCategoryPrayerPoint},
+  {tag: 'prayer-category-prayer-point-create', className: PrayerCategoryPrayerPointCreate},
+  {tag: 'prayer-create-free-category', className: PrayerCreateFreeCategory},
+  {tag: 'prayer-day-overview', className: PrayerDayOverview},
+  {tag: 'prayer-home', className: PrayerHome},
+  {tag: 'prayer-icon', className: PrayerIcon},
+  {tag: 'prayer-main-menu', className: PrayerMainMenu},
+  {tag: 'prayer-menu', className: PrayerMenu},
+  {tag: 'prayer-moment-configure', className: PrayerMomentConfigure},
+  {tag: 'prayer-page', className: PrayerPage},
+  {tag: 'prayer-pray', className: PrayerPray},
+  {tag: 'prayer-prayer', className: PrayerPrayer},
+  {tag: 'prayer-settings', className: PrayerSettings},
+  {tag: 'prayer-storage-callback', className: PrayerStorageCallback},
+  {tag: 'remote-storage-widget', className: RemoteStorageWidget},
+];
+
+customElementItems.forEach(item => {
+  customElements.define(item.tag, item.className);
+});
 
 customElements.define('prayer-app', class PrayerApp extends BaseElement {
 
@@ -40,6 +65,8 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
    * This is the main startup function of the app.
    */
   async connectedCallback () {
+    this.customElements = customElementItems;
+
     let a = Store.getState().app;
 
     this.storage = remoteStorage;
