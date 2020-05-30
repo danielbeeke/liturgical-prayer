@@ -1,16 +1,13 @@
 import {render} from '../vendor/uhtml.js';
 import {watch} from '../vendor/ReduxWatch.js';
 import {Store} from "./Store.js";
-import {createHotContext, getHotContext} from '../../../hmr-client.js';
 
 /**
  * Some helpers to easily create Custom Elements composed in a base class.
  */
 export class BaseElement extends HTMLElement {
-  constructor (highestImportMeta) {
+  constructor () {
     super();
-    if (highestImportMeta) this.enableHmr(highestImportMeta.url);
-
     this.interval = false;
     this.subscribers = [];
 
@@ -24,40 +21,6 @@ export class BaseElement extends HTMLElement {
       render(this, () => elementDraw.apply(this, arguments));
       this.afterDraw();
     };
-  }
-
-  enableHmr (url) {
-    createHotContext(url);
-    let hmr = getHotContext(url);
-
-    if (hmr) {
-      // Receive any updates from the dev server, and update accordingly.
-      hmr.accept(({ module }) => {
-        try {
-          let moduleName = Object.keys(module)[0];
-          let item = this.root.customElements.find(customElement => customElement.className.name === moduleName);
-          let newClass = module[moduleName];
-          let oldClass = item.className;
-
-          for (const [propertyName, propertyDescriptor] of Object.entries(Object.getOwnPropertyDescriptors(newClass.prototype))) {
-            Reflect.defineProperty(oldClass.prototype, propertyName, propertyDescriptor);
-          }
-
-          let elements = document.querySelectorAll(item.tag);
-          elements.forEach(element => {
-            element.attachDraw(oldClass.prototype.draw);
-            element.draw();
-          });
-
-        } catch (err) {
-          console.log(err);
-          // hmr.invalidate();
-        }
-      });
-      hmr.dispose(() => {
-        console.log('dispose')
-      });
-    }
   }
 
   get route () {

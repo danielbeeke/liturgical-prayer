@@ -7,10 +7,6 @@ import {addWbr} from '../Helpers/addWbr.js';
 
 export class PrayerMomentConfigure extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   async connectedCallback() {
     this.draw();
     let list = this.querySelector('.categories');

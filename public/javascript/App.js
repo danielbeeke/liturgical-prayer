@@ -34,6 +34,7 @@ import {PrayerPrayer} from './CustomElements/PrayerPrayer.js';
 import {PrayerSettings} from './CustomElements/PrayerSettings.js';
 import {PrayerStorageCallback} from './CustomElements/PrayerStorageCallback.js';
 import {RemoteStorageWidget} from './CustomElements/RemoteStorageWidget.js';
+import {enableHmr} from './Core/Hmr.js';
 
 let customElementItems = [
   {tag: 'prayer-calendar', className: PrayerCalendar},
@@ -57,6 +58,7 @@ let customElementItems = [
 
 customElementItems.forEach(item => {
   customElements.define(item.tag, item.className);
+  enableHmr(`${location.origin}/javascript/CustomElements/${item.className.name}.js`, customElementItems);
 });
 
 customElements.define('prayer-app', class PrayerApp extends BaseElement {

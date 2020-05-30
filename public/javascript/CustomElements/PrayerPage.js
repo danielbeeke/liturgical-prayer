@@ -5,10 +5,6 @@ import {toLines} from '../Helpers/toLines.js';
 
 export class PrayerPage extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   draw () {
     let page = Content['Pages'].find(page => page.slug === location.pathname.substr(1));
 

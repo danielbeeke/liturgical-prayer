@@ -8,10 +8,6 @@ import {observeCurrentPrayer} from '../Helpers/observeCurrentPrayer.js';
 
 export class PrayerPray extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   draw () {
     let date = this.getAttribute('date') ? new Date(this.getAttribute('date')) : new Date();
     let s = Store.getState().schedule;

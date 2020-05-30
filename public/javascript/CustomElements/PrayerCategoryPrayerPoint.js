@@ -5,10 +5,6 @@ import {deletePrayerPoint, updatePrayerPoint} from '../Actions/ScheduleActions.j
 
 export class PrayerCategoryPrayerPoint extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   draw() {
     let t = this.root.t;
     let s = Store.getState().schedule;

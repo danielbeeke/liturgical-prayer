@@ -5,10 +5,6 @@ import {getCurrentActiveMoment} from '../Helpers/getCurrentActiveMoment.js';
 
 export class PrayerHome extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   draw () {
     let t = this.root.t;
     let s = Store.getState().schedule;

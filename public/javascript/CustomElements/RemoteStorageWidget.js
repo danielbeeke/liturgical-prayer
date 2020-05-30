@@ -5,7 +5,7 @@ import {remoteStorage} from '../Core/RemoteStorage.js';
 export class RemoteStorageWidget extends BaseElement {
 
   constructor() {
-    super(import.meta);
+    super();
     this.rs = remoteStorage;
     this.setupHandlers();
     this.showLogin = false;

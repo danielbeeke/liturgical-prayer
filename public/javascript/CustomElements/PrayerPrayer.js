@@ -7,10 +7,6 @@ import {Store} from '../Core/Store.js';
 
 export class PrayerPrayer extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   draw () {
     let query = (new URL(document.location)).searchParams;
 

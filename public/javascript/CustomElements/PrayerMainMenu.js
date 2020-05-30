@@ -5,10 +5,6 @@ import {Slugify} from '../Helpers/Slugify.js';
 
 export class PrayerMainMenu extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   draw () {
     let t = this.root.t;
 

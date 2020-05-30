@@ -8,7 +8,7 @@ import {Content} from '../Content.js';
 export class PrayerCreateFreeCategory extends BaseElement {
 
   constructor() {
-    super(import.meta);
+    super();
     let t = this.root.t;
     this.selected = '';
     this.otherText = '';

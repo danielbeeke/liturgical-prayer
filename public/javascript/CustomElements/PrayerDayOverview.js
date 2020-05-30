@@ -5,10 +5,6 @@ import {PrayerScheduler} from '../Helpers/PrayerScheduler.js';
 
 export class PrayerDayOverview extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   attributeChangedCallback () {
     this.draw();
   }

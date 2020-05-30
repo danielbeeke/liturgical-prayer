@@ -2,10 +2,6 @@ import {BaseElement} from '../Core/BaseElement.js';
 
 export class PrayerIcon extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   async connectedCallback () {
     let name = this.getAttribute('name');
     if (!window.svgCache) window.svgCache = {};

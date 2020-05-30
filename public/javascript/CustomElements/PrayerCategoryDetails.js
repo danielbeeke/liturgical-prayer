@@ -6,10 +6,6 @@ import {Sortable} from '../Helpers/Sortable.js';
 
 export class PrayerCategoryDetails extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   connectedCallback() {
     super.connectedCallback();
     let list = this.querySelector('.prayer-items');

@@ -5,10 +5,6 @@ import {addPrayerPoint} from '../Actions/ScheduleActions.js';
 
 export class PrayerCategoryPrayerPointCreate extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   draw() {
     let t = this.root.t;
     let s = Store.getState().schedule;

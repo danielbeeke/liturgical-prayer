@@ -7,10 +7,6 @@ import {Content} from '../Content.js';
 
 export class PrayerSettings extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   connectedCallback() {
     this.draw();
   }

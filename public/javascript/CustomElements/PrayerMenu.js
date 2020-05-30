@@ -3,10 +3,6 @@ import {html} from '../vendor/uhtml.js';
 
 export class PrayerMenu extends BaseElement {
 
-  constructor() {
-    super(import.meta);
-  }
-
   draw () {
     let t = this.root.t;
 

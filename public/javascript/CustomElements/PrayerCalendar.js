@@ -6,7 +6,7 @@ import {Store} from '../Core/Store.js';
 export class PrayerCalendar extends BaseElement {
 
   constructor() {
-    super(import.meta);
+    super();
     this.selectedRowAdjustment = 0;
 
     /**
