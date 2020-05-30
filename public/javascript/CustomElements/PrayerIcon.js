@@ -1,6 +1,6 @@
 import {BaseElement} from '../Core/BaseElement.js';
 
-customElements.define('prayer-icon', class PrayerIcon extends BaseElement {
+export class PrayerIcon extends BaseElement {
 
   async connectedCallback () {
     await this.loadIcon();
@@ -50,4 +50,4 @@ customElements.define('prayer-icon', class PrayerIcon extends BaseElement {
 
   static get observedAttributes() { return ['name']; }
 
-});
+}

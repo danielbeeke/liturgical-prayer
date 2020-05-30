@@ -5,7 +5,7 @@ import {toggleCategory, setCategoriesOrder, setMomentTime} from '../Actions/Sche
 import {Sortable} from '../Helpers/Sortable.js';
 import {addWbr} from '../Helpers/addWbr.js';
 
-customElements.define('prayer-moment-configure', class PrayerMomentConfigure extends BaseElement {
+export class PrayerMomentConfigure extends BaseElement {
 
   async connectedCallback() {
     this.draw();
@@ -112,4 +112,4 @@ customElements.define('prayer-moment-configure', class PrayerMomentConfigure ext
       <div class="end"></div>
     `;
   }
-});
+}

@@ -1,22 +1,18 @@
-prayer-add-note {
-  width: 100%;
-}
-
 $note-size: 60%;
 
-.add-note-panel {
+prayer-add-note {
+  width: 100%;
   display: flex;
   flex-direction: column;
   height: 50rs;
   overflow: hidden;
-  width: calc(100% + 8rs);
   background: var(--color-gray-light);
   transition: all var(--speed) var(--easing);
-  transform: translateX(0);
-  margin: 0 -4rs;
   padding: 4rs;
   z-index: 1;
   opacity: 1;
+  position: sticky;
+  bottom: 0;
 
   &:after {
     content: '';

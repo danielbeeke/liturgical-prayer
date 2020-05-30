@@ -3,7 +3,7 @@ import {html} from '../vendor/uhtml.js';
 import {Content} from '../Content.js';
 import {toLines} from '../Helpers/toLines.js';
 
-customElements.define('prayer-page', class PrayerHome extends BaseElement {
+export class PrayerPage extends BaseElement {
 
   draw () {
     let page = Content['Pages'].find(page => page.slug === location.pathname.substr(1));
@@ -17,4 +17,4 @@ customElements.define('prayer-page', class PrayerHome extends BaseElement {
       <div class="end"></div>
     `;
   }
-});
+}

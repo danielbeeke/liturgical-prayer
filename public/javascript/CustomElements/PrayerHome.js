@@ -3,7 +3,7 @@ import {Store} from '../Core/Store.js';
 import {html} from '../vendor/uhtml.js';
 import {getCurrentActiveMoment} from '../Helpers/getCurrentActiveMoment.js';
 
-customElements.define('prayer-home', class PrayerHome extends BaseElement {
+export class PrayerHome extends BaseElement {
 
   draw () {
     let t = this.root.t;
@@ -39,6 +39,7 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
   }
 
   afterDraw() {
+    super.afterDraw();
     let s = Store.getState().schedule;
     let activeMoment = getCurrentActiveMoment(s.moments);
 
@@ -47,4 +48,4 @@ customElements.define('prayer-home', class PrayerHome extends BaseElement {
       activeMomentCard.scrollIntoView();
     }
   }
-});
+}

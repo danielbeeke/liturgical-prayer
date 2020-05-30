@@ -3,7 +3,7 @@ import {html} from '../vendor/uhtml.js';
 import {Content} from '../Content.js';
 import {Slugify} from '../Helpers/Slugify.js';
 
-customElements.define('prayer-main-menu', class PrayerMenu extends BaseElement {
+export class PrayerMainMenu extends BaseElement {
 
   draw () {
     let t = this.root.t;
@@ -39,4 +39,4 @@ customElements.define('prayer-main-menu', class PrayerMenu extends BaseElement {
 
     `;
   }
-});
+}

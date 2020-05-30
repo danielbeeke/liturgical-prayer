@@ -6,12 +6,7 @@ import {markFixedPrayer, markFreePrayer} from '../Actions/PrayActions.js';
 import {toLines} from '../Helpers/toLines.js';
 import {observeCurrentPrayer} from '../Helpers/observeCurrentPrayer.js';
 
-customElements.define('prayer-pray', class PrayerPray extends BaseElement {
-
-  constructor() {
-    super();
-    this.showNotePanel = false;
-  }
+export class PrayerPray extends BaseElement {
 
   draw () {
     let date = this.getAttribute('date') ? new Date(this.getAttribute('date')) : new Date();
@@ -27,6 +22,8 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
     let prayers = activeCategories.map(category => {
       return category.isFreeForm ? prayerScheduler.getFreeFormPrayer(date, category, moment.slug) : prayerScheduler.getFixedPrayer(date, category, moment.slug);
     });
+
+    this.prayers = prayers;
 
     prayers.forEach(prayer => {
       if (!prayer.marked) {
@@ -51,7 +48,7 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
         <span class="moment">${t.direct(moment.name)}</span>
         ${prayers.length > 1 ? html`
         <div class="indicator">
-            ${prayers.map((prayer, index) => html`<div class="${'indicator-item' + (index === 0 ? ' active' : '')}"></div>`)}
+            ${prayers.map((prayer, index) => html`<div class="indicator-item"></div>`)}
         </div>
         ` : ''}
       </div>
@@ -59,7 +56,10 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
       <div class="slider">
       ${prayers.map((prayer, index) => {
         let category = prayer.category.isFreeForm ? t.direct('Your category') : (prayer.category.name !== prayer.Title ? prayer.category.name : '');
-              
+
+        let prayerIdentifier = prayer.UniqueID ? prayer.UniqueID : prayer.items.map(item => item.slug).join(',');
+        let addNoteLink = `/add-note/${this.route.parameters.moment}/${prayer.category.slug}/${dateString}/${prayerIdentifier}?back=/pray/${this.route.parameters.moment}/${prayer.category.slug}`;
+  
         return html`<div class="prayer" data-id="${prayer.UniqueID}">
           <div class="header">
             <h2 class="title">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</h2>
@@ -78,12 +78,10 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
             </p>
             <span class="amen">Amen</span>
             
-            <prayer-add-note 
-                moment="${this.route.parameters.moment}" 
-                category="${prayer.category.slug}" 
-                date="${dateString}"
-                prayer="${prayer.UniqueID ? prayer.UniqueID : prayer.items.map(item => item.slug).join(',')}" />
-              
+            <a class="add-note-button" href="${addNoteLink}">
+              <prayer-icon name="note-add" />
+            </a>
+                          
           </div>
         </div>`      
       })}
@@ -93,7 +91,13 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
   }
 
   afterDraw() {
-    observeCurrentPrayer(this);
+    super.afterDraw();
+    this.observer = observeCurrentPrayer(this);
   }
 
-});
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.observer.disconnect()
+  }
+
+}

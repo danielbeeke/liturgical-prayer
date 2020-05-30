@@ -3,7 +3,7 @@ import {Store} from '../Core/Store.js';
 import {html} from '../vendor/uhtml.js';
 import {PrayerScheduler} from '../Helpers/PrayerScheduler.js';
 
-customElements.define('prayer-day-overview', class PrayerDayOverview extends BaseElement {
+export class PrayerDayOverview extends BaseElement {
 
   attributeChangedCallback () {
     this.draw();
@@ -51,4 +51,4 @@ customElements.define('prayer-day-overview', class PrayerDayOverview extends Bas
     </div>`
   }
 
-});
+}

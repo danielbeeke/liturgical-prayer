@@ -2,11 +2,10 @@ import {BaseElement} from '../Core/BaseElement.js';
 import {html} from '../vendor/uhtml.js';
 import {saveNote} from '../Actions/PrayActions.js';
 
-customElements.define('prayer-add-note', class PrayerIcon extends BaseElement {
+export class PrayerAddNote extends BaseElement {
 
   constructor() {
     super();
-    this.showNotePanel = false;
     this.noteText = '';
   }
 
@@ -20,31 +19,13 @@ customElements.define('prayer-add-note', class PrayerIcon extends BaseElement {
     );
   }
 
-  toggle () {
-    this.showNotePanel = !this.showNotePanel;
-
-    if (this.showNotePanel) {
-      this.querySelector('.add-note-panel').addEventListener('transitionend', () => {
-        this.querySelector('.add-note-panel').scrollIntoView({
-          behavior: 'smooth'
-        });
-      }, { once: true });
-    }
-
-    this.draw();
-  }
-
   draw() {
     let t = this.root.t;
+    let query = (new URL(document.location)).searchParams;
 
     return html`
-
-    <button class="${`add-note-button` + (this.showNotePanel ? ' opened' : '')}" onclick="${() => this.toggle()}">
-        <prayer-icon name="${this.showNotePanel ? 'cross' : 'note-add'}" />
-    </button>
-
-    <div class="${`add-note-panel ` + (!this.showNotePanel ? ' hidden' : '')}">
       <h3 class="page-title">
+        <a class="back-button" href="${query.get('back')}"><prayer-icon name="arrow-left" /></a>
         ${t.direct('Add a note')}
       </h3>
       
@@ -58,11 +39,7 @@ customElements.define('prayer-add-note', class PrayerIcon extends BaseElement {
       <div>
         <button class="button" onclick="${() => this.saveNote()}">${t.direct('Save')}</button>        
       </div>
-
-      
-    </div>
-
     `;
   }
 
-});
+}
