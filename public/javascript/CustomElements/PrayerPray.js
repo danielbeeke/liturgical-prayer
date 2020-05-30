@@ -39,6 +39,9 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
       }
     });
 
+    let now = new Date();
+    let dateString = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+
     return html`
       <a class="close-prayers" href="/pray">
         <prayer-icon name="cross" />
@@ -75,7 +78,11 @@ customElements.define('prayer-pray', class PrayerPray extends BaseElement {
             </p>
             <span class="amen">Amen</span>
             
-            <prayer-add-note />
+            <prayer-add-note 
+                moment="${this.route.parameters.moment}" 
+                category="${prayer.category.slug}" 
+                date="${dateString}"
+                prayer="${prayer.UniqueID ? prayer.UniqueID : prayer.items.map(item => item.slug).join(',')}" />
               
           </div>
         </div>`      

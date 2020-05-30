@@ -1,5 +1,6 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {html} from '../vendor/uhtml.js';
+import {saveNote} from '../Actions/PrayActions.js';
 
 customElements.define('prayer-add-note', class PrayerIcon extends BaseElement {
 
@@ -10,7 +11,13 @@ customElements.define('prayer-add-note', class PrayerIcon extends BaseElement {
   }
 
   saveNote () {
-
+    saveNote(
+      this.getAttribute('moment'),
+      this.getAttribute('date'),
+      this.getAttribute('prayer'),
+      this.getAttribute('category'),
+      this.noteText
+    );
   }
 
   toggle () {
