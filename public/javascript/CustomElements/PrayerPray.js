@@ -87,7 +87,7 @@ export class PrayerPray extends BaseElement {
               <a class="note-button edit" href="${addNoteLink}">
                 <prayer-icon name="pencil" />
               </a>
-              <em>${t.direct('Your note:')}</em><br><br>
+              <em>${t.direct('Your note:')}</em><br>
               ${note.note}
               </div>
             ` : html`

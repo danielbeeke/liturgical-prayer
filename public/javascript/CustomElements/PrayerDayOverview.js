@@ -50,7 +50,7 @@ export class PrayerDayOverview extends BaseElement {
 
               ${note ? html`
               <div class="note">
-                <em>${t.direct('Your note:')}</em><br><br>
+                <em>${t.direct('Your note:')}</em><br>
                 ${note.note}
               </div>
               ` : ''}
