@@ -22,7 +22,7 @@ export class PrayerHome extends BaseElement {
     <div class="moments moments-slider">
       ${s.moments.filter(moment => moment.enabled).map(moment => html`
         <a class="moment card" data-moment="${moment.slug}" href="${'/pray/' + moment.slug}" style="${`--color-primary: ${moment.color};  --color-secondary: ${moment.colorBackground}`}">
-          <div class="image" style="${`background-image: url(${moment.background});`}"></div>
+          <div class="image" style="${`background-image: url(/images/${moment.slug}.jpg);`}"></div>
           <span class="button has-icon">
             ${t`Pray`}
             <prayer-icon name="arrow-right" />
