@@ -511,7 +511,7 @@ prayer-calendar {
   prayer-calendar .calendar {
     position: relative;
     margin-top: 16px;
-    height: 288px;
+    height: 336px;
     padding-left: 32px;
     padding-right: 32px;
     z-index: 2;
@@ -554,7 +554,24 @@ prayer-calendar {
     position: relative; }
   prayer-calendar .day {
     background: var(--color-gray-light); }
+  prayer-calendar .note-indicators {
+    top: 6px;
+    left: 6px;
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+  prayer-calendar .note-indicator {
+    border-radius: 50%;
+    background: var(--color-primary);
+    width: 5px;
+    height: 5px;
+    display: block;
+    margin-right: 3px;
+    -webkit-transition: background var(--speed) var(--easing);
+    transition: background var(--speed) var(--easing); }
   prayer-calendar .number {
+    position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -576,6 +593,8 @@ prayer-calendar {
     prayer-calendar .number.active {
       background: var(--color-primary);
       color: white; }
+      prayer-calendar .number.active .note-indicator {
+        background: white; }
   prayer-calendar:not(.has-selected-day) .back-to-month-view {
     opacity: 0;
     pointer-events: none;
@@ -658,6 +677,9 @@ prayer-day-overview .prayer-teaser {
 prayer-day-overview .prayer-list {
   padding: 0;
   list-style: none; }
+
+prayer-day-overview .note {
+  margin-top: 0; }
 
 prayer-home {
   display: -webkit-box;
@@ -844,7 +866,7 @@ prayer-moment-configure {
   prayer-moment-configure .create-category-title + p {
     margin-top: 16px; }
 
-prayer-note {
+prayer-note-form {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -863,9 +885,9 @@ prayer-note {
   opacity: 1;
   position: sticky;
   bottom: 0; }
-  prayer-note:after {
+  prayer-note-form:after {
     content: ''; }
-  prayer-note .field {
+  prayer-note-form .field {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -876,22 +898,22 @@ prayer-note {
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto; }
-    prayer-note .field .field-inner {
+    prayer-note-form .field .field-inner {
       -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
       flex: 1 1 auto; }
-    prayer-note .field textarea {
+    prayer-note-form .field textarea {
       border-color: var(--color-gray);
       -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
       flex: 1 1 auto;
       height: auto; }
-  prayer-note.hidden {
+  prayer-note-form.hidden {
     pointer-events: none;
     height: 0;
     opacity: 0;
     padding: 0 32px; }
-  prayer-note .page-title .close-note-add {
+  prayer-note-form .page-title .close-note-add {
     cursor: pointer;
     margin-top: 8px;
     float: right; }
@@ -932,7 +954,7 @@ prayer-note {
     left: auto;
     top: 16px; }
 
-.prayer .note {
+.note {
   margin-top: 32px;
   font-preset: paragraphs;padding-right: 16px;padding-left: 16px;padding-bottom: 18px;padding-top: 22px;line-height: 24px;font-size: 16px;font-weight: 300;font-family: Inter var;
   margin-bottom: 32px;
@@ -941,7 +963,7 @@ prayer-note {
   width: 100%;
   -webkit-box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07);
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07); }
-  .prayer .note:before {
+  .note:before {
     content: "";
     position: absolute;
     top: -4px;
@@ -950,7 +972,7 @@ prayer-note {
     border-style: solid;
     z-index: 3;
     border-color: white transparent; }
-  .prayer .note:after {
+  .note:after {
     content: "";
     position: absolute;
     top: 0;
@@ -958,10 +980,10 @@ prayer-note {
     border-width: 16px 16px 0 0;
     border-style: solid;
     border-color: #fff rgba(34, 34, 34, 0.15); }
-  .prayer .note .note-button {
+  .note .note-button {
     -webkit-transform: translateY(-32px);
     transform: translateY(-32px); }
-  .prayer .note em {
+  .note em {
     color: var(--color-gray-dark); }
 
 prayer-pray.page {

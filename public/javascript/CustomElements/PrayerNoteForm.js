@@ -3,7 +3,7 @@ import {html} from '../vendor/uhtml.js';
 import {saveNote, deleteNote} from '../Actions/PrayActions.js';
 import {Store} from '../Core/Store.js';
 
-export class PrayerNote extends BaseElement {
+export class PrayerNoteForm extends BaseElement {
 
   constructor() {
     super();

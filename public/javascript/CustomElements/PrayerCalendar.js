@@ -69,7 +69,7 @@ export class PrayerCalendar extends BaseElement {
 
   getNumberDays () {
     let numberDays = [];
-    let numberCount = daysInMonth(this.month - 1, this.year);
+    let numberCount = daysInMonth(this.month, this.year);
     for (let i = 1; i <= numberCount; i++) {
       numberDays.push(i);
     }
@@ -79,8 +79,25 @@ export class PrayerCalendar extends BaseElement {
       let calendarItem = this.calendar.find(item => item.date === dateString);
       let hasPrayers = !!calendarItem;
 
+      let dayNotes = calendarItem && calendarItem.notes;
+      let hasNotes = !!dayNotes;
+      let noteCount = 0;
+      if (hasNotes) {
+        for (let [moment, categories] of Object.entries(dayNotes)) {
+          noteCount += Object.keys(categories).length;
+        }
+      }
+
+      let noteIndicators = [];
+      for (let i = 0; i < noteCount; i++) {
+        noteIndicators.push('');
+      }
+
       if (hasPrayers) {
-        return html`<a href="${`/calendar/${this.year}-${this.month}-${day}`}" class="number has-prayers no-page-transition">
+        return html`<a href="${`/calendar/${this.year}-${this.month}-${day}`}" class="${`number has-prayers no-page-transition ${hasNotes ? 'has-notes' : ''}`}">
+          ${hasNotes ? html`<div class="note-indicators">
+            ${noteIndicators.map(noteIndicator => html`<span class="note-indicator"></span>`)}
+          </div>` : ''}
           ${day}
         </a>`;
       }
@@ -132,7 +149,7 @@ export class PrayerCalendar extends BaseElement {
   }
 
   maxRows () {
-    let numberCount = daysInMonth(this.month - 1, this.year);
+    let numberCount = daysInMonth(this.month, this.year);
     let firstDayOfMonth = new Date(this.year, this.month - 1, 1);
     return Math.ceil((numberCount + firstDayOfMonth.getDay()) / 7);
   }

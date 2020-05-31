@@ -12,6 +12,7 @@ export class PrayerDayOverview extends BaseElement {
   static get observedAttributes() { return ['moment', 'date']; }
 
   draw () {
+    let t = this.root.t;
     let dateParts = this.route.parameters.date.split('-');
     this.year = parseInt(dateParts[0]);
     this.month = parseInt(dateParts[1]);
@@ -40,10 +41,20 @@ export class PrayerDayOverview extends BaseElement {
           <h3 class="moment-title">${moment.name}</h3>
           <ul class="prayer-list">
           ${prayers.map(prayer => {
+            let note = dayObject.notes[moment.slug] && dayObject.notes[moment.slug][prayer.category.slug];
+            
             return html`
               <li class="prayer-teaser" data-id="${prayer.UniqueID}">
-                <a href="${`/prayer/${prayer.category.slug}/${prayer.UniqueID ? prayer.UniqueID : prayer.items.map(item => item.slug).join(',')}?back=${location.pathname}`}">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</a>
-              </li>`          
+                <a href="${`/prayer/${prayer.category.slug}/${prayer.UniqueID ? prayer.UniqueID : prayer.items.map(item => item.slug).join(',')}?back=${location.pathname}`}">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</a>                
+              </li>
+
+              ${note ? html`
+              <div class="note">
+                <em>${t.direct('Your note:')}</em><br><br>
+                ${note.note}
+              </div>
+              ` : ''}
+            `          
           })}
           </ul>
         </div>`

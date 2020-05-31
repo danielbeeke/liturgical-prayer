@@ -42,7 +42,7 @@ prayer-calendar {
   .calendar {
     position: relative;
     margin-top: 2rs;
-    height: 36rs;
+    height: 42rs;
     padding-left: 4rs;
     padding-right: 4rs;
     z-index: 2;
@@ -89,7 +89,25 @@ prayer-calendar {
     background: var(--color-gray-light);
   }
 
+  .note-indicators {
+    top: 6px;
+    left: 6px;
+    position: absolute;
+    display: flex;
+  }
+
+  .note-indicator {
+    border-radius: 50%;
+    background: var(--color-primary);
+    width: 5px;
+    height: 5px;
+    display: block;
+    margin-right: 3px;
+    transition: background var(--speed) var(--easing);
+  }
+
   .number {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -109,6 +127,10 @@ prayer-calendar {
     &.active {
       background: var(--color-primary);
       color: white;
+
+      .note-indicator {
+        background: white;
+      }
     }
   }
 
@@ -154,4 +176,5 @@ prayer-calendar {
     background: white;
     height: 30rs;
   }
+
 }
