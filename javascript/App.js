@@ -310,7 +310,7 @@ var e=function(e){return{get:function(t){return e.get(t)},set:function(t,r){retu
       </div>
 
       <div class="slider">
-      ${a.map((e,t)=>{let o=e.category.isFreeForm?n.direct("Your category"):e.category.name!==e.Title?e.category.name:"",i=e.UniqueID?e.UniqueID:e.items.map(e=>e.slug).join(","),a=`/note/${this.route.parameters.moment}/${e.category.slug}/${u}/${i}?back=/pray/${this.route.parameters.moment}/${e.category.slug}`,s=r.calendar.find(e=>e.date===u),l=!!(s.notes[this.route.parameters.moment]&&s.notes[this.route.parameters.moment][e.category.slug])&&s.notes[this.route.parameters.moment][e.category.slug];return D`<div class="prayer" data-id="${e.UniqueID}">
+      ${a.map((e,t)=>{let o=e.category.isFreeForm?n.direct("Your category"):e.category.name!==e.Title?e.category.name:"",i=e.UniqueID?e.UniqueID:e.items.map(e=>e.slug).join(","),a=`/note/${this.route.parameters.moment}/${e.category.slug}/${u}/${i}?back=/pray/${this.route.parameters.moment}/${e.category.slug}`,s=r.calendar.find(e=>e.date===u),l=!!(s&&s.notes[this.route.parameters.moment]&&s.notes[this.route.parameters.moment][e.category.slug])&&s.notes[this.route.parameters.moment][e.category.slug];return D`<div class="prayer" data-id="${e.UniqueID}">
           <div class="header">
             <h2 class="title">${e.category.isFreeForm?e.category.name:e.Title}</h2>
             <div class="meta">
