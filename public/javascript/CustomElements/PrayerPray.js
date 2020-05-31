@@ -61,7 +61,7 @@ export class PrayerPray extends BaseElement {
         let addNoteLink = `/note/${this.route.parameters.moment}/${prayer.category.slug}/${dateString}/${prayerIdentifier}?back=/pray/${this.route.parameters.moment}/${prayer.category.slug}`;
 
         let currentDateObject = p.calendar.find(item => item.date === dateString);
-        let noteExists = currentDateObject.notes[this.route.parameters.moment] && currentDateObject.notes[this.route.parameters.moment][prayer.category.slug];
+        let noteExists = currentDateObject && currentDateObject.notes[this.route.parameters.moment] && currentDateObject.notes[this.route.parameters.moment][prayer.category.slug];
         let note = noteExists ? currentDateObject.notes[this.route.parameters.moment][prayer.category.slug] : false;
         
         return html`<div class="prayer" data-id="${prayer.UniqueID}">
