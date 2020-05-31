@@ -33,14 +33,27 @@ export const clearFixedPrayerCategory = (categoryName) => {
   })
 };
 
-export const saveNote = (momentSlug, dateString, prayer, categorySlug, text) => {
+export const saveNote = (momentSlug, dateString, prayer, categorySlug, note) => {
   Store.dispatch({
     type: 'save-note',
     payload: {
       momentSlug: momentSlug,
       dateString: dateString,
       categorySlug: categorySlug,
-      text: text
+      prayer: prayer,
+      note: note
+    }
+  })
+};
+
+export const deleteNote = (momentSlug, dateString, prayer, categorySlug) => {
+  Store.dispatch({
+    type: 'delete-note',
+    payload: {
+      momentSlug: momentSlug,
+      dateString: dateString,
+      categorySlug: categorySlug,
+      prayer: prayer
     }
   })
 };

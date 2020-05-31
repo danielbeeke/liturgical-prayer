@@ -160,7 +160,7 @@ export class PrayerCalendar extends BaseElement {
   draw () {
     this.prepareData();
 
-    let {date, ...dayData} = this.selectedDayData ? this.selectedDayData : {};
+    let {date, ...momentsData} = this.selectedDayData ? this.selectedDayData : {};
 
     return html`
       <div class="header">

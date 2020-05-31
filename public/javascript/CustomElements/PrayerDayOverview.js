@@ -19,8 +19,8 @@ export class PrayerDayOverview extends BaseElement {
     this.dateString = `${this.year}-${this.month}-${this.day}`;
     this.calendar = Store.getState().pray.calendar;
     this.s = Store.getState().schedule;
-    let {date, ...dayData} = this.calendar.find(item => item.date === this.dateString);
-    this.selectedDayData = dayData;
+    let dayObject = this.calendar.find(item => item.date === this.dateString);
+    this.selectedDayData = dayObject.moments;
     this.dateObject = new Date(this.dateString);
 
     let givenMomentNames = Object.keys(this.selectedDayData);

@@ -22,16 +22,18 @@ export function PrayReducer (state = {
       let currentDateObject = nextState.calendar.find(item => item.date === dateString);
       if (!currentDateObject) {
         currentDateObject = {
-          date: dateString
+          date: dateString,
+          moments: {},
+          notes: {},
         };
         nextState.calendar.push(currentDateObject);
       }
 
-      if (!currentDateObject[momentSlug]) {
-        currentDateObject[momentSlug] = {};
+      if (!currentDateObject.moments[momentSlug]) {
+        currentDateObject.moments[momentSlug] = {};
       }
 
-      currentDateObject[momentSlug][categorySlug] = content;
+      currentDateObject.moments[momentSlug][categorySlug] = content;
     };
 
     if (action.type === 'mark-fixed-prayer') {
@@ -48,9 +50,21 @@ export function PrayReducer (state = {
       setCurrentMomentCategoryContent(action.payload.items);
     }
 
-
     if (action.type === 'save-note') {
-      // setCurrentMomentCategoryContent(action.payload.items);
+      let currentDateObject = nextState.calendar.find(item => item.date === action.payload.dateString);
+      if (!currentDateObject.notes[action.payload.momentSlug]) {
+        currentDateObject.notes[action.payload.momentSlug] = {};
+      }
+
+      currentDateObject.notes[action.payload.momentSlug][action.payload.categorySlug] = {
+        prayer: action.payload.prayer,
+        note: action.payload.note
+      };
+    }
+
+    if (action.type === 'delete-note') {
+      let currentDateObject = nextState.calendar.find(item => item.date === action.payload.dateString);
+      delete currentDateObject.notes[action.payload.momentSlug][action.payload.categorySlug];
     }
 
     if (action.type === 'replace-state') {

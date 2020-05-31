@@ -1,6 +1,5 @@
 import {Store} from '../Core/Store.js';
 import {clearFixedPrayerCategory} from '../Actions/PrayActions.js';
-import {html} from '../vendor/uhtml.js';
 import {Content} from '../Content.js';
 
 export class PrayerScheduler {
@@ -20,7 +19,7 @@ export class PrayerScheduler {
     let day = date.getDate();
     let dateString = `${year}-${month}-${day}`;
     let currentDateObject = this.p.calendar.find(item => item.date === dateString);
-    let assignedItemIds = currentDateObject && currentDateObject[momentSlug] && currentDateObject[momentSlug][prayerCategory.slug];
+    let assignedItemIds = currentDateObject && currentDateObject.moments[momentSlug] && currentDateObject.moments[momentSlug][prayerCategory.slug];
 
     let freeCategory = this.s.freeCategories.find(freeCategory => freeCategory.slug === prayerCategory.slug);
     let assignedItems = assignedItemIds && assignedItemIds.length ? freeCategory.items.filter(item => assignedItemIds.includes(item.slug)) : [];
@@ -47,10 +46,6 @@ export class PrayerScheduler {
   getNextFreePrayer (date, prayerCategory) {
     this.p = Store.getState().pray;
     this.s = Store.getState().schedule;
-
-    // for (let [date, moments] of Object.entries(this.p.calendar)) {
-    //
-    // }
 
     let previousItems = {};
 
@@ -117,7 +112,7 @@ export class PrayerScheduler {
 
     let dateString = `${year}-${month}-${day}`;
     let currentDateObject = this.p.calendar.find(item => item.date === dateString);
-    let assignedPrayerId = currentDateObject ? currentDateObject[momentSlug] && currentDateObject[momentSlug][prayerCategory.slug] : false;
+    let assignedPrayerId = currentDateObject ? currentDateObject.moments[momentSlug] && currentDateObject.moments[momentSlug][prayerCategory.slug] : false;
 
     if (assignedPrayerId) {
       let allPrayers = Content[prayerCategory.name];

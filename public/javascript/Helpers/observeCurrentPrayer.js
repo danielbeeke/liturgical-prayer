@@ -29,9 +29,10 @@ export function observeCurrentPrayer(element) {
     prayers.forEach((prayer, index) => prayer.classList[index === activeIndex ? 'add' : 'remove']('active'));
     indicators.forEach((indicator, index) => indicator.classList[index === activeIndex ? 'add' : 'remove']('active'));
 
-    let newUrl = `/pray/${element.route.parameters.moment}/${element.prayers[activeIndex].category.slug}`;
-    history.pushState(null,null, newUrl);
-
+    if (element.prayers[activeIndex]) {
+      let newUrl = `/pray/${element.route.parameters.moment}/${element.prayers[activeIndex].category.slug}`;
+      history.pushState(null,null, newUrl);
+    }
   }, options);
 
   prayers.forEach(prayer => {
