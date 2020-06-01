@@ -43,4 +43,4 @@ gulp.task('rollup', () => {
 
 
 
-gulp.task('copy', gulp.series(['clean', 'copy-dist', 'create-404', 'rollup']));
+gulp.task('copy', gulp.series(['clean', 'copy-dist', 'rollup']));

@@ -44,6 +44,11 @@ prayer-menu {
       z-index: -1;
       bottom: 3.6rs;
       transition: all var(--speed) var(--easing);
+      box-shadow:
+              0 0 1px 0 rgba(0,0,0,0.08),
+              0 6px 12px 0 rgba(0,0,0,0.07),
+              0 1px 1px 0 rgba(0,0,0,0.07);
+
     }
 
     prayer-icon {

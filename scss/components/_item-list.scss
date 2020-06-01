@@ -25,7 +25,7 @@
     }
 
     img,
-    prayer-icon {
+    prayer-icon:not([name="handle"]) {
       margin-top: 1rs;
       transform: translateY(-2px);
       transition: opacity var(--speed) var(--easing);

@@ -134,6 +134,10 @@ prayer-calendar {
     }
   }
 
+  .note {
+    z-index: -1;
+  }
+
   &:not(.has-selected-day) {
     .back-to-month-view {
       opacity: 0;
