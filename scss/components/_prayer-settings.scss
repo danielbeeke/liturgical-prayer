@@ -1,9 +1,14 @@
 prayer-settings {
   padding: 4rs;
-  max-width: var(--max-width-panel);
 
   h2 {
     font-preset: header3;
     margin-bottom: 3rs;
+  }
+}
+
+@include tablet {
+  prayer-settings.page {
+    padding: 0 4rs;
   }
 }

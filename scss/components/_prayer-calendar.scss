@@ -2,12 +2,13 @@ prayer-calendar {
   $spacer: 1rs;
   $column: calc((100% - (6.1 * #{$spacer})) / 7);
   --calendar-transition: .5s;
-  &.page {
-    padding: 0;
+  display: flex;
+
+  .inner-page {
+    flex: 1 1 auto;
   }
 
-  > .header {
-    padding: 4rs 4rs 0 4rs;
+  .header {
     display: flex;
     overflow: hidden;
     position: relative;
@@ -43,9 +44,8 @@ prayer-calendar {
     position: relative;
     margin-top: 2rs;
     height: 42rs;
-    padding-left: 4rs;
-    padding-right: 4rs;
     z-index: 2;
+    max-width: var(--max-width-panel);
     transition: height var(--calendar-transition) var(--easing);
 
     &:before {
@@ -166,7 +166,7 @@ prayer-calendar {
   }
 
   .prayers {
-    padding: 4rs;
+    padding: 4rs 0;
     transition: opacity var(--speed) var(--easing);
     opacity: 1;
     display: block;
@@ -181,4 +181,21 @@ prayer-calendar {
     height: 30rs;
   }
 
+}
+
+@include tablet {
+  prayer-calendar {
+    .header {
+      padding-top: 0;
+    }
+
+    .header,
+    .calendar {
+      padding-left: 0;
+    }
+
+    .calendar {
+      margin-top: 4rs;
+    }
+  }
 }

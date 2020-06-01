@@ -37,7 +37,8 @@ export class PrayerCalendar extends BaseElement {
     this.selectedDayData = this.day ? this.calendar.find(item => item.date === this.dateString) : null;
     this.selectedRow = this.day ? Math.ceil((this.day + this.getEmptyDays().length) / 7) : 0;
 
-    this.classList[this.selectedDayData ? 'add' : 'remove']('hide-menu');
+    let isTablet = window.outerWidth > 700;
+    this.classList[this.selectedDayData && !isTablet ? 'add' : 'remove']('hide-menu');
     this.classList[this.selectedDayData ? 'add' : 'remove']('has-selected-day');
   }
 
@@ -180,36 +181,39 @@ export class PrayerCalendar extends BaseElement {
     let {date, ...momentsData} = this.selectedDayData ? this.selectedDayData : {};
 
     return html`
-      <div class="header">
-
-      <h2 class="page-title">
-        <prayer-icon name="calendar" />
-        ${this.getMonthLabel()}
-      </h2>
-
-      <button onclick="${() => this.previous()}" class="${`button secondary only-icon no-page-transition previous-month ${this.previousIsDisabled() ? ' disabled' : ''}`}">
-        <prayer-icon name="arrow-left" />
-      </button>
-      
-      <button onclick="${() => this.next()}" class="${`button secondary only-icon no-page-transition next-month ${this.nextIsDisabled() ? ' disabled' : ''}`}">
-        <prayer-icon name="arrow-right" />
-      </button>
-
-      <button onclick="${() => this.goBack()}" class="button secondary only-icon no-page-transition back-to-month-view">
-        <prayer-icon name="cross" />
-      </button>
-
-    </div>
-      
-      <div class="calendar" ontransitionend="${() => this.showPrayers()}" style="${`--selected-row: ${(this.selectedRow + this.selectedRowAdjustment).toString()};`}">
-      <div class="inner">
-          ${this.getWeekDays().map(day => html`<div class="day number">${day.toString().substr(0, 1)}</div>`)}
-          ${this.getEmptyDays().map(day => html`<div class="empty number"></div>`)}
-          ${this.getNumberDays()}  
+      <prayer-main-menu />
+      <div class="inner-page">
+        <div class="header">
+  
+        <h2 class="page-title">
+          <prayer-icon name="calendar" />
+          ${this.getMonthLabel()}
+        </h2>
+  
+        <button onclick="${() => this.previous()}" class="${`button secondary only-icon no-page-transition previous-month ${this.previousIsDisabled() ? ' disabled' : ''}`}">
+          <prayer-icon name="arrow-left" />
+        </button>
+        
+        <button onclick="${() => this.next()}" class="${`button secondary only-icon no-page-transition next-month ${this.nextIsDisabled() ? ' disabled' : ''}`}">
+          <prayer-icon name="arrow-right" />
+        </button>
+  
+        <button onclick="${() => this.goBack()}" class="button secondary only-icon no-page-transition back-to-month-view">
+          <prayer-icon name="cross" />
+        </button>
+  
       </div>
-      </div>
-      <div class="prayers-wrapper">
-        ${this.selectedDayData ? html`<prayer-day-overview date="${this.route.parameters.date}" moment="${this.route.parameters.moment}" class="prayers hidden" />` : ''}
+        
+        <div class="calendar" ontransitionend="${() => this.showPrayers()}" style="${`--selected-row: ${(this.selectedRow + this.selectedRowAdjustment).toString()};`}">
+        <div class="inner">
+            ${this.getWeekDays().map(day => html`<div class="day number">${day.toString().substr(0, 1)}</div>`)}
+            ${this.getEmptyDays().map(day => html`<div class="empty number"></div>`)}
+            ${this.getNumberDays()}  
+        </div>
+        </div>
+        <div class="prayers-wrapper">
+          ${this.selectedDayData ? html`<prayer-day-overview date="${this.route.parameters.date}" moment="${this.route.parameters.moment}" class="prayers hidden" />` : ''}
+        </div>      
       </div>
     `;
   }
@@ -242,6 +246,8 @@ export class PrayerCalendar extends BaseElement {
     if (prayers) {
       this.querySelector('.calendar').on
     }
+
+    this.querySelector('a[href="/calendar"]').classList.add('active');
   }
 
   showPrayers () {

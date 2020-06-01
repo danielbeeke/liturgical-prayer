@@ -77,8 +77,13 @@ export class BaseElement extends HTMLElement {
     let page = document.querySelector('.page');
     let that = this;
 
-    if (page) {
+    if (page && page === this) {
       setTimeout(() => {
+        page.addEventListener('transitionend', () => {
+          delete this.root.dataset.transition;
+        }, {
+          once: true
+        });
         page.classList.remove('hidden');
       });
     }
@@ -124,21 +129,39 @@ export class BaseElement extends HTMLElement {
             innerLink.classList[isCurrent ? 'add' : 'remove']('active')
           });
 
-          let page = document.querySelector('.page:not(.no-transition)');
+          let page = document.querySelector('.page');
 
-          if (page && !link.classList.contains('no-page-transition')) {
-            page.addEventListener('transitionend', () => {
-              that.root.router.navigate(link.getAttribute('href'));
-            }, {once: true});
-            page.classList.add('hidden');
-          }
-          else {
+          link.classList.add('active');
+
+          this.root.dataset.transition = this.getTransitionName(link.getAttribute('href'));
+          page.addEventListener('transitionend', () => {
             that.root.router.navigate(link.getAttribute('href'));
-          }
+          }, {once: true});
+          page.classList.add('hidden');
         });
 
       }
     })
+  }
+
+  getTransitionName (nextPath) {
+    let currentName = this.route.name;
+    let nextRoute = this.root.router.match(nextPath);
+    if (!nextRoute) return 'default';
+    let nextName = nextRoute.name;
+    let isTablet = window.outerWidth > 700;
+
+    let pageTypes = ['page', 'calendar', 'calendar-details', 'settings', 'menu'];
+
+    if (nextName === 'calendar-details' && currentName === 'calendar-details') {
+      return 'calendar';
+    }
+
+    if (pageTypes.includes(nextName) && pageTypes.includes(currentName) && isTablet) {
+     return 'page';
+    }
+
+    return 'default';
   }
 
   tokenize (content) {

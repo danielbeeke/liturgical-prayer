@@ -428,6 +428,45 @@ p {
   .page-title .back-button + prayer-icon {
     margin-left: 5.6px; }
 
+[data-transition="default"] .page.hidden {
+  opacity: 0;
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+  pointer-events: none; }
+
+[data-transition="open-app"] .page.hidden {
+  opacity: 0;
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+  pointer-events: none; }
+
+[data-transition="open-app"] .page.hidden + prayer-menu {
+  -webkit-transform: translateY(calc(100% + 40px));
+  transform: translateY(calc(100% + 40px));
+  opacity: 0; }
+
+[data-transition="page"] .page-inner {
+  opacity: 1;
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-transition: all var(--speed) var(--easing);
+  transition: all var(--speed) var(--easing); }
+
+[data-transition="page"] .page.hidden {
+  pointer-events: none;
+  opacity: .999; }
+  [data-transition="page"] .page.hidden .inner-page {
+    opacity: 0;
+    -webkit-transform: translateX(-5px);
+    transform: translateX(-5px); }
+
+[data-transition="calendar"] prayer-day-overview {
+  -webkit-transition: all var(--speed) var(--easing);
+  transition: all var(--speed) var(--easing); }
+
+[data-transition="calendar"] .page.hidden prayer-day-overview {
+  opacity: 0; }
+
 prayer-app {
   height: 100%;
   display: -webkit-box;
@@ -449,13 +488,8 @@ prayer-app {
     prayer-app > .page.no-transition {
       -webkit-transition: all 0.001s;
       transition: all 0.001s; }
-    prayer-app > .page > .end {
+    prayer-app > .page .end {
       border-bottom: 112px solid transparent; }
-    prayer-app > .page.hidden {
-      opacity: 0;
-      -webkit-transform: translateY(-5px);
-      transform: translateY(-5px);
-      pointer-events: none; }
   prayer-app:before {background-image:  url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjgwIiBoZWlnaHQ9IjMyIiB2aWV3Qm94PSIwIDAgODAgMzIiPjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSIxIiB4PSIwIiB5PSIwIiBmaWxsPSJibGFjayIvPjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSIxIiB4PSI0MCIgeT0iMCIgZmlsbD0icmVkIi8+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEiIHg9IjAiIHk9IjgiIGZpbGw9ImdyZWVuIi8+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEiIHg9IjQwIiB5PSI4IiBmaWxsPSJibHVlIi8+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEiIHg9IjAiIHk9IjE2IiBmaWxsPSJncmVlbiIvPjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSIxIiB4PSI0MCIgeT0iMTYiIGZpbGw9ImJsdWUiLz48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iMSIgeD0iMCIgeT0iMjQiIGZpbGw9ImdyZWVuIi8+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEiIHg9IjQwIiB5PSIyNCIgZmlsbD0iYmx1ZSIvPjwvc3ZnPg==");
     opacity: 0;
     z-index: 100;
@@ -474,12 +508,20 @@ prayer-app {
   prayer-app[data-grid-enabled="true"]:before {
     opacity: 1; }
 
+@media all and (min-width: 700px) {
+  prayer-app > .page {
+    padding: 0 32px; } }
+
 prayer-calendar {
-  --calendar-transition: .5s; }
-  prayer-calendar.page {
-    padding: 0; }
-  prayer-calendar > .header {
-    padding: 32px 32px 0 32px;
+  --calendar-transition: .5s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+  prayer-calendar .inner-page {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto; }
+  prayer-calendar .header {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -494,13 +536,13 @@ prayer-calendar {
     -webkit-transition: max-height var(--speed) var(--easing);
     transition: max-height var(--speed) var(--easing);
     z-index: 4; }
-    prayer-calendar > .header .page-title {
+    prayer-calendar .header .page-title {
       margin-bottom: 0; }
-    prayer-calendar > .header .button {
+    prayer-calendar .header .button {
       margin-top: 8px;
       -webkit-transition: all var(--speed) var(--easing);
       transition: all var(--speed) var(--easing); }
-    prayer-calendar > .header .button + .button {
+    prayer-calendar .header .button + .button {
       margin-left: 8px; }
   prayer-calendar .previous-month {
     margin-left: auto; }
@@ -512,9 +554,8 @@ prayer-calendar {
     position: relative;
     margin-top: 16px;
     height: 336px;
-    padding-left: 32px;
-    padding-right: 32px;
     z-index: 2;
+    max-width: var(--max-width-panel);
     -webkit-transition: height var(--calendar-transition) var(--easing);
     transition: height var(--calendar-transition) var(--easing); }
     prayer-calendar .calendar:before {
@@ -615,7 +656,7 @@ prayer-calendar {
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg); }
   prayer-calendar .prayers {
-    padding: 32px;
+    padding: 32px 0;
     -webkit-transition: opacity var(--speed) var(--easing);
     transition: opacity var(--speed) var(--easing);
     opacity: 1;
@@ -625,6 +666,15 @@ prayer-calendar {
   prayer-calendar .prayers-wrapper {
     background: white;
     height: 240px; }
+
+@media all and (min-width: 700px) {
+  prayer-calendar .header {
+    padding-top: 0; }
+  prayer-calendar .header,
+  prayer-calendar .calendar {
+    padding-left: 0; }
+  prayer-calendar .calendar {
+    margin-top: 32px; } }
 
 prayer-category-details .prayer-point prayer-icon[name="handle"] {
   pointer-events: none; }
@@ -692,6 +742,8 @@ prayer-home {
   -ms-flex-direction: column;
   flex-direction: column;
   padding: 32px 32px 0 32px; }
+  prayer-home .logo-wrapper {
+    margin-top: 32px; }
   prayer-home > .prefix {
     font-preset: header2;padding-bottom: 5px;padding-top: 11px;line-height: 16px;letter-spacing: -0.5px;font-size: 15px;font-weight: 570;font-family: Inter var;
     display: block;
@@ -707,7 +759,7 @@ prayer-icon {
     width: 100%;
     display: block; }
 
-prayer-main-menu.page {
+prayer-main-menu {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -717,10 +769,10 @@ prayer-main-menu.page {
   flex-direction: column;
   max-width: var(--max-width-panel);
   position: relative;
-  padding-top: 32px; }
-  prayer-main-menu.page .logo-wrapper {
+  padding-top: 48px; }
+  prayer-main-menu .logo-wrapper {
     margin-bottom: 40px; }
-  prayer-main-menu.page .menu-item {
+  prayer-main-menu .menu-item {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -736,27 +788,56 @@ prayer-main-menu.page {
     background: var(--color-secondary);
     -webkit-transition: all var(--speed) var(--easing);
     transition: all var(--speed) var(--easing); }
-    prayer-main-menu.page .menu-item prayer-icon {
+    prayer-main-menu .menu-item prayer-icon {
       position: absolute;
       margin-right: 16px;
       width: 24px;
       top: 50%;
       -webkit-transform: translateY(-50%) translateY(1px);
       transform: translateY(-50%) translateY(1px); }
-      prayer-main-menu.page .menu-item prayer-icon * {
+      prayer-main-menu .menu-item prayer-icon * {
         -webkit-transition: all var(--speed) var(--easing);
         transition: all var(--speed) var(--easing); }
-    prayer-main-menu.page .menu-item .title {
+    prayer-main-menu .menu-item .title {
       font-preset: header2;padding-bottom: 13px;padding-top: 11px;line-height: 16px;letter-spacing: -0.5px;font-size: 15px;font-weight: 570;font-family: Inter var;
       margin-left: 36px; }
-    prayer-main-menu.page .menu-item:last-child {
+    prayer-main-menu .menu-item:last-child {
       margin-bottom: 80px;
       border-bottom: 0; }
-    prayer-main-menu.page .menu-item:hover {
+    prayer-main-menu .menu-item.active, prayer-main-menu .menu-item:hover {
       color: white;
       background: var(--color-primary); }
-      prayer-main-menu.page .menu-item:hover prayer-icon * {
+      prayer-main-menu .menu-item.active prayer-icon *, prayer-main-menu .menu-item:hover prayer-icon * {
         fill: white; }
+
+.page prayer-main-menu {
+  display: none; }
+
+@media all and (min-width: 700px) {
+  prayer-main-menu.page {
+    max-width: calc(300px + 64px);
+    padding-top: 32px; }
+  .page {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; }
+    .page prayer-main-menu {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 300px;
+      flex: 0 0 300px;
+      margin-right: 32px;
+      position: sticky;
+      padding-top: 32px;
+      top: 0; }
+    .page .inner-page {
+      -webkit-transition: all var(--speed) var(--easing);
+      transition: all var(--speed) var(--easing);
+      padding: 16px 0 32px 0; }
+      .page .inner-page .end {
+        margin-top: 144px; } }
 
 prayer-menu {
   display: -webkit-box;
@@ -856,19 +937,20 @@ body.has-focused-input prayer-menu {
 body.is-sorting {
   overflow: hidden !important; }
 
-prayer-moment-configure {
-  padding: 32px; }
-  prayer-moment-configure h2 {
-    font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
-    margin-bottom: 24px; }
-  prayer-moment-configure prayer-icon[name="handle"] {
-    margin-right: 10px;
-    pointer-events: none; }
-  prayer-moment-configure .create-category-title {
-    margin-top: 40px;
-    margin-bottom: 0; }
-  prayer-moment-configure .create-category-title + p {
-    margin-top: 16px; }
+prayer-moment-configure h2 {
+  font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
+  margin-bottom: 24px; }
+
+prayer-moment-configure prayer-icon[name="handle"] {
+  margin-right: 10px;
+  pointer-events: none; }
+
+prayer-moment-configure .create-category-title {
+  margin-top: 40px;
+  margin-bottom: 0; }
+
+prayer-moment-configure .create-category-title + p {
+  margin-top: 16px; }
 
 prayer-note-form {
   width: 100%;
@@ -991,6 +1073,9 @@ prayer-note-form {
     color: var(--color-gray-dark);
     font-preset: title;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var; }
 
+prayer-page.page {
+  padding: 0 32px; }
+
 prayer-page p {
   max-width: var(--max-width-panel); }
 
@@ -1048,11 +1133,14 @@ prayer-prayer .header {
     max-width: calc(100% - 32px); }
 
 prayer-settings {
-  padding: 32px;
-  max-width: var(--max-width-panel); }
+  padding: 32px; }
   prayer-settings h2 {
     font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
     margin-bottom: 24px; }
+
+@media all and (min-width: 700px) {
+  prayer-settings.page {
+    padding: 0 32px; } }
 
 .prayer {
   -webkit-box-flex: 0;

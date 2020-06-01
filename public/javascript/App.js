@@ -59,7 +59,6 @@ let customElementItems = [
 
 customElementItems.forEach(item => {
   customElements.define(item.tag, item.className);
-  console.log(window.hmrEnabled)
   if (window.hmrEnabled && window.hmrEnabled === true) {
     enableHmr(`${location.origin}/javascript/CustomElements/${item.className.name}.js`, customElementItems);
   }
@@ -149,6 +148,6 @@ window.oncontextmenu = function(event) {
   return false;
 };
 
-if('serviceWorker' in navigator) {
+if('serviceWorker' in navigator && typeof window.hmrEnabled === 'undefined') {
   navigator.serviceWorker.register('/sw.js');
 };

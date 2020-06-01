@@ -16,6 +16,8 @@ export class PrayerCategoryPrayerPointCreate extends BaseElement {
     this.categoryUrl = `/settings/${this.route.parameters.moment}/prayer-category/${this.route.parameters.category}`;
 
     return html`
+      <prayer-main-menu />
+      <div class="inner-page">
       <h2 class="page-title">
         <a class="back-button" href="${this.categoryUrl}"><prayer-icon name="arrow-left" /></a>
         ${t.direct('Create prayer point')}
@@ -41,7 +43,7 @@ export class PrayerCategoryPrayerPointCreate extends BaseElement {
 
       
       <div class="end"></div>
-      
+      </div>
     `
   }
 

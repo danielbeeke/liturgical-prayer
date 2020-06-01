@@ -1,9 +1,9 @@
-prayer-main-menu.page {
+prayer-main-menu {
   display: flex;
   flex-direction: column;
   max-width: var(--max-width-panel);
   position: relative;
-  padding-top: 4rs;
+  padding-top: 6rs;
 
   .logo-wrapper {
     margin-bottom: 5rs;
@@ -44,6 +44,7 @@ prayer-main-menu.page {
       border-bottom: 0;
     }
 
+    &.active,
     &:hover {
       color: white;
       background: var(--color-primary);
@@ -52,6 +53,41 @@ prayer-main-menu.page {
         * {
           fill: white;
         }
+      }
+    }
+  }
+}
+
+.page {
+  prayer-main-menu {
+    display: none;
+  }
+}
+
+@include tablet {
+  prayer-main-menu.page {
+    max-width: calc(300px + 8rs);
+    padding-top: 4rs;
+  }
+
+  .page {
+    display: flex;
+
+    prayer-main-menu {
+      display: flex;
+      flex: 0 0 300px;
+      margin-right: 4rs;
+      position: sticky;
+      padding-top: 4rs;
+      top:0;
+    }
+
+    .inner-page {
+      transition: all var(--speed) var(--easing);
+      padding: 2rs 0 4rs 0;
+
+      .end {
+        margin-top: 18rs;
       }
     }
   }

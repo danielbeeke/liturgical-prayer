@@ -16,15 +16,10 @@ prayer-app {
       transition: all 0.001s;
     }
 
-    > .end {
+    .end {
       border-bottom: 14rs solid transparent;
     }
 
-    &.hidden {
-      opacity: 0;
-      transform: translateY(-5px);
-      pointer-events: none;
-    }
   }
 
   &:before {
@@ -46,5 +41,10 @@ prayer-app {
   &[data-grid-enabled="true"]:before {
     opacity: 1;
   }
+}
 
+@include tablet {
+  prayer-app > .page {
+    padding: 0 4rs;
+  }
 }

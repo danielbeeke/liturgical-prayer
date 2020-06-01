@@ -1,0 +1,50 @@
+[data-transition="default"] .page {
+  &.hidden {
+    opacity: 0;
+    transform: translateY(-5px);
+    pointer-events: none;
+  }
+}
+
+[data-transition="open-app"] {
+  .page.hidden {
+    opacity: 0;
+    transform: translateY(-5px);
+    pointer-events: none;
+  }
+
+  .page.hidden + prayer-menu {
+    transform: translateY(calc(100% + #{5rs}));
+    opacity: 0;
+  }
+}
+
+[data-transition="page"] {
+  .page-inner {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all var(--speed) var(--easing);
+  }
+
+  .page.hidden {
+    pointer-events: none;
+    opacity: .999;
+
+    .inner-page {
+      opacity: 0;
+      transform: translateX(-5px);
+    }
+  }
+}
+
+[data-transition="calendar"] {
+  prayer-day-overview {
+    transition: all var(--speed) var(--easing);
+  }
+
+  .page.hidden {
+    prayer-day-overview {
+      opacity: 0;
+    }
+  }
+}

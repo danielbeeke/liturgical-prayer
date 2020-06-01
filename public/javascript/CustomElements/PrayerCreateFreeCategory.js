@@ -79,6 +79,8 @@ export class PrayerCreateFreeCategory extends BaseElement {
     let t = this.root.t;
 
     return html`
+      <prayer-main-menu />
+      <div class="inner-page">
     <h2 class="page-title">
         <a class="back-button" href="${'/settings/' + this.route.parameters.moment}"><prayer-icon name="arrow-left" /></a>
         ${t.direct('Create category')}
@@ -104,6 +106,7 @@ export class PrayerCreateFreeCategory extends BaseElement {
     ` : html`
     <button class="button" onclick="${() => this.saveCategory()}">${t.direct('Save')}</button>
     `}
+    </div>
     `;
   }
 }

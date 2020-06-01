@@ -19,47 +19,49 @@ export class PrayerSettings extends BaseElement {
     let englishBibles = bibles.filter(bible => bible.language.id === 'eng');
 
     return html`
-      <h2 class="page-title">
-        <prayer-icon name="settings" />
-        ${t.direct('Settings')}
-      </h2>
-
-      <div class="field">
-        <label>
-          ${t.direct('Moments and settings')}
-        </label>
-        
-        <div class="item-list">
-        ${s.moments.map(moment => html`
-          <div class="${'item moment ' + (moment.enabled ? 'enabled' : '')}" style="${`--color-primary: ${moment.color};`}">
-            <input type="checkbox" id="${'toggle-' + moment.slug}" .checked="${moment.enabled}" onchange="${() => {toggleMoment(moment.slug); this.draw()}}">
-            <label for="${'toggle-' + moment.slug}">
-              <span class="title">${t.direct(moment.name)}</span>
-            </label>
-            <a href="${'/settings/' + moment.slug}">
-              <prayer-icon name="pencil" />
-            </a>
+      <prayer-main-menu />
+      <div class="inner-page">
+        <h2 class="page-title">
+          <prayer-icon name="settings" />
+          ${t.direct('Settings')}
+        </h2>
+  
+        <div class="field">
+          <label>
+            ${t.direct('Moments and settings')}
+          </label>
+          
+          <div class="item-list">
+          ${s.moments.map(moment => html`
+            <div class="${'item moment ' + (moment.enabled ? 'enabled' : '')}" style="${`--color-primary: ${moment.color};`}">
+              <input type="checkbox" id="${'toggle-' + moment.slug}" .checked="${moment.enabled}" onchange="${() => {toggleMoment(moment.slug); this.draw()}}">
+              <label for="${'toggle-' + moment.slug}">
+                <span class="title">${t.direct(moment.name)}</span>
+              </label>
+              <a href="${'/settings/' + moment.slug}">
+                <prayer-icon name="pencil" />
+              </a>
+            </div>
+          `)}
           </div>
-        `)}
         </div>
+  
+        <div class="field">
+          <label>${t`Bible translation`}</label>
+          <select onchange="${event => setBible(event.target.value)}">
+              ${englishBibles.map(bible => html`
+                  <option value="${bible.id}" .selected="${a.bible === bible.id}">${bible.name}</option>
+              `)}            
+          </select>
+        </div>
+        
+        <div class="field">
+          <label>${t`Sync data`}</label>
+          <remote-storage-widget />
+        </div>
+        
+        <div class="end"></div>
       </div>
-
-      <div class="field">
-        <label>${t`Bible translation`}</label>
-        <select onchange="${event => setBible(event.target.value)}">
-            ${englishBibles.map(bible => html`
-                <option value="${bible.id}" .selected="${a.bible === bible.id}">${bible.name}</option>
-            `)}            
-        </select>
-      </div>
-      
-      <div class="field">
-        <label>${t`Sync data`}</label>
-        <remote-storage-widget />
-      </div>
-      
-      
-      <div class="end"></div>
     `;
   }
 }

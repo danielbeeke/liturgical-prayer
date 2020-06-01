@@ -54,62 +54,65 @@ export class PrayerMomentConfigure extends BaseElement {
     };
 
     return html`
-      <h2 class="page-title">
-        <a class="back-button" href="/settings"><prayer-icon name="arrow-left" /></a>
-        ${t.direct(moment.name)}
-      </h2>
-
-      <div class="field">
-        <label>${t`Prayer categories`}</label>
-        <div class="categories sortable item-list">
-        ${categories.map(category => html`
-          <div class="${'prayer-category item ' + (categoryIsEnabled(category.slug) ? 'enabled' : '')}" data-order="${category.order}" data-slug="${category.slug}">
-            <prayer-icon name="handle" />
-            <input type="checkbox" id="${'toggle-' + category.slug}" 
-            .checked="${categoryIsEnabled(category.slug)}" 
-            onchange="${() => {toggleCategory(moment.slug, category.slug); this.draw()}}">
-            <label for="${'toggle-' + category.slug}">
-              <span class="title">${addWbr(t.direct(category.name))}</span>
-            </label>
-            <a href="${`/settings/${this.route.parameters.moment}/prayer-category/${category.slug}`}">
-              <img alt="icon" src="${`/images/${category.isFreeForm ? 'pencil' : 'info'}.svg`}" />
-            </a>
-          </div>
-        `)}
-        </div>      
-      </div>
-      
-      <div class="field">
-        <label>${t.direct('Create your own category')}</label>
-        <p>
-          ${t`Do you want to pray for your family, friends, church or city? Create category and add your own prayer points.`}
-          <br /><br />
-          <a class="button has-icon" href="${`/settings/${this.route.parameters.moment}/create-free-category`}">
-          ${t.direct('Create category')}
-          <prayer-icon name="arrow-right" />
-        </a>
-        </p>      
-      </div>
-      
-      <div class="row">
+      <prayer-main-menu />
+      <div class="inner-page">
+        <h2 class="page-title">
+          <a class="back-button" href="/settings"><prayer-icon name="arrow-left" /></a>
+          ${t.direct(moment.name)}
+        </h2>
+  
         <div class="field">
-          <label>${t.direct('From')}</label>
-          <small class="description">${t`Usually starts at:`}</small>
-          <input value="${moment.from}" type="time" onchange="${event => {this.from = event.target.value; this.setTime()}}">        
+          <label>${t`Prayer categories`}</label>
+          <div class="categories sortable item-list">
+          ${categories.map(category => html`
+            <div class="${'prayer-category item ' + (categoryIsEnabled(category.slug) ? 'enabled' : '')}" data-order="${category.order}" data-slug="${category.slug}">
+              <prayer-icon name="handle" />
+              <input type="checkbox" id="${'toggle-' + category.slug}" 
+              .checked="${categoryIsEnabled(category.slug)}" 
+              onchange="${() => {toggleCategory(moment.slug, category.slug); this.draw()}}">
+              <label for="${'toggle-' + category.slug}">
+                <span class="title">${addWbr(t.direct(category.name))}</span>
+              </label>
+              <a href="${`/settings/${this.route.parameters.moment}/prayer-category/${category.slug}`}">
+                <img alt="icon" src="${`/images/${category.isFreeForm ? 'pencil' : 'info'}.svg`}" />
+              </a>
+            </div>
+          `)}
+          </div>      
         </div>
         
-         <div class="field">
-          <label>${t.direct('Till')}</label>
-          <small class="description">${t`Usually ends at:`}</small>
-          <input value="${moment.till}" type="time" onchange="${event => {this.till = event.target.value; this.setTime()}}">
+        <div class="field">
+          <label>${t.direct('Create your own category')}</label>
+          <p>
+            ${t`Do you want to pray for your family, friends, church or city? Create category and add your own prayer points.`}
+            <br /><br />
+            <a class="button has-icon" href="${`/settings/${this.route.parameters.moment}/create-free-category`}">
+            ${t.direct('Create category')}
+            <prayer-icon name="arrow-right" />
+          </a>
+          </p>      
         </div>
-
-        <p class="description">${t`We use this information to scroll to the right moment when you open the app.`}</p>
-   
-      </div>
-    
+        
+        <div class="row">
+          <div class="field">
+            <label>${t.direct('From')}</label>
+            <small class="description">${t`Usually starts at:`}</small>
+            <input value="${moment.from}" type="time" onchange="${event => {this.from = event.target.value; this.setTime()}}">        
+          </div>
+          
+           <div class="field">
+            <label>${t.direct('Till')}</label>
+            <small class="description">${t`Usually ends at:`}</small>
+            <input value="${moment.till}" type="time" onchange="${event => {this.till = event.target.value; this.setTime()}}">
+          </div>
+  
+          <p class="description">${t`We use this information to scroll to the right moment when you open the app.`}</p>
      
-      <div class="end"></div>
+        </div>
+      
+       
+        <div class="end"></div>
+      </div>
     `;
   }
 }

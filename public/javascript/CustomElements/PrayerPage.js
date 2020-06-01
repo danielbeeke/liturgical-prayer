@@ -9,12 +9,20 @@ export class PrayerPage extends BaseElement {
     let page = Content['Pages'].find(page => page.slug === location.pathname.substr(1));
 
     return html`
-      <h2 class="page-title">
-        <prayer-icon name="${page.Icon}" />
-        ${page.Title}
-      </h2>
-      <p>${toLines(page.Content)}</p>
-      <div class="end"></div>
+      <prayer-main-menu />
+      <div class="inner-page">
+        <h2 class="page-title">
+          <prayer-icon name="${page.Icon}" />
+          ${page.Title}
+        </h2>
+        <p>${toLines(page.Content)}</p>
+        <div class="end"></div>
+      </div>
     `;
   }
+
+  forceDraw() {
+    this.draw();
+  }
+
 }
