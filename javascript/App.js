@@ -178,7 +178,7 @@ var e=function(e){return{get:function(t){return e.get(t)},set:function(t,r){retu
     </div>`}}},{tag:"prayer-home",className:class extends jt{draw(){let e=this.root.t,t=Mt.getState().schedule;return this.dataset.items=t.moments.filter(e=>e.enabled).length.toString(),D`
 
     <div class="logo-wrapper">
-      <img src="/images/logo.svg">
+      <img alt="logo" src="/images/logo.svg">
     </div>
     
     <h1 class="title">${e`Some beautiful prayers are to be prayed.`}</h1>
@@ -203,7 +203,7 @@ var e=function(e){return{get:function(t){return e.get(t)},set:function(t,r){retu
       <div class="main-menu">
 
         <div class="logo-wrapper">
-          <img src="/images/logo.svg">
+          <img alt="logo" src="/images/logo.svg">
         </div>
 
         ${t.map(e=>D`
@@ -250,7 +250,7 @@ var e=function(e){return{get:function(t){return e.get(t)},set:function(t,r){retu
               <span class="title">${(e=>{let t=e.toString().split(/[/]+/);return D`${t.map((e,r)=>r!==t.length-1&&t.length>1?D`${e}/<wbr>`:D`${e}`)}`})(r.direct(t.name))}</span>
             </label>
             <a href="${`/settings/${this.route.parameters.moment}/prayer-category/${t.slug}`}">
-              <img  src="${`/images/${t.isFreeForm?"pencil":"info"}.svg`}" />
+              <img alt="icon" src="${`/images/${t.isFreeForm?"pencil":"info"}.svg`}" />
             </a>
           </div>
         `)}
@@ -420,17 +420,17 @@ var e=function(e){return{get:function(t){return e.get(t)},set:function(t,r){retu
       
       ${this.rs.apiKeys.hasOwnProperty("dropbox")?D`<button class="button has-icon dropbox secondary block" onclick="${()=>this.connect("dropbox")}">
         Dropbox
-        <img class="dropbox-logo" src="/images/dropbox.svg">
+        <img alt="dropbox" class="dropbox-logo" src="/images/dropbox.svg">
       </button><br>`:""}
       
       ${this.rs.apiKeys.hasOwnProperty("googledrive")?D`<button class="button has-icon googledrive secondary block" onclick="${()=>this.connect("googledrive")}">
         Google Drive
-        <img class="googledrive-logo" src="/images/googledrive.svg">
+        <img alt="googledrive" class="googledrive-logo" src="/images/googledrive.svg">
       </button><br>`:""}
       
       <button class="button rs secondary block has-icon" onclick="${()=>{this.showLogin=!0,this.draw()}}">
         RemoteStorage
-        <img class="rs-logo" src="/images/remotestorage.svg">
+        <img alt="remotestorage" class="rs-logo" src="/images/remotestorage.svg">
       </button>
       
     </div>`,n=D`<div class="sign-in" >
@@ -453,21 +453,21 @@ var e=function(e){return{get:function(t){return e.get(t)},set:function(t,r){retu
         <div class="rs-error-message"></div>
         <div class="rs-error-buttons">
           <button class="button has-icon rs-disconnect" onclick="${()=>this.rs.disconnect()}">
-            <img src="/images/cross.svg" class="rs-icon rs-power-icon" />
+            <img alt="power" src="/images/cross.svg" class="rs-icon rs-power-icon" />
           </button>
         </div>
       </div>`,i=!!this.rs.backend&&this.rs.backend,a=!1;if("remotestorage"===this.rs.backend&&this.rs.remote.userAddress&&this.rs.remote.connected){a="https://logo.clearbit.com/"+this.rs.remote.userAddress.split("@")[1]}let s=D`<div class="${"connected"+(this.isSyncing?" is-syncing":"")}">
-      <img class="rs-main-logo" id="${"logo-"+i}" src="${a||`/images/${i}.svg`}">
+      <img alt="logo" class="rs-main-logo" id="${"logo-"+i}" src="${a||`/images/${i}.svg`}">
       <div class="rs-connected-text">
         <h3 class="title">${this.rs.remote.userAddress}</h3>
         <div class="description">${this.statusText()}</div>
       </div>
       <div class="rs-connected-buttons">
         ${this.rs.hasFeature("Sync")?D`<button class="button only-icon" onclick="${()=>this.sync()}">
-          <img src="/images/loop.svg" class="rs-icon rs-loop-icon">
+          <img alt="loop icon" src="/images/loop.svg" class="rs-icon rs-loop-icon">
         </button>`:""}
         <button class="button only-icon" onclick="${()=>this.rs.disconnect()}">
-          <img src="/images/cross.svg" class="rs-icon rs-power-icon" />
+          <img alt="power icon" src="/images/cross.svg" class="rs-icon rs-power-icon" />
         </button>
       </div>
     </div>`;return D`
@@ -492,7 +492,7 @@ var e=function(e){return{get:function(t){return e.get(t)},set:function(t,r){retu
         <button class="${"button "+(0===this.noteText.length?"disabled":"")}" onclick="${()=>this.saveNote()}">${e.direct("Save")}</button>        
         ${this.existingNote?D`<button class="button danger" onclick="${()=>this.deleteNote()}">${e.direct("Delete")}</button>`:""}
       </div>
-    `}}}];er.forEach(e=>{customElements.define(e.tag,e.className),window.hmrEnabled&&!0===window.hmrEnabled&&function(e,t){window.createHotContext(e);let r=window.getHotContext(e);r&&r.accept(({module:e})=>{try{let r=Object.keys(e)[0],n=t.find(e=>e.className.name===r),o=e[r],i=n.className;for(const[e,t]of Object.entries(Object.getOwnPropertyDescriptors(o.prototype)))Reflect.defineProperty(i.prototype,e,t);document.querySelectorAll(n.tag).forEach(e=>{let t=e.scrollTop,r=e.scrollLeft;e.attachDraw(i.prototype.draw),e.draw(),e.scrollTop=t,e.scrollLeft=r})}catch(e){r.invalidate()}})}(`${location.origin}/javascript/CustomElements/${e.className.name}.js`,er)}),customElements.define("prayer-app",class extends jt{async connectedCallback(){this.customElements=er;let e=Mt.getState().app;this.storage=ue,this.t=await Yt(e.language),this.tokenizer=new Gt,this.router=new Bt({routes:qt,debug:!1,initialPath:""!==location.pathname.substr(1)?location.pathname+(location.search?location.search:""):"pray"}),window.addEventListener("keyup",e=>{e.shiftKey&&"G"===e.key&&(e.preventDefault(),Mt.dispatch({type:"toggle-grid"}))}),this.watch("app.path",e=>{this.router.sync(e),this.draw()}),this.watch("app.language",async e=>{this.t=await Yt(e),[...this.children].forEach(e=>void 0!==e.draw?e.draw():null)}),this.watch("app.verticalGridEnabled",e=>{this.dataset.gridEnabled=e}),this.draw()}draw(){let e=Mt.getState().app;return this.dataset.gridEnabled=e.verticalGridEnabled,this.router.currentRoute&&this.router.currentRoute.redirect&&this.router.navigate(this.router.currentRoute.redirect),D`
+    `}}}];er.forEach(e=>{customElements.define(e.tag,e.className),window.hmrEnabled&&!0===window.hmrEnabled&&function(e,t){window.createHotContext(e);let r=window.getHotContext(e);r&&r.accept(({module:e})=>{try{let r=Object.keys(e)[0],n=t.find(e=>e.className.name===r),o=e[r],i=n.className;for(const[e,t]of Object.entries(Object.getOwnPropertyDescriptors(o.prototype)))Reflect.defineProperty(i.prototype,e,t);document.querySelectorAll(n.tag).forEach(e=>{let t=e.scrollTop,r=e.scrollLeft;e.attachDraw(i.prototype.draw),e.draw(),e.scrollTop=t,e.scrollLeft=r})}catch(e){r.invalidate()}})}(`${location.origin}/javascript/CustomElements/${e.className.name}.js`,er)}),customElements.define("prayer-app",class extends jt{async connectedCallback(){this.customElements=er;let e=Mt.getState().app;this.storage=ue;this.t=await Yt(e.language),document.documentElement.setAttribute("lang",{English:"en",Dutch:"NL-nl"}[e.language]),this.tokenizer=new Gt,this.router=new Bt({routes:qt,debug:!1,initialPath:""!==location.pathname.substr(1)?location.pathname+(location.search?location.search:""):"pray"}),window.addEventListener("keyup",e=>{e.shiftKey&&"G"===e.key&&(e.preventDefault(),Mt.dispatch({type:"toggle-grid"}))}),this.watch("app.path",e=>{this.router.sync(e),this.draw()}),this.watch("app.language",async e=>{this.t=await Yt(e),[...this.children].forEach(e=>void 0!==e.draw?e.draw():null)}),this.watch("app.verticalGridEnabled",e=>{this.dataset.gridEnabled=e}),this.draw()}draw(){let e=Mt.getState().app;return this.dataset.gridEnabled=e.verticalGridEnabled,this.router.currentRoute&&this.router.currentRoute.redirect&&this.router.navigate(this.router.currentRoute.redirect),D`
       ${this.router.currentRoute&&this.router.currentRoute.template?this.router.currentRoute.template:null}
       <prayer-menu />
     `}afterDraw(){this.children[0].forceDraw()}}),window.oncontextmenu=function(e){return e.preventDefault(),e.stopPropagation(),!1};
