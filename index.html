@@ -8,6 +8,13 @@
     <meta name="theme-color" content="#83af7a">
     <meta name="google-site-verification" content="0tI1PxSZh-CpzZSbXhlMYd2aLLaYXrcfsTKBnxO-6nU">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script>
+      (function(){
+        let redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) { history.replaceState(null, null, redirect); }
+      })();
+    </script>
     <script type="module" src="/javascript/App.js"></script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180.png">

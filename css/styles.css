@@ -320,7 +320,7 @@ p {
     margin-bottom: 8px;
     margin-right: 16px; }
   .item-list .item img,
-  .item-list .item prayer-icon {
+  .item-list .item prayer-icon:not([name="handle"]) {
     margin-top: 8px;
     -webkit-transform: translateY(-2px);
     transform: translateY(-2px);
@@ -595,6 +595,8 @@ prayer-calendar {
       color: white; }
       prayer-calendar .number.active .note-indicator {
         background: white; }
+  prayer-calendar .note {
+    z-index: -1; }
   prayer-calendar:not(.has-selected-day) .back-to-month-view {
     opacity: 0;
     pointer-events: none;
@@ -810,7 +812,9 @@ prayer-menu {
       z-index: -1;
       bottom: 28.8px;
       -webkit-transition: all var(--speed) var(--easing);
-      transition: all var(--speed) var(--easing); }
+      transition: all var(--speed) var(--easing);
+      -webkit-box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07);
+      box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07); }
     prayer-menu .menu-item prayer-icon {
       width: 36px;
       height: 40px;
