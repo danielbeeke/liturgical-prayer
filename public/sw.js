@@ -1,5 +1,46 @@
 let cacheName = 'liturgical-prayer-v1';
 
+let images = [
+  'afternoon.jpg',
+  'arrow-right.svg',
+  'back.svg',
+  'compass.svg',
+  'day.svg',
+  'dropbox.svg',
+  'face.svg',
+  'googledrive.svg',
+  'info_big.svg',
+  'logo.svg',
+  'meal.jpg',
+  'note-add.svg',
+  'power.svg',
+  'remove.svg',
+  'shield.svg',
+  'arrow-left.svg',
+  'author.svg',
+  'calendar.svg',
+  'cross.svg',
+  'dots.svg',
+  'evening.jpg',
+  'fingerprint.svg',
+  'handle.svg',
+  'info.svg',
+  'loop.svg',
+  'morning.jpg',
+  'pencil.svg',
+  'remotestorage.svg',
+  'settings.svg',
+  'tag.svg'
+];
+
+self.addEventListener('install', (e) => {
+  e.waitUntil(
+    caches.open(cacheName).then((cache) => {
+      return cache.addAll(images);
+    })
+  );
+});
+
 self.addEventListener('fetch', (e) => {
   e.respondWith(
     caches.match(e.request).then((r) => {
