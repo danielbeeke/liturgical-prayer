@@ -33,10 +33,12 @@ let images = [
   'tag.svg'
 ];
 
+let imagePaths = images.map(image => '/images/' + image);
+
 self.addEventListener('install', (e) => {
   e.waitUntil(
     caches.open(cacheName).then((cache) => {
-      return cache.addAll(images);
+      return cache.addAll(imagePaths);
     })
   );
 });
