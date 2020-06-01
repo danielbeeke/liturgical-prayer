@@ -1,12 +1,6 @@
 prayer-home {
   display: flex;
   flex-direction: column;
-  padding: 4rs 4rs 0 4rs;
-
-
-  .logo-wrapper {
-    margin-top: 4rs;
-  }
 
   > .prefix {
     font-preset: header2;

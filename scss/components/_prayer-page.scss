@@ -1,9 +1,17 @@
 prayer-page {
   &.page {
-    padding: 0 4rs;
+    padding: 4rs;
   }
 
   p {
     max-width: var(--max-width-panel);
+  }
+}
+
+@include tablet {
+  prayer-page {
+    &.page {
+      padding: 0 4rs;
+    }
   }
 }

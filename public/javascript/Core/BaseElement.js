@@ -151,7 +151,7 @@ export class BaseElement extends HTMLElement {
     let nextName = nextRoute.name;
     let isTablet = window.outerWidth > 700;
 
-    let pageTypes = ['page', 'calendar', 'calendar-details', 'settings', 'menu'];
+    let pageTypes = ['page', 'calendar', 'calendar-details', 'settings', 'menu', 'settings-moment-category', 'settings-moment-create-item', 'settings-moment-edit-item', 'settings-moment'];
 
     if (nextName === 'calendar-details' && currentName === 'calendar-details') {
       return 'calendar';

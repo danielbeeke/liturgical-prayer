@@ -22,7 +22,7 @@
 [data-transition="page"] {
   .page-inner {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
     transition: all var(--speed) var(--easing);
   }
 
@@ -32,7 +32,7 @@
 
     .inner-page {
       opacity: 0;
-      transform: translateX(-5px);
+      transform: translateY(-5px);
     }
   }
 }
