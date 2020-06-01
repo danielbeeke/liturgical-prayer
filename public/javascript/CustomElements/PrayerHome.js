@@ -14,7 +14,7 @@ export class PrayerHome extends BaseElement {
     return html`
 
     <div class="logo-wrapper">
-      <img src="/images/logo.svg">
+      <img alt="logo" src="/images/logo.svg">
     </div>
     
     <h1 class="title">${t`Some beautiful prayers are to be prayed.`}</h1>

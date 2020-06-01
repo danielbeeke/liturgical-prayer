@@ -25,7 +25,7 @@ export class PrayerMainMenu extends BaseElement {
       <div class="main-menu">
 
         <div class="logo-wrapper">
-          <img src="/images/logo.svg">
+          <img alt="logo" src="/images/logo.svg">
         </div>
 
         ${links.map(link => html`

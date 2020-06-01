@@ -59,7 +59,9 @@ let customElementItems = [
 
 customElementItems.forEach(item => {
   customElements.define(item.tag, item.className);
-  enableHmr(`${location.origin}/javascript/CustomElements/${item.className.name}.js`, customElementItems);
+  if (window.hmrEnabled && window.hmrEnabled === true) {
+    enableHmr(`${location.origin}/javascript/CustomElements/${item.className.name}.js`, customElementItems);
+  }
 });
 
 customElements.define('prayer-app', class PrayerApp extends BaseElement {
@@ -74,7 +76,13 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
 
     this.storage = remoteStorage;
 
+    let languages = {
+      'English': 'en',
+      'Dutch': 'NL-nl'
+    };
+
     this.t = await I14n(a.language);
+    document.documentElement.setAttribute('lang', languages[a.language]);
     this.tokenizer = new Tokenizer();
 
     this.router = new Router({

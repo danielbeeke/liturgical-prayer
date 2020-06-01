@@ -99,17 +99,17 @@ export class RemoteStorageWidget extends BaseElement {
       
       ${this.rs.apiKeys.hasOwnProperty('dropbox') ? html`<button class="button has-icon dropbox secondary block" onclick="${() => this.connect('dropbox')}">
         Dropbox
-        <img class="dropbox-logo" src="/images/dropbox.svg">
+        <img alt="dropbox" class="dropbox-logo" src="/images/dropbox.svg">
       </button><br>` : ''}
       
       ${this.rs.apiKeys.hasOwnProperty('googledrive') ? html`<button class="button has-icon googledrive secondary block" onclick="${() => this.connect('googledrive')}">
         Google Drive
-        <img class="googledrive-logo" src="/images/googledrive.svg">
+        <img alt="googledrive" class="googledrive-logo" src="/images/googledrive.svg">
       </button><br>` : ''}
       
       <button class="button rs secondary block has-icon" onclick="${() => {this.showLogin = true; this.draw()}}">
         RemoteStorage
-        <img class="rs-logo" src="/images/remotestorage.svg">
+        <img alt="remotestorage" class="rs-logo" src="/images/remotestorage.svg">
       </button>
       
     </div>`;
@@ -136,7 +136,7 @@ export class RemoteStorageWidget extends BaseElement {
         <div class="rs-error-message"></div>
         <div class="rs-error-buttons">
           <button class="button has-icon rs-disconnect" onclick="${() => this.rs.disconnect()}">
-            <img src="/images/cross.svg" class="rs-icon rs-power-icon" />
+            <img alt="power" src="/images/cross.svg" class="rs-icon rs-power-icon" />
           </button>
         </div>
       </div>`;
@@ -150,17 +150,17 @@ export class RemoteStorageWidget extends BaseElement {
     }
 
     let connected = html`<div class="${'connected' + (this.isSyncing ? ' is-syncing' : '')}">
-      <img class="rs-main-logo" id="${`logo-${iconBrand}`}" src="${customIcon ? customIcon : `/images/${iconBrand}.svg`}">
+      <img alt="logo" class="rs-main-logo" id="${`logo-${iconBrand}`}" src="${customIcon ? customIcon : `/images/${iconBrand}.svg`}">
       <div class="rs-connected-text">
         <h3 class="title">${this.rs.remote.userAddress}</h3>
         <div class="description">${this.statusText()}</div>
       </div>
       <div class="rs-connected-buttons">
         ${this.rs.hasFeature('Sync') ? html`<button class="button only-icon" onclick="${() => this.sync()}">
-          <img src="/images/loop.svg" class="rs-icon rs-loop-icon">
+          <img alt="loop icon" src="/images/loop.svg" class="rs-icon rs-loop-icon">
         </button>` : ''}
         <button class="button only-icon" onclick="${() => this.rs.disconnect()}">
-          <img src="/images/cross.svg" class="rs-icon rs-power-icon" />
+          <img alt="power icon" src="/images/cross.svg" class="rs-icon rs-power-icon" />
         </button>
       </div>
     </div>`;

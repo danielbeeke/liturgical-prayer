@@ -1,8 +1,6 @@
-import {createHotContext, getHotContext} from '../../../hmr-client.js';
-
 export function enableHmr (url, appCustomElements) {
-  createHotContext(url);
-  let hmr = getHotContext(url);
+  window.createHotContext(url);
+  let hmr = window.getHotContext(url);
 
   if (hmr) {
     hmr.accept(({ module }) => {

@@ -88,6 +88,8 @@ export function getHotContext(fullUrl) {
   }
 }
 
+window.getHotContext = getHotContext;
+
 export function createHotContext(fullUrl) {
   const id = new URL(fullUrl).pathname;
   const existing = REGISTERED_MODULES[id];
@@ -99,6 +101,9 @@ export function createHotContext(fullUrl) {
   REGISTERED_MODULES[id] = state;
   return state;
 }
+
+window.createHotContext = createHotContext;
+
 async function applyUpdate(id) {
   const state = REGISTERED_MODULES[id];
   if (!state) {
@@ -152,3 +157,4 @@ socket.addEventListener("message", ({ data: _data }) => {
   });
 });
 debug("listening for file changes...");
+window.hmrEnabled = true;

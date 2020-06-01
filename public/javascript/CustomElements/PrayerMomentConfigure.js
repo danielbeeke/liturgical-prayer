@@ -72,7 +72,7 @@ export class PrayerMomentConfigure extends BaseElement {
               <span class="title">${addWbr(t.direct(category.name))}</span>
             </label>
             <a href="${`/settings/${this.route.parameters.moment}/prayer-category/${category.slug}`}">
-              <img  src="${`/images/${category.isFreeForm ? 'pencil' : 'info'}.svg`}" />
+              <img alt="icon" src="${`/images/${category.isFreeForm ? 'pencil' : 'info'}.svg`}" />
             </a>
           </div>
         `)}
