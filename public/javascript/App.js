@@ -147,3 +147,7 @@ window.oncontextmenu = function(event) {
   event.stopPropagation();
   return false;
 };
+
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+};
