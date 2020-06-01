@@ -26,7 +26,7 @@ socket.addEventListener("open", () => {
   SOCKET_MESSAGE_QUEUE.forEach(_sendSocketMessage);
   SOCKET_MESSAGE_QUEUE = [];
 });
-const REGISTERED_MODULES = {};
+window.REGISTERED_MODULES = {};
 class HotModuleState {
   constructor(id) {
     this.data = {};
@@ -82,7 +82,7 @@ class HotModuleState {
 }
 export function getHotContext(fullUrl) {
   const id = new URL(fullUrl).pathname;
-  const existing = REGISTERED_MODULES[id];
+  const existing = window.REGISTERED_MODULES[id];
   if (existing) {
     return existing;
   }
@@ -92,20 +92,20 @@ window.getHotContext = getHotContext;
 
 export function createHotContext(fullUrl) {
   const id = new URL(fullUrl).pathname;
-  const existing = REGISTERED_MODULES[id];
+  const existing = window.REGISTERED_MODULES[id];
   if (existing) {
     existing.lock();
     return existing;
   }
   const state = new HotModuleState(id);
-  REGISTERED_MODULES[id] = state;
+  window.REGISTERED_MODULES[id] = state;
   return state;
 }
 
 window.createHotContext = createHotContext;
 
 async function applyUpdate(id) {
-  const state = REGISTERED_MODULES[id];
+  const state = window.REGISTERED_MODULES[id];
   if (!state) {
     return false;
   }
@@ -144,7 +144,7 @@ socket.addEventListener("message", ({ data: _data }) => {
     return;
   }
   debug("message: update", data);
-  debug(data.url, Object.keys(REGISTERED_MODULES));
+  debug(data.url, Object.keys(window.REGISTERED_MODULES));
   applyUpdate(data.url)
   .then((ok) => {
     if (!ok) {

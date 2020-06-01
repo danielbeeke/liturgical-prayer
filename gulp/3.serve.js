@@ -19,7 +19,7 @@ process.setMaxListeners(0);
       server: [folder, './'],
       snippetOptions: {
         rule: {
-          match: /<\/body>/i,
+          match: /<!--  SNIPPET  -->/i,
           fn: function (snippet, match) {
             return snippet + `<script type="module" src="/hmr-client.js"></script>` + match;
           }

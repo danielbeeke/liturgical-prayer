@@ -991,6 +991,9 @@ prayer-note-form {
     color: var(--color-gray-dark);
     font-preset: title;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var; }
 
+prayer-page p {
+  max-width: var(--max-width-panel); }
+
 prayer-pray.page {
   padding: 0;
   height: 100%;

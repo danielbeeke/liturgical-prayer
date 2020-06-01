@@ -59,6 +59,7 @@ let customElementItems = [
 
 customElementItems.forEach(item => {
   customElements.define(item.tag, item.className);
+  console.log(window.hmrEnabled)
   if (window.hmrEnabled && window.hmrEnabled === true) {
     enableHmr(`${location.origin}/javascript/CustomElements/${item.className.name}.js`, customElementItems);
   }
