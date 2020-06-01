@@ -67,7 +67,7 @@ p {
   font-preset: paragraphs;padding-bottom: 2px;padding-top: 6px;line-height: 24px;font-size: 16px;font-weight: 300;font-family: Inter var; }
 
 #__bs_notify__ {
-  display: none; }
+  display: none !important; }
 
 @font-face {
   font-family: 'Inter var';
@@ -748,6 +748,10 @@ prayer-home {
   prayer-home > .title {
     font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
     margin-bottom: 16px; }
+
+@media all and (min-width: 700px) {
+  prayer-home .logo-wrapper {
+    margin-top: 32px; } }
 
 prayer-icon {
   display: inline-block;

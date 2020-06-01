@@ -1,10 +1,12 @@
 {
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "css-test": "backstop test"
   },
   "devDependencies": {
     "autoprefixer": "^9.8.0",
     "ava": "^1.0.0",
+    "backstopjs": "^5.0.1",
     "browser-sync": "^2.26.7",
     "browser-sync-ui": "^1.0.1",
     "datauri": "^3.0.0",

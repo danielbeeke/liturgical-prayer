@@ -14,14 +14,14 @@ process.setMaxListeners(0);
     const hmr = new EsmHmrEngine();
 
     browserSync.init({
-      port: 4443,
+      port: folder === 'public' ? 4443 : 4444,
       single: true,
-      server: [folder, './'],
+      server: folder === 'public' ? [folder, './'] : [folder],
       snippetOptions: {
         rule: {
           match: /<!--  SNIPPET  -->/i,
           fn: function (snippet, match) {
-            return snippet + `<script type="module" src="/hmr-client.js"></script>` + match;
+            return snippet + (folder === 'public' ? `<script type="module" src="/hmr-client.js"></script>` : '') + match;
           }
         }
       },

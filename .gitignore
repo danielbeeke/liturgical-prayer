@@ -7,3 +7,6 @@ public/Settings.js
 public/Settings.mjs
 settings.json
 .DS_Store
+backstop_data/bitmaps_test
+backstop_data/bitmaps_reference
+backstop_data/html_report

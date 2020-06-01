@@ -81,6 +81,7 @@ export class BaseElement extends HTMLElement {
       setTimeout(() => {
         page.addEventListener('transitionend', () => {
           delete this.root.dataset.transition;
+          console.log('done')
         }, {
           once: true
         });

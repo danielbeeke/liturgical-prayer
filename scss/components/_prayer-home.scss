@@ -13,3 +13,11 @@ prayer-home {
     margin-bottom: 2rs;
   }
 }
+
+@include tablet {
+  prayer-home {
+    .logo-wrapper {
+      margin-top: 4rs;
+    }
+  }
+}
