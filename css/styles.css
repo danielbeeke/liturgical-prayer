@@ -447,8 +447,8 @@ p {
 
 [data-transition="page"] .page-inner {
   opacity: 1;
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
   -webkit-transition: all var(--speed) var(--easing);
   transition: all var(--speed) var(--easing); }
 
@@ -457,8 +457,8 @@ p {
   opacity: .999; }
   [data-transition="page"] .page.hidden .inner-page {
     opacity: 0;
-    -webkit-transform: translateX(-5px);
-    transform: translateX(-5px); }
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px); }
 
 [data-transition="calendar"] prayer-day-overview {
   -webkit-transition: all var(--speed) var(--easing);
@@ -740,10 +740,7 @@ prayer-home {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
-  flex-direction: column;
-  padding: 32px 32px 0 32px; }
-  prayer-home .logo-wrapper {
-    margin-top: 32px; }
+  flex-direction: column; }
   prayer-home > .prefix {
     font-preset: header2;padding-bottom: 5px;padding-top: 11px;line-height: 16px;letter-spacing: -0.5px;font-size: 15px;font-weight: 570;font-family: Inter var;
     display: block;
@@ -1074,10 +1071,14 @@ prayer-note-form {
     font-preset: title;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var; }
 
 prayer-page.page {
-  padding: 0 32px; }
+  padding: 32px; }
 
 prayer-page p {
   max-width: var(--max-width-panel); }
+
+@media all and (min-width: 700px) {
+  prayer-page.page {
+    padding: 0 32px; } }
 
 prayer-pray.page {
   padding: 0;
