@@ -323,7 +323,9 @@ p {
   .item-list .item prayer-icon:not([name="handle"]) {
     margin-top: 8px;
     -webkit-transform: translateY(-2px);
-    transform: translateY(-2px);
+    transform: translateY(-2px); }
+  .item-list .item img,
+  .item-list .item prayer-icon {
     -webkit-transition: opacity var(--speed) var(--easing);
     transition: opacity var(--speed) var(--easing); }
   .item-list .item *:last-child {

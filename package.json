@@ -1,7 +1,8 @@
 {
   "scripts": {
     "test": "ava",
-    "css-test": "backstop test"
+    "css-test": "backstop test --config backstop.js",
+    "css-reference": "backstop reference --config backstop.js"
   },
   "devDependencies": {
     "autoprefixer": "^9.8.0",

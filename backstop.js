@@ -37,7 +37,9 @@ let tests = {
   "/pray": 'Home',
   '/settings': 'Settings',
   '/how-to-use-this-app': 'About',
-  '/settings/morning': 'Morning settings'
+  '/settings/morning': 'Morning settings',
+  '/settings/morning/create-free-category': 'Create free category',
+  '/settings/morning/prayer-category/morning-prayer': 'Info'
 };
 
 for (let [path, label] of Object.entries(tests)) {
