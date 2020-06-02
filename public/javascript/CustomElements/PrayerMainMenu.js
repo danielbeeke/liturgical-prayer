@@ -6,7 +6,7 @@ import {Slugify} from '../Helpers/Slugify.js';
 export class PrayerMainMenu extends BaseElement {
 
   draw () {
-    let t = this.root.t;
+    let t = window.t;
     let isTablet = window.outerWidth > 700;
     let anotherPage = [isTablet ? 'another-page' : ''];
 

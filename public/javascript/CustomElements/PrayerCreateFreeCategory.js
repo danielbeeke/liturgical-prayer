@@ -9,7 +9,7 @@ export class PrayerCreateFreeCategory extends BaseElement {
 
   constructor() {
     super();
-    let t = this.root.t;
+    let t = window.t;
     this.selected = '';
     this.otherText = '';
     let s = Store.getState().schedule;
@@ -76,7 +76,7 @@ export class PrayerCreateFreeCategory extends BaseElement {
   }
 
   draw () {
-    let t = this.root.t;
+    let t = window.t;
 
     return html`
       <prayer-main-menu />

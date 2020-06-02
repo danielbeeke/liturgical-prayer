@@ -21,8 +21,7 @@ let urls = [
 
 (async function () {
   for (let url of urls) {
-    const html = await ssr('https://localhost:4443/' + url);
-    fs.mkdirSync('./dist/' + url, { recursive: true });
-    fs.writeFileSync('./dist/' + url + '.html', html);
+    const html = await ssr('https://localhost:4444/' + url);
+    fs.writeFileSync('./public/' + url + '.html', html);
   }
 })();

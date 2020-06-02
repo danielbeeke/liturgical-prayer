@@ -43,7 +43,7 @@ export class PrayerCalendar extends BaseElement {
   }
 
   getWeekDays () {
-    let t = this.root.t;
+    let t = window.t;
 
     return [
       t.direct('Sunday'),

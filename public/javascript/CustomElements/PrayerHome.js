@@ -6,7 +6,7 @@ import {getCurrentActiveMoment} from '../Helpers/getCurrentActiveMoment.js';
 export class PrayerHome extends BaseElement {
 
   draw () {
-    let t = this.root.t;
+    let t = window.t;
     let s = Store.getState().schedule;
 
     this.dataset.items = s.moments.filter(moment => moment.enabled).length.toString();

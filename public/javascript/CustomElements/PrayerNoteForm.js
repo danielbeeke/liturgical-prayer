@@ -38,7 +38,7 @@ export class PrayerNoteForm extends BaseElement {
   }
 
   draw() {
-    let t = this.root.t;
+    let t = window.t;
     let query = (new URL(document.location)).searchParams;
 
     return html`

@@ -1,6 +1,7 @@
 'use strict';
 
 const gulp = require('gulp');
+const fs = require('fs');
 const browserSync = require('browser-sync').create();
 const EsmHmrEngine = require('./hmr-server.js');
 const through = require('through2');
@@ -15,13 +16,30 @@ process.setMaxListeners(0);
 
     browserSync.init({
       port: folder === 'public' ? 4443 : 4444,
-      single: true,
+      middleware: function(req, res, next) {
+        let url = req.url;
+
+        if (!url.includes('.')) {
+          if (fs.existsSync(folder + '/' + req.url + '.html')) {
+            req.url += '.html';
+          }
+          else {
+            req.url = '/index.html'
+          }
+        }
+
+        if (url === '/') {
+          req.url = '/index.html'
+        }
+
+        return next();
+      },
       server: folder === 'public' ? [folder, './'] : [folder],
       snippetOptions: {
         rule: {
           match: /<!--  SNIPPET  -->/i,
           fn: function (snippet, match) {
-            return snippet + (folder === 'public' ? `<script type="module" src="/hmr-client.js"></script>` : '') + match;
+            return (folder === 'public' ? snippet + `<script type="module" src="/hmr-client.js"></script>` + match : ' ');
           }
         }
       },

@@ -43,10 +43,10 @@ let customElementItems = [
   {tag: 'prayer-category-prayer-point-create', className: PrayerCategoryPrayerPointCreate},
   {tag: 'prayer-create-free-category', className: PrayerCreateFreeCategory},
   {tag: 'prayer-day-overview', className: PrayerDayOverview},
+  {tag: 'prayer-menu', className: PrayerMenu},
   {tag: 'prayer-home', className: PrayerHome},
   {tag: 'prayer-icon', className: PrayerIcon},
   {tag: 'prayer-main-menu', className: PrayerMainMenu},
-  {tag: 'prayer-menu', className: PrayerMenu},
   {tag: 'prayer-moment-configure', className: PrayerMomentConfigure},
   {tag: 'prayer-page', className: PrayerPage},
   {tag: 'prayer-pray', className: PrayerPray},
@@ -56,13 +56,6 @@ let customElementItems = [
   {tag: 'remote-storage-widget', className: RemoteStorageWidget},
   {tag: 'prayer-note-form', className: PrayerNoteForm},
 ];
-
-customElementItems.forEach(item => {
-  customElements.define(item.tag, item.className);
-  if (window.hmrEnabled && window.hmrEnabled === true) {
-    enableHmr(`${location.origin}/javascript/CustomElements/${item.className.name}.js`, customElementItems);
-  }
-});
 
 customElements.define('prayer-app', class PrayerApp extends BaseElement {
 
@@ -81,7 +74,7 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
       'Dutch': 'NL-nl'
     };
 
-    this.t = await I14n(a.language);
+    window.t = await I14n(a.language);
     document.documentElement.setAttribute('lang', languages[a.language]);
     this.tokenizer = new Tokenizer();
 
@@ -139,7 +132,13 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
   afterDraw() {
     this.children[0].forceDraw();
   }
+});
 
+customElementItems.forEach(item => {
+  customElements.define(item.tag, item.className);
+  if (window.hmrEnabled && window.hmrEnabled === true) {
+    enableHmr(`${location.origin}/javascript/CustomElements/${item.className.name}.js`, customElementItems);
+  }
 });
 
 window.oncontextmenu = function(event) {
@@ -148,6 +147,6 @@ window.oncontextmenu = function(event) {
   return false;
 };
 
-if('serviceWorker' in navigator && typeof window.hmrEnabled === 'undefined') {
+if ('serviceWorker' in navigator && typeof window.hmrEnabled === 'undefined') {
   navigator.serviceWorker.register('/sw.js');
-};
+}

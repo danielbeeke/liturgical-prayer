@@ -22,7 +22,7 @@ export class PrayerPrayer extends BaseElement {
   }
 
   getPrayer () {
-    let t = this.root.t;
+    let t = window.t;
     let prayer;
     let fixedCategory = Content['Categories'].find(category => {
       return Slugify(category.Title) === this.route.parameters.category;

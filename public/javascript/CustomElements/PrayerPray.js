@@ -14,7 +14,7 @@ export class PrayerPray extends BaseElement {
 
     let moment = s.moments.find(moment => moment.slug === this.route.parameters.moment);
     let p = Store.getState().pray;
-    let t = this.root.t;
+    let t = window.t;
     this.setAttribute('style', `--color-primary: ${moment.color}; --color-secondary: ${moment.colorBackground}`);
 
     let activeCategories = moment.prayerCategories.filter(category => category.enabled).sort((a, b) => a.order - b.order);

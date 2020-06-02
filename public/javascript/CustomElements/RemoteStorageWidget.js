@@ -65,7 +65,7 @@ export class RemoteStorageWidget extends BaseElement {
   }
 
   statusText () {
-    let t = this.root.t;
+    let t = window.t;
     if (this.online) {
       return this.isSyncing ? t.direct('Syncing') : t.direct('connected');
     }
@@ -86,7 +86,7 @@ export class RemoteStorageWidget extends BaseElement {
   }
 
   draw () {
-    let t = this.root.t;
+    let t = window.t;
     let readMore = html`
       ${t.direct('This app allows you to sync the data with a storage of your choice.')} 
       <a class="rs-help" href="https://remotestorage.io/" target="_blank">${t.direct('Read more about syncing')}</a>.

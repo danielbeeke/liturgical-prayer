@@ -40,7 +40,18 @@ gulp.task('rollup', () => {
   });
 });
 
+var inlinesource = require('gulp-inline-source');
+
+gulp.task('inlinesource', function () {
+  var options = {
+    compress: false
+  };
+
+  return gulp.src('./dist/*.html')
+  .pipe(inlinesource(options))
+  .pipe(gulp.dest('./dist'));
+});
 
 
 
-gulp.task('copy', gulp.series(['clean', 'copy-dist', 'rollup']));
+gulp.task('copy', gulp.series(['clean', 'copy-dist', 'rollup', 'inlinesource']));

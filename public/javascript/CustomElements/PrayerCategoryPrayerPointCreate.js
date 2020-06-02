@@ -6,7 +6,7 @@ import {addPrayerPoint} from '../Actions/ScheduleActions.js';
 export class PrayerCategoryPrayerPointCreate extends BaseElement {
 
   draw() {
-    let t = this.root.t;
+    let t = window.t;
     let s = Store.getState().schedule;
     this.moment = s.moments.find(moment => moment.slug === this.route.parameters.moment);
     this.freeCategory = s.freeCategories.find(category => category.slug === this.route.parameters.category);

@@ -44,7 +44,7 @@ export class PrayerMomentConfigure extends BaseElement {
     this.till = moment.till;
     let categories = [...moment.prayerCategories].sort((a, b) => a.order - b.order);
 
-    let t = this.root.t;
+    let t = window.t;
 
     let categoryIsEnabled = (categorySlug) => {
       let category = categories.find(category => category.slug === categorySlug);

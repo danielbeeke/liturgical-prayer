@@ -12,7 +12,7 @@ export class PrayerDayOverview extends BaseElement {
   static get observedAttributes() { return ['moment', 'date']; }
 
   draw () {
-    let t = this.root.t;
+    let t = window.t;
     let dateParts = this.route.parameters.date.split('-');
     this.year = parseInt(dateParts[0]);
     this.month = parseInt(dateParts[1]);

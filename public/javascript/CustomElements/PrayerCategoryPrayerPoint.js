@@ -6,7 +6,7 @@ import {deletePrayerPoint, updatePrayerPoint} from '../Actions/ScheduleActions.j
 export class PrayerCategoryPrayerPoint extends BaseElement {
 
   draw() {
-    let t = this.root.t;
+    let t = window.t;
     let s = Store.getState().schedule;
     this.freeCategory = s.freeCategories.find(category => category.slug === this.route.parameters.category);
     let item = Object.assign({}, this.freeCategory.items.find(item => item.slug === this.route.parameters.item));

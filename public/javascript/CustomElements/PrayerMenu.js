@@ -4,7 +4,7 @@ import {html} from '../vendor/uhtml.js';
 export class PrayerMenu extends BaseElement {
 
   draw () {
-    let t = this.root.t;
+    let t = window.t;
 
     return html`
       <a class="${'menu-item' + (location.pathname === '/settings' ? ' active' : '')}" href="/settings">

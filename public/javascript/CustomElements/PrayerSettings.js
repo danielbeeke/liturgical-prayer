@@ -12,7 +12,7 @@ export class PrayerSettings extends BaseElement {
   }
 
   draw () {
-    let t = this.root.t;
+    let t = window.t;
     let s = Store.getState().schedule;
     let a = Store.getState().app;
     let bibles = Content.Bibles;

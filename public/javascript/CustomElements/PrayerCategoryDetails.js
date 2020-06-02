@@ -35,7 +35,7 @@ export class PrayerCategoryDetails extends BaseElement {
   }
 
   draw () {
-    let t = this.root.t;
+    let t = window.t;
 
     let s = Store.getState().schedule;
     this.moment = s.moments.find(moment => moment.slug === this.route.parameters.moment);
