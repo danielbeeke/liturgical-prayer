@@ -436,16 +436,9 @@ p {
   transform: translateY(-5px);
   pointer-events: none; }
 
-[data-transition="open-app"] .page.hidden {
-  opacity: 0;
-  -webkit-transform: translateY(-5px);
-  transform: translateY(-5px);
-  pointer-events: none; }
-
-[data-transition="open-app"] .page.hidden + prayer-menu {
-  -webkit-transform: translateY(calc(100% + 40px));
-  transform: translateY(calc(100% + 40px));
-  opacity: 0; }
+[data-transition="open-app"] * {
+  -webkit-transition: none !important;
+  transition: none !important; }
 
 [data-transition="page"] .page-inner {
   opacity: 1;

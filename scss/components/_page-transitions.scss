@@ -7,16 +7,9 @@
 }
 
 [data-transition="open-app"] {
-  .page.hidden {
-    opacity: 0;
-    transform: translateY(-5px);
-    pointer-events: none;
-  }
-
-  .page.hidden + prayer-menu {
-    transform: translateY(calc(100% + #{5rs}));
-    opacity: 0;
-  }
+* {
+  transition: none !important;
+}
 }
 
 [data-transition="page"] {

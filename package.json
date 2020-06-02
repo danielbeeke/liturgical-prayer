@@ -24,6 +24,7 @@
     "gulp-webshot": "^0.2.3",
     "node-fetch": "^2.6.0",
     "postcss": "^7.0.30",
+    "puppeteer": "^3.3.0",
     "require-dir": "^0.3.2",
     "rollup": "^2.10.5",
     "rollup-plugin-terser": "^5.3.0",
