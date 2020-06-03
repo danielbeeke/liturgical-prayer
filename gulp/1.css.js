@@ -14,7 +14,7 @@ gulp.task('css', function () {
         rhythmmeister.processor(fontPresets),
         autoPrefixer({ cascade: false })
     ];
-    return gulp.src('scss/styles.scss')
+    return gulp.src(['scss/styles.scss', 'scss/first.scss'])
     .pipe(sassGlob())
     .pipe(sass())
     .pipe(postcss(processors))

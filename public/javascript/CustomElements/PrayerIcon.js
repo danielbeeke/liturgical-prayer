@@ -11,6 +11,8 @@ export class PrayerIcon extends BaseElement {
 
     if (!name) return;
 
+    if (this.querySelector('svg')) return;
+
     if (!window.svgCache) window.svgCache = {};
     if (!window.svgCacheWaiters) window.svgCacheWaiters = {};
 

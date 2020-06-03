@@ -14,9 +14,9 @@ gulp.task('copy-dist', () => {
   return gulp.src(['public/**/*', '!public/javascript/**/*']).pipe(gulp.dest('dist'));
 });
 
-gulp.task('create-404', () => {
-  return gulp.src(['public/index.html'])
-  .pipe(rename('404.html'))
+gulp.task('create-index', () => {
+  return gulp.src(['dist/pray.html'])
+  .pipe(rename('index.html'))
   .pipe(gulp.dest('dist'));
 });
 
@@ -54,4 +54,4 @@ gulp.task('inlinesource', function () {
 
 
 
-gulp.task('copy', gulp.series(['clean', 'copy-dist', 'rollup', 'inlinesource']));
+gulp.task('copy', gulp.series(['clean', 'copy-dist', 'rollup', 'inlinesource', 'create-index']));
