@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="utf-8">
     <title>Liturgical prayer</title>
     <meta name="viewport" content="width=device-width">
@@ -238,7 +238,7 @@ prayer-home {
     max-width: 20vw;
     max-height: 60vh; } }
 </style>
-    <link href="/css/styles.css" rel="stylesheet" defer>
+    <link href="/css/styles.css" rel="stylesheet" defer="">
     <link rel="icon" href="data:;base64,iVBORwOKGO=">
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#83af7a">
@@ -254,7 +254,7 @@ prayer-home {
         if (redirect && redirect !== location.href) { history.replaceState(null, null, redirect); }
       })();
     </script>
-    <!--  SNIPPET  -->
+     
     <script type="module" src="/javascript/App.js"></script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180.png">
@@ -298,6 +298,39 @@ prayer-home {
 
   <body>
 
-    <prayer-app data-transition="open-app"></prayer-app>
+    <prayer-app data-transition="open-app" data-grid-enabled="false"><prayer-home class="page" data-items="1"><div class="logo-wrapper">
+      <img alt="logo" src="/images/logo.svg">
+    </div>
+    
+    <h1 class="title">Some beautiful prayers are to be prayed.<!--isµ0--></h1>
+    
+    <div class="moments moments-slider">
+      <a class="moment card" data-moment="morning" href="/pray/morning" style="--color-primary: #91add9;  --color-secondary: #f9f9ed">
+          <div class="image" style="background-image: url(/images/morning.jpg);"></div>
+          <span class="button has-icon">
+            Pray<!--isµ4-->
+            <prayer-icon name="arrow-right"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.295 16.59l4.58-4.59-4.58-4.59L9.705 6l6 6-6 6-1.41-1.41z" fill="#404040"></path></svg></prayer-icon>
+          </span>
+          <span class="title">Morning<!--isµ5--></span>
+        </a><!--isµ1-->
+      
+      <div class="end"></div>
+    </div>
+    
+    <div class="end"></div></prayer-home><!--isµ0-->
+      <prayer-menu><a href="/settings" class="menu-item">
+        <prayer-icon name="settings"><svg width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M29.253 18c0 .51-.045.99-.105 1.47l3.165 2.475c.285.225.36.63.18.96l-3 5.19a.743.743 0 01-.645.375.85.85 0 01-.27-.045l-3.735-1.5c-.78.585-1.62 1.095-2.535 1.47l-.57 3.975a.731.731 0 01-.735.63h-6a.731.731 0 01-.735-.63l-.57-3.975a10.96 10.96 0 01-2.535-1.47l-3.735 1.5a.7.7 0 01-.255.045.75.75 0 01-.66-.375l-3-5.19a.757.757 0 01.18-.96l3.165-2.475c-.06-.48-.105-.975-.105-1.47s.045-.99.105-1.47l-3.165-2.475a.74.74 0 01-.18-.96l3-5.19a.743.743 0 01.645-.375c.09 0 .18.015.27.045l3.735 1.5c.78-.585 1.62-1.095 2.535-1.47l.57-3.975c.045-.36.36-.63.735-.63h6c.375 0 .69.27.735.63l.57 3.975c.915.375 1.755.87 2.535 1.47l3.735-1.5a.7.7 0 01.255-.045.75.75 0 01.66.375l3 5.19c.18.33.105.735-.18.96l-3.165 2.475c.06.48.105.96.105 1.47zm-3 0c0-.315-.015-.63-.075-1.095l-.21-1.695 1.335-1.05 1.605-1.275-1.05-1.815-1.905.765-1.59.645-1.365-1.05a8.51 8.51 0 00-1.845-1.065l-1.59-.645-.24-1.695L19.038 6h-2.085l-.3 2.025-.24 1.695-1.59.645c-.615.255-1.23.615-1.875 1.095l-1.35 1.02-1.56-.63-1.905-.765-1.05 1.815 1.62 1.26 1.335 1.05-.21 1.695c-.045.45-.075.795-.075 1.095 0 .3.03.645.075 1.11l.21 1.695-1.335 1.05-1.62 1.26 1.05 1.815 1.905-.765 1.59-.645 1.365 1.05c.6.45 1.2.795 1.845 1.065l1.59.645.24 1.695.285 2.025h2.1l.3-2.025.24-1.695 1.59-.645c.615-.255 1.23-.615 1.875-1.095l1.35-1.02 1.56.63 1.905.765 1.05-1.815-1.62-1.26-1.335-1.05.21-1.695c.045-.45.075-.78.075-1.095zm-8.25-6c-3.315 0-6 2.685-6 6s2.685 6 6 6 6-2.685 6-6-2.685-6-6-6zm-3 6c0 1.65 1.35 3 3 3s3-1.35 3-3-1.35-3-3-3-3 1.35-3 3z" fill="#333"></path></svg></prayer-icon>
+        <span class="title">Settings<!--isµ1--></span>
+      </a>
+
+      <a href="/pray" class="menu-item active">
+        <prayer-icon name="compass"><svg width="37" height="36" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.083 18C3.083 9.72 9.99 3 18.5 3s15.417 6.72 15.417 15c0 8.28-6.907 15-15.417 15S3.083 26.28 3.083 18zm3.084 0c0 6.615 5.534 12 12.333 12s12.333-5.385 12.333-12S25.3 6 18.5 6 6.167 11.385 6.167 18zm3.854 8.25l11.578-5.235 5.38-11.265-11.578 5.235-5.38 11.265zM20.196 18c0-.915-.756-1.65-1.696-1.65s-1.696.735-1.696 1.65c0 .915.756 1.65 1.696 1.65s1.696-.735 1.696-1.65z" fill="#333"></path></svg></prayer-icon>
+        <span class="title">Home<!--isµ3--></span>
+      </a>
+
+      <a href="/menu" class="menu-item">
+        <prayer-icon name="dots"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-2 8c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z" fill="#333"></path></svg></prayer-icon>
+        <span class="title">Menu<!--isµ5--></span>
+      </a></prayer-menu></prayer-app>
 
 </body></html>
