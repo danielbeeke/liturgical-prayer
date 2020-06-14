@@ -7,6 +7,14 @@ const EsmHmrEngine = require('./hmr-server.js');
 const through = require('through2');
 global.reload = browserSync.reload;
 global.stream = browserSync.stream;
+const inlinesource = require('gulp-inline-source');
+
+gulp.task('inlinesource', function () {
+  return gulp.src('./public/*.html')
+  .pipe(inlinesource({ compress: false }))
+  .pipe(gulp.dest('public'))
+  .pipe(browserSync.stream());
+});
 
 process.setMaxListeners(0);
 
@@ -66,6 +74,7 @@ process.setMaxListeners(0);
         isHotReloadable ? hmr.broadcastMessage({type: 'update', url}) : hmr.broadcastMessage({type: 'reload'});
       });
       gulp.watch('scss/**/*', gulp.series('css'));
+      gulp.watch('public/**/*.html', gulp.series('inlinesource'));
       gulp.watch('font-presets.json', gulp.series('css'));
     }
   });
