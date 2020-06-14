@@ -7,9 +7,9 @@
 }
 
 [data-transition="open-app"] {
-* {
-  transition: none !important;
-}
+  * {
+    transition: none !important;
+  }
 }
 
 [data-transition="page"] {

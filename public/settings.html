@@ -1,0 +1,459 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <title>Liturgical prayer</title>
+    <meta name="viewport" content="width=device-width">
+    <style>:root {
+  --color-primary: #83af7a;
+  --color-secondary: #dbedd7;
+  --color-danger: #dd5b3f;
+  --color-note: #f3f4ab;
+  --color-gray: #ccc;
+  --color-gray-light: #f7f7f7;
+  --color-gray-dark: #777;
+  --color-black: #525252;
+  --speed: .3s;
+  --easing: cubic-bezier(.67,-0.07,.49,.93);
+  --padding: 7px;
+  --border-radius: 8px;
+  --max-width-panel: 2000px;
+  --selected-row: 0; }
+
+@media all and (min-width: 700px) {
+  :root {
+    --max-width-panel: 500px; } }
+
+html {
+  height: 100%; }
+
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100vw;
+  overflow: hidden;
+  color: var(--color-black);
+  overscroll-behavior-y: contain; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0; }
+
+*:after, *:before, * {
+  box-sizing: border-box; }
+
+img {
+  max-width: 100%; }
+
+iframe {
+  border: 0; }
+
+*:focus {
+  outline: none; }
+
+*::-moz-focus-inner {
+  border: none; }
+
+* {
+  -webkit-tap-highlight-color: transparent; }
+  *:not(input):not(textarea) {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+  *::-webkit-scrollbar {
+    display: none; }
+
+a:link:not(.button),
+a:visited:not(.button) {
+  color: var(--color-tertiary); }
+
+p {
+  font-preset: paragraphs;padding-bottom: 2px;padding-top: 6px;line-height: 24px;font-size: 16px;font-weight: 300;font-family: Inter var; }
+
+#__bs_notify__ {
+  display: none !important; }
+
+@font-face {
+  font-family: 'Inter var';
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url("/fonts/Inter-roman.var.woff2?v=3.13") format("woff2"); }
+
+@font-face {
+  font-family: 'Inter var';
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: italic;
+  font-named-instance: 'Italic';
+  src: url("/fonts/Inter-italic.var.woff2?v=3.13") format("woff2"); }
+
+prayer-menu {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background: var(--color-secondary);
+  padding-bottom: 16px;
+  transition: opacity var(--speed) var(--easing), -webkit-transform var(--speed) var(--easing);
+  transition: transform var(--speed) var(--easing), opacity var(--speed) var(--easing);
+  transition: transform var(--speed) var(--easing), opacity var(--speed) var(--easing), -webkit-transform var(--speed) var(--easing);
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  position: fixed;
+  bottom: 0;
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07);
+  opacity: 1;
+  z-index: 20; }
+  prayer-menu .menu-item {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    position: relative;
+    margin-top: -16px;
+    color: var(--color-gray-dark); }
+    prayer-menu .menu-item .title {
+      font-preset: menu;padding-bottom: 4px;padding-top: 12px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var;
+      margin-left: -30px;
+      margin-right: -30px;
+      transition: all var(--speed) var(--easing); }
+    prayer-menu .menu-item:after {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      background: var(--color-gray);
+      display: block;
+      content: '';
+      position: absolute;
+      z-index: -1;
+      bottom: 28.8px;
+      transition: all var(--speed) var(--easing);
+      box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07); }
+    prayer-menu .menu-item prayer-icon {
+      width: 36px;
+      height: 40px;
+      display: block;
+      opacity: .7;
+      transition: all var(--speed) var(--easing); }
+    prayer-menu .menu-item:hover, prayer-menu .menu-item.active {
+      color: var(--color-black); }
+      prayer-menu .menu-item:hover prayer-icon, prayer-menu .menu-item.active prayer-icon {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px);
+        opacity: 1; }
+      prayer-menu .menu-item:hover:after, prayer-menu .menu-item.active:after {
+        width: 66px;
+        height: 66px;
+        background: var(--color-primary); }
+
+@media all and (min-width: 700px) {
+  prayer-menu {
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+    padding-left: 40px; }
+    prayer-menu .menu-item {
+      margin-right: 64px; } }
+
+.page.hide-menu + prayer-menu,
+body.is-sorting prayer-menu,
+body.has-focused-input prayer-menu {
+  -webkit-transform: translateY(calc(100% + 40px));
+  transform: translateY(calc(100% + 40px));
+  opacity: 0; }
+
+body.is-sorting {
+  overflow: hidden !important; }
+
+prayer-home {
+  display: flex;
+  flex-direction: column; }
+  prayer-home > .prefix {
+    font-preset: header2;padding-bottom: 5px;padding-top: 11px;line-height: 16px;letter-spacing: -0.5px;font-size: 15px;font-weight: 570;font-family: Inter var;
+    display: block;
+    margin-bottom: 8px; }
+  prayer-home > .title {
+    font-preset: header3;padding-bottom: 7px;padding-top: 9px;line-height: 32px;font-size: 20px;font-weight: 700;font-family: Inter var;
+    margin-bottom: 16px; }
+
+@media all and (min-width: 700px) {
+  prayer-home .logo-wrapper {
+    margin-top: 32px; } }
+
+.moments-slider {
+  flex: 0 0 calc(100% - 272px);
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin: 0 -32px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  scrollbar-width: none;
+  min-height: 250px;
+  -ms-scroll-snap-type: mandatory;
+  scroll-snap-type: mandatory;
+  -ms-scroll-snap-points-x: repeat(60vw);
+  scroll-snap-points-x: repeat(60vw);
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 32px; }
+  .moments-slider .moment {
+    scroll-snap-align: start;
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.08), 0 6px 12px 0 rgba(0, 0, 0, 0.07), 0 1px 1px 0 rgba(0, 0, 0, 0.07); }
+  .moments-slider .end {
+    margin-left: 32px;
+    flex: 0 0 1px; }
+
+.moment.card {
+  height: 100%;
+  display: block;
+  flex: 0 0 60vw;
+  margin-left: 32px;
+  border-radius: var(--border-radius);
+  position: relative;
+  overflow: hidden;
+  background: var(--color-gray-light); }
+  .moment.card .image {
+    width: 100%;
+    height: calc(100% - 40px);
+    background-size: cover;
+    background-position: center; }
+  .moment.card .title {
+    background: var(--color-secondary);
+    position: absolute;
+    font-preset: title;padding-bottom: 12px;padding-top: 12px;line-height: 16px;text-transform: uppercase;letter-spacing: .7px;font-size: 11px;font-weight: 670;font-family: Inter var;
+    bottom: 0;
+    padding-left: 16px;
+    width: 100%; }
+  .moment.card .button {
+    position: absolute;
+    bottom: 56px;
+    left: 16px;
+    color: var(--color-black); }
+    .moment.card .button * {
+      fill: var(--color-black); }
+
+@media all and (min-width: 700px) {
+  .moment.card {
+    max-width: 20vw;
+    max-height: 60vh; } }
+</style>
+    <link href="/css/styles.css" rel="stylesheet" defer="">
+    <link rel="icon" href="data:;base64,iVBORwOKGO=">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#83af7a">
+    <meta name="google-site-verification" content="0tI1PxSZh-CpzZSbXhlMYd2aLLaYXrcfsTKBnxO-6nU">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      window.t = () => {};
+      window.t.direct = ()=> {};
+
+      (function(){
+        let redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) { history.replaceState(null, null, redirect); }
+      })();
+    </script>
+     
+    <script type="module" src="/javascript/App.js"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="apple-icon-167.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120.png">
+
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#83af7a">
+    <meta name="msapplication-TileColor" content="#83af7a">
+
+    <meta name="Description" content="Liturgical Prayer app helps you pray each day some new prayers.">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="apple-touch-startup-image" href="apple-splash-2048-2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="apple-splash-2732-2048.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="apple-splash-1668-2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="apple-splash-2388-1668.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="apple-splash-1668-2224.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="apple-splash-2224-1668.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="apple-splash-1536-2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="apple-splash-2048-1536.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="apple-splash-1242-2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="apple-splash-2688-1242.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="apple-splash-1125-2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="apple-splash-2436-1125.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="apple-splash-828-1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="apple-splash-1792-828.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="apple-splash-1242-2208.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="apple-splash-2208-1242.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="apple-splash-750-1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="apple-splash-1334-750.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="apple-splash-640-1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="apple-splash-1136-640.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+
+</head>
+
+  <body>
+
+    <prayer-app data-grid-enabled="false"><prayer-settings class="page"><prayer-main-menu><div class="main-menu">
+
+        <div class="logo-wrapper">
+          <img alt="logo" src="/images/logo.svg">
+        </div>
+
+        <a class="menu-item  " href="/pray">
+            <prayer-icon name="compass"><svg width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="explore_24px">
+<path id="icon/action/explore_24px" fill-rule="evenodd" clip-rule="evenodd" d="M3.08333 18C3.08333 9.72 9.99 3 18.5 3C27.01 3 33.9167 9.72 33.9167 18C33.9167 26.28 27.01 33 18.5 33C9.99 33 3.08333 26.28 3.08333 18ZM6.16667 18C6.16667 24.615 11.7013 30 18.5 30C25.2987 30 30.8333 24.615 30.8333 18C30.8333 11.385 25.2987 6 18.5 6C11.7013 6 6.16667 11.385 6.16667 18ZM10.0208 26.25L21.5988 21.015L26.9792 9.75L15.4013 14.985L10.0208 26.25ZM20.1958 18C20.1958 17.085 19.4404 16.35 18.5 16.35C17.5596 16.35 16.8042 17.085 16.8042 18C16.8042 18.915 17.5596 19.65 18.5 19.65C19.4404 19.65 20.1958 18.915 20.1958 18Z" fill="#333333"></path>
+</g>
+</svg>
+</prayer-icon>
+            <span class="title">Home<!--isµ3--></span>
+          </a><a class="menu-item another-page " href="/how-to-use-this-app">
+            <prayer-icon name="face"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="icon/action/face_24px" fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2C17.52 2 22 6.48 22 12ZM9 14.25C9.69 14.25 10.25 13.69 10.25 13C10.25 12.31 9.69 11.75 9 11.75C8.31 11.75 7.75 12.31 7.75 13C7.75 13.69 8.31 14.25 9 14.25ZM13.75 13C13.75 12.31 14.31 11.75 15 11.75C15.69 11.75 16.25 12.31 16.25 13C16.25 13.69 15.69 14.25 15 14.25C14.31 14.25 13.75 13.69 13.75 13ZM17.5 8C14.6 8 12.06 6.44 10.66 4.12C11.09 4.05 11.54 4 12 4C14.9 4 17.44 5.56 18.84 7.88C18.41 7.95 17.96 8 17.5 8ZM4.42 9.47C6.13 8.5 7.45 6.92 8.08 5.03C6.37 6 5.05 7.58 4.42 9.47ZM19.67 9.76C19.88 10.47 20 11.22 20 12C20 16.41 16.41 20 12 20C7.59 20 4 16.41 4 12C4 11.9829 4.00116 11.9659 4.0023 11.9492C4.00449 11.9171 4.00659 11.8864 4 11.86C6.6 10.88 8.69 8.87 9.74 6.31C11.58 8.56 14.37 10 17.5 10C18.25 10 18.97 9.91 19.67 9.76Z" fill="#333333"></path>
+</svg>
+</prayer-icon>
+            <span class="title">How to use this app<!--isµ3--></span>
+          </a><a class="menu-item another-page " href="/about">
+            <prayer-icon name="info_big"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="info_24px 2">
+<g id="Vector">
+<path d="M16.5 10.5H19.5V13.5H16.5V10.5Z" fill="#333333"></path>
+<path d="M16.5 16.5H19.5V25.5H16.5V16.5Z" fill="#333333"></path>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3 18C3 9.72001 9.71997 3 18 3C26.28 3 33 9.72001 33 18C33 26.28 26.28 33 18 33C9.71997 33 3 26.28 3 18ZM6 18C6 24.615 11.3849 30 18 30C24.6151 30 30 24.615 30 18C30 11.385 24.6151 6 18 6C11.3849 6 6 11.385 6 18Z" fill="#333333"></path>
+</g>
+</g>
+</svg>
+</prayer-icon>
+            <span class="title">About<!--isµ3--></span>
+          </a><a class="menu-item another-page " href="/privacy-and-security">
+            <prayer-icon name="shield"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm7 10c0 4.52-2.98 8.69-7 9.93-4.02-1.24-7-5.41-7-9.93V6.3l7-3.11 7 3.11V11zM6 13l1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8-4-4z" fill="#333"></path></svg></prayer-icon>
+            <span class="title">Privacy and security<!--isµ3--></span>
+          </a><a class="menu-item another-page " href="/calendar">
+            <prayer-icon name="calendar"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="icon/action/calendar_today_24px" fill-rule="evenodd" clip-rule="evenodd" d="M20 3H19V1H17V3H7V1H5V3H4C2.9 3 2 3.9 2 5V21C2 22.1 2.9 23 4 23H20C21.1 23 22 22.1 22 21V5C22 3.9 21.1 3 20 3ZM20 21H4V10H20V21ZM4 8H20V5H4V8Z" fill="#333333"></path>
+</svg>
+</prayer-icon>
+            <span class="title">Past prayers<!--isµ3--></span>
+          </a><a class="menu-item another-page active" href="/settings">
+            <prayer-icon name="settings"><svg width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M29.253 18c0 .51-.045.99-.105 1.47l3.165 2.475c.285.225.36.63.18.96l-3 5.19a.743.743 0 01-.645.375.85.85 0 01-.27-.045l-3.735-1.5c-.78.585-1.62 1.095-2.535 1.47l-.57 3.975a.731.731 0 01-.735.63h-6a.731.731 0 01-.735-.63l-.57-3.975a10.96 10.96 0 01-2.535-1.47l-3.735 1.5a.7.7 0 01-.255.045.75.75 0 01-.66-.375l-3-5.19a.757.757 0 01.18-.96l3.165-2.475c-.06-.48-.105-.975-.105-1.47s.045-.99.105-1.47l-3.165-2.475a.74.74 0 01-.18-.96l3-5.19a.743.743 0 01.645-.375c.09 0 .18.015.27.045l3.735 1.5c.78-.585 1.62-1.095 2.535-1.47l.57-3.975c.045-.36.36-.63.735-.63h6c.375 0 .69.27.735.63l.57 3.975c.915.375 1.755.87 2.535 1.47l3.735-1.5a.7.7 0 01.255-.045.75.75 0 01.66.375l3 5.19c.18.33.105.735-.18.96l-3.165 2.475c.06.48.105.96.105 1.47zm-3 0c0-.315-.015-.63-.075-1.095l-.21-1.695 1.335-1.05 1.605-1.275-1.05-1.815-1.905.765-1.59.645-1.365-1.05a8.51 8.51 0 00-1.845-1.065l-1.59-.645-.24-1.695L19.038 6h-2.085l-.3 2.025-.24 1.695-1.59.645c-.615.255-1.23.615-1.875 1.095l-1.35 1.02-1.56-.63-1.905-.765-1.05 1.815 1.62 1.26 1.335 1.05-.21 1.695c-.045.45-.075.795-.075 1.095 0 .3.03.645.075 1.11l.21 1.695-1.335 1.05-1.62 1.26 1.05 1.815 1.905-.765 1.59-.645 1.365 1.05c.6.45 1.2.795 1.845 1.065l1.59.645.24 1.695.285 2.025h2.1l.3-2.025.24-1.695 1.59-.645c.615-.255 1.23-.615 1.875-1.095l1.35-1.02 1.56.63 1.905.765 1.05-1.815-1.62-1.26-1.335-1.05.21-1.695c.045-.45.075-.78.075-1.095zm-8.25-6c-3.315 0-6 2.685-6 6s2.685 6 6 6 6-2.685 6-6-2.685-6-6-6zm-3 6c0 1.65 1.35 3 3 3s3-1.35 3-3-1.35-3-3-3-3 1.35-3 3z" fill="#333"></path></svg></prayer-icon>
+            <span class="title">Settings<!--isµ3--></span>
+          </a><!--isµ0-->
+        
+      </div></prayer-main-menu>
+      <div class="inner-page">
+        <h2 class="page-title">
+          <prayer-icon name="settings"><svg width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M29.253 18c0 .51-.045.99-.105 1.47l3.165 2.475c.285.225.36.63.18.96l-3 5.19a.743.743 0 01-.645.375.85.85 0 01-.27-.045l-3.735-1.5c-.78.585-1.62 1.095-2.535 1.47l-.57 3.975a.731.731 0 01-.735.63h-6a.731.731 0 01-.735-.63l-.57-3.975a10.96 10.96 0 01-2.535-1.47l-3.735 1.5a.7.7 0 01-.255.045.75.75 0 01-.66-.375l-3-5.19a.757.757 0 01.18-.96l3.165-2.475c-.06-.48-.105-.975-.105-1.47s.045-.99.105-1.47l-3.165-2.475a.74.74 0 01-.18-.96l3-5.19a.743.743 0 01.645-.375c.09 0 .18.015.27.045l3.735 1.5c.78-.585 1.62-1.095 2.535-1.47l.57-3.975c.045-.36.36-.63.735-.63h6c.375 0 .69.27.735.63l.57 3.975c.915.375 1.755.87 2.535 1.47l3.735-1.5a.7.7 0 01.255-.045.75.75 0 01.66.375l3 5.19c.18.33.105.735-.18.96l-3.165 2.475c.06.48.105.96.105 1.47zm-3 0c0-.315-.015-.63-.075-1.095l-.21-1.695 1.335-1.05 1.605-1.275-1.05-1.815-1.905.765-1.59.645-1.365-1.05a8.51 8.51 0 00-1.845-1.065l-1.59-.645-.24-1.695L19.038 6h-2.085l-.3 2.025-.24 1.695-1.59.645c-.615.255-1.23.615-1.875 1.095l-1.35 1.02-1.56-.63-1.905-.765-1.05 1.815 1.62 1.26 1.335 1.05-.21 1.695c-.045.45-.075.795-.075 1.095 0 .3.03.645.075 1.11l.21 1.695-1.335 1.05-1.62 1.26 1.05 1.815 1.905-.765 1.59-.645 1.365 1.05c.6.45 1.2.795 1.845 1.065l1.59.645.24 1.695.285 2.025h2.1l.3-2.025.24-1.695 1.59-.645c.615-.255 1.23-.615 1.875-1.095l1.35-1.02 1.56.63 1.905.765 1.05-1.815-1.62-1.26-1.335-1.05.21-1.695c.045-.45.075-.78.075-1.095zm-8.25-6c-3.315 0-6 2.685-6 6s2.685 6 6 6 6-2.685 6-6-2.685-6-6-6zm-3 6c0 1.65 1.35 3 3 3s3-1.35 3-3-1.35-3-3-3-3 1.35-3 3z" fill="#333"></path></svg></prayer-icon>
+          Settings<!--isµ0-->
+        </h2>
+  
+        <div class="field">
+          <label>
+            Moments and settings<!--isµ1-->
+          </label>
+          
+          <div class="item-list">
+          <div class="item moment enabled" style="--color-primary: #91add9;">
+              <input type="checkbox" id="toggle-morning">
+              <label for="toggle-morning">
+                <span class="title">Morning<!--isµ6--></span>
+              </label>
+              <a href="/settings/morning">
+                <prayer-icon name="pencil"><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.369 3.29l2.34 2.34c.39.39.39 1.02 0 1.41l-1.83 1.83-3.75-3.75 1.83-1.83c.19-.19.44-.29.7-.29.26 0 .51.09.71.29zM2.999 17.25V21h3.75l11.06-11.06-3.75-3.75-11.06 11.06zM5.919 19h-.92v-.92l9.06-9.06.92.92L5.919 19z" fill="#333"></path></svg></prayer-icon>
+              </a>
+            </div><div class="item moment " style="--color-primary: #97c2c9;">
+              <input type="checkbox" id="toggle-afternoon">
+              <label for="toggle-afternoon">
+                <span class="title">Afternoon<!--isµ6--></span>
+              </label>
+              <a href="/settings/afternoon">
+                <prayer-icon name="pencil"><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.369 3.29l2.34 2.34c.39.39.39 1.02 0 1.41l-1.83 1.83-3.75-3.75 1.83-1.83c.19-.19.44-.29.7-.29.26 0 .51.09.71.29zM2.999 17.25V21h3.75l11.06-11.06-3.75-3.75-11.06 11.06zM5.919 19h-.92v-.92l9.06-9.06.92.92L5.919 19z" fill="#333"></path></svg></prayer-icon>
+              </a>
+            </div><div class="item moment " style="--color-primary: #ae96be;">
+              <input type="checkbox" id="toggle-evening">
+              <label for="toggle-evening">
+                <span class="title">Evening<!--isµ6--></span>
+              </label>
+              <a href="/settings/evening">
+                <prayer-icon name="pencil"><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.369 3.29l2.34 2.34c.39.39.39 1.02 0 1.41l-1.83 1.83-3.75-3.75 1.83-1.83c.19-.19.44-.29.7-.29.26 0 .51.09.71.29zM2.999 17.25V21h3.75l11.06-11.06-3.75-3.75-11.06 11.06zM5.919 19h-.92v-.92l9.06-9.06.92.92L5.919 19z" fill="#333"></path></svg></prayer-icon>
+              </a>
+            </div><div class="item moment " style="--color-primary: #d4a5b2;">
+              <input type="checkbox" id="toggle-meal">
+              <label for="toggle-meal">
+                <span class="title">Meal<!--isµ6--></span>
+              </label>
+              <a href="/settings/meal">
+                <prayer-icon name="pencil"><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.369 3.29l2.34 2.34c.39.39.39 1.02 0 1.41l-1.83 1.83-3.75-3.75 1.83-1.83c.19-.19.44-.29.7-.29.26 0 .51.09.71.29zM2.999 17.25V21h3.75l11.06-11.06-3.75-3.75-11.06 11.06zM5.919 19h-.92v-.92l9.06-9.06.92.92L5.919 19z" fill="#333"></path></svg></prayer-icon>
+              </a>
+            </div><!--isµ2-->
+          </div>
+        </div>
+  
+        <div class="field">
+          <label>Bible translation<!--isµ3--></label>
+          <select>
+              <option value="de4e12af7f28f599-02">King James (Authorised) Version<!--isµ2--></option><option value="9879dbb7cfe39e4d-04">World English Bible<!--isµ2--></option><!--isµ5-->            
+          </select>
+        </div>
+        
+        <div class="field">
+          <label>Sync data<!--isµ6--></label>
+          <remote-storage-widget data-online="true" data-status="ready"><!--isµ0-->
+      <div class="choose">
+      <div class="description">
+        This app allows you to sync the data with a storage of your choice.<!--isµ0--> 
+      <a class="rs-help" href="https://remotestorage.io/" target="_blank">Read more about syncing<!--isµ1--></a>.<!--isµ0-->
+      </div>
+      
+      <button class="button has-icon dropbox secondary block">
+        Dropbox
+        <img alt="dropbox" class="dropbox-logo" src="/images/dropbox.svg">
+      </button><br><!--isµ1-->
+      
+      <button class="button has-icon googledrive secondary block">
+        Google Drive
+        <img alt="googledrive" class="googledrive-logo" src="/images/googledrive.svg">
+      </button><br><!--isµ2-->
+      
+      <button class="button rs secondary block has-icon">
+        RemoteStorage
+        <img alt="remotestorage" class="rs-logo" src="/images/remotestorage.svg">
+      </button>
+      
+    </div><!--isµ1-->
+      <!--isµ2-->
+      <!--isµ3--></remote-storage-widget>
+        </div>
+        
+        <div class="end"></div>
+      </div></prayer-settings><!--isµ0-->
+      <prayer-menu><a href="/settings" class="menu-item active">
+        <prayer-icon name="settings"><svg width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M29.253 18c0 .51-.045.99-.105 1.47l3.165 2.475c.285.225.36.63.18.96l-3 5.19a.743.743 0 01-.645.375.85.85 0 01-.27-.045l-3.735-1.5c-.78.585-1.62 1.095-2.535 1.47l-.57 3.975a.731.731 0 01-.735.63h-6a.731.731 0 01-.735-.63l-.57-3.975a10.96 10.96 0 01-2.535-1.47l-3.735 1.5a.7.7 0 01-.255.045.75.75 0 01-.66-.375l-3-5.19a.757.757 0 01.18-.96l3.165-2.475c-.06-.48-.105-.975-.105-1.47s.045-.99.105-1.47l-3.165-2.475a.74.74 0 01-.18-.96l3-5.19a.743.743 0 01.645-.375c.09 0 .18.015.27.045l3.735 1.5c.78-.585 1.62-1.095 2.535-1.47l.57-3.975c.045-.36.36-.63.735-.63h6c.375 0 .69.27.735.63l.57 3.975c.915.375 1.755.87 2.535 1.47l3.735-1.5a.7.7 0 01.255-.045.75.75 0 01.66.375l3 5.19c.18.33.105.735-.18.96l-3.165 2.475c.06.48.105.96.105 1.47zm-3 0c0-.315-.015-.63-.075-1.095l-.21-1.695 1.335-1.05 1.605-1.275-1.05-1.815-1.905.765-1.59.645-1.365-1.05a8.51 8.51 0 00-1.845-1.065l-1.59-.645-.24-1.695L19.038 6h-2.085l-.3 2.025-.24 1.695-1.59.645c-.615.255-1.23.615-1.875 1.095l-1.35 1.02-1.56-.63-1.905-.765-1.05 1.815 1.62 1.26 1.335 1.05-.21 1.695c-.045.45-.075.795-.075 1.095 0 .3.03.645.075 1.11l.21 1.695-1.335 1.05-1.62 1.26 1.05 1.815 1.905-.765 1.59-.645 1.365 1.05c.6.45 1.2.795 1.845 1.065l1.59.645.24 1.695.285 2.025h2.1l.3-2.025.24-1.695 1.59-.645c.615-.255 1.23-.615 1.875-1.095l1.35-1.02 1.56.63 1.905.765 1.05-1.815-1.62-1.26-1.335-1.05.21-1.695c.045-.45.075-.78.075-1.095zm-8.25-6c-3.315 0-6 2.685-6 6s2.685 6 6 6 6-2.685 6-6-2.685-6-6-6zm-3 6c0 1.65 1.35 3 3 3s3-1.35 3-3-1.35-3-3-3-3 1.35-3 3z" fill="#333"></path></svg></prayer-icon>
+        <span class="title">Settings<!--isµ1--></span>
+      </a>
+
+      <a href="/pray" class="menu-item">
+        <prayer-icon name="compass"><svg width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="explore_24px">
+<path id="icon/action/explore_24px" fill-rule="evenodd" clip-rule="evenodd" d="M3.08333 18C3.08333 9.72 9.99 3 18.5 3C27.01 3 33.9167 9.72 33.9167 18C33.9167 26.28 27.01 33 18.5 33C9.99 33 3.08333 26.28 3.08333 18ZM6.16667 18C6.16667 24.615 11.7013 30 18.5 30C25.2987 30 30.8333 24.615 30.8333 18C30.8333 11.385 25.2987 6 18.5 6C11.7013 6 6.16667 11.385 6.16667 18ZM10.0208 26.25L21.5988 21.015L26.9792 9.75L15.4013 14.985L10.0208 26.25ZM20.1958 18C20.1958 17.085 19.4404 16.35 18.5 16.35C17.5596 16.35 16.8042 17.085 16.8042 18C16.8042 18.915 17.5596 19.65 18.5 19.65C19.4404 19.65 20.1958 18.915 20.1958 18Z" fill="#333333"></path>
+</g>
+</svg>
+</prayer-icon>
+        <span class="title">Home<!--isµ3--></span>
+      </a>
+
+      <a href="/menu" class="menu-item">
+        <prayer-icon name="dots"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="more_vert_24px">
+<path id="icon/navigation/more_vert_24px" fill-rule="evenodd" clip-rule="evenodd" d="M12 8C13.1 8 14 7.1 14 6C14 4.9 13.1 4 12 4C10.9 4 10 4.9 10 6C10 7.1 10.9 8 12 8ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10ZM10 18C10 16.9 10.9 16 12 16C13.1 16 14 16.9 14 18C14 19.1 13.1 20 12 20C10.9 20 10 19.1 10 18Z" fill="#333333"></path>
+</g>
+</svg>
+</prayer-icon>
+        <span class="title">Menu<!--isµ5--></span>
+      </a></prayer-menu></prayer-app>
+
+</body></html>

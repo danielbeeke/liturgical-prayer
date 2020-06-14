@@ -77,17 +77,23 @@ export class BaseElement extends HTMLElement {
     let page = document.querySelector('.page');
     let that = this;
 
-    if (page && page === this) {
-      setTimeout(() => {
-        page.addEventListener('transitionend', () => {
-          delete this.root.dataset.transition;
-          console.log('done')
-        }, {
-          once: true
-        });
-        page.classList.remove('hidden');
-      });
-    }
+    // if (page && page === this && page.classList.contains('hidden')) {
+    //   console.log('6. Current page', this.root.dataset.transition);
+    //
+    //   if (this.root.dataset.transition) {
+    //     console.log('7. Attach transition end begin');
+    //
+    //     page.addEventListener('transitionend', (event) => {
+    //       this.root.dataset.transition = '';
+    //       console.log('9, transition end ran');
+    //     }, {
+    //       once: true
+    //     });
+    //   }
+    //
+    //   console.log('8. removed hidden');
+    //   page.classList.remove('hidden');
+    // }
 
     let inputs = this.querySelectorAll('input:not(.datepicker-button-input),textarea');
     inputs.forEach(input => {
@@ -135,8 +141,23 @@ export class BaseElement extends HTMLElement {
           link.classList.add('active');
 
           this.root.dataset.transition = this.getTransitionName(link.getAttribute('href'));
+
           page.addEventListener('transitionend', () => {
             that.root.router.navigate(link.getAttribute('href'));
+            let newPage = document.querySelector('.page.hidden');
+
+            if (newPage) {
+              newPage.addEventListener('transitionend', (event) => {
+                this.root.dataset.transition = '';
+              }, {
+                once: true
+              });
+
+              setTimeout(() => {
+                newPage.classList.remove('hidden');
+              })
+
+            }
           }, {once: true});
           page.classList.add('hidden');
         });

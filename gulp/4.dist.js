@@ -42,4 +42,4 @@ gulp.task('rollup', () => {
 
 
 
-gulp.task('copy', gulp.series(['clean', 'copy-dist', 'rollup', 'create-index']));
+gulp.task('copy', gulp.series(['clean', 'copy-dist', 'rollup']));
