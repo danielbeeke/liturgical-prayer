@@ -1,5 +1,5 @@
 import {produce} from "../vendor/immer.js";
-import {Content} from '../Content.js';
+import {Content} from '../DataLoader.js';
 
 /**
  * Holds information about the schedule, is a Redux reducer

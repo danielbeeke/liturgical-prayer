@@ -150,4 +150,4 @@ window.oncontextmenu = function(event) {
 
 if('serviceWorker' in navigator && typeof window.hmrEnabled === 'undefined') {
   navigator.serviceWorker.register('/sw.js');
-};
+}

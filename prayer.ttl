@@ -1,0 +1,26 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix prayer: <https://pray.danielbeeke.nl/prayer/> .
+
+prayer: rdf:type owl:Ontology ;
+# Description.
+         dcterms:title "Prayer ontology"@en ;
+         dcterms:description "The prayer ontology aims at describing prayers."@en ;
+         vann:preferredNamespacePrefix "prayer" ;
+         vann:preferredNamespaceURI <https://pray.danielbeeke.nl/prayer/> .
+
+prayer:Prayer a rdfs:Class ;
+                rdfs:label "Prayer"@en ;
+                rdfs:comment "An prayer is a text you can pray."@en .
+
+prayer:Author a rdfs:Class ;
+                 rdfs:label "Author"@en ;
+                 rdfs:comment "The author of the prayer."@en .
+
+prayer:text a rdf:Property ;
+                rdfs:label "The prayer"@en ;
+                rdfs:comment """The prayer text itself."""@en .

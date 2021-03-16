@@ -1,6 +1,6 @@
 import {Store} from '../Core/Store.js';
 import {clearFixedPrayerCategory} from '../Actions/PrayActions.js';
-import {Content} from '../Content.js';
+import {Content} from '../DataLoader.js';
 
 export class PrayerScheduler {
 

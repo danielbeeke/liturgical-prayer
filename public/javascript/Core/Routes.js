@@ -1,5 +1,5 @@
 import {html} from '../vendor/uhtml.js';
-import {Content} from '../Content.js';
+import {Content} from '../DataLoader.js';
 import {Slugify} from '../Helpers/Slugify.js';
 
 let pageRoutes = {};

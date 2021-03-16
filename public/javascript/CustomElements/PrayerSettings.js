@@ -3,7 +3,7 @@ import {Store} from '../Core/Store.js';
 import {html} from '../vendor/uhtml.js';
 import {toggleMoment} from '../Actions/ScheduleActions.js';
 import {setBible} from '../Actions/AppActions.js';
-import {Content} from '../Content.js';
+import {Content} from '../DataLoader.js';
 
 export class PrayerSettings extends BaseElement {
 

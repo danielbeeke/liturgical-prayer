@@ -3,7 +3,7 @@ import {html} from '../vendor/uhtml.js';
 import {Slugify} from '../Helpers/Slugify.js';
 import {createFreeCategory} from '../Actions/ScheduleActions.js';
 import {Store} from '../Core/Store.js';
-import {Content} from '../Content.js';
+import {Content} from '../DataLoader.js';
 
 export class PrayerCreateFreeCategory extends BaseElement {
 

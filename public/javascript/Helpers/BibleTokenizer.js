@@ -1,4 +1,4 @@
-import {Content} from '../Content.js';
+import {Content} from '../DataLoader.js';
 import {Store} from '../Core/Store.js';
 import {Hole} from '../vendor/uhtml.js';
 

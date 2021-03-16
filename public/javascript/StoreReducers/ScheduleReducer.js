@@ -1,6 +1,6 @@
 import {produce} from "../vendor/immer.js";
 import {Slugify} from '../Helpers/Slugify.js';
-import {Content} from '../Content.js';
+import {Content} from '../DataLoader.js';
 
 let moments = Content['Moments'];
 

@@ -1,6 +1,6 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {html} from '../vendor/uhtml.js';
-import {Content} from '../Content.js';
+import {Content} from '../DataLoader.js';
 import {toLines} from '../Helpers/toLines.js';
 
 export class PrayerPage extends BaseElement {
