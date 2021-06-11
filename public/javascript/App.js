@@ -35,6 +35,7 @@ import {PrayerStorageCallback} from './CustomElements/PrayerStorageCallback.js';
 import {RemoteStorageWidget} from './CustomElements/RemoteStorageWidget.js';
 import {enableHmr} from './Core/Hmr.js';
 import {PrayerNoteForm} from './CustomElements/PrayerNoteForm.js';
+import {contentReady} from './Content.js';
 
 let customElementItems = [
   {tag: 'prayer-calendar', className: PrayerCalendar},
@@ -70,6 +71,7 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
    * This is the main startup function of the app.
    */
   async connectedCallback () {
+    await contentReady;
     this.customElements = customElementItems;
 
     let a = Store.getState().app;

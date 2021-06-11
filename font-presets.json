@@ -25,9 +25,17 @@
     },
     "header3": {
       "font-family": "Inter var",
-      "rows": 4,
+      "rows": 3,
       "font-weight": 700,
       "font-size": "20px",
+      "base-line-percentage": 0.84
+    },
+    "header4": {
+      "font-family": "Inter var",
+      "rows": 1,
+      "font-weight": 570,
+      "font-size": "11px",
+      "letter-spacing": "1px",
       "base-line-percentage": 0.84
     },
     "title": {

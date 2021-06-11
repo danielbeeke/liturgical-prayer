@@ -1,17 +1,16 @@
 .indicator {
   display: flex;
   background: var(--color-secondary);
-  padding-left: 4rs;
-  width: calc(100vw - 8rs);
+  flex: 1 1 auto;
   flex-wrap: wrap;
+  gap: .5rs;
+  margin-top: 1rs;
+  padding-right: 6rs;
 
   .indicator-item {
-    height: .5rs;
-    margin-top: .5rs;
+    height: 1rs;
     border-radius: 4px;
-    margin-bottom: 1rs;
-    flex: 0 0 3rs;
-    margin-right: 1rs;
+    flex: 0 0 1rs;
     background: var(--color-gray);
 
     &.active {

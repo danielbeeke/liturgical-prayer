@@ -60,14 +60,11 @@
   flex-wrap: wrap;
   margin-bottom: 4rs;
   max-width: var(--max-width-panel);
+  gap: 2rs;
 
   .field {
-    flex: 0 0 calc(50% - #{1rs});
+    flex: 1 1 calc(50% - #{1rs});
     margin-bottom: 0;
-  }
-
-  .field + .field {
-    margin-left: 2rs;
   }
 
   > .description {

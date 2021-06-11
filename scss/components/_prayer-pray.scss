@@ -9,13 +9,15 @@ prayer-pray {
 
   .pre-header {
     background: var(--color-secondary);
+    display: flex;
+    padding-top: 1rs;
   }
 
   .moment {
     display: block;
     color: var(--color-primary);
-    font-preset: button;
-    padding: 1rs 4rs 1rs 4rs;
+    font-preset: header4;
+    padding: 0 1rs 0rs 4rs;
   }
 
   .moment-switcher {

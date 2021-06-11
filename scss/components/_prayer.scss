@@ -10,7 +10,7 @@
     position: sticky;
     top: 0;
     background: var(--color-secondary);
-    padding: 0 4rs 2rs;
+    padding: 0 4rs 1rs;
     z-index: 5;
   }
 
@@ -31,9 +31,18 @@
 
   .category {
     color: var(--color-primary);
-    font-preset: button;
+    font-preset: header4;
     margin-right: 2rs;
     display: inline-flex;
+
+    padding-left: 3rs;
+    position: relative;
+
+    prayer-icon {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
   }
 
   .title {
@@ -43,11 +52,15 @@
 
   .author {
     display: block;
-    font-preset: button;
+    font-preset: header4;
     color: var(--color-primary);
+    padding-left: 3rs;
+    position: relative;
 
     prayer-icon {
-      transform: translateY(-3px);
+      position: absolute;
+      left: 0;
+      top: 0;
     }
   }
 

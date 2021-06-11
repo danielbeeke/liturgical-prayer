@@ -16,6 +16,7 @@ select {
   -webkit-appearance: none;
   appearance: none;
   cursor: pointer;
+  color: var(--color-black);
   text-overflow: ellipsis;
 
   &:-moz-focusring {
