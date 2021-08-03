@@ -1,6 +1,6 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
-import {html} from '../vendor/uhtml.js';
+import {html} from 'https://cdn.skypack.dev/uhtml/async'
 import {toggleCategory, setCategoriesOrder, setMomentTime} from '../Actions/ScheduleActions.js';
 import {Sortable} from '../Helpers/Sortable.js';
 import {addWbr} from '../Helpers/addWbr.js';
@@ -8,7 +8,7 @@ import {addWbr} from '../Helpers/addWbr.js';
 export class PrayerMomentConfigure extends BaseElement {
 
   async connectedCallback() {
-    this.draw();
+    await this.draw();
     let list = this.querySelector('.categories');
 
     this.sortable = new Sortable(list);

@@ -1,7 +1,6 @@
 import {BaseElement} from '../Core/BaseElement.js';
-import {html} from '../vendor/uhtml.js';
+import {html} from 'https://cdn.skypack.dev/uhtml/async'
 import {Content} from '../Content.js';
-import {Slugify} from '../Helpers/Slugify.js';
 
 export class PrayerMainMenu extends BaseElement {
 
@@ -11,19 +10,17 @@ export class PrayerMainMenu extends BaseElement {
     let anotherPage = [isTablet ? 'another-page' : ''];
 
     let links = Content.Pages.map(page => {
-      page.Slug = '/' + Slugify(page.Title);
-      page.ExtraClasses = [isTablet ? 'another-page' : ''];
+      page.extraClasses = [isTablet ? 'another-page' : ''];
       return page;
     });
 
     links = [...links, ...[
-      { Slug: '/pray', Title: t.direct('Home'), Icon: 'compass', Weight: 1, ExtraClasses: []},
-      { Slug: '/calendar', Title: t.direct('Past prayers'), Icon: 'calendar', Weight: 98, ExtraClasses: anotherPage},
-      { Slug: '/settings', Title: t.direct('Settings'), Icon: 'settings' , Weight: 99, ExtraClasses: anotherPage},
+      { id: 'pray', name: t.direct('Home'), icon: 'compass', weight: -100, extraClasses: []},
+      { id: 'settings', name: t.direct('Settings'), weight: 98, extraClasses: anotherPage},
+      { id: 'calendar', name: t.direct('Past prayers'), icon: 'calendar', weight: 99, extraClasses: anotherPage},
     ]];
 
-
-    links = links.sort((a, b) => a.Weight - b.Weight);
+    links = links.sort((a, b) => a.weight ?? 0 - b.weight ?? 0);
 
     return html`
       <div class="main-menu">
@@ -34,12 +31,12 @@ export class PrayerMainMenu extends BaseElement {
 
         ${links.map(link => {
           let parts = location.pathname.split('/');
-          let firstPart = '/' + parts[1];
+          let firstPart = parts[1];
 
           return html`
-          <a class="${`menu-item ${link.ExtraClasses.join(' ')} ${link.slug === firstPart ? 'active' : ''}`}" href="${link.Slug}">
-            <prayer-icon name="${link.Icon}" />
-            <span class="title">${link.Title}</span>
+          <a class="${`menu-item ${link.extraClasses.join(' ')} ${link.id === firstPart ? 'active' : ''}`}" href="${link.id}">
+            <prayer-icon name="${link.id}" />
+            <span class="title">${link.name}</span>
           </a>
         `})}
         

@@ -1,5 +1,5 @@
 import {BaseElement} from '../Core/BaseElement.js';
-import {html} from '../vendor/uhtml.js';
+import {html} from 'https://cdn.skypack.dev/uhtml/async'
 import {daysInMonth} from '../Helpers/DaysInMonth.js';
 import {Store} from '../Core/Store.js';
 
@@ -156,6 +156,8 @@ export class PrayerCalendar extends BaseElement {
   }
 
   previousIsDisabled () {
+    if (!this.calendar?.[0]) return false
+
     if (this.selectedDayData) {
       return (this.selectedRow + this.selectedRowAdjustment) === 1;
     }
@@ -247,7 +249,7 @@ export class PrayerCalendar extends BaseElement {
       this.querySelector('.calendar').on
     }
 
-    this.querySelector('a[href="/calendar"]').classList.add('active');
+    this.querySelector('a[href="/calendar"]')?.classList.add('active');
   }
 
   showPrayers () {

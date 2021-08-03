@@ -1,4 +1,4 @@
-import {Hole} from '../vendor/uhtml.js';
+import {Hole} from 'https://cdn.skypack.dev/uhtml/async';
 
 class TranslatedText extends Hole {
   constructor(text, context) {

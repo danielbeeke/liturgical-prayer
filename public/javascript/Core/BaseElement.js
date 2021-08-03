@@ -1,4 +1,4 @@
-import {render} from '../vendor/uhtml.js';
+import {render} from 'https://cdn.skypack.dev/uhtml/async';
 import {watch} from '../vendor/ReduxWatch.js';
 import {Store} from "./Store.js";
 
@@ -17,8 +17,8 @@ export class BaseElement extends HTMLElement {
   }
 
   attachDraw (elementDraw) {
-    this.draw = function () {
-      render(this, () => elementDraw.apply(this, arguments));
+    this.draw = async function () {
+      await render(this, () => elementDraw.apply(this, arguments))
       this.afterDraw();
     };
   }
@@ -81,7 +81,6 @@ export class BaseElement extends HTMLElement {
       setTimeout(() => {
         page.addEventListener('transitionend', () => {
           delete this.root.dataset.transition;
-          console.log('done')
         }, {
           once: true
         });

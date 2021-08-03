@@ -1,7 +1,6 @@
 import {BaseElement} from '../Core/BaseElement.js';
-import {html} from '../vendor/uhtml.js';
+import {html} from 'https://cdn.skypack.dev/uhtml/async'
 import {Content} from '../Content.js';
-import {toLines} from '../Helpers/toLines.js';
 
 export class PrayerPage extends BaseElement {
 
@@ -12,10 +11,10 @@ export class PrayerPage extends BaseElement {
       <prayer-main-menu />
       <div class="inner-page">
         <h2 class="page-title">
-          <prayer-icon name="${page.Icon}" />
-          ${page.Title}
+          <prayer-icon name="${page.id}" />
+          ${page.name}
         </h2>
-        <p>${toLines(page.Content)}</p>
+        <p ref=${element => element.innerHTML = page.content}></p>
         <div class="end"></div>
       </div>
     `;

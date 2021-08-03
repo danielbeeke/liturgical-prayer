@@ -1,5 +1,5 @@
 import {BaseElement} from '../Core/BaseElement.js';
-import {html} from '../vendor/uhtml.js';
+import {html} from 'https://cdn.skypack.dev/uhtml/async'
 import {Slugify} from '../Helpers/Slugify.js';
 import {createFreeCategory} from '../Actions/ScheduleActions.js';
 import {Store} from '../Core/Store.js';

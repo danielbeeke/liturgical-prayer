@@ -1,5 +1,5 @@
 import {BaseElement} from '../Core/BaseElement.js';
-import {html} from '../vendor/uhtml.js';
+import {html} from 'https://cdn.skypack.dev/uhtml/async'
 import {remoteStorage} from '../Core/RemoteStorage.js';
 
 export class RemoteStorageWidget extends BaseElement {

@@ -1,4 +1,4 @@
-import {html} from '../vendor/uhtml.js';
+import {html} from 'https://cdn.skypack.dev/uhtml/async'
 
 export let addWbr = (string) => {
   let realString = string.toString();

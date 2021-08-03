@@ -1,6 +1,6 @@
 import {Content} from '../Content.js';
 import {Store} from '../Core/Store.js';
-import {Hole} from '../vendor/uhtml.js';
+import {Hole} from 'https://cdn.skypack.dev/uhtml/async';
 
 export class BibleTokenizer {
 

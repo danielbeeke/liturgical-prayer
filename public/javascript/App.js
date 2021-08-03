@@ -8,7 +8,7 @@
 import {BaseElement} from './Core/BaseElement.js';
 import {Store} from './Core/Store.js';
 import {remoteStorage} from './Core/RemoteStorage.js';
-import {html} from './vendor/uhtml.js';
+import {html} from 'https://cdn.skypack.dev/uhtml/async';
 
 import {toggleGrid} from './Actions/AppActions.js';
 
@@ -35,7 +35,6 @@ import {PrayerStorageCallback} from './CustomElements/PrayerStorageCallback.js';
 import {RemoteStorageWidget} from './CustomElements/RemoteStorageWidget.js';
 import {enableHmr} from './Core/Hmr.js';
 import {PrayerNoteForm} from './CustomElements/PrayerNoteForm.js';
-import {contentReady} from './Content.js';
 
 let customElementItems = [
   {tag: 'prayer-calendar', className: PrayerCalendar},
@@ -71,7 +70,6 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
    * This is the main startup function of the app.
    */
   async connectedCallback () {
-    await contentReady;
     this.customElements = customElementItems;
 
     let a = Store.getState().app;
@@ -139,7 +137,7 @@ customElements.define('prayer-app', class PrayerApp extends BaseElement {
   }
 
   afterDraw() {
-    this.children[0].forceDraw();
+    this.children?.[0]?.forceDraw();
   }
 
 });

@@ -1,5 +1,5 @@
 import {BaseElement} from '../Core/BaseElement.js';
-import {html} from '../vendor/uhtml.js';
+import {html} from 'https://cdn.skypack.dev/uhtml/async'
 import {Store} from '../Core/Store.js';
 import {deleteFreeCategory, setPrayerPointsOrder} from '../Actions/ScheduleActions.js';
 import {Sortable} from '../Helpers/Sortable.js';

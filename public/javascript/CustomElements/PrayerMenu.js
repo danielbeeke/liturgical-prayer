@@ -1,5 +1,5 @@
 import {BaseElement} from '../Core/BaseElement.js';
-import {html} from '../vendor/uhtml.js';
+import {html} from 'https://cdn.skypack.dev/uhtml/async'
 
 export class PrayerMenu extends BaseElement {
 
@@ -13,7 +13,7 @@ export class PrayerMenu extends BaseElement {
       </a>
 
       <a class="${'menu-item' + (location.pathname === '/pray' ? ' active' : '')}" href="/pray">
-        <prayer-icon name="compass" />
+        <prayer-icon name="pray" />
         <span class="title">${t.direct('Home')}</span>
       </a>
 

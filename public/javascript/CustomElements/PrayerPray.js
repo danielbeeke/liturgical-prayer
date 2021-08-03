@@ -1,6 +1,6 @@
 import {BaseElement} from '../Core/BaseElement.js';
 import {Store} from '../Core/Store.js';
-import {html} from '../vendor/uhtml.js';
+import {html} from 'https://cdn.skypack.dev/uhtml/async'
 import {PrayerScheduler} from '../Helpers/PrayerScheduler.js'
 import {markFixedPrayer, markFreePrayer} from '../Actions/PrayActions.js';
 import {toLines} from '../Helpers/toLines.js';

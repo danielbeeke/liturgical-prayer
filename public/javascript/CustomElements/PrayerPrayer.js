@@ -1,5 +1,5 @@
 import {BaseElement} from '../Core/BaseElement.js';
-import {html} from '../vendor/uhtml.js';
+import {html} from 'https://cdn.skypack.dev/uhtml/async'
 import {Content} from '../Content.js';
 import {toLines} from '../Helpers/toLines.js';
 import {Slugify} from '../Helpers/Slugify.js';
