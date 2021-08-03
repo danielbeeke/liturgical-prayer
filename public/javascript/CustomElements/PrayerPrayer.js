@@ -4,6 +4,7 @@ import {Content} from '../Content.js';
 import {toLines} from '../Helpers/toLines.js';
 import {Slugify} from '../Helpers/Slugify.js';
 import {Store} from '../Core/Store.js';
+import {prepareAuthors} from '../Helpers/prepareAuthors.js';
 
 export class PrayerPrayer extends BaseElement {
 
@@ -25,7 +26,7 @@ export class PrayerPrayer extends BaseElement {
     let t = this.root.t;
     let prayer;
     let fixedCategory = Content['Categories'].find(category => {
-      return Slugify(category.Title) === this.route.parameters.category;
+      return category.id === this.route.parameters.category;
     });
 
     if (fixedCategory && fixedCategory.Title) {
@@ -48,7 +49,7 @@ export class PrayerPrayer extends BaseElement {
       };
     }
 
-    let category = prayer.category.isFreeForm ? t.direct('Your category') : (prayer.category.name !== prayer.Title ? prayer.category.name : '');
+    let category = prayer.category.isFreeForm ? t.direct('Your category') : (prayer.category.Title !== prayer.Title ? prayer.category.Title : '');
 
     if (prayer) {
       return html`<div class="prayer" data-id="${prayer.UniqueID}">
@@ -56,7 +57,7 @@ export class PrayerPrayer extends BaseElement {
           <h2 class="title">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</h2>
           <div class="meta">
             ${category ? html`<small class="category"><prayer-icon name="tag" />${category}</small>` : html``}
-            ${prayer.Author ? html`<em class="author"><prayer-icon name="author" />${prayer.Author}</em>` : html``}            
+            ${prayer.Author ? prepareAuthors(prayer.Author) : html``}            
           </div>
         </div>
         <div class="inner">

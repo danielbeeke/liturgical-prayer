@@ -1196,13 +1196,20 @@ prayer-settings {
   .prayer .author {
     display: block;
     font-preset: header4;padding-bottom: 8px;padding-top: 8px;line-height: 8px;letter-spacing: 1px;font-size: 11px;font-weight: 570;font-family: Inter var;
-    color: var(--color-primary);
+    color: var(--color-primary) !important;
     padding-left: 24px;
     position: relative; }
+    .prayer .author.with-image {
+      padding-left: 32px; }
+    .prayer .author img,
     .prayer .author prayer-icon {
       position: absolute;
       left: 0;
       top: 0; }
+    .prayer .author img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%; }
   .prayer .amen {
     display: block;
     font-preset: author;padding-bottom: 4px;padding-top: 4px;line-height: 16px;text-transform: uppercase;letter-spacing: .5px;font-size: 11px;font-weight: 670;font-family: Inter var; }

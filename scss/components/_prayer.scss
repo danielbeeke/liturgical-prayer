@@ -53,14 +53,25 @@
   .author {
     display: block;
     font-preset: header4;
-    color: var(--color-primary);
+    color: var(--color-primary) !important;
     padding-left: 3rs;
     position: relative;
 
+    &.with-image {
+      padding-left: 4rs;
+    }
+
+    img,
     prayer-icon {
       position: absolute;
       left: 0;
       top: 0;
+    }
+
+    img {
+      width: 3rs;
+      height: 3rs;
+      border-radius: 50%;
     }
   }
 

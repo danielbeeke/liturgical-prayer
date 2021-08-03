@@ -5,6 +5,7 @@ import {PrayerScheduler} from '../Helpers/PrayerScheduler.js'
 import {markFixedPrayer, markFreePrayer} from '../Actions/PrayActions.js';
 import {toLines} from '../Helpers/toLines.js';
 import {observeCurrentPrayer} from '../Helpers/observeCurrentPrayer.js';
+import {prepareAuthors} from '../Helpers/prepareAuthors.js';
 
 export class PrayerPray extends BaseElement {
 
@@ -63,13 +64,13 @@ export class PrayerPray extends BaseElement {
         let currentDateObject = p.calendar.find(item => item.date === dateString);
         let noteExists = currentDateObject && currentDateObject.notes[this.route.parameters.moment] && currentDateObject.notes[this.route.parameters.moment][prayer.category.slug];
         let note = noteExists ? currentDateObject.notes[this.route.parameters.moment][prayer.category.slug] : false;
-        
+
         return html`<div class="prayer" data-id="${prayer.UniqueID}">
           <div class="header">
             <h2 class="title">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</h2>
             <div class="meta">
               ${category ? html`<small class="category"><prayer-icon name="tag" />${category}</small>` : html`` }
-              ${prayer.Author ? html`<em class="author"><prayer-icon name="author" />${prayer.Author}</em>` : html``}            
+              ${prepareAuthors(prayer.Author)}            
             </div>
           </div>
           <div class="inner">
@@ -108,7 +109,7 @@ export class PrayerPray extends BaseElement {
     super.afterDraw();
     this.observer = observeCurrentPrayer(this);
     if (!this.route.parameters.category) {
-      let url = `/pray/${this.route.parameters.moment}/${this.prayers[0].category.slug}`;
+      let url = this.prayers[0] ? `/pray/${this.route.parameters.moment}/${this.prayers[0].category.slug}` : '/';
       setTimeout(() => {
         this.root.router.navigate(url);
       });

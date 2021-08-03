@@ -42,7 +42,7 @@ export class PrayerDayOverview extends BaseElement {
           <ul class="prayer-list">
           ${prayers.map(prayer => {
             let note = dayObject.notes[moment.slug] && dayObject.notes[moment.slug][prayer.category.slug];
-            
+
             return html`
               <li class="prayer-teaser" data-id="${prayer.UniqueID}">
                 <a href="${`/prayer/${prayer.category.slug}/${prayer.UniqueID ? prayer.UniqueID : prayer.items.map(item => item.slug).join(',')}?back=${location.pathname}`}">${prayer.category.isFreeForm ? prayer.category.name : prayer.Title}</a>                

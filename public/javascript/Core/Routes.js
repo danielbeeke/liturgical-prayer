@@ -5,7 +5,7 @@ import {Slugify} from '../Helpers/Slugify.js';
 let pageRoutes = {};
 
 Content.Pages.forEach(page => {
-  pageRoutes[page.slug] = { template: html`<prayer-page class="page hidden" />`, name: 'page' };
+  pageRoutes[page.id] = { template: html`<prayer-page class="page hidden" />`, name: 'page' };
 });
 
 export const Routes = {

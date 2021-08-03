@@ -5,7 +5,7 @@ import {Content} from '../Content.js';
 export class PrayerPage extends BaseElement {
 
   draw () {
-    let page = Content['Pages'].find(page => page.slug === location.pathname.substr(1));
+    let page = Content['Pages'].find(page => page.id === location.pathname.substr(1));
 
     return html`
       <prayer-main-menu />
